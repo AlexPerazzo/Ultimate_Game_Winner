@@ -1,0 +1,41 @@
+﻿<Window x:Class="Ultimate_Game_Winner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ultimate_Game_Winner"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Main Page -->
+            <RowDefinition />
+            
+            <!-- Page Options -->
+            <RowDefinition Height="40"/>
+
+        </Grid.RowDefinitions>
+
+        <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
+
+        <local:BottomButtons Grid.Row="1"/>
+        
+        <!--<grid grid.row="1">
+            <grid.columndefinitions >
+                 log a game 
+                <columndefinition/>
+                
+                 leaderboard 
+                <columndefinition/>
+                
+                 log of all games                 
+                <columndefinition/>
+
+            </grid.columndefinitions>
+            <button name="recordbtn" grid.column="0" content="record a game" fontsize="20" click="recordbtn_click"/>
+            <button name="leaderboardbtn" grid.column="1" content="leaderboard" fontsize="20" click="leaderboardbtn_click"/>
+            <button name="logbtn" grid.column="2" content="all logged games" fontsize="20" click="logbtn_click"/>
+        </grid>-->
+
+    </Grid>
+</Window>

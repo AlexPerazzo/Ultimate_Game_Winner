@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Ultimate_Game_Winner.BottomButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Name="Recordbtn" Grid.Column="0" Content="Record a Game" FontSize="20" Click="Recordbtn_Click"/>
+        <Button Name="Leaderboardbtn" Grid.Column="1" Content="Leaderboard" FontSize="20" Click="Leaderboardbtn_Click"/>
+        <Button Name="Logbtn" Grid.Column="2" Content="All Logged Games" FontSize="20" Click="Logbtn_Click"/>
+    </Grid>
+</UserControl>
