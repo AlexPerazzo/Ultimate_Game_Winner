@@ -8,18 +8,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <!-- Main Page -->
+            <!-- Welcome Note -->
             <RowDefinition />
-            
             <!-- Page Options -->
             <RowDefinition Height="40"/>
-
         </Grid.RowDefinitions>
 
         <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
-
+        <!--<local:WelcomeScreen Grid.Row="0"/>-->
         <local:BottomButtons Grid.Row="1"/>
         
+
+
+    </Grid>
+</Window>
+
         <!--<grid grid.row="1">
             <grid.columndefinitions >
                  log a game 
@@ -36,6 +39,3 @@
             <button name="leaderboardbtn" grid.column="1" content="leaderboard" fontsize="20" click="leaderboardbtn_click"/>
             <button name="logbtn" grid.column="2" content="all logged games" fontsize="20" click="logbtn_click"/>
         </grid>-->
-
-    </Grid>
-</Window>

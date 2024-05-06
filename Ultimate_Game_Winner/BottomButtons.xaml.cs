@@ -20,9 +20,12 @@ namespace Ultimate_Game_Winner
     /// </summary>
     public partial class BottomButtons : UserControl
     {
+        Frame mainFrame = ((MainWindow)Application.Current.MainWindow).MainFrame;
         public BottomButtons()
         {
-            InitializeComponent();                  
+            InitializeComponent();
+            
+            
         }
         private void Recordbtn_Click(object sender, RoutedEventArgs e)
         {
@@ -32,11 +35,14 @@ namespace Ultimate_Game_Winner
         private void Leaderboardbtn_Click(object sender, RoutedEventArgs e)
         {
             Leaderboardbtn.Content = "Testing2";
+            
+            mainFrame.Navigate(new Uri("Leaderboard.xaml", UriKind.Relative));
         }
 
         private void Logbtn_Click(object sender, RoutedEventArgs e)
         {
-            Recordbtn.Content = "Get tricked.";
+            Recordbtn.Content = "Get tricked!";
+            mainFrame.Navigate(new Uri("TheLog.xaml", UriKind.Relative));
         }
     }
 }

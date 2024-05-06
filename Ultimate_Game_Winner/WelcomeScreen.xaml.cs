@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,17 +16,13 @@ using System.Windows.Shapes;
 namespace Ultimate_Game_Winner
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for WelcomeScreen.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WelcomeScreen : Page
     {
-        public MainWindow()
+        public WelcomeScreen()
         {
             InitializeComponent();
-
         }
-
-        public Frame MainFrame => mainFrame;
-        
     }
 }
