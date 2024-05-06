@@ -15,7 +15,8 @@
         </Grid.RowDefinitions>
 
         <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
-        <!--<local:WelcomeScreen Grid.Row="0"/>-->
+        <local:Welcome Grid.Row="0"/>
+        
         <local:BottomButtons Grid.Row="1"/>
         
 

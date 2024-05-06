@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Ultimate_Game_Winner
 {
     /// <summary>
-    /// Interaction logic for WelcomeScreen.xaml
+    /// Interaction logic for RecordaGame.xaml
     /// </summary>
-    public partial class WelcomeScreen : Page
+    public partial class RecordaGame : Page
     {
-        public WelcomeScreen()
+        public RecordaGame()
         {
             InitializeComponent();
         }

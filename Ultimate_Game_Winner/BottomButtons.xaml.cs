@@ -30,6 +30,7 @@ namespace Ultimate_Game_Winner
         private void Recordbtn_Click(object sender, RoutedEventArgs e)
         {
             Recordbtn.Content = "Testing";
+            mainFrame.Navigate(new Uri("RecordaGame.xaml", UriKind.Relative));
         }
 
         private void Leaderboardbtn_Click(object sender, RoutedEventArgs e)
