@@ -6,10 +6,33 @@
       xmlns:local="clr-namespace:Ultimate_Game_Winner"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RecordaGame">
+      Title="RecordaGame"
+      Background="White">
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <!-- Welcome Note -->
+                <RowDefinition />
+                <!-- Page Options -->
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
 
-    <Grid>
-        <Label FontSize="70" Content="Record record" HorizontalAlignment="Left" Margin="312,259,0,0" VerticalAlignment="Top"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
+                <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
+            </Grid>
 
-    </Grid>
+            <TextBox Name="Name" HorizontalAlignment="Left" Margin="324,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="NumPlayers" HorizontalAlignment="Left" Margin="324,101,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="First" HorizontalAlignment="Left" Margin="324,177,0,0" TextWrapping="Wrap" Text="1st Place" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="Second" HorizontalAlignment="Left" Margin="324,239,0,0" TextWrapping="Wrap" Text="2nd Place" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="Third" HorizontalAlignment="Left" Margin="324,307,0,0" TextWrapping="Wrap" Text="3rd Place" VerticalAlignment="Top" Width="120"/>
+
+
+        </Grid>
+    </ScrollViewer>
 </Page>

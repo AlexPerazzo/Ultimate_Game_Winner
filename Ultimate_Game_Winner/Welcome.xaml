@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Welcome to Ultimate Game Winner. Click on one of the three options to get started." FontSize="55" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700"/>
+        <!--<TextBlock Text="Welcome to Ultimate Game Winner. Click on one of the three options to get started." FontSize="55" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700"/>-->
 
     </Grid>
 </UserControl>
