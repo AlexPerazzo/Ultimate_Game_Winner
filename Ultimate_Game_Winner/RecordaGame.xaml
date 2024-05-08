@@ -22,8 +22,8 @@
                     <ColumnDefinition />
 
                 </Grid.ColumnDefinitions>
-                <Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
-                <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
+                <Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="SubmitClick"/>
+                <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="CancelClick"/>
             </Grid>
 
             <TextBox Name="Name" HorizontalAlignment="Left" Margin="324,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120"/>

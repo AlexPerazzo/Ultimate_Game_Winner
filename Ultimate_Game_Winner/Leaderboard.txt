@@ -1,0 +1,12 @@
+Alex,-2
+Eric,-3
+Mom,-4
+Ben,-5
+1st Place,-4
+2nd Place,-6
+3rd Place,-8
+4th Place,-15
+1st Plac,-4
+2nd Plac,-6
+3rd Plac,-8
+4th Plac,-5

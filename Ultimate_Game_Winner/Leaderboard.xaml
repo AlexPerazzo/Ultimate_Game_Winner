@@ -9,9 +9,13 @@
       Title="Leaderboard"
       Background="White">
 
-    <Grid>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top"/>
+    <ScrollViewer>
+        <Grid>
         
 
-    </Grid>
+        <StackPanel Name="theLeaderboard"/>
+
+        </Grid>
+    </ScrollViewer>
+    
 </Page>

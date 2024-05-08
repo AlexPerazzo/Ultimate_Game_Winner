@@ -16,18 +16,15 @@ using System.Windows.Shapes;
 
 namespace Ultimate_Game_Winner
 {
-    /// <summary>
-    /// Interaction logic for TheLog.xaml
-    /// </summary>
     public partial class TheLog : Page
     {
         public TheLog()
         {
             InitializeComponent();
-            Loaded += MyPage_Loaded;
+            Loaded += LoadLog;
         }
 
-        private void MyPage_Loaded(object sender, RoutedEventArgs e)
+        private void LoadLog(object sender, RoutedEventArgs e)
         {
             List<string> logList = new List<string> {};
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
@@ -38,7 +35,7 @@ namespace Ultimate_Game_Winner
                     logList.Add(line);
                 }
             }
-            // Put the code here to iterate through the list and display it
+            
             
             foreach (string item in logList)
             {
