@@ -7,10 +7,20 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TheLog"
-      Background="White">
-
+      Background="White"
+      >
+    <ScrollViewer>
     <Grid>
-        <TextBlock FontSize="50" HorizontalAlignment="Left" Height="151" Margin="301,166,0,0" TextWrapping="Wrap" Text="This is the Log!" VerticalAlignment="Top" Width="284"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
 
+        </Grid.RowDefinitions>
+        
+        <StackPanel Name="theLog"/>
+        
+        <Button Name="DeleteLog" Grid.Row="1" Margin="5" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Right" Click="DeleteLog_Click"/>
     </Grid>
+    </ScrollViewer>
+    
 </Page>

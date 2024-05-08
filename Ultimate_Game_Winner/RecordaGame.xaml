@@ -31,6 +31,7 @@
             <TextBox Name="First" HorizontalAlignment="Left" Margin="324,177,0,0" TextWrapping="Wrap" Text="1st Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Second" HorizontalAlignment="Left" Margin="324,239,0,0" TextWrapping="Wrap" Text="2nd Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Third" HorizontalAlignment="Left" Margin="324,307,0,0" TextWrapping="Wrap" Text="3rd Place" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="Fourth" HorizontalAlignment="Left" Margin="324,362,0,0" TextWrapping="Wrap" Text="4th Place" VerticalAlignment="Top" Width="120"/>
 
 
         </Grid>

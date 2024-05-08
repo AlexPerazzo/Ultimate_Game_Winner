@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,8 +28,25 @@ namespace Ultimate_Game_Winner
             InitializeComponent();
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private async void Submit_Click(object sender, RoutedEventArgs e)
         {
+            string nameOfGame = Name.Text;
+            string numPlayers = NumPlayers.Text;
+            string firstPlace = First.Text;
+            string secondPlace = Second.Text;
+            string thirdPlace = Third.Text;
+            string fourthPlace = Fourth.Text;
+
+            string stringToSave = $"{nameOfGame},{numPlayers},{firstPlace},{secondPlace},{thirdPlace},{fourthPlace}";
+
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt", true))
+            {
+                    writer.WriteLine(stringToSave);
+            }
+                    Cancel_Click(sender, e);
+                    Submit.Content = "Success!!";
+                    await Task.Delay(2500);
+                    Submit.Content = "SUBMIT";
 
         }
 
@@ -39,6 +57,8 @@ namespace Ultimate_Game_Winner
             First.Text = "1st Place";
             Second.Text = "2nd Place";
             Third.Text = "3rd Place";
+            Fourth.Text = "4th Place";
         }
+
     }
 }

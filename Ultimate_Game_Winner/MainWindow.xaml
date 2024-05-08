@@ -11,7 +11,7 @@
             <!-- Welcome Note -->
             <RowDefinition />
             <!-- Page Options -->
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
 
         <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>

@@ -28,21 +28,17 @@ namespace Ultimate_Game_Winner
             
         }
         private void Recordbtn_Click(object sender, RoutedEventArgs e)
-        {
-            Recordbtn.Content = "Testing";
+        {        
             mainFrame.Navigate(new Uri("RecordaGame.xaml", UriKind.Relative));
         }
 
         private void Leaderboardbtn_Click(object sender, RoutedEventArgs e)
-        {
-            Leaderboardbtn.Content = "Testing2";
-            
+        {                        
             mainFrame.Navigate(new Uri("Leaderboard.xaml", UriKind.Relative));
         }
 
         private void Logbtn_Click(object sender, RoutedEventArgs e)
-        {
-            Recordbtn.Content = "Get tricked!";
+        {            
             mainFrame.Navigate(new Uri("TheLog.xaml", UriKind.Relative));
         }
     }
