@@ -24,29 +24,34 @@ namespace Ultimate_Game_Winner
         public Leaderboard()
         {
             InitializeComponent();
+            //Calls LoadLeaderboard when the page is loaded.
             Loaded += LoadLeaderboard;
         }
 
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
-            List<String> leaderboardList = new List<String> {};
+            //List<String> leaderboardList = new List<String> {};
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\Leaderboard.txt"))
             {
+
+                //Reads each line from the text file and makes a TextBlock out of it
+                //Adds that TextBlock to the StackPanel from the xaml page
+                
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    leaderboardList.Add(line);
+                    //leaderboardList.Add(line);
+
+                    TextBlock textBlock = new TextBlock();
+                    textBlock.Text = line;
+                    textBlock.FontSize = 20;
+                    textBlock.Margin = new Thickness(12, 12, 0, 0);
+                    theLeaderboard.Children.Add(textBlock);
+
                 }
             }
 
-            foreach (string item in leaderboardList) 
-            {
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = item;
-                textBlock.FontSize = 20;
-                textBlock.Margin = new Thickness(12, 12, 0, 0);
-                theLeaderboard.Children.Add(textBlock);
-            }
+            //foreach (string item in leaderboardList){}
         }
 
     }

@@ -16,16 +16,14 @@ using System.Windows.Shapes;
 namespace Ultimate_Game_Winner
 {
     /// <summary>
-    /// Interaction logic for BottomButtons.xaml
+        /// The three different buttons on bottom all navigate the mainFrame to their associated xaml pages
     /// </summary>
     public partial class BottomButtons : UserControl
     {
         Frame mainFrame = ((MainWindow)Application.Current.MainWindow).MainFrame;
         public BottomButtons()
         {
-            InitializeComponent();
-            
-            
+            InitializeComponent();            
         }
         private void Recordbtn_Click(object sender, RoutedEventArgs e)
         {        

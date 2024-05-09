@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -28,8 +29,9 @@ namespace Ultimate_Game_Winner
             InitializeComponent();
         }
 
-        private async void SubmitClick(object sender, RoutedEventArgs e)
+        private async void Submit_Click(object sender, RoutedEventArgs e)
         {
+            //Gather all needed information
             string nameOfGame = Name.Text;
             string numPlayers = NumPlayers.Text;
             string firstPlace = First.Text;
@@ -38,21 +40,26 @@ namespace Ultimate_Game_Winner
             string fourthPlace = Fourth.Text;
 
             string stringToSave = $"{nameOfGame},{numPlayers},{firstPlace},{secondPlace},{thirdPlace},{fourthPlace}";
-
+            //Save all information to LogofPlayedGames.txt
             using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt", true))
             {
                     writer.WriteLine(stringToSave);
             }
-                    CancelClick(sender, e);
+                    //Reset page's text
+                    Cancel_Click(sender, e);
+                    
+                    //Update Leaderboard
                     CalculatePoints();
+
                     Submit.Content = "Success!!";
                     await Task.Delay(2500);
                     Submit.Content = "SUBMIT";
 
         }
 
-        private void CancelClick(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            //Resets Texts of all TextBox's back to original display
             Name.Text = "Name of Game";
             NumPlayers.Text = "# of Players";
             First.Text = "1st Place";
@@ -63,7 +70,9 @@ namespace Ultimate_Game_Winner
 
         private void CalculatePoints()
         {
+            
             Dictionary<String, int> newLeaderboard = new Dictionary<string, int>();
+
 
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
             {
@@ -73,8 +82,10 @@ namespace Ultimate_Game_Winner
                     String[] parts = line.Split(',');
                     for (int i = 0; i < parts.Length; i++)
                     {
+                        //skips over Game Name and Number of Players
                         if (i != 0 && i != 1)
                         {
+                            //checks if person is already in the dictionary and adds them accordingly
                             if (!newLeaderboard.ContainsKey(parts[i]))
                             {
                                 newLeaderboard.Add(parts[i], i * -1);
@@ -84,18 +95,27 @@ namespace Ultimate_Game_Winner
                             {
                                 newLeaderboard[parts[i]] += i * -1;
                             }
+                            //5/8/24 Points assigned is currently -2, -3, -4, -5 points for 1st, 2nd, 3rd, 4th respectively
+                            //This is placeholder to get it up and running; number of points assigned will be a more complicated process
+                            //that depends upon information that is planned to be obtained through use of an API
                         }
                     }
                 }
             }
 
+            
+            var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
             using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\Leaderboard.txt"))
             {
+
                 writer.Write(string.Empty);
-                foreach (var entry in newLeaderboard)
+                int i = 0;
+                foreach (var entry in sortedDictionary)
                 {
-                    // Write key-value pair to file
-                    writer.WriteLine($"{entry.Key},{entry.Value}");
+                    i += 1;
+                    //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
+                    writer.WriteLine($"#{i} {entry.Key} with {entry.Value} points");
                 }
             }
         }

@@ -6,6 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <!--Three separate columns all taking equal space for the three buttons.
+        They are forced into the bottom row of the mainpage, which makes them display along the bottom row
+        (instead of taking the whole page as shown)-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />

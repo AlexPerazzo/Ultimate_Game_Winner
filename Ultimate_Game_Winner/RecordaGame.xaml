@@ -11,27 +11,32 @@
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
-                <!-- Welcome Note -->
+                <!--Textboxes in bigger main row-->
                 <RowDefinition />
-                <!-- Page Options -->
+                <!--Submit/Cancel Buttons in smaller bottom row-->
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-
-                </Grid.ColumnDefinitions>
-                <Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="SubmitClick"/>
-                <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="CancelClick"/>
-            </Grid>
-
+            
+            <!--TextBox's for all the needed information-->
             <TextBox Name="Name" HorizontalAlignment="Left" Margin="324,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="NumPlayers" HorizontalAlignment="Left" Margin="324,101,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="First" HorizontalAlignment="Left" Margin="324,177,0,0" TextWrapping="Wrap" Text="1st Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Second" HorizontalAlignment="Left" Margin="324,239,0,0" TextWrapping="Wrap" Text="2nd Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Third" HorizontalAlignment="Left" Margin="324,307,0,0" TextWrapping="Wrap" Text="3rd Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Fourth" HorizontalAlignment="Left" Margin="324,362,0,0" TextWrapping="Wrap" Text="4th Place" VerticalAlignment="Top" Width="120"/>
+            
+            <!--Two buttons centered on the bottom row with some margin-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+
+                </Grid.ColumnDefinitions>
+                <Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
+                <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
+            </Grid>
+
+            
 
 
         </Grid>

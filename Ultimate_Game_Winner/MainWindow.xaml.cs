@@ -22,6 +22,7 @@ namespace Ultimate_Game_Winner
 
         }
 
+        //Give other xaml.cs's access to the mainFrame
         public Frame MainFrame => mainFrame;
         
     }

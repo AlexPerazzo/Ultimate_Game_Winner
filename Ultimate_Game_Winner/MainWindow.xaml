@@ -8,35 +8,18 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <!-- Welcome Note -->
+            <!-- Welcome Note (pending)-->
             <RowDefinition />
             <!-- Page Options -->
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
 
         <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
-        <local:Welcome Grid.Row="0"/>
-        
+
+        <!--Displays BottomButtons xaml into the bottom 35px row-->
         <local:BottomButtons Grid.Row="1"/>
-        
+
 
 
     </Grid>
 </Window>
-
-        <!--<grid grid.row="1">
-            <grid.columndefinitions >
-                 log a game 
-                <columndefinition/>
-                
-                 leaderboard 
-                <columndefinition/>
-                
-                 log of all games                 
-                <columndefinition/>
-
-            </grid.columndefinitions>
-            <button name="recordbtn" grid.column="0" content="record a game" fontsize="20" click="recordbtn_click"/>
-            <button name="leaderboardbtn" grid.column="1" content="leaderboard" fontsize="20" click="leaderboardbtn_click"/>
-            <button name="logbtn" grid.column="2" content="all logged games" fontsize="20" click="logbtn_click"/>
-        </grid>-->

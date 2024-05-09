@@ -1,12 +1,8 @@
-Alex,-2
-Eric,-3
-Mom,-4
-Ben,-5
-1st Place,-4
-2nd Place,-6
-3rd Place,-8
-4th Place,-15
-1st Plac,-4
-2nd Plac,-6
-3rd Plac,-8
-4th Plac,-5
+#1 r with -2 points
+#2 2nw with -3 points
+#3 1st Place with -4 points
+#4 w with -4 points
+#5 t with -5 points
+#6 2nd Place with -6 points
+#7 3rd Place with -8 points
+#8 4th Place with -10 points

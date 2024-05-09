@@ -9,10 +9,10 @@
       Title="Leaderboard"
       Background="White">
 
+    <!--Simple ScrollViewer with a StackPanel to be added upon.-->
     <ScrollViewer>
         <Grid>
         
-
         <StackPanel Name="theLeaderboard"/>
 
         </Grid>

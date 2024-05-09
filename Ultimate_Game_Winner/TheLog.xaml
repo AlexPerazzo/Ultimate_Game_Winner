@@ -12,7 +12,9 @@
     <ScrollViewer>
     <Grid>
         <Grid.RowDefinitions>
+            <!--Main content row-->
             <RowDefinition/>
+            <!--Row for reset button-->
             <RowDefinition Height="35"/>
 
         </Grid.RowDefinitions>
