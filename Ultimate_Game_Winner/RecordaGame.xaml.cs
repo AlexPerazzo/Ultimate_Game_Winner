@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Http;
+using System.Xml.Linq;
 
 namespace Ultimate_Game_Winner
 {
@@ -69,24 +70,81 @@ namespace Ultimate_Game_Winner
             Fourth.Text = "4th Place";
         }
 
+        private (float, float) GetAPIData(int gameID)
+        {
+            XDocument doc;
+            using (var client = new HttpClient())
+            {
+                var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
+                var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
+                doc = XDocument.Parse(result);
+            }
+            XElement item = doc.Element("items").Element("item");
+            string averageWeightString = item.Element("statistics").Element("ratings").Element("averageweight").Attribute("value").Value;
+            var minPlaytimeString = item.Element("minplaytime").Attribute("value").Value;
+            var maxPlaytimeString = item.Element("maxplaytime").Attribute("value").Value;
+
+
+            float averageWeight = float.Parse(averageWeightString);
+            float minPlaytime = float.Parse(minPlaytimeString);
+            float maxPlaytime = float.Parse(maxPlaytimeString);
+            float averagePlaytime = (minPlaytime + maxPlaytime) / 2;
+
+
+            return (averagePlaytime, averageWeight);
+        }
+
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             //Resets Texts of all TextBox's back to original display
+            int gameID = GetID(Name.Text);
+
             Name.Text = "Test";
             NumPlayers.Text = "Test";
             First.Text = "Test";
             Second.Text = "Test";
             Third.Text = "Test";
             Fourth.Text = "Test";
-            using (var client = new HttpClient())
-            {
-                var endpoint = new Uri("https://boardgamegeek.com/xmlapi2/thing?id=342942&stats=1");
-                var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
-                TestAPIText.Text = result;
-                //var result = client.GetAsync(endpoint).Result;
-                //var json = result.Content.ReadAsStringAsync().Result;
-            }
+            //TestAPIText.Text = gameID.ToString();
+
+
+
+            (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
+
+            Name.Text = averagePlaytime.ToString();
+            NumPlayers.Text = averageWeight.ToString();
+
+
+            //using (var client = new HttpClient())
+            //{
+            //    var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
+            //    var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
+            //    TestAPIText.Text = result;
+            //    //var result = client.GetAsync(endpoint).Result;
+            //    //var json = result.Content.ReadAsStringAsync().Result;
+            //}
         }
+
+        private int GetID(string nameOfGame)
+        {
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\GamesAndIDs.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] lineList = line.Split(",");
+                    if (lineList[1] == $"\"{nameOfGame}\"")
+                    {
+                        int gameID = int.Parse(lineList[0]);
+                        
+                        return gameID;
+                    }
+                }
+            }
+            return 0;
+        }
+
+
 
         private void CalculatePoints()
         {
