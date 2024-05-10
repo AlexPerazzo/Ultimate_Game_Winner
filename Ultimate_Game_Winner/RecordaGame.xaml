@@ -24,15 +24,19 @@
             <TextBox Name="Second" HorizontalAlignment="Left" Margin="324,239,0,0" TextWrapping="Wrap" Text="2nd Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Third" HorizontalAlignment="Left" Margin="324,307,0,0" TextWrapping="Wrap" Text="3rd Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Fourth" HorizontalAlignment="Left" Margin="324,362,0,0" TextWrapping="Wrap" Text="4th Place" VerticalAlignment="Top" Width="120"/>
-            
-            <!--Two buttons centered on the bottom row with some margin-->
+			<TextBox Name="TestAPIText" HorizontalAlignment="Left" Margin="424,462,0,0" TextWrapping="Wrap" Text="TestingAPI" VerticalAlignment="Top" Width="120"/>
+
+
+			<!--Two buttons centered on the bottom row with some margin-->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
 
                 </Grid.ColumnDefinitions>
-                <Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
+				<Button Name="TestAPIButton" Grid.Column="0" Content="Test It" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Test_Click"/>
+
+				<Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
                 <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
             </Grid>
 

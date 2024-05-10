@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
 
 namespace Ultimate_Game_Winner
 {
@@ -66,6 +67,25 @@ namespace Ultimate_Game_Winner
             Second.Text = "2nd Place";
             Third.Text = "3rd Place";
             Fourth.Text = "4th Place";
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            //Resets Texts of all TextBox's back to original display
+            Name.Text = "Test";
+            NumPlayers.Text = "Test";
+            First.Text = "Test";
+            Second.Text = "Test";
+            Third.Text = "Test";
+            Fourth.Text = "Test";
+            using (var client = new HttpClient())
+            {
+                var endpoint = new Uri("https://boardgamegeek.com/xmlapi2/thing?id=342942&stats=1");
+                var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
+                TestAPIText.Text = result;
+                //var result = client.GetAsync(endpoint).Result;
+                //var json = result.Content.ReadAsStringAsync().Result;
+            }
         }
 
         private void CalculatePoints()
