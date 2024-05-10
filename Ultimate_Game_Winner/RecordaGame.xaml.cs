@@ -51,7 +51,7 @@ namespace Ultimate_Game_Winner
                     Cancel_Click(sender, e);
                     
                     //Update Leaderboard
-                    CalculatePoints();
+                    UpdateLeaderboard();
 
                     Submit.Content = "Success!!";
                     await Task.Delay(2500);
@@ -144,9 +144,26 @@ namespace Ultimate_Game_Winner
             return 0;
         }
 
+        private float CalculatePoints(float weight, float playtime, float placementPercentage)
+        {
+            //Creates a point value, either positive or negative.
+            //Parameters:
+            //    Weight: Weight of game
+            //    Playtime: Playtime of game
+            //    Placement_Percentage: A percent based off the placement of a player
+            //Return:
+            //    Point value
 
+            float weightFactor = .25 * weight + .75;
+            float playtimeFactor = ((-0.00487789 * (playtime * *2)) + (2.02538 * playtime) - (1.95751)) / 100;
+            float placementFactor = placementPercentage;
 
-        private void CalculatePoints()
+            float points = 10 * weightFactor * playtimeFactor * placementFactor;
+
+            return points;
+        }
+
+        private void UpdateLeaderboard()
         {
             
             Dictionary<String, int> newLeaderboard = new Dictionary<string, int>();
