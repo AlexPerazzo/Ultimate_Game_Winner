@@ -1,3 +1,4 @@
-Name of Game,# of Players,1st Place,2nd Place,3rd Place,4th Place
-Name of Game,# of Players,r,2nw,w,t
-Name of Game,# of Players,1st Place,2nd Place,3rd Place,4th Place
+Ark Nova,4,1st Place,2nd Place,3rd Place,4th Place
+Scythe,4,Alex,Eric,Mom,Dad
+Ark Nova,4,1st Place,2nd Place,3rd Place,4th Place
+Scythe,4,Alex,2nd Place,3rd Place,4th Place

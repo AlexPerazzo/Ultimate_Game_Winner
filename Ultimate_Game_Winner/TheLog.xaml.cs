@@ -27,7 +27,7 @@ namespace Ultimate_Game_Winner
         private void LoadLog(object sender, RoutedEventArgs e)
         {
             //List<string> logList = new List<string> {};
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
             {
                 //Reads each line from the LogofPlayedGames.txt file and makes a TextBlock out of it
                 //Adds that TextBlock to the StackPanel from the xaml page

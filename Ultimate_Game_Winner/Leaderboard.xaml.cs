@@ -31,7 +31,7 @@ namespace Ultimate_Game_Winner
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
             //List<String> leaderboardList = new List<String> {};
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
             {
 
                 //Reads each line from the text file and makes a TextBlock out of it

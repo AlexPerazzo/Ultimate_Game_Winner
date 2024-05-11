@@ -43,15 +43,19 @@ namespace Ultimate_Game_Winner
 
             string stringToSave = $"{nameOfGame},{numPlayers},{firstPlace},{secondPlace},{thirdPlace},{fourthPlace}";
             //Save all information to LogofPlayedGames.txt
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt", true))
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt", true))
             {
                     writer.WriteLine(stringToSave);
             }
                     //Reset page's text
                     Cancel_Click(sender, e);
-                    
+
+
+                    int gameID = GetID(nameOfGame);
+                    (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
+
                     //Update Leaderboard
-                    UpdateLeaderboard();
+                    UpdateLeaderboard(averageWeight, averagePlaytime);
 
                     Submit.Content = "Success!!";
                     await Task.Delay(2500);
@@ -98,6 +102,7 @@ namespace Ultimate_Game_Winner
         {
             //Resets Texts of all TextBox's back to original display
             int gameID = GetID(Name.Text);
+            (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
 
             Name.Text = "Test";
             NumPlayers.Text = "Test";
@@ -109,7 +114,7 @@ namespace Ultimate_Game_Winner
 
 
 
-            (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
+            CalculatePoints(averageWeight, averagePlaytime, int.Parse(NumPlayers.Text), 2);
 
             Name.Text = averagePlaytime.ToString();
             NumPlayers.Text = averageWeight.ToString();
@@ -141,10 +146,10 @@ namespace Ultimate_Game_Winner
                     }
                 }
             }
-            return 0;
+            return -1;
         }
 
-        private float CalculatePoints(float weight, float playtime, float placementPercentage)
+        private double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
             //Creates a point value, either positive or negative.
             //Parameters:
@@ -154,22 +159,40 @@ namespace Ultimate_Game_Winner
             //Return:
             //    Point value
 
-            float weightFactor = .25 * weight + .75;
-            float playtimeFactor = ((-0.00487789 * (playtime * *2)) + (2.02538 * playtime) - (1.95751)) / 100;
-            float placementFactor = placementPercentage;
-
-            float points = 10 * weightFactor * playtimeFactor * placementFactor;
+            var weightFactor = (.25) * weight + (.75);
+            var playtimeFactor = ((-0.00487789 * Math.Pow(playtime, 2)) + (2.02538 * playtime) - (1.95751)) / 100;
+            var placementFactor = CalculatePlacementPercentage(placement, numOfPlayers);
+            
+            var points = 10 * weightFactor * playtimeFactor * placementFactor;
 
             return points;
+
+            double CalculatePlacementPercentage(int placement, int numOfPlayers)
+            {
+                using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\PlacementPercentages.txt"))
+                {
+                    reader.ReadLine();
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] lineList = line.Split(",");
+                        if (int.Parse(lineList[0]) == numOfPlayers)
+                        {
+                            return double.Parse(lineList[placement]);
+                        }
+                    }
+                    return -1;
+                }
+            }
         }
 
-        private void UpdateLeaderboard()
+        private void UpdateLeaderboard(float weight, float playtime)
         {
             
-            Dictionary<String, int> newLeaderboard = new Dictionary<string, int>();
+            Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
 
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null) 
@@ -180,15 +203,16 @@ namespace Ultimate_Game_Winner
                         //skips over Game Name and Number of Players
                         if (i != 0 && i != 1)
                         {
+                            double points = CalculatePoints(weight, playtime, int.Parse(parts[1]), (i-1));
                             //checks if person is already in the dictionary and adds them accordingly
                             if (!newLeaderboard.ContainsKey(parts[i]))
                             {
-                                newLeaderboard.Add(parts[i], i * -1);
+                                newLeaderboard.Add(parts[i], points);
                             }
 
                             else
                             {
-                                newLeaderboard[parts[i]] += i * -1;
+                                newLeaderboard[parts[i]] += points;
                             }
                             //5/8/24 Points assigned is currently -2, -3, -4, -5 points for 1st, 2nd, 3rd, 4th respectively
                             //This is placeholder to get it up and running; number of points assigned will be a more complicated process
@@ -198,19 +222,22 @@ namespace Ultimate_Game_Winner
                 }
             }
 
-            
+
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
             {
-
+                
                 writer.Write(string.Empty);
                 int i = 0;
                 foreach (var entry in sortedDictionary)
                 {
                     i += 1;
                     //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
-                    writer.WriteLine($"#{i} {entry.Key} with {entry.Value} points");
+                    var key = entry.Key;
+                    var value = entry.Value;
+                    string writeThis = $"#{i} {key} with {value} points";
+                    writer.WriteLine(writeThis);
                 }
             }
         }
