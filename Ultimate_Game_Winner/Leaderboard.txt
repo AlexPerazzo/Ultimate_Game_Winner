@@ -1,8 +1,5 @@
-#1 1st Place with 8.6565345791113 points
-#2 2nd Place with 5.771023052740867 points
-#3 Alex with 4.32826728955565 points
-#4 Eric with 2.8855115263704336 points
-#5 Mom with -2.0198580684593037 points
-#6 3rd Place with -4.039716136918607 points
-#7 Dad with -4.32826728955565 points
-#8 4th Place with -8.6565345791113 points
+#1 2nd Place with 8.658456462637032 points
+#2 1st Place with 8.65845646263703 points
+#3 A with 4.329228231318515 points
+#4 3rd Place with -6.0609195238459215 points
+#5 4th Place with -12.987684693955545 points

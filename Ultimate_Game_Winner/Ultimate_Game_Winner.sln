@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ultimate_Game_Winner", "Ultimate_Game_Winner\Ultimate_Game_Winner.csproj", "{AC4F61DA-0F09-455B-A807-43C20B82B3A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ultimate_Game_Winner", "Ultimate_Game_Winner.csproj", "{CBD16944-E383-4672-B0D3-C46FDC3BDA7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC4F61DA-0F09-455B-A807-43C20B82B3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC4F61DA-0F09-455B-A807-43C20B82B3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC4F61DA-0F09-455B-A807-43C20B82B3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC4F61DA-0F09-455B-A807-43C20B82B3A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBD16944-E383-4672-B0D3-C46FDC3BDA7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD16944-E383-4672-B0D3-C46FDC3BDA7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD16944-E383-4672-B0D3-C46FDC3BDA7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD16944-E383-4672-B0D3-C46FDC3BDA7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -49,7 +49,8 @@ namespace Ultimate_Game_Winner
         
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
         {
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\Ultimate_Game_Winner\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
+            //replaces anything in LogofPlayedGames.txt with an empty line.
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
             {
                 writer.Write(string.Empty);
             }
