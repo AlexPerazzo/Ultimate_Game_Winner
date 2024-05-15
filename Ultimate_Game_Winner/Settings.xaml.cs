@@ -34,6 +34,10 @@ namespace Ultimate_Game_Winner
             {
                 writer.Write(string.Empty);
             }
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            {
+                writer.Write(string.Empty);
+            }
             DeleteLog.Content = "Done.";
         }
     }

@@ -19,12 +19,22 @@
             
             <!--TextBox's for all the needed information-->
             <TextBox Name="Name" HorizontalAlignment="Left" Margin="324,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120"/>
-            <TextBox Name="NumPlayers" HorizontalAlignment="Left" Margin="324,101,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120"/>
-            <TextBox Name="First" HorizontalAlignment="Left" Margin="324,177,0,0" TextWrapping="Wrap" Text="1st Place" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="NumPlayers" HorizontalAlignment="Left" Margin="324,101,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120" TextChanged="NumPlayers_TextChanged"/>
+            <StackPanel>
+                <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox Width="100" Margin="5"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            
+            <!--<TextBox Name="First" HorizontalAlignment="Left" Margin="324,177,0,0" TextWrapping="Wrap" Text="1st Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Second" HorizontalAlignment="Left" Margin="324,239,0,0" TextWrapping="Wrap" Text="2nd Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Third" HorizontalAlignment="Left" Margin="324,307,0,0" TextWrapping="Wrap" Text="3rd Place" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Fourth" HorizontalAlignment="Left" Margin="324,362,0,0" TextWrapping="Wrap" Text="4th Place" VerticalAlignment="Top" Width="120"/>
-			<TextBox Name="TestAPIText" HorizontalAlignment="Left" Margin="424,462,0,0" TextWrapping="Wrap" Text="TestingAPI" VerticalAlignment="Top" Width="120"/>
+			<TextBox Name="TestAPIText" HorizontalAlignment="Left" Margin="424,462,0,0" TextWrapping="Wrap" Text="TestingAPI" VerticalAlignment="Top" Width="120"/>-->
 
 
 			<!--Two buttons centered on the bottom row with some margin-->

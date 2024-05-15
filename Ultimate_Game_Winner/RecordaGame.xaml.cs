@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Http;
 using System.Xml.Linq;
+using System.Collections.ObjectModel;
 
 namespace Ultimate_Game_Winner
 {
@@ -25,21 +26,18 @@ namespace Ultimate_Game_Winner
     /// </summary>
     public partial class RecordaGame : Page
     {
-        
+        public ObservableCollection<TextBox> TextBoxCollection { get; set; }
         public RecordaGame()
         {
             InitializeComponent();
+            TextBoxCollection = new ObservableCollection<TextBox>();
+            NameTextBoxesControl.ItemsSource = TextBoxCollection;
         }
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
-            //Gather all needed information
-            string nameOfGame = Name.Text; string numPlayers = NumPlayers.Text; string firstPlace = First.Text; string secondPlace = Second.Text; string thirdPlace = Third.Text; string fourthPlace = Fourth.Text;
-
-            string stringToSave = $"{nameOfGame},{numPlayers},{firstPlace},{secondPlace},{thirdPlace},{fourthPlace}";
-            //Save all information to LogofPlayedGames.txt
-            SaveStringIntoTxt(stringToSave, "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt");
-
+            string nameOfGame = Name.Text; string numPlayers = NumPlayers.Text;
+            SaveToLog(nameOfGame, numPlayers);
             //Reset page's text
             Cancel_Click(sender, e);
 
@@ -57,12 +55,28 @@ namespace Ultimate_Game_Winner
 
         }
 
-        private void SaveStringIntoTxt(string stringToSave, string fileName)
+        private void SaveToLog(string nameOfGame, string numPlayers)
         {
-            //writes line to file
-            using (StreamWriter writer = new StreamWriter(fileName, true))
+            
+            
+            // Append each item from the list, separated by commas
+            string line = $"{nameOfGame},{numPlayers},";
+            foreach (TextBox textBox in TextBoxCollection)
             {
-                writer.WriteLine(stringToSave);
+                line += textBox.Text + ",";
+            }
+            line = line.TrimEnd(',');
+            
+            //Save all information to LogofPlayedGames.txt
+            SaveStringIntoTxt(line, "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt");
+
+            void SaveStringIntoTxt(string stringToSave, string fileName)
+            {
+                //writes line to file
+                using (StreamWriter writer = new StreamWriter(fileName, true))
+                {
+                    writer.WriteLine(stringToSave);
+                }
             }
         }
 
@@ -71,10 +85,7 @@ namespace Ultimate_Game_Winner
             //Resets Texts of all TextBox's back to original display
             Name.Text = "Name of Game";
             NumPlayers.Text = "# of Players";
-            First.Text = "1st Place";
-            Second.Text = "2nd Place";
-            Third.Text = "3rd Place";
-            Fourth.Text = "4th Place";
+            TextBoxCollection.Clear();
         }
 
         private (float, float) GetAPIData(int gameID)
@@ -111,10 +122,7 @@ namespace Ultimate_Game_Winner
 
             Name.Text = "Test";
             NumPlayers.Text = "Test";
-            First.Text = "Test";
-            Second.Text = "Test";
-            Third.Text = "Test";
-            Fourth.Text = "Test";
+            
             //TestAPIText.Text = gameID.ToString();
 
 
@@ -246,6 +254,90 @@ namespace Ultimate_Game_Winner
                 }
             }
         }
+
+        public void RefreshLeaderboard()
+        {
+
+            Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
+
+
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    String[] parts = line.Split(',');
+                    for (int i = 0; i < parts.Length; i++)
+                    {
+                        //skips over Game Name and Number of Players
+                        if (i != 0 && i != 1)
+                        {
+                            int ID = GetID(parts[0]);
+                            (float weight, float playtime) = GetAPIData(ID);
+                            double points = CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
+
+
+                            //checks if person is already in the dictionary and adds them accordingly
+                            if (!newLeaderboard.ContainsKey(parts[i]))
+                            {
+                                newLeaderboard.Add(parts[i], points);
+                            }
+
+                            else
+                            {
+                                newLeaderboard[parts[i]] += points;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+
+            var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            {
+
+                writer.Write(string.Empty);
+                int i = 0;
+                foreach (var entry in sortedDictionary)
+                {
+                    i += 1;
+                    //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
+                    var key = entry.Key;
+                    var value = entry.Value;
+                    string writeThis = $"#{i} {key} with {value} points";
+                    writer.WriteLine(writeThis);
+                }
+            }
+        }
+        private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
+            {
+                // Update the collection based on the number of textboxes required
+                UpdateTextBoxCollection(numberOfTextBoxes);
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void UpdateTextBoxCollection(int count)
+        {
+            // Clear the existing collection
+            TextBoxCollection.Clear();
+
+            // Add the required number of textboxes
+            for (int i = 0; i < count; i++)
+            {
+                TextBox textBox = new TextBox { Width = 100, Margin = new Thickness(5, 150, 0, 0) };
+                TextBoxCollection.Add(textBox);
+            }
+        }
+
 
     }
 }
