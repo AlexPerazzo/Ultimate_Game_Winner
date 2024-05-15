@@ -13,9 +13,11 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Button Name="Recordbtn" Grid.Column="0" Content="Record a Game" FontSize="20" Click="Recordbtn_Click"/>
         <Button Name="Leaderboardbtn" Grid.Column="1" Content="Leaderboard" FontSize="20" Click="Leaderboardbtn_Click"/>
         <Button Name="Logbtn" Grid.Column="2" Content="All Logged Games" FontSize="20" Click="Logbtn_Click"/>
+        <Button Name="Settingsbtn" Grid.Column="3" Content="Settings" FontSize="20" Click="Settingsbtn_Click"/>
     </Grid>
 </UserControl>

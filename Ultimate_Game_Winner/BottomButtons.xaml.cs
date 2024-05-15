@@ -39,5 +39,10 @@ namespace Ultimate_Game_Winner
         {            
             mainFrame.Navigate(new Uri("TheLog.xaml", UriKind.Relative));
         }
+
+        private void Settingsbtn_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new Uri("Settings.xaml", UriKind.Relative));
+        }
     }
 }

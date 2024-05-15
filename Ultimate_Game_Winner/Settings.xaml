@@ -1,0 +1,20 @@
+﻿<Page x:Class="Ultimate_Game_Winner.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Ultimate_Game_Winner"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Settings"
+      Background="White">
+
+    <Grid>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="59,144,0,0" TextWrapping="Wrap" Text="Ranking System" VerticalAlignment="Top" Height="32" Width="148"/>
+        <Menu Margin="400,179,292,252"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="59,198,0,0" TextWrapping="Wrap" Text="Filter" VerticalAlignment="Top"/>
+        <Menu Margin="312,233,380,198"/>
+        <Button Name="DeleteLog" Width="120" Margin="59,81,0,262" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Left" Click="DeleteLog_Click"/>
+
+    </Grid>
+</Page>

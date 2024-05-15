@@ -1,5 +1,7 @@
-#1 2nd Place with 8.658456462637032 points
-#2 1st Place with 8.65845646263703 points
-#3 A with 4.329228231318515 points
-#4 3rd Place with -6.0609195238459215 points
-#5 4th Place with -12.987684693955545 points
+#1 Alex with 4.329228231318515 points
+#2 2nd Place with 2.886152154212344 points
+#3 Idk with 2.886152154212344 points
+#4 1st Place with 0 points
+#5 3rd Place with -2.0203065079486406 points
+#6 Idk2 with -2.0203065079486406 points
+#7 4th Place with -4.329228231318515 points

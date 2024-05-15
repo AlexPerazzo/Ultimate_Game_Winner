@@ -21,7 +21,7 @@
         
         <StackPanel Name="theLog"/>
         
-        <Button Name="DeleteLog" Grid.Row="1" Margin="5" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Right" Click="DeleteLog_Click"/>
+        <!--<Button Name="DeleteLog" Grid.Row="1" Margin="5" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Right" Click="DeleteLog_Click"/>-->
     </Grid>
     </ScrollViewer>
     

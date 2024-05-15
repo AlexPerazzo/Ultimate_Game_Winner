@@ -47,14 +47,6 @@ namespace Ultimate_Game_Winner
             //foreach (string item in logList){}
         }
         
-        private void DeleteLog_Click(object sender, RoutedEventArgs e)
-        {
-            //replaces anything in LogofPlayedGames.txt with an empty line.
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
-            {
-                writer.Write(string.Empty);
-            }
-            DeleteLog.Content = "Refresh to Load";
-        }
+        
     }
 }
