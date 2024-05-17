@@ -36,17 +36,14 @@ namespace Ultimate_Game_Winner
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
-            string nameOfGame = Name.Text; string numPlayers = NumPlayers.Text;
-            SaveToLog(nameOfGame, numPlayers);
+            string nameOfGame = GameName.Text; string numPlayers = NumPlayers.Text;
+            string lineSaved = SaveToLog(nameOfGame, numPlayers);
             //Reset page's text
             Cancel_Click(sender, e);
 
 
-            int gameID = GetID(nameOfGame);
-            (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
-
             //Update Leaderboard
-            UpdateLeaderboard(averageWeight, averagePlaytime);
+            UpdateLeaderboard(lineSaved);
 
             //Displays Success and then converts back to normal
             Submit.Content = "Success!!";
@@ -55,7 +52,7 @@ namespace Ultimate_Game_Winner
 
         }
 
-        private void SaveToLog(string nameOfGame, string numPlayers)
+        private string SaveToLog(string nameOfGame, string numPlayers)
         {
             
             
@@ -78,17 +75,18 @@ namespace Ultimate_Game_Winner
                     writer.WriteLine(stringToSave);
                 }
             }
+            return line;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             //Resets Texts of all TextBox's back to original display
-            Name.Text = "Name of Game";
+            GameName.Text = "Name of Game";
             NumPlayers.Text = "# of Players";
             TextBoxCollection.Clear();
         }
 
-        private (float, float) GetAPIData(int gameID)
+        private (float playtime, float weight) GetAPIData(int gameID)
         {
             //Uses API and grabs the needed information: weight and playtime
             XDocument doc;
@@ -117,10 +115,10 @@ namespace Ultimate_Game_Winner
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             //Resets Texts of all TextBox's back to original display
-            int gameID = GetID(Name.Text);
+            int gameID = GetID(GameName.Text);
             (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
 
-            Name.Text = "Test";
+            GameName.Text = "Test";
             NumPlayers.Text = "Test";
             
             //TestAPIText.Text = gameID.ToString();
@@ -129,7 +127,7 @@ namespace Ultimate_Game_Winner
 
             CalculatePoints(averageWeight, averagePlaytime, int.Parse(NumPlayers.Text), 2);
 
-            Name.Text = averagePlaytime.ToString();
+            GameName.Text = averagePlaytime.ToString();
             NumPlayers.Text = averageWeight.ToString();
 
 
@@ -199,42 +197,42 @@ namespace Ultimate_Game_Winner
             }
         }
 
-        private void UpdateLeaderboard(float weight, float playtime)
+        private void UpdateLeaderboard(string gameplayToAdd)
         {
-            
+            string[] gameParts = gameplayToAdd.Split(',');
+
+            int gameID = GetID(gameParts[0]);
+            (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
+
+
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
-
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null) 
                 {
                     String[] parts = line.Split(',');
-                    for (int i = 0; i < parts.Length; i++)
+                    newLeaderboard.Add(parts[0], double.Parse(parts[1]));
+                }
+
+                for (int i = 2; i < gameParts.Length; i++)
+                {
+
+                    double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
+                    
+                    //checks if person is already in the dictionary and adds them accordingly
+                    if (!newLeaderboard.ContainsKey(gameParts[i]))
                     {
-                        //skips over Game Name and Number of Players
-                        if (i != 0 && i != 1)
-                        {
-                            double points = CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
-                            
+                        newLeaderboard.Add(gameParts[i], points);
+                    }
 
-                            //checks if person is already in the dictionary and adds them accordingly
-                            if (!newLeaderboard.ContainsKey(parts[i]))
-                            {
-                                newLeaderboard.Add(parts[i], points);
-                            }
-
-                            else
-                            {
-                                newLeaderboard[parts[i]] += points;
-                            }
-                            
-                        }
+                    else
+                    {
+                        newLeaderboard[gameParts[i]] += points;
                     }
                 }
             }
-
             
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
@@ -249,7 +247,7 @@ namespace Ultimate_Game_Winner
                     //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
                     var key = entry.Key;
                     var value = entry.Value;
-                    string writeThis = $"#{i} {key} with {value} points";
+                    string writeThis = $"{key},{value}";
                     writer.WriteLine(writeThis);
                 }
             }
@@ -338,6 +336,23 @@ namespace Ultimate_Game_Winner
             }
         }
 
+        private void GameName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (GameName.Text != "Ark Nova")
+                MessageBox.Show("Testing!");
+        }
 
+        private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //need to have it check if it's an int first
+            if (!(int.TryParse(NumPlayers.Text, out int numPlayers) && numPlayers >= 2 && numPlayers <=6))
+            {
+                MessageBox.Show("Please input a number between 2 and 6");
+                //NumPlayers.Focus();
+                NumPlayers.Text = "";
+                //NumPlayers.Background = new SolidColorBrush(Colors.Red);
+            }
+
+        }
     }
 }

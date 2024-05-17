@@ -38,12 +38,16 @@ namespace Ultimate_Game_Winner
                 //Adds that TextBlock to the StackPanel from the xaml page
                 
                 string line;
+                int count = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
+                    count ++;
                     //leaderboardList.Add(line);
 
                     TextBlock textBlock = new TextBlock();
-                    textBlock.Text = line;
+                    string[] parts = line.Split(",");
+
+                    textBlock.Text = $"${count} {parts[0]} with {parts[1]} points";
                     textBlock.FontSize = 20;
                     textBlock.Margin = new Thickness(12, 12, 0, 0);
                     theLeaderboard.Children.Add(textBlock);
