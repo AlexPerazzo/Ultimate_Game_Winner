@@ -1,3 +1,0 @@
-Ark Nova,2,Alex,Ben
-Spirit Island,3,Alex,Ben,Eric
-Ark Nova,3,Eric,Alex,Ben

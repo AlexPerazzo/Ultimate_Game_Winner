@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace Ultimate_Game_Winner
 {
-    /// <summary>
-    /// Interaction logic for Leaderboard.xaml
-    /// </summary>
+
     public partial class Leaderboard : Page
     {
         public Leaderboard()
