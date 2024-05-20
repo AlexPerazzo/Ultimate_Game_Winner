@@ -112,34 +112,6 @@ namespace Ultimate_Game_Winner
             return (averagePlaytime, averageWeight);
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
-        {
-            //Resets Texts of all TextBox's back to original display
-            int gameID = GetID(GameName.Text);
-            (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
-
-            GameName.Text = "Test";
-            NumPlayers.Text = "Test";
-            
-            //TestAPIText.Text = gameID.ToString();
-
-
-
-            CalculatePoints(averageWeight, averagePlaytime, int.Parse(NumPlayers.Text), 2);
-
-            GameName.Text = averagePlaytime.ToString();
-            NumPlayers.Text = averageWeight.ToString();
-
-
-            //using (var client = new HttpClient())
-            //{
-            //    var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
-            //    var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
-            //    TestAPIText.Text = result;
-            //    //var result = client.GetAsync(endpoint).Result;
-            //    //var json = result.Content.ReadAsStringAsync().Result;
-            //}
-        }
 
         private int GetID(string nameOfGame)
         {
@@ -169,12 +141,12 @@ namespace Ultimate_Game_Winner
 
 
             // There isn't an exact rhyme or reason to these numbers; they just helped fit the point curve to what I wanted
-            var weightFactor = (.25) * weight + (.75);
-            var playtimeFactor = ((-0.00487789 * Math.Pow(playtime, 2)) + (2.02538 * playtime) - (1.95751)) / 100;
+            var weightFactor = 3 * Math.Log10(weight);
+            var playtimeFactor = 2 * Math.Log10(playtime / 10);
             var placementFactor = CalculatePlacementPercentage(placement, numOfPlayers);
             
-            var points = 10 * weightFactor * playtimeFactor * placementFactor;
-
+            var points = (weightFactor + playtimeFactor) * placementFactor;
+            //var roundedPoints = Math.Round(points, 2);
             return points;
 
             double CalculatePlacementPercentage(int placement, int numOfPlayers)
@@ -220,7 +192,7 @@ namespace Ultimate_Game_Winner
                 {
 
                     double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
-                    
+                    //var roundedPoints = Math.Round(points, 2);
                     //checks if person is already in the dictionary and adds them accordingly
                     if (!newLeaderboard.ContainsKey(gameParts[i]))
                     {
@@ -247,7 +219,7 @@ namespace Ultimate_Game_Winner
                     //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
                     var key = entry.Key;
                     var value = entry.Value;
-                    string writeThis = $"{key},{value}";
+                    string writeThis = $"{key},{value:F2}";
                     writer.WriteLine(writeThis);
                 }
             }
