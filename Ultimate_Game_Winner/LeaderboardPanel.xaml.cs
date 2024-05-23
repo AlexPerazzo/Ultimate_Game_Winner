@@ -23,6 +23,11 @@ namespace Ultimate_Game_Winner
         public LeaderboardPanel()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
+
+        public string PlayerName { get; set; }
+        public string Placement { get; set; }
+        public string Points { get; set; }
     }
 }

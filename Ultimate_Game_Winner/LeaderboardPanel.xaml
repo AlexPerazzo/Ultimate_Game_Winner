@@ -4,13 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ultimate_Game_Winner"
-             mc:Ignorable="d" Height="165" Width="400">
-    <Grid Margin="0,0,0,0">
+             mc:Ignorable="d" Height="165" Width="400" Background="White">
+    <Grid Margin="0,0,0,0" Background="White">
         <Rectangle HorizontalAlignment="Center" Height="165" VerticalAlignment="Center" Width="402" RadiusX="33.667" RadiusY="33.667">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="#FF9B9B9B" Offset="0.25" />
-                    <GradientStop Color="White" Offset="0.25" />
+                    <GradientStop Color="LightBlue" Offset="0.25" />
+                    <GradientStop Color="DeepSkyBlue" Offset="0.25" />
+                    <!--Good color grey: #FF9B9B9B-->
+                    
                     <!--<GradientStop Color="White" Offset="1" />-->
 
                     <!--<GradientStop Color="Red" Offset=".6" />
@@ -18,9 +20,10 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        <Border BorderBrush="Black" CornerRadius="23" Margin="0" BorderThickness="3"/>
         <Rectangle HorizontalAlignment="Left" Height="175" Margin="98,0,0,0" VerticalAlignment="Center" Width="2" Fill="Black"/>
         <Grid Margin="0,0,302,0">
-            <Label Content="12" FontSize="82" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="0" FontFamily="Segoe UI Black" Margin="0,21,0,0">
+            <Label Content="{Binding Placement}" FontSize="82" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="0" FontFamily="Segoe UI Black" Margin="0,21,0,0">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="1.9" BlurRadius="2.2" Opacity="0.25"/>
                 </Label.Effect>
@@ -33,12 +36,12 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Content="Elijah" FontFamily="Bodoni MT" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" FontSize="76" Margin="5,0,0,0" FontStyle="Italic" FontWeight="Bold">
+            <Label Grid.Row="0" Content="{Binding PlayerName}" FontFamily="Bodoni MT" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" FontSize="76" Margin="5,0,0,0" FontStyle="Italic" FontWeight="Bold">
                 <Label.Effect>
                     <DropShadowEffect BlurRadius="2" Color="Black" Opacity="0.0" ShadowDepth="2.5" RenderingBias="Performance"/>
                 </Label.Effect>
             </Label>
-            <Label Grid.Row="1" Content="22pts" FontFamily="Bodoni MT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" FontSize="35" Margin="0,0,15,13">
+            <Label Grid.Row="1" Content="{Binding Points}" FontFamily="Bodoni MT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" FontSize="35" Margin="0,0,15,13">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="1.5" BlurRadius="3" Opacity="0.5"/>
                 </Label.Effect>

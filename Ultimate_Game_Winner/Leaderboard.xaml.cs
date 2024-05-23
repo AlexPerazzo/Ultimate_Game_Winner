@@ -41,14 +41,19 @@ namespace Ultimate_Game_Winner
                 {
                     placement ++;
                     //leaderboardList.Add(line);
+                    LeaderboardPanel panel = new LeaderboardPanel();
+                    string[] parts = line.Split(",");
+                    panel.PlayerName = parts[0];
+                    panel.Points = $"{parts[1]}pts";
+                    panel.Placement = placement.ToString();
 
                     TextBlock textBlock = new TextBlock();
-                    string[] parts = line.Split(",");
+                    //string[] parts = line.Split(",");
 
                     textBlock.Text = $"#{placement} {parts[0]} with {parts[1]} points";
                     textBlock.FontSize = 20;
-                    textBlock.Margin = new Thickness(12, 12, 0, 0);
-                    theLeaderboard.Children.Add(textBlock);
+                    panel.Margin = new Thickness(12, 12, 0, 0);
+                    theLeaderboard.Children.Add(panel);
 
                 }
             }
