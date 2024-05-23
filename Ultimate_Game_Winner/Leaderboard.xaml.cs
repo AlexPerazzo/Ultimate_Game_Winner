@@ -47,11 +47,11 @@ namespace Ultimate_Game_Winner
                     panel.Points = $"{parts[1]}pts";
                     panel.Placement = placement.ToString();
 
-                    TextBlock textBlock = new TextBlock();
+                    //TextBlock textBlock = new TextBlock();
                     //string[] parts = line.Split(",");
 
-                    textBlock.Text = $"#{placement} {parts[0]} with {parts[1]} points";
-                    textBlock.FontSize = 20;
+                    //textBlock.Text = $"#{placement} {parts[0]} with {parts[1]} points";
+                    //textBlock.FontSize = 20;
                     panel.Margin = new Thickness(12, 12, 0, 0);
                     theLeaderboard.Children.Add(panel);
 
