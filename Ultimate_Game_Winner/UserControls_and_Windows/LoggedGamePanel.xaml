@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Ultimate_Game_Winner.LoggedGamePanel"
+﻿<UserControl x:Class="Ultimate_Game_Winner.UserControls_and_Windows.LoggedGamePanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
     <Grid>
         <!--<Rectangle HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="800" Fill="DeepSkyBlue" RadiusX="20.897" RadiusY="20.897"/>-->
         <Border BorderBrush="Orange" BorderThickness="2" Padding="5">
-            <StackPanel VerticalAlignment="Center" Margin="-1,0,1,0" Background="White" Orientation="Horizontal">
+            <StackPanel x:Name="LogPanel" VerticalAlignment="Center" Margin="-1,0,1,0" Background="White" Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
                 
                 <Label Content="{Binding PlayerName}" Margin="10,0,0,0" FontSize="60" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding GameName}" Margin="30,0,0,0" FontSize="36" VerticalAlignment="Bottom"/>

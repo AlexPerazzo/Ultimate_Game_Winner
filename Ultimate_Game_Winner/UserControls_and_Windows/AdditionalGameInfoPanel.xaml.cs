@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ultimate_Game_Winner
+namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
-    /// Interaction logic for LoggedGamePanel.xaml
+    /// Interaction logic for AdditionalGameInfoPanel.xaml
     /// </summary>
-    public partial class LoggedGamePanel : UserControl
+    public partial class AdditionalGameInfoPanel : Window
     {
-        public LoggedGamePanel()
+        public AdditionalGameInfoPanel()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
-
-        public string PlayerName { get; set; }
-        public string GameName { get; set; }
-
-        public string NumPlayers { get; set; }
-        public string Date { get; set; }
     }
 }

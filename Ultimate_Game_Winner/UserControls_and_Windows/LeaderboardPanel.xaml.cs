@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ultimate_Game_Winner
+namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
     /// Interaction logic for LeaderboardPanel.xaml

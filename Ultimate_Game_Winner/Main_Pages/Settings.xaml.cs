@@ -13,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner.UserControls_and_Windows;
+using Ultimate_Game_Winner;
 
-namespace Ultimate_Game_Winner
+namespace Ultimate_Game_Winner.Main_Pages
 {
     /// <summary>
     /// Interaction logic for Settings.xaml
@@ -29,16 +31,9 @@ namespace Ultimate_Game_Winner
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
         {
-            //replaces anything in LogofPlayedGames.txt with an empty line.
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
-            {
-                writer.Write(string.Empty);
-            }
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
-            {
-                writer.Write(string.Empty);
-            }
-            DeleteLog.Content = "Done.";
+            AreYouSure areYouSure = new AreYouSure();
+            areYouSure.Show();
         }
+        
     }
 }

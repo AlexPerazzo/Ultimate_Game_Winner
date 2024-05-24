@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner;
 
-namespace Ultimate_Game_Winner
+namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
         /// The three different buttons on bottom all navigate the mainFrame to their associated xaml pages
@@ -27,22 +28,22 @@ namespace Ultimate_Game_Winner
         }
         private void Recordbtn_Click(object sender, RoutedEventArgs e)
         {        
-            mainFrame.Navigate(new Uri("RecordaGame.xaml", UriKind.Relative));
+            mainFrame.Navigate(new Uri("Main_Pages\\RecordaGame.xaml", UriKind.Relative));
         }
 
         private void Leaderboardbtn_Click(object sender, RoutedEventArgs e)
         {                        
-            mainFrame.Navigate(new Uri("Leaderboard.xaml", UriKind.Relative));
+            mainFrame.Navigate(new Uri("Main_Pages\\Leaderboard.xaml", UriKind.Relative));
         }
 
         private void Logbtn_Click(object sender, RoutedEventArgs e)
         {            
-            mainFrame.Navigate(new Uri("TheLog.xaml", UriKind.Relative));
+            mainFrame.Navigate(new Uri("Main_Pages\\TheLog.xaml", UriKind.Relative));
         }
 
         private void Settingsbtn_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Navigate(new Uri("Settings.xaml", UriKind.Relative));
+            mainFrame.Navigate(new Uri("Main_Pages\\Settings.xaml", UriKind.Relative));
         }
     }
 }

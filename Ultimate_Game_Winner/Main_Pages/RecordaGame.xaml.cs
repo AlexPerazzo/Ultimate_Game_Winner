@@ -18,8 +18,9 @@ using System.Windows.Shapes;
 using System.Net.Http;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
+using Ultimate_Game_Winner;
 
-namespace Ultimate_Game_Winner
+namespace Ultimate_Game_Winner.Main_Pages
 {
     /// <summary>
     /// Interaction logic for RecordaGame.xaml
@@ -67,7 +68,7 @@ namespace Ultimate_Game_Winner
             line += correctFormatDate;
             
             //Save all information to LogofPlayedGames.txt
-            SaveStringIntoTxt(line, "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt");
+            SaveStringIntoTxt(line, "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt");
 
             void SaveStringIntoTxt(string stringToSave, string fileName)
             {
@@ -100,10 +101,10 @@ namespace Ultimate_Game_Winner
                 doc = XDocument.Parse(result);
             }
 
-            XElement item = doc.Element("items").Element("item");
+            XElement? item = doc.Element("items").Element("item");
 
             //sorts thorugh that information to grab what we need.
-            string averageWeightString = item.Element("statistics").Element("ratings").Element("averageweight").Attribute("value").Value;
+            string? averageWeightString = item.Element("statistics").Element("ratings").Element("averageweight").Attribute("value").Value;
             var minPlaytimeString = item.Element("minplaytime").Attribute("value").Value;
             var maxPlaytimeString = item.Element("maxplaytime").Attribute("value").Value;
 
@@ -118,7 +119,7 @@ namespace Ultimate_Game_Winner
         private int GetID(string nameOfGame)
         {
             //Reads list of all games and their ids
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\GamesAndIDs.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -154,7 +155,7 @@ namespace Ultimate_Game_Winner
             double CalculatePlacementPercentage(int placement, int numOfPlayers)
             {
                 //reads from PlacementPercentages.txt and grabs the associated information needed for the math calculations.
-                using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\PlacementPercentages.txt"))
+                using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\PlacementPercentages.txt"))
                 {
                     reader.ReadLine();
                     string line;
@@ -181,7 +182,7 @@ namespace Ultimate_Game_Winner
 
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null) 
@@ -211,7 +212,7 @@ namespace Ultimate_Game_Winner
             
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
                 
                 writer.Write(string.Empty);
@@ -234,7 +235,7 @@ namespace Ultimate_Game_Winner
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
 
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -269,7 +270,7 @@ namespace Ultimate_Game_Winner
 
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
 
                 writer.Write(string.Empty);

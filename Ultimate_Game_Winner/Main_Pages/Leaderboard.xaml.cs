@@ -13,15 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner.UserControls_and_Windows;
+using Ultimate_Game_Winner;
 
-namespace Ultimate_Game_Winner
+namespace Ultimate_Game_Winner.Main_Pages
 {
 
     public partial class Leaderboard : Page
     {
         public Leaderboard()
         {
+            
             InitializeComponent();
+            //Testing
             //Calls LoadLeaderboard when the page is loaded.
             Loaded += LoadLeaderboard;
         }
@@ -29,13 +33,13 @@ namespace Ultimate_Game_Winner
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
             //List<String> leaderboardList = new List<String> {};
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Leaderboard.txt"))
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
 
                 //Reads each line from the text file and makes a TextBlock out of it
                 //Adds that TextBlock to the StackPanel from the xaml page
                 
-                string line;
+                string? line;
                 int placement = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
