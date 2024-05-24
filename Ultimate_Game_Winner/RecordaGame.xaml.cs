@@ -62,7 +62,9 @@ namespace Ultimate_Game_Winner
             {
                 line += textBox.Text + ",";
             }
-            line = line.TrimEnd(',');
+            DateTime currentDate = DateTime.Now;
+            var correctFormatDate = currentDate.ToString("M/d/yy");
+            line += correctFormatDate;
             
             //Save all information to LogofPlayedGames.txt
             SaveStringIntoTxt(line, "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\LogofPlayedGames.txt");
@@ -188,7 +190,8 @@ namespace Ultimate_Game_Winner
                     newLeaderboard.Add(parts[0], double.Parse(parts[1]));
                 }
 
-                for (int i = 2; i < gameParts.Length; i++)
+                //Loopers through from first player (index 2) to last player (index second to last (there's a date at the end))
+                for (int i = 2; i < gameParts.Length - 1; i++)
                 {
 
                     double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
@@ -308,23 +311,23 @@ namespace Ultimate_Game_Winner
             }
         }
 
-        private void GameName_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (GameName.Text != "Ark Nova")
-                MessageBox.Show("Testing!");
-        }
+        //private void GameName_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (GameName.Text != "Ark Nova")
+        //        MessageBox.Show("Testing!");
+        //}
 
-        private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //need to have it check if it's an int first
-            if (!(int.TryParse(NumPlayers.Text, out int numPlayers) && numPlayers >= 2 && numPlayers <=6))
-            {
-                MessageBox.Show("Please input a number between 2 and 6");
-                //NumPlayers.Focus();
-                NumPlayers.Text = "";
-                //NumPlayers.Background = new SolidColorBrush(Colors.Red);
-            }
+        //private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    //need to have it check if it's an int first
+        //    if (!(int.TryParse(NumPlayers.Text, out int numPlayers) && numPlayers >= 2 && numPlayers <=6))
+        //    {
+        //        MessageBox.Show("Please input a number between 2 and 6");
+        //        //NumPlayers.Focus();
+        //        NumPlayers.Text = "";
+        //        //NumPlayers.Background = new SolidColorBrush(Colors.Red);
+        //    }
 
-        }
+        //}
     }
 }

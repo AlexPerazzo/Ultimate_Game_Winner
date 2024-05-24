@@ -35,11 +35,17 @@ namespace Ultimate_Game_Winner
                 while ((line = reader.ReadLine()) != null)
                 {
                     //logList.Add(line);
-                    TextBlock textBlock = new TextBlock();
-                    textBlock.Text = line;
-                    textBlock.FontSize = 20; 
-                    textBlock.Margin = new Thickness(12, 12, 0, 0);
-                    theLog.Children.Add(textBlock);
+                    LoggedGamePanel panel = new LoggedGamePanel();
+                    string[] parts = line.Split(',');
+                    panel.GameName = parts[0];
+                    var numPlayers = parts.Length - 2;
+                    panel.NumPlayers = $"{numPlayers} players";
+                    panel.PlayerName = parts[2];
+                    panel.Date = parts[parts.Length - 1];
+                    panel.Margin = new Thickness(12, 12, 0, 0);
+
+                    
+                    theLog.Children.Add(panel);
                 }
             }
             

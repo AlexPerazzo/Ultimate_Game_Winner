@@ -23,6 +23,13 @@ namespace Ultimate_Game_Winner
         public LoggedGamePanel()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
+
+        public string PlayerName { get; set; }
+        public string GameName { get; set; }
+
+        public string NumPlayers { get; set; }
+        public string Date { get; set; }
     }
 }

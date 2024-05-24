@@ -1,6 +1,5 @@
-Eric,3.88
-Mother,1.94
-Ben,1.94
-Alex,1.94
-Hannah,-1.94
-Mom,-5.82
+Sarah,3.70
+Mom,1.94
+Ben,1.85
+Alex,-1.94
+Eric,-3.70
