@@ -16,6 +16,7 @@
             <!-- Page Options -->
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
+        <Label Content="Welcome! There will be additional information here, I guess" HorizontalAlignment="Left" Margin="359,0,0,0" VerticalAlignment="Center"/>
 
         <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
 
