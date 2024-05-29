@@ -25,6 +25,10 @@ namespace Ultimate_Game_Winner
 
         //Give other xaml.cs's access to the mainFrame
         public Frame MainFrame => mainFrame;
-        
+
+        private void mainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
     }
 }

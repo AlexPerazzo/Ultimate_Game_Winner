@@ -10,17 +10,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <!-- Welcome Note (pending)-->
-            
-			
+
+
             <RowDefinition />
             <!-- Page Options -->
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <Label Content="Welcome! There will be additional information here, I guess" HorizontalAlignment="Left" Margin="359,0,0,0" VerticalAlignment="Center"/>
+        <Label Content="Ultimate Game Winner!" Height="65" Width="615" HorizontalAlignment="Center" Margin="0,0,0,200" VerticalAlignment="Center" FontStyle="Italic" FontFamily="Arial Black" FontSize="48"/>
 
-        <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
 
         <!--Displays BottomButtons xaml into the bottom 35px row-->
+        <Label Content="Welcome to..." HorizontalAlignment="Center" Height="36" VerticalAlignment="Center" Width="242" FontSize="24" FontStyle="Italic" Margin="0,0,369,285"/>
+        <Label Content="Created by Alex Perazzo" HorizontalAlignment="Center" Height="42" Margin="398,0,0,130" VerticalAlignment="Center" Width="219" FontSize="20" FontStyle="Italic"/>
+
+        <TextBlock Text="Select any of the options below to get started!" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Margin="0,150,0,0" Width="619" TextAlignment="Center"/>
+        <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden" Navigated="mainFrame_Navigated"/>
         <local:BottomButtons Grid.Row="1"/>
 
 
