@@ -1,4 +1,9 @@
+Brent,5.83
 Sarah,5.55
+Tyler,3.88
 Ben,3.70
-Alex,-3.61
+Hannah,1.94
+Dad,-2.72
 Eric,-4.53
+Alex,-5.55
+Mom,-5.83

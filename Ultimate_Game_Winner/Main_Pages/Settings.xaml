@@ -10,11 +10,12 @@
       Background="White">
 
     <Grid>
-        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="59,144,0,0" TextWrapping="Wrap" Text="Ranking System" VerticalAlignment="Top" Height="32" Width="148"/>
-        <Menu Margin="400,179,292,252"/>
-        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="59,198,0,0" TextWrapping="Wrap" Text="Filter" VerticalAlignment="Top"/>
-        <Menu Margin="312,233,380,198"/>
-        <Button Name="DeleteLog" Width="120" Margin="59,81,0,262" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Left" Click="DeleteLog_Click"/>
+        <Button Name="DeleteLog" Margin="0,0,0,300" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DeleteLog_Click"/>
 
+        <TextBlock Text="Ranking System" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,150" TextWrapping="Wrap"  VerticalAlignment="Center"/>
+        <ComboBox Height="20" Width="100" Margin="0,0,0,75">
+            <ComboBoxItem Content="Normal" IsSelected="True"/>
+            <ComboBoxItem Content="Custom"/>
+        </ComboBox>
     </Grid>
 </Page>

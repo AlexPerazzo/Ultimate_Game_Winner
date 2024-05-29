@@ -4,17 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ultimate_Game_Winner"
-             mc:Ignorable="d" Height="173" Width="408" Background="White">
+             mc:Ignorable="d" Height="120" Width="277" Background="White">
     <Grid Margin="0,0,0,0" Background="White">
         
-        <!--Comment the stuff below out and it appears to make no difference, but I'm too afraid to delete yet-->
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="197*"/>
-            <ColumnDefinition Width="7*"/>
-        </Grid.ColumnDefinitions>-->
         
         <!--Overall Main Rectangle with curved edges-->
-        <Rectangle HorizontalAlignment="Left" Height="165" VerticalAlignment="Center" Width="402" RadiusX="33.667" RadiusY="33.667" Grid.ColumnSpan="2" Margin="3,0,0,0">
+        <Rectangle HorizontalAlignment="Left" Height="110" VerticalAlignment="Center" Width="268" RadiusX="33.667" RadiusY="33.667" Grid.ColumnSpan="2" Margin="3,0,0,0">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -29,11 +24,12 @@
         </Rectangle>
         
         <!--Black vertical line-->
-        <Rectangle HorizontalAlignment="Left" Height="165" Margin="102,0,0,0" VerticalAlignment="Center" Width="2" Fill="Black"/>
+        <Rectangle HorizontalAlignment="Left" Height="110" Margin="68,0,0,0" VerticalAlignment="Center" Width="2" Fill="Black"/>
         
         <!--Grid on left side with Placement in it.-->
-        <Grid Margin="0,0,288,0">
-            <Label Content="{Binding Placement}" Foreground="White" FontSize="82" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="0" FontFamily="Segoe UI Black" Margin="0,26,0,0">
+        <!---->
+        <Grid Margin="0,0,208,0">
+            <Label Content="{Binding Placement}" Foreground="White" FontSize="54" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="0" FontFamily="Segoe UI Black" Margin="5,20,0,0">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="1.9" BlurRadius="2.2" Opacity="0.25"/>
                 </Label.Effect>
@@ -41,21 +37,21 @@
         </Grid>
 
         <!--Grid with two rows: Top for Name, Bottom for points-->
-        <Grid Margin="104,0,0,0" Grid.ColumnSpan="2" >
+        <Grid Margin="69,0,0,0" Grid.ColumnSpan="2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <!--PlayerName-->
-            <Label Grid.Row="0" Content="{Binding PlayerName}" FontFamily="Segoe" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" FontSize="76" Margin="7,0,0,0" FontStyle="Italic" FontWeight="DemiBold">
+            <!--PlayerName -->
+            <Label Grid.Row="0" Content="{Binding PlayerName}" FontFamily="Segoe" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" FontSize="50" Margin="7,0,0,0" FontStyle="Italic" FontWeight="DemiBold">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="1.5" BlurRadius="3" Opacity="0.5"/>
                 </Label.Effect>
             </Label>
-            
-            <!--Points-->
-            <Label Grid.Row="1" Content="{Binding Points}" FontFamily="Bodoni MT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" FontSize="35" Margin="0,0,15,13">
+
+            <!--Points -->
+            <Label Grid.Row="1" Content="{Binding Points}" FontFamily="Bodoni MT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" FontSize="23" Margin="0,0,27,12">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="1.5" BlurRadius="3" Opacity="0.5"/>
                 </Label.Effect>
