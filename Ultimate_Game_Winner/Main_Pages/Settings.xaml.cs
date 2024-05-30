@@ -34,6 +34,40 @@ namespace Ultimate_Game_Winner.Main_Pages
             AreYouSure areYouSure = new AreYouSure();
             areYouSure.Show();
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
+            {
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\newGamesAndIDs.txt"))
+                {
+                    reader.ReadLine();
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var count = 0;
+                        var writeThis = "";
+                        foreach (var letter in line)
+                        {
+                            writeThis += letter;
+
+                            if (letter == ',')
+                            {
+                                count++;
+                            }
+                            if (count == 3)
+                            {
+                                break;
+                            }
+
+                        }
+
+
+                        writer.WriteLine(writeThis);
+                    }
+                }
+            }
+            TextEditor.Content = "Done";
+        }
     }
 }

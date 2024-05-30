@@ -144,16 +144,14 @@ namespace Ultimate_Game_Winner.Main_Pages
         private double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
             //Creates a point value, either positive or negative.
+
             
-
-
-            // There isn't an exact rhyme or reason to these numbers; they just helped fit the point curve to what I wanted
             var weightFactor = 3 * Math.Log10(weight);
             var playtimeFactor = 2 * Math.Log10(playtime / 10);
             var placementFactor = CalculatePlacementPercentage(placement, numOfPlayers);
             
             var points = (weightFactor + playtimeFactor) * placementFactor;
-            //var roundedPoints = Math.Round(points, 2);
+            
             return points;
 
             double CalculatePlacementPercentage(int placement, int numOfPlayers)
@@ -201,7 +199,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 {
 
                     double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
-                    //var roundedPoints = Math.Round(points, 2);
+                    
                     //checks if person is already in the dictionary and adds them accordingly
                     if (!newLeaderboard.ContainsKey(gameParts[i]))
                     {
@@ -342,6 +340,8 @@ namespace Ultimate_Game_Winner.Main_Pages
                 textBox.HorizontalAlignment = HorizontalAlignment.Center;
                 TextBoxCollection.Add(textBox);
             }
+
+            // Adds additional box for gameplay notes
                 TextBox notes = new TextBox { Width = 300, Height = 70, Margin = new Thickness(0, 25, 0, 0) };
                 notes.Text = "Additional gameplay notes... (leave blank or don't touch if none are wanted)";
                 notes.VerticalAlignment = VerticalAlignment.Center;

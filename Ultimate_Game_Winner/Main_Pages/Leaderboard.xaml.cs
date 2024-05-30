@@ -32,7 +32,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
-            //List<String> leaderboardList = new List<String> {};
+            
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
 
@@ -51,11 +51,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     panel.Points = $"{parts[1]}pts";
                     panel.Placement = placement.ToString();
 
-                    //TextBlock textBlock = new TextBlock();
-                    //string[] parts = line.Split(",");
-
-                    //textBlock.Text = $"#{placement} {parts[0]} with {parts[1]} points";
-                    //textBlock.FontSize = 20;
+                   
                     panel.Margin = new Thickness(12, 12, 0, 0);
                     theLeaderboard.Children.Add(panel);
 
