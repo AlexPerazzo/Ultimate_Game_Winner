@@ -37,7 +37,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 {
                     //logList.Add(line);
                     LoggedGamePanel panel = new LoggedGamePanel();
-                    string[] parts = line.Split(',');
+                    string[] parts = line.Split(",,,");
                     panel.GameName = parts[0];
                     var numPlayers = parts.Length - 3;
                     panel.NumPlayers = $"{numPlayers} players";
@@ -51,7 +51,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
 
 
-            //foreach (string item in logList){}
+            
         }
 
 

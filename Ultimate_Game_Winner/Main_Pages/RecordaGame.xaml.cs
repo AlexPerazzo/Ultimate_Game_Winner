@@ -58,10 +58,14 @@ namespace Ultimate_Game_Winner.Main_Pages
             
             
             // Append each item from the list, separated by commas
-            string line = $"{nameOfGame},{numPlayers},";
+            string line = $"{nameOfGame},,,{numPlayers},,,";
             foreach (TextBox textBox in TextBoxCollection)
             {
-                line += textBox.Text + ",";
+                if (textBox.Text == "" || textBox.Text == "Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted)")
+                    line += "N/A,,,";
+                else
+                    line += textBox.Text + ",,,";
+                
             }
             DateTime currentDate = DateTime.Now;
             var correctFormatDate = currentDate.ToString("M/d/yy");
@@ -174,7 +178,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void UpdateLeaderboard(string gameplayToAdd)
         {
-            string[] gameParts = gameplayToAdd.Split(',');
+            string[] gameParts = gameplayToAdd.Split(",,,");
 
             int gameID = GetID(gameParts[0]);
             (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
@@ -191,8 +195,9 @@ namespace Ultimate_Game_Winner.Main_Pages
                     newLeaderboard.Add(parts[0], double.Parse(parts[1]));
                 }
 
-                //Loopers through from first player (index 2) to last player (index second to last (there's a date at the end))
-                for (int i = 2; i < gameParts.Length - 1; i++)
+            }
+                //Loops through from first player (index 2) to last player (index third to last (there's a date and notes at the end))
+                for (int i = 2; i < gameParts.Length - 2; i++)
                 {
 
                     double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
@@ -208,7 +213,6 @@ namespace Ultimate_Game_Winner.Main_Pages
                         newLeaderboard[gameParts[i]] += points;
                     }
                 }
-            }
             
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
@@ -240,7 +244,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    String[] parts = line.Split(',');
+                    String[] parts = line.Split(",,,");
                     for (int i = 0; i < parts.Length; i++)
                     {
                         //skips over Game Name and Number of Players
@@ -299,36 +303,53 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
+        public static string AddOrdinal(int num)
+        {
+            if (num <= 0) return num.ToString();
+
+            switch (num % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return num + "th";
+            }
+
+            switch (num % 10)
+            {
+                case 1:
+                    return num + "st";
+                case 2:
+                    return num + "nd";
+                case 3:
+                    return num + "rd";
+                default:
+                    return num + "th";
+            }
+        }
         private void UpdateTextBoxCollection(int count)
         {
+
             // Clear the existing collection
             TextBoxCollection.Clear();
 
             // Add the required number of textboxes
             for (int i = 0; i < count; i++)
             {
-                TextBox textBox = new TextBox { Width = 100, Margin = new Thickness(5, 150, 0, 0) };
+                TextBox textBox = new TextBox { Width = 100, Margin = new Thickness(0, 25, 0, 0) };
+                textBox.Text = $"{AddOrdinal(i+1)} place...";
+                textBox.VerticalAlignment = VerticalAlignment.Center;
+                textBox.HorizontalAlignment = HorizontalAlignment.Center;
                 TextBoxCollection.Add(textBox);
             }
+                TextBox notes = new TextBox { Width = 300, Height = 70, Margin = new Thickness(0, 25, 0, 0) };
+                notes.Text = "Additional gameplay notes... (leave blank or don't touch if none are wanted)";
+                notes.VerticalAlignment = VerticalAlignment.Center;
+                notes.HorizontalAlignment = HorizontalAlignment.Center;
+                notes.TextWrapping = TextWrapping.Wrap;
+                TextBoxCollection.Add(notes);
         }
 
-        //private void GameName_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    if (GameName.Text != "Ark Nova")
-        //        MessageBox.Show("Testing!");
-        //}
-
-        //private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    //need to have it check if it's an int first
-        //    if (!(int.TryParse(NumPlayers.Text, out int numPlayers) && numPlayers >= 2 && numPlayers <=6))
-        //    {
-        //        MessageBox.Show("Please input a number between 2 and 6");
-        //        //NumPlayers.Focus();
-        //        NumPlayers.Text = "";
-        //        //NumPlayers.Background = new SolidColorBrush(Colors.Red);
-        //    }
-
-        //}
+        
     }
 }

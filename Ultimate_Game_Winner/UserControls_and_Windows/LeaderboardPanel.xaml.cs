@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -29,5 +30,32 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         public string PlayerName { get; set; }
         public string Placement { get; set; }
         public string Points { get; set; }
+
+        private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DropShadowEffect dropShadowEffect = new DropShadowEffect
+            {
+                Color = Colors.Black,
+                ShadowDepth = 6,
+                
+            };
+
+            // Apply the drop shadow effect to the StackPanel
+            LeaderPanel.Effect = dropShadowEffect;
+        }
+
+        private void Rectangle_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DropShadowEffect dropShadowEffect = new DropShadowEffect
+            {
+                Color = Colors.Gray,
+            };
+            LeaderPanel.Effect = dropShadowEffect;
+        }
+
+        private void LeaderPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
