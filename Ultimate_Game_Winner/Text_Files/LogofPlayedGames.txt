@@ -1,7 +1,12 @@
-Ark Nova,,,2,,,Alex,,,Ben,,,5/30/24
+Ark Nova,,,2,,,Alex,,,Ben,,,Game Log stuff.,,,5/30/24
 Ark Nova,,,3,,,Alex,,,Ben,,,Eric,,,We played a game.,,,5/30/24
 Ark Nova,,,2,,,Mom,,,Sarah,,,Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted),,,5/30/24
 Ark Nova,,,2,,,Sarah,,,Mom,,,Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted),,,5/30/24
 Ark Nova,,,2,,,Alex,,,Eric,,,Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted),,,5/30/24
 Ark Nova,,,2,,,Alex,,,Ben,,,N/A,,,5/30/24
 Ark Nova,,,2,,,Alex,,,Ben,,,N/A,,,5/30/24
+Ark Nova,,,2,,,Alex,,,Ben,,,Additional gameplay notes... (leave blank or don't touch if none are wanted),,,5/31/24
+Scythe,,,2,,,Alex,,,Ben,,,Additional gameplay notes... (leave blank or don't touch if none are wanted),,,5/31/24
+Yahtzee,,,2,,,Mom,,,Alex,,,Additional gameplay notes... (leave blank or don't touch if none are wanted),,,5/31/24
+Scythe,,,2,,,Mom,,,Eric,,,N/A,,,5/31/24
+Ark Nova,,,2,,,Alex,,,Eric,,,N/A,,,5/31/24

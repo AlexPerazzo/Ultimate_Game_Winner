@@ -39,7 +39,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     LoggedGamePanel panel = new LoggedGamePanel();
                     string[] parts = line.Split(",,,");
                     panel.GameName = parts[0];
-                    var numPlayers = parts.Length - 3;
+                    var numPlayers = parts.Length - 4;
                     panel.NumPlayers = $"{numPlayers} players";
                     panel.PlayerName = parts[2];
                     panel.Date = parts[parts.Length - 1];

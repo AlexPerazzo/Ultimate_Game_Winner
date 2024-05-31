@@ -1,5 +1,5 @@
-Alex,11.64
+Alex,16.76
+Mom,2.40
 Sarah,0.00
-Mom,-0.00
-Ben,-3.88
-Eric,-5.82
+Ben,-7.64
+Eric,-9.58

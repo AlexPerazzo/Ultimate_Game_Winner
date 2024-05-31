@@ -53,6 +53,22 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
+        private static string CapitalizeEachWord(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            string[] words = input.Split(' ');
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].Length > 0)
+                {
+                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                }
+            }
+
+            return string.Join(' ', words);
+        }
         private string SaveToLog(string nameOfGame, string numPlayers)
         {
             
@@ -61,10 +77,10 @@ namespace Ultimate_Game_Winner.Main_Pages
             string line = $"{nameOfGame},,,{numPlayers},,,";
             foreach (TextBox textBox in TextBoxCollection)
             {
-                if (textBox.Text == "" || textBox.Text == "Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted)")
+                if (textBox.Text == "" || textBox.Text == "Additional gameplay notes... (leave blank or don't touch if none are wanted)")
                     line += "N/A,,,";
                 else
-                    line += textBox.Text + ",,,";
+                    line += CapitalizeEachWord(textBox.Text) + ",,,";
                 
             }
             DateTime currentDate = DateTime.Now;
@@ -130,7 +146,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 {
                     string[] lineList = line.Split(",");
                     //stops when the names match up
-                    if (lineList[1] == $"\"{nameOfGame}\"")
+                    if (lineList[1] == nameOfGame)
                     {
                         //returns associated id
                         int gameID = int.Parse(lineList[0]);
@@ -148,7 +164,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             
             var weightFactor = 3 * Math.Log10(weight);
             var playtimeFactor = 2 * Math.Log10(playtime / 10);
-            var placementFactor = CalculatePlacementPercentage(placement, numOfPlayers);
+            var placementFactor = 1 * CalculatePlacementPercentage(placement, numOfPlayers);
             
             var points = (weightFactor + playtimeFactor) * placementFactor;
             
