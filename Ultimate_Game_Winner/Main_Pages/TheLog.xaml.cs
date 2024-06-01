@@ -44,9 +44,10 @@ namespace Ultimate_Game_Winner.Main_Pages
                     panel.PlayerName = parts[2];
                     panel.Date = parts[parts.Length - 1];
                     panel.Margin = new Thickness(12, 12, 0, 0);
+                    panel.AllInfo = parts;
 
 
-                    theLog.Children.Add(panel);
+                    theLog.Children.Insert(0, panel);
                 }
             }
 

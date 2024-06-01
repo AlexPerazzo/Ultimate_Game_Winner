@@ -32,10 +32,13 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         public string NumPlayers { get; set; }
         public string Date { get; set; }
+        public string[] AllInfo { get; set; }
+
+
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            AdditionalGameInfoPanel additionalGameInfoPanel = new AdditionalGameInfoPanel();
+            AdditionalGameInfoPanel additionalGameInfoPanel = new AdditionalGameInfoPanel(AllInfo);
             additionalGameInfoPanel.Show();
         }
 

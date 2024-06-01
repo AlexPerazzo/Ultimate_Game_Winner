@@ -10,3 +10,5 @@ Scythe,,,2,,,Alex,,,Ben,,,Additional gameplay notes... (leave blank or don't tou
 Yahtzee,,,2,,,Mom,,,Alex,,,Additional gameplay notes... (leave blank or don't touch if none are wanted),,,5/31/24
 Scythe,,,2,,,Mom,,,Eric,,,N/A,,,5/31/24
 Ark Nova,,,2,,,Alex,,,Eric,,,N/A,,,5/31/24
+Yahtzee,,,6,,,Mom,,,Alex,,,Grandma,,,Eric,,,Ben,,,Dad,,,N/A,,,5/31/24
+Ark Nova,,,2,,,Alex,,,Eric,,,N/A,,,5/31/24

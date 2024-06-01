@@ -19,9 +19,28 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     /// </summary>
     public partial class AdditionalGameInfoPanel : Window
     {
-        public AdditionalGameInfoPanel()
+        private string[] allInfo;
+        public AdditionalGameInfoPanel(string[] alltheInfo)
         {
             InitializeComponent();
+            //this.DataContext = this;
+            allInfo = alltheInfo;
+            Loaded += LoadPlayers;
+
+        }
+
+
+        private void LoadPlayers(object sender, RoutedEventArgs e)
+        {
+
+            for (int i = 2; i < allInfo.Length - 2; i++)
+            {
+                LeaderboardPanel playerPanel = new LeaderboardPanel();
+                playerPanel.PlayerName = allInfo[i];
+                playerPanel.Placement = $"{i-1}";
+                playerPanel.Points = "received 2.3 pts";
+                PlayersPanel.Children.Add(playerPanel);
+            }
         }
     }
 }

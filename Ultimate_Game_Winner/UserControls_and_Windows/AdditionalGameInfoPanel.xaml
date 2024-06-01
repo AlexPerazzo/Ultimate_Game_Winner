@@ -6,8 +6,21 @@
         xmlns:local="clr-namespace:Ultimate_Game_Winner"
         mc:Ignorable="d"
         Title="AdditionalGameInfoPanel" Height="450" Width="800">
+    <ScrollViewer>
     <Grid>
-        <Label Content="Testing" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".65*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <StackPanel x:Name="PlayersPanel" Grid.Column="0"/>
 
     </Grid>
+    </ScrollViewer>
 </Window>
