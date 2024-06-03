@@ -39,6 +39,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             AdditionalGameInfoPanel additionalGameInfoPanel = new AdditionalGameInfoPanel(AllInfo);
+            additionalGameInfoPanel.gameName = AllInfo[0];
             additionalGameInfoPanel.Show();
         }
 

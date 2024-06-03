@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using Ultimate_Game_Winner.Main_Pages;
 
 namespace Ultimate_Game_Winner.UserControls_and_Windows
@@ -21,30 +23,61 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     public partial class AdditionalGameInfoPanel : Window
     {
         private string[] allInfo;
+        public string gameName { get; set; }
         public AdditionalGameInfoPanel(string[] alltheInfo)
         {
             InitializeComponent();
-            //this.DataContext = this;
+
+            this.DataContext = this;
             allInfo = alltheInfo;
             Loaded += LoadPlayers;
 
         }
+        private string GetAPIImage(int gameID)
+        {
+            //Uses API and grabs the needed information: weight and playtime
+            XDocument doc;
+            //Goes to API and gets information
+            using (var client = new HttpClient())
+            {
+                var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
+                var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
+                doc = XDocument.Parse(result);
+            }
 
+            XElement? item = doc.Element("items").Element("item");
+
+            //sorts thorugh that information to grab what we need.
+            
+
+
+            var imageURL = item.Element("thumbnail").Value;
+
+
+            return imageURL;
+        }
 
         private void LoadPlayers(object sender, RoutedEventArgs e)
         {
+            
+            RecordaGame recordaGame = new RecordaGame();
+            var ID = recordaGame.GetID(allInfo[0]);
+            (float weight, float playtime) = recordaGame.GetAPIData(ID);
+            var URL = GetAPIImage(ID);
+            var imageUri = new Uri(URL);
+            var bitmap = new BitmapImage(imageUri);
+            BoardGameImage.Source = bitmap;
+            //AdditionalNotes.Text = URL;
+            
 
             for (int i = 2; i < allInfo.Length - 2; i++)
             {
-                RecordaGame recordaGame = new RecordaGame();
-                var ID = recordaGame.GetID(allInfo[0]);
-                (float weight, float playtime) = recordaGame.GetAPIData(ID);
                 var points = recordaGame.CalculatePoints(weight, playtime, int.Parse(allInfo[1]), i-1);
 
                 LeaderboardPanel playerPanel = new LeaderboardPanel();
                 playerPanel.PlayerName = allInfo[i];
                 playerPanel.Placement = $"{i-1}";
-                playerPanel.Points = $"received {points}";
+                playerPanel.Points = $"received {points} pts";
                 PlayersPanel.Children.Add(playerPanel);
             }
         }
