@@ -109,7 +109,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             TextBoxCollection.Clear();
         }
 
-        private (float playtime, float weight) GetAPIData(int gameID)
+        
+        public (float playtime, float weight) GetAPIData(int gameID)
         {
             //Uses API and grabs the needed information: weight and playtime
             XDocument doc;
@@ -136,7 +137,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
 
 
-        private int GetID(string nameOfGame)
+        public int GetID(string nameOfGame)
         {
             //Reads list of all games and their ids
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
@@ -157,7 +158,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             return -1;
         }
 
-        private double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
+        public double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
             //Creates a point value, either positive or negative.
 
@@ -167,8 +168,12 @@ namespace Ultimate_Game_Winner.Main_Pages
             var placementFactor = 1 * CalculatePlacementPercentage(placement, numOfPlayers);
             
             var points = (weightFactor + playtimeFactor) * placementFactor;
-            
-            return points;
+
+            string stringPoints = points.ToString("0.00");
+            var finalPoints = double.Parse(stringPoints);
+
+
+            return finalPoints;
 
             double CalculatePlacementPercentage(int placement, int numOfPlayers)
             {

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner.Main_Pages;
 
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
@@ -35,10 +36,15 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
             for (int i = 2; i < allInfo.Length - 2; i++)
             {
+                RecordaGame recordaGame = new RecordaGame();
+                var ID = recordaGame.GetID(allInfo[0]);
+                (float weight, float playtime) = recordaGame.GetAPIData(ID);
+                var points = recordaGame.CalculatePoints(weight, playtime, int.Parse(allInfo[1]), i-1);
+
                 LeaderboardPanel playerPanel = new LeaderboardPanel();
                 playerPanel.PlayerName = allInfo[i];
                 playerPanel.Placement = $"{i-1}";
-                playerPanel.Points = "received 2.3 pts";
+                playerPanel.Points = $"received {points}";
                 PlayersPanel.Children.Add(playerPanel);
             }
         }
