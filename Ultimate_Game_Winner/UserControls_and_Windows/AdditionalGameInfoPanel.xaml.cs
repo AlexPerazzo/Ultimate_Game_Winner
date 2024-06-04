@@ -27,6 +27,11 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         public string weight { get; set; }
         public string playtime { get; set; }
 
+        public string genre { get; set; }
+
+        public string additionalNotes { get; set; }
+        public string date { get; set; }
+
         public AdditionalGameInfoPanel(string[] alltheInfo)
         {
             InitializeComponent();
@@ -37,7 +42,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             Loaded += LoadPlayers;
 
         }
-        private string GetAPIImage(int gameID)
+        private (string, string) GetAPIImageGenre(int gameID)
         {
             //Uses API and grabs the needed information: weight and playtime
             XDocument doc;
@@ -56,9 +61,10 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
 
             var imageURL = item.Element("thumbnail").Value;
+            var genre = item.Element("statistics").Element("ratings").Element("ranks").Elements("rank").ElementAt(1).Attribute("name").Value;
 
 
-            return imageURL;
+            return (imageURL, genre);
         }
 
         private void RefreshWindow()
@@ -74,15 +80,21 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             RecordaGame recordaGame = new RecordaGame();
             var ID = recordaGame.GetID(allInfo[0]);
             (float thePlaytime, float theWeight) = recordaGame.GetAPIData(ID);
-            var URL = GetAPIImage(ID);
+            var (URL, theGenre) = GetAPIImageGenre(ID);
             var imageUri = new Uri(URL);
             var bitmap = new BitmapImage(imageUri);
             BoardGameImage.Source = bitmap;
+
+            var fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length-6);
+
+            genre = $"Genre: {fixedGenre}";
             weight = $"Weight: {theWeight.ToString("0.00")}/5";
             playtime = $"Average Playtime: {thePlaytime.ToString()} min";
-            //gameName = allInfo[0];
+            gameName = allInfo[0];
+            date = $"Date Recorded: {allInfo[allInfo.Length-1]}";
+            additionalNotes = $"Additional Notes: {allInfo[allInfo.Length-2]}";
             //AdditionalNotes.Text = URL;
-            
+
 
             for (int i = 2; i < allInfo.Length - 2; i++)
             {

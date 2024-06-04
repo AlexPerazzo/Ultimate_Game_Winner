@@ -1,7 +1,7 @@
-Alex,26.23
-Mom,5.32
-Grandma,0.93
+Alex,27.75
+Mom,4.15
+Grandma,3.26
+Dad,-2.34
 Sarah,-2.59
-Dad,-2.92
 Ben,-5.92
-Eric,-18.00
+Eric,-20.33
