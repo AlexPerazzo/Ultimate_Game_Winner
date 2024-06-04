@@ -40,6 +40,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         {
             AdditionalGameInfoPanel additionalGameInfoPanel = new AdditionalGameInfoPanel(AllInfo);
             additionalGameInfoPanel.gameName = AllInfo[0];
+            
             additionalGameInfoPanel.Show();
         }
 

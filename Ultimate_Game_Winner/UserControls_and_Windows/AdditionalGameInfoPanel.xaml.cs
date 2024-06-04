@@ -24,12 +24,16 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     {
         private string[] allInfo;
         public string gameName { get; set; }
+        public string weight { get; set; }
+        public string playtime { get; set; }
+
         public AdditionalGameInfoPanel(string[] alltheInfo)
         {
             InitializeComponent();
 
             this.DataContext = this;
             allInfo = alltheInfo;
+            
             Loaded += LoadPlayers;
 
         }
@@ -57,29 +61,41 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             return imageURL;
         }
 
+        private void RefreshWindow()
+        {
+            // Assuming 'this' is your window
+            var oldDataContext = this.DataContext;
+            this.DataContext = null;
+            this.DataContext = oldDataContext;
+        }
         private void LoadPlayers(object sender, RoutedEventArgs e)
         {
             
             RecordaGame recordaGame = new RecordaGame();
             var ID = recordaGame.GetID(allInfo[0]);
-            (float weight, float playtime) = recordaGame.GetAPIData(ID);
+            (float thePlaytime, float theWeight) = recordaGame.GetAPIData(ID);
             var URL = GetAPIImage(ID);
             var imageUri = new Uri(URL);
             var bitmap = new BitmapImage(imageUri);
             BoardGameImage.Source = bitmap;
+            weight = $"Weight: {theWeight.ToString("0.00")}/5";
+            playtime = $"Average Playtime: {thePlaytime.ToString()} min";
+            //gameName = allInfo[0];
             //AdditionalNotes.Text = URL;
             
 
             for (int i = 2; i < allInfo.Length - 2; i++)
             {
-                var points = recordaGame.CalculatePoints(weight, playtime, int.Parse(allInfo[1]), i-1);
+                var points = recordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
 
                 LeaderboardPanel playerPanel = new LeaderboardPanel();
+                //playerPanel.Padding = new Thickness(5);
                 playerPanel.PlayerName = allInfo[i];
                 playerPanel.Placement = $"{i-1}";
                 playerPanel.Points = $"received {points} pts";
                 PlayersPanel.Children.Add(playerPanel);
             }
+            RefreshWindow();
         }
     }
 }

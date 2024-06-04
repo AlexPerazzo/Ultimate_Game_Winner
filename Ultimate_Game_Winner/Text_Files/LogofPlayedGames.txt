@@ -12,3 +12,4 @@ Scythe,,,2,,,Mom,,,Eric,,,N/A,,,5/31/24
 Ark Nova,,,2,,,Alex,,,Eric,,,N/A,,,5/31/24
 Yahtzee,,,6,,,Mom,,,Alex,,,Grandma,,,Eric,,,Ben,,,Dad,,,N/A,,,5/31/24
 Ark Nova,,,2,,,Alex,,,Eric,,,N/A,,,5/31/24
+Terraforming Mars,,,4,,,Alex,,,Ben,,,Sarah,,,Eric,,,N/A,,,6/3/24
