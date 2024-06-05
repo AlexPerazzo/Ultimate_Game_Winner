@@ -10,19 +10,18 @@
       Background="White"
       >
     <ScrollViewer>
-    <Grid>
-        <Grid.RowDefinitions>
-            <!--Main content row-->
-            <RowDefinition/>
-            <!--Row for reset button-->
-            <RowDefinition Height="35"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--Main content row-->
+                <RowDefinition/>
+                <!--White Space Row-->
+                <RowDefinition Height="35"/>
 
-        </Grid.RowDefinitions>
-        
-        <StackPanel Name="theLog"/>
-        
-        <!--<Button Name="DeleteLog" Grid.Row="1" Margin="5" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Right" Click="DeleteLog_Click"/>-->
-    </Grid>
+            </Grid.RowDefinitions>
+
+            <!--All logged Games Stack Panel-->
+            <StackPanel Name="theLog"/>
+        </Grid>
     </ScrollViewer>
     
 </Page>

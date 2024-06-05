@@ -17,15 +17,17 @@ using Ultimate_Game_Winner.Main_Pages;
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
-    /// Interaction logic for AdditionalPlayerInfoPanel.xaml
+    /// When the User Clicks on a Person, Information about that person
+    /// (including all games they've played in and their placements/points earned during those games)
+    /// will be displayed through this Window
     /// </summary>
-    public partial class AdditionalPlayerInfoPanel : Window
+    public partial class AdditionalPlayerInfo : Window
     {
 
         string playerName {  get; set; }
         string Title { get; set; }
 
-        public AdditionalPlayerInfoPanel(string PlayerName)
+        public AdditionalPlayerInfo(string PlayerName)
         {
             InitializeComponent();
             this.DataContext = this;

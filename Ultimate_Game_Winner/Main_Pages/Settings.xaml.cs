@@ -19,7 +19,7 @@ using Ultimate_Game_Winner;
 namespace Ultimate_Game_Winner.Main_Pages
 {
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Contains options for changing ranking system and clearing the log of all recorded games
     /// </summary>
     public partial class Settings : Page
     {

@@ -27,7 +27,6 @@
         <Rectangle HorizontalAlignment="Left" Height="110" Margin="68,0,0,0" VerticalAlignment="Center" Width="2" Fill="Black"/>
         
         <!--Grid on left side with Placement in it.-->
-        <!---->
         <Grid Margin="0,0,208,0">
             <Label Content="{Binding Placement}" IsHitTestVisible="False" Foreground="White" FontSize="54" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="0" FontFamily="Segoe UI Black" Margin="5,20,0,0">
                 <Label.Effect>

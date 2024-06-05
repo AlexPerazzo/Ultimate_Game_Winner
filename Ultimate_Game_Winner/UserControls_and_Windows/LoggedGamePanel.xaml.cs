@@ -17,7 +17,8 @@ using System.Windows.Shapes;
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
-    /// Interaction logic for LoggedGamePanel.xaml
+    /// Each gameplay individually will be displayed on the Log with the winner, game, # of players, and date recorded
+    /// Each individual game with said info will be displayed through this UserControl
     /// </summary>
     public partial class LoggedGamePanel : UserControl
     {
@@ -38,10 +39,10 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            AdditionalGameInfoPanel additionalGameInfoPanel = new AdditionalGameInfoPanel(AllInfo);
+            AdditionalGameplayInfo additionalGameplayInfo = new AdditionalGameplayInfo(AllInfo);
             
             
-            additionalGameInfoPanel.Show();
+            additionalGameplayInfo.Show();
         }
 
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)

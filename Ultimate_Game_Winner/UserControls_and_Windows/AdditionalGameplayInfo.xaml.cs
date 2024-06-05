@@ -18,21 +18,21 @@ using Ultimate_Game_Winner.Main_Pages;
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
-    /// Interaction logic for AdditionalGameInfoPanel.xaml
+    /// When the User Clicks on a Gameplay, Information about that gameplay
+    /// (including players participating, their placements, and information about the game itself)
+    /// will be displayed through this Window
     /// </summary>
-    public partial class AdditionalGameInfoPanel : Window
+    public partial class AdditionalGameplayInfo : Window
     {
         private string[] allInfo;
         public string gameName { get; set; }
         public string weight { get; set; }
         public string playtime { get; set; }
-
         public string genre { get; set; }
-
         public string additionalNotes { get; set; }
         public string date { get; set; }
 
-        public AdditionalGameInfoPanel(string[] alltheInfo)
+        public AdditionalGameplayInfo(string[] alltheInfo)
         {
             InitializeComponent();
 
@@ -44,7 +44,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         }
         private (string, string) GetAPIImageGenre(int gameID)
         {
-            //Uses API and grabs the needed information: weight and playtime
+            
             XDocument doc;
             //Goes to API and gets information
             using (var client = new HttpClient())
@@ -54,12 +54,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 doc = XDocument.Parse(result);
             }
 
-            XElement? item = doc.Element("items").Element("item");
-
             //sorts thorugh that information to grab what we need.
-            
-
-
+            XElement? item = doc.Element("items").Element("item");
             var imageURL = item.Element("thumbnail").Value;
             var genre = item.Element("statistics").Element("ratings").Element("ranks").Elements("rank").ElementAt(1).Attribute("name").Value;
 
@@ -69,7 +65,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void RefreshWindow()
         {
-            // Assuming 'this' is your window
+            // Need this function to reload after setting some data bindings
             var oldDataContext = this.DataContext;
             this.DataContext = null;
             this.DataContext = oldDataContext;
@@ -77,6 +73,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         private void LoadPlayers(object sender, RoutedEventArgs e)
         {
             
+            //Gather Information from API
             RecordaGame recordaGame = new RecordaGame();
             var ID = recordaGame.GetID(allInfo[0]);
             (float thePlaytime, float theWeight) = recordaGame.GetAPIData(ID);
@@ -84,18 +81,18 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             var imageUri = new Uri(URL);
             var bitmap = new BitmapImage(imageUri);
             BoardGameImage.Source = bitmap;
-
             var fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length-6);
 
+            //Set all Data Bindings
             genre = $"Genre: {fixedGenre}";
             weight = $"Weight: {theWeight.ToString("0.00")}/5";
             playtime = $"Average Playtime: {thePlaytime.ToString()} min";
             gameName = allInfo[0];
             date = $"Date Recorded: {allInfo[allInfo.Length-1]}";
             additionalNotes = $"Additional Notes: {allInfo[allInfo.Length-2]}";
-            //AdditionalNotes.Text = URL;
+            
 
-
+            //Populate Players StackPanel (loop through to calculate proper number of points)
             for (int i = 2; i < allInfo.Length - 2; i++)
             {
                 var points = recordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
@@ -107,6 +104,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 playerPanel.Points = $"received {points} pts";
                 PlayersPanel.Children.Add(playerPanel);
             }
+            
+            //Refresh Window so set Data Bindings will apply
             RefreshWindow();
         }
     }

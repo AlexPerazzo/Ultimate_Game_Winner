@@ -21,6 +21,10 @@ namespace Ultimate_Game_Winner.Main_Pages
 
     public partial class Leaderboard : Page
     {
+        /// <summary>
+        /// Displays every single person ranked based off points.
+        /// Displayed through LeaderboardPanel UserControl in a stack panel
+        /// </summary>
         public Leaderboard()
         {
             

@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
-    /// Interaction logic for AreYouSure.xaml
+    /// This Window will ask a confirmation for deleting all the games that have been recorded since it's a major decision
     /// </summary>
     public partial class AreYouSure : Window
     {
@@ -27,7 +27,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private async void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            //replaces anything in LogofPlayedGames.txt with an empty line.
+            //replaces anything in LogofPlayedGames.txt and Leaderboard.txt with an empty line.
             using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
             {
                 writer.Write(string.Empty);

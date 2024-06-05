@@ -19,6 +19,9 @@ namespace Ultimate_Game_Winner.Main_Pages
 {
     public partial class TheLog : Page
     {
+        /// <summary>
+        /// Displays every single recorded game using the LoggedGamePanel UserControl in a stack panel
+        /// </summary>
         public TheLog()
         {
             InitializeComponent();
@@ -27,7 +30,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void LoadLog(object sender, RoutedEventArgs e)
         {
-            //List<string> logList = new List<string> {};
+            
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
             {
                 //Reads each line from the LogofPlayedGames.txt file and makes a TextBlock out of it

@@ -1,5 +1,5 @@
 Hannah,5.55
-Eric,1.94
 Mom,1.76
-Alex,-0.65
+Eric,1.36
+Alex,-0.07
 Ben,-5.55

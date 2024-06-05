@@ -17,7 +17,7 @@ using Ultimate_Game_Winner;
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
-        /// The three different buttons on bottom all navigate the mainFrame to their associated xaml pages
+        /// The four different buttons on bottom all navigate the mainFrame to their associated xaml pages
     /// </summary>
     public partial class BottomButtons : UserControl
     {

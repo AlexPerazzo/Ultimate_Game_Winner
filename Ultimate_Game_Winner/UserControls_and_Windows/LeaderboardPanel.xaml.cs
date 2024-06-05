@@ -18,7 +18,8 @@ using System.Windows.Shapes;
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
-    /// Interaction logic for LeaderboardPanel.xaml
+    /// Each person individually will be displayed on the Leaderboard with their ranking and point totals
+    /// Each individual person with said info will be displayed through this UserControl
     /// </summary>
     public partial class LeaderboardPanel : UserControl
     {
@@ -34,6 +35,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
         {
+            //Add Dropshadow when hovering over
             DropShadowEffect dropShadowEffect = new DropShadowEffect
             {
                 Color = Colors.Black,
@@ -41,12 +43,12 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 
             };
 
-            // Apply the drop shadow effect to the StackPanel
             LeaderPanel.Effect = dropShadowEffect;
         }
 
         private void Rectangle_MouseLeave(object sender, MouseEventArgs e)
         {
+            //Turn Dropshadow back to normal when mouse leaves
             DropShadowEffect dropShadowEffect = new DropShadowEffect
             {
                 Color = Colors.Gray,
@@ -56,11 +58,9 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void LeaderPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            AdditionalPlayerInfoPanel additionalPlayerInfoPanel = new AdditionalPlayerInfoPanel(PlayerName);
-            additionalPlayerInfoPanel.Title = $"{PlayerName}'s Games Played";
-
-
-            additionalPlayerInfoPanel.Show();
+            AdditionalPlayerInfo additionalPlayerInfo = new AdditionalPlayerInfo(PlayerName);
+            additionalPlayerInfo.Title = $"{PlayerName}'s Games Played";
+            additionalPlayerInfo.Show();
         }
     }
 }

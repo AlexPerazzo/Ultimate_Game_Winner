@@ -23,7 +23,10 @@ using Ultimate_Game_Winner;
 namespace Ultimate_Game_Winner.Main_Pages
 {
     /// <summary>
-    /// Interaction logic for RecordaGame.xaml
+    /// Gathers information about a gameplay.
+    /// (including Game Name, # of Players, their placements, and any other optional gameplay notes)
+    /// Saves that information for later use in the Log. Also calculate points and updates the Leaderboard.
+    /// The fact that this xaml/xaml.cs dabbles into both the Log and the Leaderboard may suggest that it should be better organized
     /// </summary>
     public partial class RecordaGame : Page
     {
@@ -55,6 +58,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private static string CapitalizeEachWord(string input)
         {
+            //Helper function to help catch user input error in regards to names
             if (string.IsNullOrEmpty(input))
                 return input;
 
@@ -254,6 +258,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         public void RefreshLeaderboard()
         {
+            //Currently unused function, but may be useful to completely reset the Leaderboard at some point in the future
 
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
@@ -311,9 +316,9 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
         private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
         {
+            // Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
             if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
             {
-                // Update the collection based on the number of textboxes required
                 UpdateTextBoxCollection(numberOfTextBoxes);
             }
             else
@@ -324,6 +329,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         public static string AddOrdinal(int num)
         {
+            //Helper function for placements
             if (num <= 0) return num.ToString();
 
             switch (num % 100)
