@@ -114,7 +114,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
 
         
-        public (float playtime, float weight) GetAPIData(int gameID)
+        public static (float playtime, float weight) GetAPIData(int gameID)
         {
             //Uses API and grabs the needed information: weight and playtime
             XDocument doc;
@@ -141,7 +141,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
 
 
-        public int GetID(string nameOfGame)
+        public static int GetID(string nameOfGame)
         {
             //Reads list of all games and their ids
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
@@ -162,7 +162,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             return -1;
         }
 
-        public double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
+        public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
             //Creates a point value, either positive or negative.
 

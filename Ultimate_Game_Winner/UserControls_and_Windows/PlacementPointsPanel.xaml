@@ -5,24 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ultimate_Game_Winner.UserControls_and_Windows"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="150" Background="White">
-    <Grid Width="95" Height="95">
+             d:DesignHeight="96" d:DesignWidth="96" Background="White">
+    <!--Exactly 96x High to match up with the LoggedGamePanels-->
+    <Grid Width="96" Height="96">
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <!--<RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>-->
         </Grid.RowDefinitions>
-        
-        <Label Content="{Binding Placement}" FontSize="24" Grid.Row="0" FontFamily="Palatino Linotype" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="{Binding Points}" FontSize="30" Grid.Row="1"/>
 
 
-        <Rectangle x:Name="Background" Height="95" Width="95" Grid.RowSpan="2" Panel.ZIndex="-1" RadiusX="17.1" RadiusY="17.1">
+        <Label Content="{Binding Points}" FontSize="40" Grid.Row="0" FontFamily="Segoe" Foreground="DeepSkyBlue" FontStyle="Italic" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,10">
+            <Label.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="4"/>
+            </Label.Effect>
+        </Label>
+        <Label Content="pts received" FontSize="12" Grid.Row="1" HorizontalAlignment="Center" Foreground="DeepSkyBlue" Margin="0,60,3,0" FontWeight="SemiBold">
+            <Label.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="1" ShadowDepth=".5"/>
+            </Label.Effect>
+        </Label>
+        <Label Content="{Binding Placement}" FontSize="1" Grid.Row="1" Foreground="DeepSkyBlue"/>
+
+        <!--RadiusX="17.1" RadiusY="17.1"-->
+        <Rectangle x:Name="Background" Height="96" Width="96" Grid.RowSpan="2" Panel.ZIndex="-1" >
 
 
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="Blue" Offset="0.25" />
+                    <GradientStop Color="#33658a" Offset="0.25" />
 
                 </LinearGradientBrush>
             </Rectangle.Fill>

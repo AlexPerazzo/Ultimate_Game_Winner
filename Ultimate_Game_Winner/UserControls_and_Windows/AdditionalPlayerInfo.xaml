@@ -10,7 +10,7 @@
         
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="105"/>
             
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -18,10 +18,12 @@
             <RowDefinition Height="75"/>
             <RowDefinition Height="30"/>
 
-            <RowDefinition/>
+                <RowDefinition/>
+                <!--White Space Row-->
+                <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <Label Content="(Winner, Game Name, # of Players, Date Recorded)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
-        <Label Content="(Placeholder)" Grid.Column="0" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
+        <Label Content="(Game Name, Placement, # of Players, Date Recorded)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
+        <TextBlock Text="(Weight Factor + Time Factor) * Placement Factor" Margin="9,0,0,0" TextWrapping="Wrap" TextAlignment="Center" Grid.RowSpan="2" Grid.Column="0" Grid.Row="0" FontSize="15" FontStyle="Italic" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="Gray"></TextBlock>
 
         <Label Content="{Binding Title}" Grid.Column="1" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
         <StackPanel x:Name="AllGamesPlayed" Grid.Row="2" Grid.Column="1"/>

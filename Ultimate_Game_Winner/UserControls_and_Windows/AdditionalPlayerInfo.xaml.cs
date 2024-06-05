@@ -50,21 +50,40 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     string[] parts = line.Split(",,,");
                     var numPlayers = parts.Length - 4;
 
-                    RecordaGame recordaGame = new RecordaGame();
-                    var ID = recordaGame.GetID(parts[0]);
-                    (float thePlaytime, float theWeight) = recordaGame.GetAPIData(ID);
+                    
+                    var ID = RecordaGame.GetID(parts[0]);
+                    (float thePlaytime, float theWeight) = RecordaGame.GetAPIData(ID);
                     PlacementPointsPanel statsPanel = new PlacementPointsPanel();
+                    
 
                     for (var i = 2; i < numPlayers + 2; i++)
                     {
                         if (parts[i] == playerName)
                         {
-                            var points = recordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), i - 1);
+                            LoggedGamePanel panel = new LoggedGamePanel();
+
+                            //Normal:
+                            //panel.GameName = parts[0];
+                            //panel.PlayerName = parts[2];
+                            //Weird:
+
+                            //
+                            panel.GameName = $"{RecordaGame.AddOrdinal(i - 1)}";
+
+                            //Game Name in place of PlayerName
+                            panel.PlayerName = parts[0];
+                            var points = RecordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), i - 1);
                             statsPanel.Placement = $"{i - 1}";
                             statsPanel.Points = $"{points}";
                             statsPanel.Margin = new Thickness(12,12,0,0);
                             StatsPanels.Children.Insert(0, statsPanel);
                             correctPlayer = true;
+                            panel.NumPlayers = $"{numPlayers} players";
+                            panel.Date = parts[parts.Length - 1];
+                            panel.Margin = new Thickness(12, 12, 0, 0);
+                            panel.HorizontalAlignment= HorizontalAlignment.Left;
+                            panel.AllInfo = parts;
+                            AllGamesPlayed.Children.Insert(0, panel);
                             break;
                         }
                     }
@@ -73,15 +92,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     {
 
                     //logList.Add(line);
-                    LoggedGamePanel panel = new LoggedGamePanel();
-                    panel.GameName = parts[0];
-                    panel.NumPlayers = $"{numPlayers} players";
-                    panel.PlayerName = parts[2];
-                    panel.Date = parts[parts.Length - 1];
-                    panel.Margin = new Thickness(12, 12, 0, 0);
 
-                    panel.AllInfo = parts;
-                    AllGamesPlayed.Children.Insert(0, panel);
+
 
 
 

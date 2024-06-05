@@ -74,9 +74,9 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         {
             
             //Gather Information from API
-            RecordaGame recordaGame = new RecordaGame();
-            var ID = recordaGame.GetID(allInfo[0]);
-            (float thePlaytime, float theWeight) = recordaGame.GetAPIData(ID);
+            
+            var ID = RecordaGame.GetID(allInfo[0]);
+            (float thePlaytime, float theWeight) = RecordaGame.GetAPIData(ID);
             var (URL, theGenre) = GetAPIImageGenre(ID);
             var imageUri = new Uri(URL);
             var bitmap = new BitmapImage(imageUri);
@@ -95,7 +95,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             //Populate Players StackPanel (loop through to calculate proper number of points)
             for (int i = 2; i < allInfo.Length - 2; i++)
             {
-                var points = recordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
+                var points = RecordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
 
                 LeaderboardPanel playerPanel = new LeaderboardPanel();
                 //playerPanel.Padding = new Thickness(5);

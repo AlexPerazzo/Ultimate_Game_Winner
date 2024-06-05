@@ -39,6 +39,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             DropShadowEffect dropShadowEffect = new DropShadowEffect
             {
                 Color = Colors.Black,
+                BlurRadius = 5,
                 ShadowDepth = 6,
                 
             };

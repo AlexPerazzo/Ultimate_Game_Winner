@@ -52,7 +52,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 Color = Colors.Black,
                 BlurRadius = 10,
                 ShadowDepth = 5,
-                Opacity = 0.5
+                Opacity = 0.8
             };
 
             // Apply the drop shadow effect to the StackPanel
