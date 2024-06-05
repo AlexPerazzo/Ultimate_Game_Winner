@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Ultimate_Game_Winner.UserControls_and_Windows.PlacementPointsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ultimate_Game_Winner.UserControls_and_Windows"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="150" Background="White">
+    <Grid Width="95" Height="95">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Content="3rd" FontSize="24" Grid.Row="0" FontFamily="Palatino Linotype" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="2pts" FontSize="30" Grid.Row="1"/>
+
+
+        <Rectangle x:Name="Background" Height="95" Width="95" Grid.RowSpan="2" Panel.ZIndex="-1" RadiusX="17.1" RadiusY="17.1">
+
+
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="Blue" Offset="0.25" />
+
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+    </Grid>
+</UserControl>

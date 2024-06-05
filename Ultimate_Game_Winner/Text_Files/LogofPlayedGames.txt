@@ -1,16 +1,3 @@
-Ark Nova,,,2,,,Alex,,,Ben,,,Game Log stuff.,,,5/30/24
-Ark Nova,,,3,,,Alex,,,Ben,,,Eric,,,We played a game.,,,5/30/24
-Ark Nova,,,2,,,Mom,,,Sarah,,,Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted),,,5/30/24
-Ark Nova,,,2,,,Sarah,,,Mom,,,Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted),,,5/30/24
-Ark Nova,,,2,,,Alex,,,Eric,,,Add any additional wanted gameplay notes here... (leave blank or don't touch if none are wanted),,,5/30/24
-Ark Nova,,,2,,,Alex,,,Ben,,,N/A,,,5/30/24
-Ark Nova,,,2,,,Alex,,,Ben,,,N/A,,,5/30/24
-Ark Nova,,,2,,,Alex,,,Ben,,,Additional gameplay notes... (leave blank or don't touch if none are wanted),,,5/31/24
-Scythe,,,2,,,Alex,,,Ben,,,Additional gameplay notes... (leave blank or don't touch if none are wanted),,,5/31/24
-Yahtzee,,,2,,,Mom,,,Alex,,,Additional gameplay notes... (leave blank or don't touch if none are wanted),,,5/31/24
-Scythe,,,2,,,Mom,,,Eric,,,N/A,,,5/31/24
-Ark Nova,,,2,,,Alex,,,Eric,,,N/A,,,5/31/24
-Yahtzee,,,6,,,Mom,,,Alex,,,Grandma,,,Eric,,,Ben,,,Dad,,,N/A,,,5/31/24
-Ark Nova,,,2,,,Alex,,,Eric,,,N/A,,,5/31/24
-Terraforming Mars,,,4,,,Alex,,,Ben,,,Sarah,,,Eric,,,N/A,,,6/3/24
-Yahtzee,,,5,,,Grandma,,,Alex,,,Dad,,,Mom,,,Eric,,,Grandma Destroyed All Of Us With Two Bonus Yahtzees Even Though She Wasn't Even Playing With The Carry Over Rules.,,,6/3/24
+Ark Nova,,,3,,,Alex,,,Eric,,,Mom,,,N/A,,,6/4/24
+Terraforming Mars,,,4,,,Hannah,,,Mom,,,Alex,,,Ben,,,N/A,,,6/4/24
+Ark Nova,,,2,,,Mom,,,Alex,,,N/A,,,6/4/24

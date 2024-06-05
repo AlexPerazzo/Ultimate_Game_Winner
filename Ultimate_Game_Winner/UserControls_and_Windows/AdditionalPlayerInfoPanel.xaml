@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="AdditionalPlayerInfoPanel" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="30"/>
+
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="(Winner, Game Name, # of Players, Date Recorded)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
+        <Label Content="(Placeholder)" Grid.Column="0" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
+
+        <Label Content="{Binding Title}" Grid.Column="1" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <StackPanel x:Name="AllGamesPlayed" Grid.Row="2" Grid.Column="1"/>
+        <StackPanel x:Name="Stats" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+
     </Grid>
 </Window>
