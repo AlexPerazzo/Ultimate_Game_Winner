@@ -12,8 +12,25 @@
     <!--Simple ScrollViewer with a StackPanel to be added upon.-->
     <ScrollViewer>
         <Grid>
-        
-        <StackPanel Name="theLeaderboard"/>
+
+            <Grid.RowDefinitions>
+                <!--Title row-->
+                <RowDefinition Height="71"/>
+                
+                <!--Tip row-->
+                <RowDefinition Height="35"/>
+
+                <!--Leaderboard row-->
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--Title-->
+            <Label Content="Leaderboard" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
+            <Rectangle Height="3" VerticalAlignment="Bottom" Width="550" Fill="Black"/>
+
+            <Label Content="(Click on panel for additional player info)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Gray"></Label>
+
+
+            <StackPanel Name="theLeaderboard" Grid.Row="2"/>
 
         </Grid>
     </ScrollViewer>

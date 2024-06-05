@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:Ultimate_Game_Winner.UserControls_and_Windows"
         mc:Ignorable="d"
         Title="AdditionalPlayerInfoPanel" Height="450" Width="800">
+    <ScrollViewer>
+        
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110"/>
@@ -26,4 +28,5 @@
         <StackPanel x:Name="Stats" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
 
     </Grid>
+    </ScrollViewer>
 </Window>

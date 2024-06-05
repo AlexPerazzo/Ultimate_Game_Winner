@@ -11,16 +11,23 @@
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
+                <!--Title-->
+                <RowDefinition Height="71"/>
                 <!--Textboxes in bigger main row-->
                 <RowDefinition />
                 <!--Submit/Cancel Buttons in smaller bottom row-->
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            
+
+            <!--Title-->
+            <Label Content="Record a Game" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
+            <Rectangle Height="3" VerticalAlignment="Bottom" Width="550" Fill="Black"/>
+
+
             <!--TextBox's for all the needed information-->
-            <TextBox Name="GameName" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120"/>
-            <TextBox Name="NumPlayers" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,81,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120" TextChanged="NumPlayers_TextChanged"/>
-            <StackPanel Margin="0,90,0,0">
+            <TextBox Name="GameName" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+            <TextBox Name="NumPlayers" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,81,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120" TextChanged="NumPlayers_TextChanged" Grid.Row="1"/>
+            <StackPanel Margin="0,90,0,0" Grid.Row="1">
                 <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -31,7 +38,7 @@
             </StackPanel>
 
             <!--Two buttons centered on the bottom row with some margin-->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />

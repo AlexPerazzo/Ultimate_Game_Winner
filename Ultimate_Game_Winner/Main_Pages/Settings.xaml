@@ -10,13 +10,27 @@
       Background="White">
 
     <Grid>
-        <Button Name="DeleteLog" Margin="0,0,0,300" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DeleteLog_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="71"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
 
-        <TextBlock Text="Ranking System" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,150" TextWrapping="Wrap"  VerticalAlignment="Center"/>
-        <ComboBox Height="20" Width="100" Margin="0,0,0,75">
+        </Grid.RowDefinitions>
+        
+        <!--Title-->
+        <Label Content="Settings" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
+        <Rectangle Height="3" VerticalAlignment="Bottom" Width="550" Fill="Black"/>
+
+
+        <!--Ranking System-->
+        <TextBlock Text="Ranking System" FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="1"/>
+        <ComboBox Height="20" Width="100" Margin="0,0,0,10" VerticalAlignment="Bottom" Grid.Row="1">
             <ComboBoxItem Content="Normal" IsSelected="True"/>
             <ComboBoxItem Content="Custom"/>
         </ComboBox>
-        <!--<Button x:Name="TextEditor" Content="Button" HorizontalAlignment="Left" Margin="128,75,0,0" VerticalAlignment="Top" Click="Button_Click"/>-->
+        
+        <!--Delete Entire Log-->
+        <Button Name="DeleteLog" Margin="0,0,0,0" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DeleteLog_Click" Grid.Row="3"/>
     </Grid>
 </Page>
