@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -49,11 +50,22 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     string[] parts = line.Split(",,,");
                     var numPlayers = parts.Length - 4;
 
+                    RecordaGame recordaGame = new RecordaGame();
+                    var ID = recordaGame.GetID(parts[0]);
+                    (float thePlaytime, float theWeight) = recordaGame.GetAPIData(ID);
+                    PlacementPointsPanel statsPanel = new PlacementPointsPanel();
+
                     for (var i = 2; i < numPlayers + 2; i++)
                     {
                         if (parts[i] == playerName)
                         {
+                            var points = recordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), i - 1);
+                            statsPanel.Placement = $"{i - 1}";
+                            statsPanel.Points = $"{points}";
+                            statsPanel.Margin = new Thickness(12,12,0,0);
+                            StatsPanels.Children.Insert(0, statsPanel);
                             correctPlayer = true;
+                            break;
                         }
                     }
 
@@ -61,7 +73,6 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     {
 
                     //logList.Add(line);
-                    PlacementPointsPanel statsPanel = new PlacementPointsPanel();
                     LoggedGamePanel panel = new LoggedGamePanel();
                     panel.GameName = parts[0];
                     panel.NumPlayers = $"{numPlayers} players";
@@ -72,8 +83,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     panel.AllInfo = parts;
                     AllGamesPlayed.Children.Insert(0, panel);
 
-                    statsPanel.Margin = new Thickness(12,12,0,0);
-                    Stats.Children.Insert(0, statsPanel);
+
 
                     correctPlayer = false;
                     }

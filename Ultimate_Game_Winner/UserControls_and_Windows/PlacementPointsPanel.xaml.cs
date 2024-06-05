@@ -22,9 +22,12 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     /// </summary>
     public partial class PlacementPointsPanel : UserControl
     {
+        public string Placement {  get; set; }
+        public string Points { get; set; }
         public PlacementPointsPanel()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
     }
 }

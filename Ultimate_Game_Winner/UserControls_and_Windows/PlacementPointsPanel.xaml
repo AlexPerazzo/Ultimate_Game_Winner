@@ -13,8 +13,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Label Content="3rd" FontSize="24" Grid.Row="0" FontFamily="Palatino Linotype" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="2pts" FontSize="30" Grid.Row="1"/>
+        <Label Content="{Binding Placement}" FontSize="24" Grid.Row="0" FontFamily="Palatino Linotype" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="{Binding Points}" FontSize="30" Grid.Row="1"/>
 
 
         <Rectangle x:Name="Background" Height="95" Width="95" Grid.RowSpan="2" Panel.ZIndex="-1" RadiusX="17.1" RadiusY="17.1">

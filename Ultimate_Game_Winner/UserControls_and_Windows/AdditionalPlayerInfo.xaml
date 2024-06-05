@@ -25,7 +25,7 @@
 
         <Label Content="{Binding Title}" Grid.Column="1" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
         <StackPanel x:Name="AllGamesPlayed" Grid.Row="2" Grid.Column="1"/>
-        <StackPanel x:Name="Stats" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+        <StackPanel x:Name="StatsPanels" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
 
     </Grid>
     </ScrollViewer>
