@@ -30,6 +30,8 @@ namespace Ultimate_Game_Winner.Main_Pages
     /// </summary>
     public partial class RecordaGame : Page
     {
+        private bool numPlayersIsAGo = false;
+        private bool gameNameIsAGo = false;
         public ObservableCollection<TextBox> TextBoxCollection { get; set; }
         public RecordaGame()
         {
@@ -40,19 +42,33 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
-            string nameOfGame = GameName.Text; string numPlayers = NumPlayers.Text;
-            string lineSaved = SaveToLog(nameOfGame, numPlayers);
-            //Reset page's text
-            Cancel_Click(sender, e);
+            if (gameNameIsAGo && numPlayersIsAGo)
+            {
+
+                string nameOfGame = GameName.Text; string numPlayers = NumPlayers.Text;
+                string lineSaved = SaveToLog(nameOfGame, numPlayers);
+                //Reset page's text
+                Cancel_Click(sender, e);
 
 
-            //Update Leaderboard
-            UpdateLeaderboard(lineSaved);
+                //Update Leaderboard
+                UpdateLeaderboard(lineSaved);
 
-            //Displays Success and then converts back to normal
-            Submit.Content = "Success!!";
-            await Task.Delay(2500);
-            Submit.Content = "SUBMIT";
+                //Displays Success and then converts back to normal
+                Submit.Content = "Success!!";
+                await Task.Delay(2500);
+                Submit.Content = "SUBMIT";
+            }
+            else 
+            {
+                
+                NumPlayers_LostFocus(sender, e);
+                GameName_LostFocus(sender, e);
+                Submit.Content = "Error";
+                await Task.Delay(2500);
+                Submit.Content = "SUBMIT";
+
+            }
 
         }
 
@@ -110,7 +126,14 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Resets Texts of all TextBox's back to original display
             GameName.Text = "Name of Game";
             NumPlayers.Text = "# of Players";
+            NumPlayers.BorderBrush = SystemColors.ControlDarkBrush;
+            NumPlayersVerification.Visibility = Visibility.Hidden;
+            GameName.BorderBrush = SystemColors.ControlDarkBrush;
+            GameNameVerification.Visibility = Visibility.Hidden;
+            gameNameIsAGo = false;
+            numPlayersIsAGo = false;
             TextBoxCollection.Clear();
+            
         }
 
         
@@ -151,7 +174,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 {
                     string[] lineList = line.Split(",");
                     //stops when the names match up
-                    if (lineList[1] == nameOfGame)
+                    if (lineList[1].ToLower() == nameOfGame.ToLower())
                     {
                         //returns associated id
                         int gameID = int.Parse(lineList[0]);
@@ -377,6 +400,65 @@ namespace Ultimate_Game_Winner.Main_Pages
                 TextBoxCollection.Add(notes);
         }
 
+        private void GameName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!DoesGameExist(GameName.Text))
+            {
+                GameName.BorderBrush = Brushes.Red;
+                GameNameVerification.Visibility = Visibility.Visible;
+                gameNameIsAGo = false;
+            }
+            else
+            {
+                GameName.BorderBrush = SystemColors.ControlDarkBrush;
+                GameNameVerification.Visibility = Visibility.Hidden;
+                gameNameIsAGo = true;
+            }
+        }
+
+        private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (NumPlayers.Text != "2" && NumPlayers.Text != "3" && NumPlayers.Text != "4" && NumPlayers.Text != "5" && NumPlayers.Text != "6")
+            {
+                NumPlayers.BorderBrush = Brushes.Red;
+                NumPlayersVerification.Visibility = Visibility.Visible;
+                numPlayersIsAGo = false;
+            }
+            else
+            {
+                NumPlayers.BorderBrush = SystemColors.ControlDarkBrush;
+                NumPlayersVerification.Visibility = Visibility.Hidden;
+                numPlayersIsAGo = true;
+            }
+        }
+
+
+        private bool DoesGameExist(string nameOfGame)
+        {
+            //Reads list of all games and their ids
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] lineList = line.Split(",");
+                    //stops when the names match up
+                    if (lineList[1].ToLower() == nameOfGame.ToLower())
+                    {
+                        //if game exists return true
+                        return true;
+                    }
+                }
+            }
+            //otherwise return false
+            return false;
+        }
+
+
         
+
+
+
+
     }
 }

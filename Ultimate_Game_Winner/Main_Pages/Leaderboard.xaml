@@ -22,6 +22,10 @@
 
                 <!--Leaderboard row-->
                 <RowDefinition/>
+                
+                <!--White Space row-->
+                <RowDefinition Height="20"/>
+
             </Grid.RowDefinitions>
             <!--Title-->
             <Label Content="Leaderboard" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
