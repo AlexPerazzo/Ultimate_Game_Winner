@@ -1,6 +1,4 @@
-Alex,10.87
-Mom,6.60
-Becky,3.11
-Sarah,-3.11
-Ben,-6.60
-Eric,-9.71
+Alexander,0.59
+Ben,0.58
+Grandmother,0.58
+Benjamin Jamieson,-1.17

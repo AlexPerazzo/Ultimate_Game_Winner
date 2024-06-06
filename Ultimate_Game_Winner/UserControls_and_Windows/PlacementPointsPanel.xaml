@@ -14,12 +14,15 @@
             <RowDefinition Height="*"/>-->
         </Grid.RowDefinitions>
 
-
+        <Viewbox Stretch="Uniform" StretchDirection="Both" HorizontalAlignment="Left" Margin="0,0,8,0">
+            
         <Label Content="{Binding Points}" FontSize="40" Grid.Row="0" FontFamily="Segoe" Foreground="DeepSkyBlue" FontStyle="Italic" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,10">
             <Label.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="4"/>
             </Label.Effect>
         </Label>
+        </Viewbox>
+
         <Label Content="pts received" FontSize="12" Grid.Row="1" HorizontalAlignment="Center" Foreground="DeepSkyBlue" Margin="0,60,3,0" FontWeight="SemiBold">
             <Label.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="1" ShadowDepth=".5"/>

@@ -43,11 +43,14 @@
             </Grid.RowDefinitions>
 
             <!--PlayerName -->
+                
+            <Viewbox Stretch="Uniform" StretchDirection="Both" HorizontalAlignment="Left" Margin="0,8,11,8">
             <Label Grid.Row="0" Content="{Binding PlayerName}" IsHitTestVisible="False" FontFamily="Segoe" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" FontSize="50" Margin="7,0,0,0" FontStyle="Italic" FontWeight="DemiBold">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="1.5" BlurRadius="3" Opacity="0.5"/>
                 </Label.Effect>
             </Label>
+            </Viewbox>
 
             <!--Points -->
             <Label Grid.Row="1" Content="{Binding Points}" IsHitTestVisible="False" FontFamily="Bodoni MT" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" FontSize="23" Margin="0,0,27,12">
