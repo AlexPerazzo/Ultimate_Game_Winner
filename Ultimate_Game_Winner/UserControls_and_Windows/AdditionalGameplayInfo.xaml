@@ -57,6 +57,9 @@
             <!--Picture of the Game-->
             <Image x:Name="BoardGameImage" Stretch="Uniform" Grid.Column="3" Grid.Row="0" Margin="5,5,5,5" VerticalAlignment="Top" HorizontalAlignment="Right"/>
             
+            <!--Delete Gameplay Button-->
+            <Button x:Name="DeleteGameplayBtn" Grid.Column="2" VerticalAlignment="Bottom" Content="Delete Gameplay" HorizontalAlignment="Center" Margin="0,0,0,10" Click="DeleteGameplayBtn_Click"/>
+
             <!--StackPanel of all Players who participated-->
             <StackPanel x:Name="PlayersPanel" Grid.Column="0"/>
 

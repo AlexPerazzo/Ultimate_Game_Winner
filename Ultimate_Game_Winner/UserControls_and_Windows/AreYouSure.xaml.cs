@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner.Main_Pages;
 
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
@@ -20,25 +21,50 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     /// </summary>
     public partial class AreYouSure : Window
     {
-        public AreYouSure()
+        bool deleteAll;
+        string[] allInfo;
+        public AreYouSure(bool DeleteAll, string[] AllInfo)
         {
+
             InitializeComponent();
+            deleteAll = DeleteAll;
+            allInfo = AllInfo;
+            this.DataContext = this;
         }
 
         private async void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            //replaces anything in LogofPlayedGames.txt and Leaderboard.txt with an empty line.
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+            if (deleteAll)
             {
-                writer.Write(string.Empty);
+
+                //replaces anything in LogofPlayedGames.txt and Leaderboard.txt with an empty line.
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+                {
+                    writer.Write(string.Empty);
+                }
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+                {
+                    writer.Write(string.Empty);
+                }
+                ConfirmBtn.Content = "Success!";
+                await Task.Delay(500);
+                this.Close();
             }
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+
+            else
             {
-                writer.Write(string.Empty);
+                string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt";
+              
+                List<string> lines = new List<string>(File.ReadAllLines(filePath));
+
+                lines.Remove(string.Join(",,,", allInfo));
+
+                File.WriteAllLines(filePath, lines);
+                RecordaGame.RefreshLeaderboard();
+                ConfirmBtn.Content = "Success!";
+                await Task.Delay(500);
+                this.Close();
             }
-            ConfirmBtn.Content = "Success!";
-            await Task.Delay(500);
-            this.Close();
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)

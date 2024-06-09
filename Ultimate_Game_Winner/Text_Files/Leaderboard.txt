@@ -1,4 +1,2 @@
-Alex,2.03
-Eric,1.94
-Andrew,1.85
-Mom,-3.88
+Eric,3.88
+Ben,-3.88

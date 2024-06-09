@@ -31,7 +31,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
         {
-            AreYouSure areYouSure = new AreYouSure();
+            AreYouSure areYouSure = new AreYouSure(true, []);
             areYouSure.Show();
         }
 

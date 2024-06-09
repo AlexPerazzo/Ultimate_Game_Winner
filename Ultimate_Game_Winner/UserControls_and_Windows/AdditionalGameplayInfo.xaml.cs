@@ -108,5 +108,11 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             //Refresh Window so set Data Bindings will apply
             RefreshWindow();
         }
+
+        private void DeleteGameplayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AreYouSure areYouSure = new AreYouSure(false, allInfo);
+            areYouSure.Show();
+        }
     }
 }

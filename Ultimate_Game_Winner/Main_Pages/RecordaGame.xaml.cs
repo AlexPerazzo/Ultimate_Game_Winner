@@ -191,6 +191,10 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             
             var weightFactor = 3 * Math.Log10(weight);
+            if (playtime <= 10)
+            {
+                playtime = 10;
+            }
             var playtimeFactor = 2 * Math.Log10(playtime / 10);
             var placementFactor = 1 * CalculatePlacementPercentage(placement, numOfPlayers);
             
@@ -279,7 +283,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
-        public void RefreshLeaderboard()
+        public static void RefreshLeaderboard()
         {
             //Currently unused function, but may be useful to completely reset the Leaderboard at some point in the future
 
@@ -295,10 +299,10 @@ namespace Ultimate_Game_Winner.Main_Pages
                     for (int i = 0; i < parts.Length; i++)
                     {
                         //skips over Game Name and Number of Players
-                        if (i != 0 && i != 1)
+                        if (i != 0 && i != 1 && i != (parts.Length - 1) && i != (parts.Length -2))
                         {
                             int ID = GetID(parts[0]);
-                            (float weight, float playtime) = GetAPIData(ID);
+                            (float playtime, float weight) = GetAPIData(ID);
                             double points = CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
 
 
@@ -332,7 +336,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
                     var key = entry.Key;
                     var value = entry.Value;
-                    string writeThis = $"#{i} {key} with {value} points";
+                    string writeThis = $"{key},{value}";
                     writer.WriteLine(writeThis);
                 }
             }
