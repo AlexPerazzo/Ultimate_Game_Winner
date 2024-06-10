@@ -49,7 +49,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void SetBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            //RecordaGame.RefreshLeaderboard();
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
