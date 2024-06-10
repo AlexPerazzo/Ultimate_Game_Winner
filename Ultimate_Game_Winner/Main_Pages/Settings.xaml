@@ -36,20 +36,19 @@
         <!--Custom Rank Info and Options-->
         <Grid x:Name="CustomRankItems" Grid.Row="3" Visibility="Visible">
                 
-            <TextBlock Margin="0,110,0,0" Text="('Normal' ranking has points calculated using the following formula: ((WeightFactor * 3) + (PlaytimeFactor * 2)) * (PlacementFactor * 1) &#10;With WeightFactor, PlaytimeFactor, and PlacementFactor all being determined by the weight/playtime of the game and the player's placement. &#10;You can set the number each Factor is being multiplied by (the 3,2,1) to customize what you think should be the most valuable thing.)" TextWrapping="Wrap" Foreground="Gray" HorizontalAlignment="Center" Grid.Row="3"/>
+            <TextBlock Margin="8,110,8,0" Text="('Normal' ranking has points calculated using the following formula: ((WeightFactor * x) + (PlaytimeFactor * y)) * (PlacementFactor * z) &#10;WeightFactor, PlaytimeFactor, and PlacementFactor all being determined by the weight/playtime of the game and the player's placement. &#10;You can set the x, y, and z to adjust it to what you feel should be worth more points. In 'Normal', x, y, and z are set to 1." TextWrapping="Wrap" Foreground="Gray" HorizontalAlignment="Center" Grid.Row="3"/>
             <Label Content="New Formula" HorizontalAlignment="Center" Margin="0,0" FontSize="17" Grid.Row="3"/>
                 <Label Content="((WeightFactor *       ) + (PlaytimeFactor *       )) * (PlacementFactor *       )" HorizontalAlignment="Center" FontSize="20" Margin="10,30" Grid.Row="3"/>
             
             <!--The three user inputted numbers-->
-            <TextBox x:Name="WeightNum" Grid.Row="3" Text="3.0" Width="33" Height="24" Padding="-100" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="18" Margin="0,38,316,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <TextBox x:Name="PlaytimeNum" Grid.Row="3" Text="2.0" Width="33" Height="24" Padding="-100" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="18" Margin="120,38,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="WeightNum" Grid.Row="3" Text="1.0" Width="33" Height="24" Padding="-100" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="18" Margin="0,38,316,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBox x:Name="PlaytimeNum" Grid.Row="3" Text="1.0" Width="33" Height="24" Padding="-100" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="18" Margin="120,38,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <TextBox x:Name="PlacementNum" Grid.Row="3" Text="1.0" Width="33" Height="24" Padding="-100" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="18" Margin="590,38,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 
 
-                <Button x:Name="SetBtn" Content="Set" Margin="0,80,30,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Click="SetBtn_Click"/>
-            <Button x:Name="ResetBtn" Content="Reset" Margin="30,80,0,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ResetBtn_Click"/>
-        </Grid>
+                <Button x:Name="SetBtn" Content="Set" Margin="0,80,0,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Click="SetBtn_Click"/>
+                    </Grid>
 
         <!--Ranking System-->
         <TextBlock Text="Ranking System" FontSize="25" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="2"/>

@@ -190,12 +190,12 @@ namespace Ultimate_Game_Winner.Main_Pages
             string[] values;
             values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\CustomRankingNumbers.txt");
             
-            var weightFactor = float.Parse(values[0]) * Math.Log10(weight);
+            var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
             if (playtime <= 10)
             {
                 playtime = 10;
             }
-            var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10);
+            var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10) * 2;
             var placementFactor = float.Parse(values[2]) * CalculatePlacementPercentage(placement, numOfPlayers);
             
             //Creates a point value, either positive or negative.

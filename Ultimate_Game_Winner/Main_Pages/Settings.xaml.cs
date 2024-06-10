@@ -43,19 +43,34 @@ namespace Ultimate_Game_Winner.Main_Pages
         private void Normal_Selected(object sender, RoutedEventArgs e)
         {
             CustomRankItems.Visibility = Visibility.Collapsed;
+            //Uncomment once you get the page state to save to where the user left it
+            //using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\CustomRankingNumbers.txt"))
+            //{
+            //    writer.WriteLine("1.0");
+            //    writer.WriteLine("1.0");
+            //    writer.WriteLine("1.0");
+
+            //}
         }
 
        
 
-        private void SetBtn_Click(object sender, RoutedEventArgs e)
+        private async void SetBtn_Click(object sender, RoutedEventArgs e)
         {
-            //RecordaGame.RefreshLeaderboard();
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\CustomRankingNumbers.txt"))
+            {
+                writer.WriteLine(WeightNum.Text);
+                writer.WriteLine(PlaytimeNum.Text);
+                writer.WriteLine(PlacementNum.Text);
+
+            }
+            RecordaGame.RefreshLeaderboard();
+            SetBtn.Content = "Done!";
+            await Task.Delay(2500);
+            SetBtn.Content = "Set";
         }
 
-        private void ResetBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
     
 }
