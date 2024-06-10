@@ -111,7 +111,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void DeleteGameplayBtn_Click(object sender, RoutedEventArgs e)
         {
-            AreYouSure areYouSure = new AreYouSure(false, allInfo);
+            AreYouSure areYouSure = new AreYouSure(false, allInfo, this);
             areYouSure.Show();
         }
     }

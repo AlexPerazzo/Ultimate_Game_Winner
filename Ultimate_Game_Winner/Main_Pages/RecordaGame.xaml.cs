@@ -187,17 +187,18 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
-            //Creates a point value, either positive or negative.
-
+            string[] values;
+            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\CustomRankingNumbers.txt");
             
-            var weightFactor = 3 * Math.Log10(weight);
+            var weightFactor = float.Parse(values[0]) * Math.Log10(weight);
             if (playtime <= 10)
             {
                 playtime = 10;
             }
-            var playtimeFactor = 2 * Math.Log10(playtime / 10);
-            var placementFactor = 1 * CalculatePlacementPercentage(placement, numOfPlayers);
+            var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10);
+            var placementFactor = float.Parse(values[2]) * CalculatePlacementPercentage(placement, numOfPlayers);
             
+            //Creates a point value, either positive or negative.
             var points = (weightFactor + playtimeFactor) * placementFactor;
 
             string stringPoints = points.ToString("0.00");

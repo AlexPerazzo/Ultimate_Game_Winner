@@ -23,12 +23,14 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     {
         bool deleteAll;
         string[] allInfo;
-        public AreYouSure(bool DeleteAll, string[] AllInfo)
+        Window oldWindow;
+        public AreYouSure(bool DeleteAll, string[] AllInfo, Window OldWindow)
         {
 
             InitializeComponent();
             deleteAll = DeleteAll;
             allInfo = AllInfo;
+            oldWindow = OldWindow;
             this.DataContext = this;
         }
 
@@ -63,6 +65,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 RecordaGame.RefreshLeaderboard();
                 ConfirmBtn.Content = "Success!";
                 await Task.Delay(500);
+
+                oldWindow.Close();
                 this.Close();
             }
         }

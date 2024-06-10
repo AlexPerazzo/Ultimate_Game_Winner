@@ -31,10 +31,31 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
         {
-            AreYouSure areYouSure = new AreYouSure(true, []);
+            AreYouSure areYouSure = new AreYouSure(true, [], null);
             areYouSure.Show();
         }
 
+        private void Custom_Selected(object sender, RoutedEventArgs e)
+        {
+            CustomRankItems.Visibility = Visibility.Visible;
+        }
+
+        private void Normal_Selected(object sender, RoutedEventArgs e)
+        {
+            CustomRankItems.Visibility = Visibility.Collapsed;
+        }
+
+       
+
+        private void SetBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ResetBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     
 }
