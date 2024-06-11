@@ -188,7 +188,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
             string[] values;
-            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\CustomRankingNumbers.txt");
+            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             
             var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
             if (playtime <= 10)

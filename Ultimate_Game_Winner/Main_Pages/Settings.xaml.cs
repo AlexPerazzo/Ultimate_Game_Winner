@@ -24,12 +24,23 @@ namespace Ultimate_Game_Winner.Main_Pages
     /// </summary>
     public partial class Settings : Page
     {
+        
+
         public Settings()
         {
             InitializeComponent();
-            
+            Loaded += LoadSettings;
         }
 
+        private void LoadSettings(object sender, RoutedEventArgs e)
+        {
+            string[] values;
+            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            WeightNum.Text = values[0];
+            PlaytimeNum.Text = values[1];
+            PlacementNum.Text = values[2];
+            RankingSysBox.Text = values[3];
+        }
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
         {
@@ -46,25 +57,25 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             CustomRankItems.Visibility = Visibility.Collapsed;
             //Uncomment once you get the page state to save to where the user left it
-            //using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\CustomRankingNumbers.txt"))
-            //{
-            //    writer.WriteLine("1.0");
-            //    writer.WriteLine("1.0");
-            //    writer.WriteLine("1.0");
-
-            //}
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
+            {
+                writer.WriteLine("1.0");
+                writer.WriteLine("1.0");
+                writer.WriteLine("1.0");
+                writer.WriteLine("Normal");
+            }
         }
 
-       
+
 
         private async void SetBtn_Click(object sender, RoutedEventArgs e)
         {
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\CustomRankingNumbers.txt"))
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
             {
                 writer.WriteLine(WeightNum.Text);
                 writer.WriteLine(PlaytimeNum.Text);
                 writer.WriteLine(PlacementNum.Text);
-
+                writer.WriteLine("Custom");
             }
             RecordaGame.RefreshLeaderboard();
             SetBtn.Content = "Done!";
