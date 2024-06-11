@@ -28,7 +28,9 @@ namespace Ultimate_Game_Winner
 
         private void mainFrame_Navigated(object sender, NavigationEventArgs e)
         {
-
+           
         }
+
+        
     }
 }

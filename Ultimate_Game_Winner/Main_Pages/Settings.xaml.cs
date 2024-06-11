@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,8 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Ultimate_Game_Winner.UserControls_and_Windows;
 using Ultimate_Game_Winner;
+using Ultimate_Game_Winner.UserControls_and_Windows;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
@@ -26,6 +27,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         public Settings()
         {
             InitializeComponent();
+            
         }
 
 
@@ -68,9 +70,12 @@ namespace Ultimate_Game_Winner.Main_Pages
             SetBtn.Content = "Done!";
             await Task.Delay(2500);
             SetBtn.Content = "Set";
+            
         }
 
        
+
+        
     }
     
 }
