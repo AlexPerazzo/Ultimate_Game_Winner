@@ -55,6 +55,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
             else
             {
+                
                 string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt";
               
                 List<string> lines = new List<string>(File.ReadAllLines(filePath));
@@ -62,6 +63,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 lines.Remove(string.Join(",,,", allInfo));
 
                 File.WriteAllLines(filePath, lines);
+
                 RecordaGame.RefreshLeaderboard();
                 ConfirmBtn.Content = "Success!";
                 await Task.Delay(500);

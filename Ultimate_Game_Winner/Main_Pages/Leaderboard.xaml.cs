@@ -47,12 +47,13 @@ namespace Ultimate_Game_Winner.Main_Pages
                 int placement = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    placement ++;
+                    placement++;
                     //leaderboardList.Add(line);
                     LeaderboardPanel panel = new LeaderboardPanel();
                     string[] parts = line.Split(",");
                     panel.PlayerName = parts[0];
-                    panel.Points = $"{parts[1]}pts";
+                    
+                    panel.Points = $"{float.Parse(parts[1])}pts";
                     panel.Placement = placement.ToString();
 
                    
