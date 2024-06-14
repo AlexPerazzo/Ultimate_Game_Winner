@@ -24,6 +24,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         bool deleteAll;
         string[] allInfo;
         Window oldWindow;
+        
+
         public AreYouSure(bool DeleteAll, string[] AllInfo, Window OldWindow)
         {
 
@@ -32,6 +34,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             allInfo = AllInfo;
             oldWindow = OldWindow;
             this.DataContext = this;
+            
         }
 
         private async void ConfirmBtn_Click(object sender, RoutedEventArgs e)
@@ -64,12 +67,13 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
                 File.WriteAllLines(filePath, lines);
 
-                RecordaGame.RefreshLeaderboard();
+                Leaderboard.RefreshLeaderboard();
                 ConfirmBtn.Content = "Success!";
                 await Task.Delay(500);
 
-                oldWindow.Close();
+                
                 this.Close();
+                oldWindow.Close();
             }
         }
 

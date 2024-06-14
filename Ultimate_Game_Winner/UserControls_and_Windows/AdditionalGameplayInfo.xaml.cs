@@ -25,6 +25,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     public partial class AdditionalGameplayInfo : Window
     {
         private string[] allInfo;
+       
         public string gameName { get; set; }
         public string weight { get; set; }
         public string playtime { get; set; }
@@ -32,52 +33,30 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         public string additionalNotes { get; set; }
         public string date { get; set; }
 
+        
+
+       
         public AdditionalGameplayInfo(string[] alltheInfo)
         {
             InitializeComponent();
-
+            
             this.DataContext = this;
             allInfo = alltheInfo;
             
             Loaded += LoadPlayers;
 
         }
-        private (string, string) GetAPIImageGenre(int gameID)
-        {
-            
-            XDocument doc;
-            //Goes to API and gets information
-            using (var client = new HttpClient())
-            {
-                var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
-                var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
-                doc = XDocument.Parse(result);
-            }
+        
 
-            //sorts thorugh that information to grab what we need.
-            XElement? item = doc.Element("items").Element("item");
-            var imageURL = item.Element("thumbnail").Value;
-            var genre = item.Element("statistics").Element("ratings").Element("ranks").Elements("rank").ElementAt(1).Attribute("name").Value;
-
-
-            return (imageURL, genre);
-        }
-
-        private void RefreshWindow()
-        {
-            // Need this function to reload after setting some data bindings
-            var oldDataContext = this.DataContext;
-            this.DataContext = null;
-            this.DataContext = oldDataContext;
-        }
+        
         private void LoadPlayers(object sender, RoutedEventArgs e)
         {
             
             //Gather Information from API
             
-            var ID = RecordaGame.GetID(allInfo[0]);
-            (float thePlaytime, float theWeight) = RecordaGame.GetAPIData(ID);
-            var (URL, theGenre) = GetAPIImageGenre(ID);
+            var ID = UtilityFunctions.GetID(allInfo[0]);
+            (float thePlaytime, float theWeight) = UtilityFunctions.GetAPIData(ID);
+            var (URL, theGenre) = UtilityFunctions.GetAPIImageGenre(ID);
             var imageUri = new Uri(URL);
             var bitmap = new BitmapImage(imageUri);
             BoardGameImage.Source = bitmap;
@@ -106,7 +85,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             }
             
             //Refresh Window so set Data Bindings will apply
-            RefreshWindow();
+            UtilityFunctions.RefreshFramework(this);
         }
 
         private void DeleteGameplayBtn_Click(object sender, RoutedEventArgs e)

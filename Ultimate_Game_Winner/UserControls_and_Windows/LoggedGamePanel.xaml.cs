@@ -22,18 +22,20 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     /// </summary>
     public partial class LoggedGamePanel : UserControl
     {
-        public LoggedGamePanel()
-        {
-            InitializeComponent();
-            this.DataContext = this;
-        }
-
         public string PlayerName { get; set; }
         public string GameName { get; set; }
 
         public string NumPlayers { get; set; }
         public string Date { get; set; }
         public string[] AllInfo { get; set; }
+        
+        public LoggedGamePanel()
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            
+        }
+
 
 
 

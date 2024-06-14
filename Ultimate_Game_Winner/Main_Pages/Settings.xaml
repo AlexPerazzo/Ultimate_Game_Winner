@@ -63,7 +63,9 @@
             <ComboBoxItem x:Name="Custom" Content="Custom" Selected="Custom_Selected"/>
         </ComboBox>
             <!--Delete Entire Log-->
-        <Button Name="DeleteLog" Margin="0,25,0,0" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DeleteLog_Click" Grid.Row="4"/>
-    </Grid>
+            <Button Name="DeleteLog" Margin="130,25,0,0" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DeleteLog_Click" Grid.Row="4"/>
+            <Button Name="RefreshLeaderboardBtn" Margin="0,25,130,0" Content="Refresh Leaderboard" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Click="RefreshLeaderboardBtn_Click" Grid.Row="4"/>
+
+        </Grid>
     </ScrollViewer>
 </Page>

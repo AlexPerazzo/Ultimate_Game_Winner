@@ -24,7 +24,7 @@
                 <RowDefinition/>
                 
                 <!--White Space row-->
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="45"/>
 
             </Grid.RowDefinitions>
             <!--Title-->
@@ -35,6 +35,8 @@
 
 
             <StackPanel Name="theLeaderboard" Grid.Row="2"/>
+
+            <Button Name="RefreshLeaderboardBtn" Margin="0,5,0,0" Content="Refresh Leaderboard" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RefreshLeaderboardBtn_Click" Grid.Row="3"/>
 
         </Grid>
     </ScrollViewer>

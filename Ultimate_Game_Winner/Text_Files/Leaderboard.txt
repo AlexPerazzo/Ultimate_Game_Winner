@@ -1,3 +1,2 @@
-Alex,6.48
-Eric,2.16
-Ben,-6.48
+1st Place...,2.98
+2nd Place...,-1.79

@@ -28,6 +28,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             Loaded += LoadLog;
         }
 
+        
         private void LoadLog(object sender, RoutedEventArgs e)
         {
             
@@ -39,6 +40,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 while ((line = reader.ReadLine()) != null)
                 {
                     //logList.Add(line);
+                    this.DataContext = this;
                     LoggedGamePanel panel = new LoggedGamePanel();
                     string[] parts = line.Split(",,,");
                     panel.GameName = parts[0];
@@ -48,8 +50,8 @@ namespace Ultimate_Game_Winner.Main_Pages
                     panel.Date = parts[parts.Length - 1];
                     panel.Margin = new Thickness(12, 12, 0, 0);
                     panel.AllInfo = parts;
-                    
 
+                    
                     theLog.Children.Insert(0, panel);
                 }
             }

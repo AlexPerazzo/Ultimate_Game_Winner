@@ -66,5 +66,75 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
+        private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshLeaderboard();
+            theLeaderboard.Children.Clear();
+            LoadLeaderboard(sender, e);
+            RefreshLeaderboardBtn.Content = "Done!";
+            await Task.Delay(2000);
+            RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
+
+        }
+
+
+        public static void RefreshLeaderboard()
+        {
+            //Currently unused function, but may be useful to completely reset the Leaderboard at some point in the future
+
+            Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
+
+
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    String[] parts = line.Split(",,,");
+                    for (int i = 0; i < parts.Length; i++)
+                    {
+                        //skips over Game Name and Number of Players
+                        if (i != 0 && i != 1 && i != (parts.Length - 1) && i != (parts.Length - 2))
+                        {
+                            int ID = UtilityFunctions.GetID(parts[0]);
+                            (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
+                            double points = RecordaGame.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
+
+
+                            //checks if person is already in the dictionary and adds them accordingly
+                            if (!newLeaderboard.ContainsKey(parts[i]))
+                            {
+                                newLeaderboard.Add(parts[i], points);
+                            }
+
+                            else
+                            {
+                                newLeaderboard[parts[i]] += points;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+
+            var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+            {
+
+                writer.Write(string.Empty);
+                int i = 0;
+                foreach (var entry in sortedDictionary)
+                {
+                    i += 1;
+                    //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
+                    var key = entry.Key;
+                    var value = entry.Value;
+                    string writeThis = $"{key},{value}";
+                    writer.WriteLine(writeThis);
+                }
+            }
+        }
     }
 }

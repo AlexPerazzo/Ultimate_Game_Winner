@@ -43,7 +43,11 @@ namespace Ultimate_Game_Winner.Main_Pages
             WeightNum.Text = values[0];
             PlaytimeNum.Text = values[1];
             PlacementNum.Text = values[2];
-            RankingSysBox.Text = values[3];
+
+            if (float.Parse(values[0]) == 1 && float.Parse(values[1]) == 1 && float.Parse(values[2]) == 1)
+                RankingSysBox.Text = "Normal";
+            else
+                RankingSysBox.Text = values[3];
         }
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
@@ -70,7 +74,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             CustomRankItems.Visibility = Visibility.Collapsed;
 
             var textFileToChange = File.ReadAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            if (textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nNormal\r\n")
+            if (textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nNormal\r\n" && textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nCustom\r\n")
             {
                 using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
                 {
@@ -79,7 +83,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     writer.WriteLine("1.0");
                     writer.WriteLine("Normal");
                 }
-                RecordaGame.RefreshLeaderboard();
+                Leaderboard.RefreshLeaderboard();
                 
             }
         }
@@ -113,7 +117,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                         writer.WriteLine(placement);
                         writer.WriteLine("Custom");
                     }
-                    RecordaGame.RefreshLeaderboard();
+                    Leaderboard.RefreshLeaderboard();
                     SetBtn.Content = "Done!";
                     await Task.Delay(2500);
                     SetBtn.Content = "Set";
@@ -180,6 +184,14 @@ namespace Ultimate_Game_Winner.Main_Pages
                 PlacementVerification.Visibility = Visibility.Visible;
                 placementIsAGo = false;
             }
+        }
+
+        private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Leaderboard.RefreshLeaderboard();
+            RefreshLeaderboardBtn.Content = "Done!";
+            await Task.Delay(2000);
+            RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
         }
     }
     

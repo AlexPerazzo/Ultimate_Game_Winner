@@ -46,13 +46,13 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 string? line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var correctPlayer = false;
+                    
                     string[] parts = line.Split(",,,");
                     var numPlayers = parts.Length - 4;
 
                     
-                    var ID = RecordaGame.GetID(parts[0]);
-                    (float thePlaytime, float theWeight) = RecordaGame.GetAPIData(ID);
+                    var ID = UtilityFunctions.GetID(parts[0]);
+                    (float thePlaytime, float theWeight) = UtilityFunctions.GetAPIData(ID);
                     PlacementPointsPanel statsPanel = new PlacementPointsPanel();
                     
 
@@ -68,7 +68,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                             //Weird:
 
                             //
-                            panel.GameName = $"{RecordaGame.AddOrdinal(i - 1)}";
+                            panel.GameName = $"{UtilityFunctions.AddOrdinal(i - 1)}";
 
                             //Game Name in place of PlayerName
                             panel.PlayerName = parts[0];
@@ -77,7 +77,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                             statsPanel.Points = $"{points}";
                             statsPanel.Margin = new Thickness(12,12,0,0);
                             StatsPanels.Children.Insert(0, statsPanel);
-                            correctPlayer = true;
+                            
                             panel.NumPlayers = $"{numPlayers} players";
                             panel.Date = parts[parts.Length - 1];
                             panel.Margin = new Thickness(12, 12, 0, 0);
@@ -88,17 +88,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                         }
                     }
 
-                    if (correctPlayer)
-                    {
-
-                    //logList.Add(line);
-
-
-
-
-
-                    correctPlayer = false;
-                    }
+                    
                 }
             }
 

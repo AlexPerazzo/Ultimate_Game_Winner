@@ -72,35 +72,18 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
-        private static string CapitalizeEachWord(string input)
-        {
-            //Helper function to help catch user input error in regards to names
-            if (string.IsNullOrEmpty(input))
-                return input;
-
-            string[] words = input.Split(' ');
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (words[i].Length > 0)
-                {
-                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
-                }
-            }
-
-            return string.Join(' ', words);
-        }
         private string SaveToLog(string nameOfGame, string numPlayers)
         {
             
-            
+            var officialName = UtilityFunctions.ReturnOfficialGameName(nameOfGame);
             // Append each item from the list, separated by commas
-            string line = $"{nameOfGame},,,{numPlayers},,,";
+            string line = $"{officialName},,,{numPlayers},,,";
             foreach (TextBox textBox in TextBoxCollection)
             {
                 if (textBox.Text == "" || textBox.Text == "Additional gameplay notes... (leave blank or don't touch if none are wanted)")
                     line += "N/A,,,";
                 else
-                    line += CapitalizeEachWord(textBox.Text) + ",,,";
+                    line += UtilityFunctions.CapitalizeEachWord(textBox.Text) + ",,,";
                 
             }
             DateTime currentDate = DateTime.Now;
@@ -135,55 +118,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             TextBoxCollection.Clear();
             
         }
-
         
-        public static (float playtime, float weight) GetAPIData(int gameID)
-        {
-            //Uses API and grabs the needed information: weight and playtime
-            XDocument doc;
-            //Goes to API and gets information
-            using (var client = new HttpClient())
-            {
-                var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
-                var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
-                doc = XDocument.Parse(result);
-            }
-
-            XElement? item = doc.Element("items").Element("item");
-
-            //sorts thorugh that information to grab what we need.
-            string? averageWeightString = item.Element("statistics").Element("ratings").Element("averageweight").Attribute("value").Value;
-            var minPlaytimeString = item.Element("minplaytime").Attribute("value").Value;
-            var maxPlaytimeString = item.Element("maxplaytime").Attribute("value").Value;
-
-
-            float averageWeight = float.Parse(averageWeightString); float minPlaytime = float.Parse(minPlaytimeString); float maxPlaytime = float.Parse(maxPlaytimeString); float averagePlaytime = (minPlaytime + maxPlaytime) / 2;
-
-
-            return (averagePlaytime, averageWeight);
-        }
-
-
-        public static int GetID(string nameOfGame)
-        {
-            //Reads list of all games and their ids
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] lineList = line.Split(",");
-                    //stops when the names match up
-                    if (lineList[1].ToLower() == nameOfGame.ToLower())
-                    {
-                        //returns associated id
-                        int gameID = int.Parse(lineList[0]);
-                        return gameID;
-                    }
-                }
-            }
-            return -1;
-        }
 
         public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
@@ -231,8 +166,8 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             string[] gameParts = gameplayToAdd.Split(",,,");
 
-            int gameID = GetID(gameParts[0]);
-            (float averagePlaytime, float averageWeight) = GetAPIData(gameID);
+            int gameID = UtilityFunctions.GetID(gameParts[0]);
+            (float averagePlaytime, float averageWeight) = UtilityFunctions.GetAPIData(gameID);
 
 
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
@@ -284,64 +219,9 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
-        public static void RefreshLeaderboard()
-        {
-            //Currently unused function, but may be useful to completely reset the Leaderboard at some point in the future
 
-            Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
-
-
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    String[] parts = line.Split(",,,");
-                    for (int i = 0; i < parts.Length; i++)
-                    {
-                        //skips over Game Name and Number of Players
-                        if (i != 0 && i != 1 && i != (parts.Length - 1) && i != (parts.Length -2))
-                        {
-                            int ID = GetID(parts[0]);
-                            (float playtime, float weight) = GetAPIData(ID);
-                            double points = CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
-
-
-                            //checks if person is already in the dictionary and adds them accordingly
-                            if (!newLeaderboard.ContainsKey(parts[i]))
-                            {
-                                newLeaderboard.Add(parts[i], points);
-                            }
-
-                            else
-                            {
-                                newLeaderboard[parts[i]] += points;
-                            }
-
-                        }
-                    }
-                }
-            }
-
-
-            var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
-            {
-
-                writer.Write(string.Empty);
-                int i = 0;
-                foreach (var entry in sortedDictionary)
-                {
-                    i += 1;
-                    //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
-                    var key = entry.Key;
-                    var value = entry.Value;
-                    string writeThis = $"{key},{value}";
-                    writer.WriteLine(writeThis);
-                }
-            }
-        }
+        //In Leaderboard.xaml.cs??
+        
         private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
@@ -355,31 +235,6 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
-        public static string AddOrdinal(int num)
-        {
-            //Helper function for placements
-            if (num <= 0) return num.ToString();
-
-            switch (num % 100)
-            {
-                case 11:
-                case 12:
-                case 13:
-                    return num + "th";
-            }
-
-            switch (num % 10)
-            {
-                case 1:
-                    return num + "st";
-                case 2:
-                    return num + "nd";
-                case 3:
-                    return num + "rd";
-                default:
-                    return num + "th";
-            }
-        }
         private void UpdateTextBoxCollection(int count)
         {
 
@@ -390,7 +245,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             for (int i = 0; i < count; i++)
             {
                 TextBox textBox = new TextBox { Width = 100, Margin = new Thickness(0, 25, 0, 0) };
-                textBox.Text = $"{AddOrdinal(i+1)} place...";
+                textBox.Text = $"{UtilityFunctions.AddOrdinal(i+1)} place...";
                 textBox.VerticalAlignment = VerticalAlignment.Center;
                 textBox.HorizontalAlignment = HorizontalAlignment.Center;
                 TextBoxCollection.Add(textBox);
@@ -407,7 +262,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void GameName_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!DoesGameExist(GameName.Text))
+            if (!UtilityFunctions.DoesGameExist(GameName.Text))
             {
                 GameName.BorderBrush = Brushes.Red;
                 GameNameVerification.Visibility = Visibility.Visible;
@@ -437,32 +292,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
-
-        private bool DoesGameExist(string nameOfGame)
-        {
-            //Reads list of all games and their ids
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] lineList = line.Split(",");
-                    //stops when the names match up
-                    if (lineList[1].ToLower() == nameOfGame.ToLower())
-                    {
-                        //if game exists return true
-                        return true;
-                    }
-                }
-            }
-            //otherwise return false
-            return false;
-        }
-
-
         
-
-
+       
 
 
     }
