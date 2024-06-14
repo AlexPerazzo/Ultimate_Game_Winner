@@ -7,8 +7,11 @@
         mc:Ignorable="d"
         Title="AreYouSure" Height="200" Width="400">
     <Grid>
+        <!--Text-->
         <Label Content="Are you sure?" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" FontSize="50"/>
         <Label Content="This action is permanent and cannot be undone." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+        
+        <!--Buttons-->
         <Button x:Name="ConfirmBtn" Content="Confirm" HorizontalAlignment="Left" Margin="83,116,0,0" VerticalAlignment="Top" Height="34" Width="61" Click="ConfirmBtn_Click"/>
         <Button x:Name="CancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="252,116,0,0" VerticalAlignment="Top" Height="34" Width="61" Click="CancelBtn_Click"/>
 

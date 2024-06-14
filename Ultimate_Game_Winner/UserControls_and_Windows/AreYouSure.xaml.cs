@@ -39,6 +39,10 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private async void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
+            //This function is used in one of two places:
+            //1. Delete all in Settings. This is where the first part of the if clause comes in
+            //2. Delete one gameplay. This is where the else part of the if clause comes in
+
             if (deleteAll)
             {
 
@@ -56,6 +60,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 this.Close();
             }
 
+            //Delete one gameplay
             else
             {
                 

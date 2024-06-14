@@ -36,7 +36,7 @@
                 <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <!--<TextBox Text="Testing" Width="100" Margin="5"/>-->
+                            
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -49,8 +49,9 @@
                     <ColumnDefinition />
 
                 </Grid.ColumnDefinitions>
-				<!--<Button Name="TestAPIButton" Grid.Column="0" Content="Test It" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Test_Click"/>-->
+				
 
+                <!--Submit and Cancel Buttons-->
 				<Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
                 <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
             </Grid>

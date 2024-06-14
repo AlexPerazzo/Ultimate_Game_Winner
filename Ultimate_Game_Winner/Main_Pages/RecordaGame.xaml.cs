@@ -109,22 +109,27 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Resets Texts of all TextBox's back to original display
             GameName.Text = "Name of Game";
             NumPlayers.Text = "# of Players";
+            TextBoxCollection.Clear();
+
+            //Resets verification error messages
             NumPlayers.BorderBrush = SystemColors.ControlDarkBrush;
             NumPlayersVerification.Visibility = Visibility.Hidden;
             GameName.BorderBrush = SystemColors.ControlDarkBrush;
             GameNameVerification.Visibility = Visibility.Hidden;
             gameNameIsAGo = false;
             numPlayersIsAGo = false;
-            TextBoxCollection.Clear();
+
             
         }
         
 
         public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
+            //Gathers weights of different factors (in case custom ranking system is on)
             string[] values;
             values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             
+            //Creates three factors that go into point total
             var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
             if (playtime <= 10)
             {
@@ -132,8 +137,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
             var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10) * 2;
             var placementFactor = float.Parse(values[2]) * CalculatePlacementPercentage(placement, numOfPlayers);
-            
-            //Creates a point value, either positive or negative.
+  
+            //Creates a point value using the three factors
             var points = (weightFactor + playtimeFactor) * placementFactor;
 
             string stringPoints = points.ToString("0.00");
@@ -164,14 +169,15 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void UpdateLeaderboard(string gameplayToAdd)
         {
+            //Gathers necessary information about game
             string[] gameParts = gameplayToAdd.Split(",,,");
-
             int gameID = UtilityFunctions.GetID(gameParts[0]);
             (float averagePlaytime, float averageWeight) = UtilityFunctions.GetAPIData(gameID);
 
 
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
+            //puts currently leaderboard onto newLeaderboard
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
                 string line;
@@ -188,20 +194,22 @@ namespace Ultimate_Game_Winner.Main_Pages
 
                     double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
                     
-                    //checks if person is already in the dictionary and adds them accordingly
+                    //If new person, add them with their points to newLeaderboard
                     if (!newLeaderboard.ContainsKey(gameParts[i]))
                     {
                         newLeaderboard.Add(gameParts[i], points);
                     }
-
+                    //Otherwise simply adds the points to their previous total
                     else
                     {
                         newLeaderboard[gameParts[i]] += points;
                     }
                 }
             
+            //sort so Leaderboard is already in correct ranking order when saved to text file
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
+            //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
             using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
                 
@@ -210,7 +218,6 @@ namespace Ultimate_Game_Winner.Main_Pages
                 foreach (var entry in sortedDictionary)
                 {
                     i += 1;
-                    //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
                     var key = entry.Key;
                     var value = entry.Value;
                     string writeThis = $"{key},{value:F2}";
@@ -220,7 +227,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
 
 
-        //In Leaderboard.xaml.cs??
+        
         
         private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -229,10 +236,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 UpdateTextBoxCollection(numberOfTextBoxes);
             }
-            else
-            {
-                
-            }
+            
         }
 
         private void UpdateTextBoxCollection(int count)
@@ -262,12 +266,16 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void GameName_LostFocus(object sender, RoutedEventArgs e)
         {
+            //If Invalid input, makes box read and pops up message
+            //Turns necessary variable for submitting to false
             if (!UtilityFunctions.DoesGameExist(GameName.Text))
             {
                 GameName.BorderBrush = Brushes.Red;
                 GameNameVerification.Visibility = Visibility.Visible;
                 gameNameIsAGo = false;
             }
+            //If valid, puts things to normal
+            //Turns necessary variable for submitting to true
             else
             {
                 GameName.BorderBrush = SystemColors.ControlDarkBrush;
@@ -278,12 +286,16 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
         {
+            //If Invalid input, makes box read and pops up message
+            //Turns necessary variable for submitting to false
             if (NumPlayers.Text != "2" && NumPlayers.Text != "3" && NumPlayers.Text != "4" && NumPlayers.Text != "5" && NumPlayers.Text != "6")
             {
                 NumPlayers.BorderBrush = Brushes.Red;
                 NumPlayersVerification.Visibility = Visibility.Visible;
                 numPlayersIsAGo = false;
             }
+            //If valid, puts things to normal
+            //Turns necessary variable for submitting to true
             else
             {
                 NumPlayers.BorderBrush = SystemColors.ControlDarkBrush;

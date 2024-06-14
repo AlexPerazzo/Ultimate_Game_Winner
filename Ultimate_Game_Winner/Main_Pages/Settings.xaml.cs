@@ -38,6 +38,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void LoadSettings(object sender, RoutedEventArgs e)
         {
+            //Loads savedsettings in so it displays the same as the user last saved it
             string[] values;
             values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             WeightNum.Text = values[0];
@@ -52,6 +53,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
         {
+            //Asks for confirmation. AreYouSure will do the work from there
             AreYouSure areYouSure = new AreYouSure(true, [], null);
             areYouSure.Show();
         }
@@ -74,8 +76,11 @@ namespace Ultimate_Game_Winner.Main_Pages
             CustomRankItems.Visibility = Visibility.Collapsed;
 
             var textFileToChange = File.ReadAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            
+            //Doesn't waste time doing API calls if the input is already in place
             if (textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nNormal\r\n" && textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nCustom\r\n")
             {
+                //sets the settings back to normal and refreshes the leaderboard
                 using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
                 {
                     writer.WriteLine("1.0");
@@ -92,6 +97,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void SetBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Edits SavedSettings.txt which is used when calculating points
             if (weightIsAGo && playtimeIsAGo && placementIsAGo)
                 {
 
@@ -100,12 +106,15 @@ namespace Ultimate_Game_Winner.Main_Pages
                 var placement = PlacementNum.Text;
 
                 var textFileToChange = File.ReadAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+                
+                //Doesn't run API all over again if the input is already in place
                 if (textFileToChange == $"{weight}\r\n{playtime}\r\n{placement}\r\nCustom\r\n" || textFileToChange == $"{weight}\r\n{playtime}\r\n{placement}\r\nNormal\r\n")
                 {
                     SetBtn.Content = "No change detected";
                     await Task.Delay(2000);
                     SetBtn.Content = "Set";
                 }
+                //Saves the user's input and refreshes the leaderboard
                 else
                 {
                     SetBtn.Content = "Note: This may take a second";
@@ -137,12 +146,16 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void WeightNum_LostFocus(object sender, RoutedEventArgs e)
         {
+            //If valid, puts things to normal
+            //Turns necessary variable for submitting to true
             if (float.TryParse(WeightNum.Text, out _))
             {
                 WeightNum.BorderBrush = SystemColors.ControlDarkBrush;
                 WeightVerification.Visibility = Visibility.Hidden;
                 weightIsAGo = true;
             }
+            //If Invalid input, makes box read and pops up message
+            //Turns necessary variable for submitting to false
             else
             {
                 
@@ -154,12 +167,16 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void PlaytimeNum_LostFocus(object sender, RoutedEventArgs e)
         {
+            //If valid, puts things to normal
+            //Turns necessary variable for submitting to true
             if (float.TryParse(PlaytimeNum.Text, out _))
             {
                 PlaytimeNum.BorderBrush = SystemColors.ControlDarkBrush;
                 PlaytimeVerification.Visibility = Visibility.Hidden;
                 playtimeIsAGo = true;
             }
+            //If Invalid input, makes box read and pops up message
+            //Turns necessary variable for submitting to false
             else
             {
 
@@ -171,12 +188,16 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void PlacementNum_LostFocus(object sender, RoutedEventArgs e)
         {
+            //If valid, puts things to normal
+            //Turns necessary variable for submitting to true
             if (float.TryParse(PlacementNum.Text, out _))
             {
                 PlacementNum.BorderBrush = SystemColors.ControlDarkBrush;
                 PlacementVerification.Visibility = Visibility.Hidden;
                 placementIsAGo = true;
             }
+            //If Invalid input, makes box read and pops up message
+            //Turns necessary variable for submitting to false
             else
             {
 

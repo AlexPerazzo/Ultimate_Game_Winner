@@ -9,13 +9,11 @@
     <!--Exactly 96x High to match up with the LoggedGamePanels-->
     <Grid Width="96" Height="96">
         
-        <Grid.RowDefinitions>
-            <!--<RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>-->
-        </Grid.RowDefinitions>
+        
 
         <Viewbox Stretch="Uniform" StretchDirection="Both" HorizontalAlignment="Left" Margin="0,0,8,0">
             
+        <!--Points-->
         <Label Content="{Binding Points}" FontSize="40" Grid.Row="0" FontFamily="Segoe" Foreground="DeepSkyBlue" FontStyle="Italic" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,10">
             <Label.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="4"/>
@@ -23,17 +21,17 @@
         </Label>
         </Viewbox>
 
+        <!--'pts received' Text-->
         <Label Content="pts received" FontSize="12" Grid.Row="1" HorizontalAlignment="Center" Foreground="DeepSkyBlue" Margin="0,60,3,0" FontWeight="SemiBold">
             <Label.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="1" ShadowDepth=".5"/>
             </Label.Effect>
         </Label>
-        <Label Content="{Binding Placement}" FontSize="1" Grid.Row="1" Foreground="DeepSkyBlue"/>
+        
+       
 
-        <!--RadiusX="17.1" RadiusY="17.1"-->
+        <!--Background Rectangle-->
         <Rectangle x:Name="Background" Height="96" Width="96" Grid.RowSpan="2" Panel.ZIndex="-1" >
-
-
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                     <GradientStop Color="#33658a" Offset="0.25" />

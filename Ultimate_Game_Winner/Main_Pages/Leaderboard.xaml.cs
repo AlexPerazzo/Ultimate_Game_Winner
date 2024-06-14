@@ -48,7 +48,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 while ((line = reader.ReadLine()) != null)
                 {
                     placement++;
-                    //leaderboardList.Add(line);
+                    
                     LeaderboardPanel panel = new LeaderboardPanel();
                     string[] parts = line.Split(",");
                     panel.PlayerName = parts[0];
@@ -80,7 +80,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         public static void RefreshLeaderboard()
         {
-            //Currently unused function, but may be useful to completely reset the Leaderboard at some point in the future
+            
 
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
@@ -93,7 +93,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     String[] parts = line.Split(",,,");
                     for (int i = 0; i < parts.Length; i++)
                     {
-                        //skips over Game Name and Number of Players
+                        //skips over Game Name, Number of Players, Date, and Additional Comments
                         if (i != 0 && i != 1 && i != (parts.Length - 1) && i != (parts.Length - 2))
                         {
                             int ID = UtilityFunctions.GetID(parts[0]);

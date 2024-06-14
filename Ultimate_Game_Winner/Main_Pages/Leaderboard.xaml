@@ -31,11 +31,13 @@
             <Label Content="Leaderboard" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
             <Rectangle Height="3" VerticalAlignment="Bottom" Width="550" Fill="Black"/>
 
+            <!--Tip-->
             <Label Content="(Click on panel for additional player info)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Gray"></Label>
 
-
+            <!--LeaderboardPanel StackPanel-->
             <StackPanel Name="theLeaderboard" Grid.Row="2"/>
 
+            <!--Refresh Leaderboard Button-->
             <Button Name="RefreshLeaderboardBtn" Margin="0,5,0,0" Content="Refresh Leaderboard" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RefreshLeaderboardBtn_Click" Grid.Row="3"/>
 
         </Grid>

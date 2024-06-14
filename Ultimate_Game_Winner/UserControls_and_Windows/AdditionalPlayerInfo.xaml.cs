@@ -61,19 +61,14 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                         if (parts[i] == playerName)
                         {
                             LoggedGamePanel panel = new LoggedGamePanel();
-
-                            //Normal:
-                            //panel.GameName = parts[0];
-                            //panel.PlayerName = parts[2];
-                            //Weird:
-
-                            //
+                            //Swaps various normal parts of LoggedGamePanel with different wanted information
+                            
                             panel.GameName = $"{UtilityFunctions.AddOrdinal(i - 1)}";
 
                             //Game Name in place of PlayerName
                             panel.PlayerName = parts[0];
                             var points = RecordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), i - 1);
-                            statsPanel.Placement = $"{i - 1}";
+                            
                             statsPanel.Points = $"{points}";
                             statsPanel.Margin = new Thickness(12,12,0,0);
                             StatsPanels.Children.Insert(0, statsPanel);

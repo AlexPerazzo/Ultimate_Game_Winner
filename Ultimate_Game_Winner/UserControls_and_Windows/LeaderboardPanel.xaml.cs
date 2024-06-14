@@ -59,6 +59,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void LeaderPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //Displays Addtional Player Info when clicked upon
             AdditionalPlayerInfo additionalPlayerInfo = new AdditionalPlayerInfo(PlayerName);
             additionalPlayerInfo.Title = $"{PlayerName}'s Games Played";
             additionalPlayerInfo.Show();

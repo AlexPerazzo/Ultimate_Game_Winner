@@ -9,24 +9,36 @@
     <ScrollViewer>
         
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="105"/>
-            
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <!--Points Received Column-->
+                <ColumnDefinition Width="105"/>
+                <!--LoggedGamePanel Column-->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        
+            <Grid.RowDefinitions>
+                <!--Title Row-->
             <RowDefinition Height="75"/>
+                <!--Additional Info Row-->
             <RowDefinition Height="30"/>
 
+                <!--LoggedGamePanels Row-->
                 <RowDefinition/>
                 <!--White Space Row-->
                 <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
+        
+        <!--Additional Info Text-->
         <Label Content="(Game Name, Placement, # of Players, Date Recorded)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
         <TextBlock Text="(Weight Factor + Time Factor) * Placement Factor" Margin="9,0,0,0" TextWrapping="Wrap" TextAlignment="Center" Grid.RowSpan="2" Grid.Column="0" Grid.Row="0" FontSize="15" FontStyle="Italic" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="Gray"></TextBlock>
 
+        <!--Title-->
         <Label Content="{Binding Title}" Grid.Column="1" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        
+        <!--LoggedGamePanels StackPanel-->
         <StackPanel x:Name="AllGamesPlayed" Grid.Row="2" Grid.Column="1"/>
+        
+        <!--Points Received StackPanel-->
         <StackPanel x:Name="StatsPanels" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
 
     </Grid>

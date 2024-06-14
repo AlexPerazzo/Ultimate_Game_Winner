@@ -42,8 +42,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <!--PlayerName -->
-                
+            <!--PlayerName --> 
             <Viewbox Stretch="Uniform" StretchDirection="Both" HorizontalAlignment="Left" Margin="0,8,11,8">
             <Label Grid.Row="0" Content="{Binding PlayerName}" IsHitTestVisible="False" FontFamily="Segoe" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" FontSize="50" Margin="7,0,0,0" FontStyle="Italic" FontWeight="DemiBold">
                 <Label.Effect>

@@ -14,19 +14,21 @@ namespace Ultimate_Game_Winner
     {
         public static string ReturnOfficialGameName(string nameOfGame)
         {
+            //reads through all the game names
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] lineList = line.Split(",");
-                    //stops when the names match up
+                    //stops when inputed name matches up with real game name
                     if (lineList[1].ToLower() == nameOfGame.ToLower())
                     {
-
+                        //returns real game name
                         return lineList[1];
                     }
                 }
+                //if no real game name matched the inputted game name, the string "error" is returned
                 return "Error";
             }
         }
@@ -57,6 +59,7 @@ namespace Ultimate_Game_Winner
         public static string CapitalizeEachWord(string input)
         {
             //Helper function to help catch user input error in regards to names
+            //Capitalizes the first letter of every word in a string
             if (string.IsNullOrEmpty(input))
                 return input;
 
@@ -134,7 +137,7 @@ namespace Ultimate_Game_Winner
         {
 
             XDocument doc;
-            //Goes to API and gets information
+            //Goes to API
             using (var client = new HttpClient())
             {
                 var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
@@ -142,7 +145,7 @@ namespace Ultimate_Game_Winner
                 doc = XDocument.Parse(result);
             }
 
-            //sorts thorugh that information to grab what we need.
+            //sorts through that information to grab image and genre of game.
             XElement? item = doc.Element("items").Element("item");
             var imageURL = item.Element("thumbnail").Value;
             var genre = item.Element("statistics").Element("ratings").Element("ranks").Elements("rank").ElementAt(1).Attribute("name").Value;
@@ -168,6 +171,7 @@ namespace Ultimate_Game_Winner
                     }
                 }
             }
+            // Does not work if game does not exist
             return -1;
         }
     }
