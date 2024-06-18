@@ -27,7 +27,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         private bool weightIsAGo = true;
         private bool playtimeIsAGo = true;
         private bool placementIsAGo = true;
-
+        private bool filterBoxChange = false;
 
 
         public Settings()
@@ -44,11 +44,15 @@ namespace Ultimate_Game_Winner.Main_Pages
             WeightNum.Text = values[0];
             PlaytimeNum.Text = values[1];
             PlacementNum.Text = values[2];
+            var ItemsList = values[5].Split(",");
+            FilterBox.ItemsSource = ItemsList;
+            FilterBox.Text = values[4];
 
             if (float.Parse(values[0]) == 1 && float.Parse(values[1]) == 1 && float.Parse(values[2]) == 1)
                 RankingSysBox.Text = "Normal";
             else
                 RankingSysBox.Text = values[3];
+
         }
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
@@ -73,12 +77,16 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void Normal_Selected(object sender, RoutedEventArgs e)
         {
+            var values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var ItemsList = values[5].Split(",");
+            string allGenres = string.Join(",", ItemsList);
+
             CustomRankItems.Visibility = Visibility.Collapsed;
 
             var textFileToChange = File.ReadAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             
             //Doesn't waste time doing API calls if the input is already in place
-            if (textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nNormal\r\n" && textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nCustom\r\n")
+            if (textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nNormal\r\n{FilterBox.Text}\r\n{allGenres}\r\n" && textFileToChange != $"1.0\r\n1.0\r\n1.0\r\nCustom\r\n{FilterBox.Text}\r\n{allGenres}\r\n")
             {
                 //sets the settings back to normal and refreshes the leaderboard
                 using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
@@ -87,6 +95,8 @@ namespace Ultimate_Game_Winner.Main_Pages
                     writer.WriteLine("1.0");
                     writer.WriteLine("1.0");
                     writer.WriteLine("Normal");
+                    writer.WriteLine(FilterBox.Text);
+                    writer.WriteLine(allGenres);
                 }
                 Leaderboard.RefreshLeaderboard();
                 
@@ -108,7 +118,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 var textFileToChange = File.ReadAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
                 
                 //Doesn't run API all over again if the input is already in place
-                if (textFileToChange == $"{weight}\r\n{playtime}\r\n{placement}\r\nCustom\r\n" || textFileToChange == $"{weight}\r\n{playtime}\r\n{placement}\r\nNormal\r\n")
+                if (textFileToChange == $"{weight}\r\n{playtime}\r\n{placement}\r\nCustom\r\n{FilterBox.Text}\r\n" || textFileToChange == $"{weight}\r\n{playtime}\r\n{placement}\r\nNormal\r\n{FilterBox.Text}\r\n")
                 {
                     SetBtn.Content = "No change detected";
                     await Task.Delay(2000);
@@ -117,6 +127,8 @@ namespace Ultimate_Game_Winner.Main_Pages
                 //Saves the user's input and refreshes the leaderboard
                 else
                 {
+                    var values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+                    var ItemsList = values[5].Split(",");
                     SetBtn.Content = "Note: This may take a second";
                     await Task.Delay(10);
                     using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
@@ -125,6 +137,9 @@ namespace Ultimate_Game_Winner.Main_Pages
                         writer.WriteLine(playtime);
                         writer.WriteLine(placement);
                         writer.WriteLine("Custom");
+                        writer.WriteLine(FilterBox.Text);
+                        writer.WriteLine(string.Join(",", ItemsList));
+
                     }
                     Leaderboard.RefreshLeaderboard();
                     SetBtn.Content = "Done!";
@@ -214,6 +229,25 @@ namespace Ultimate_Game_Winner.Main_Pages
             await Task.Delay(2000);
             RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
         }
+
+        private void FilterBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (filterBoxChange)
+            {
+                string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
+                string?[] lines = File.ReadAllLines(filePath);
+                lines[4] = FilterBox.SelectedItem.ToString();
+                //lines[4] = (FilterBox.SelectedItem as ComboBoxItem).Content.ToString();
+                File.WriteAllLines(filePath, lines);
+                
+            }
+            else
+            {
+                filterBoxChange = true;
+            }
+        }
+
+        
     }
     
 }

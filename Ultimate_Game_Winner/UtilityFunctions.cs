@@ -146,10 +146,15 @@ namespace Ultimate_Game_Winner
             }
 
             //sorts through that information to grab image and genre of game.
+            string genre;
             XElement? item = doc.Element("items").Element("item");
             var imageURL = item.Element("thumbnail").Value;
-            var genre = item.Element("statistics").Element("ratings").Element("ranks").Elements("rank").ElementAt(1).Attribute("name").Value;
-
+            var almostGenre = item.Element("statistics").Element("ratings").Element("ranks").Elements("rank").ElementAtOrDefault(1);
+            if (almostGenre == null)
+                genre = "familygames"; 
+            
+            else
+                genre = almostGenre.Attribute("name").Value;
 
             return (imageURL, genre);
         }

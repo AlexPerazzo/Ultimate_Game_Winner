@@ -53,6 +53,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
                 //Update Leaderboard
                 UpdateLeaderboard(lineSaved);
+                UpdateFilterOptions(nameOfGame);
 
                 //Displays Success and then converts back to normal
                 Submit.Content = "Success!!";
@@ -68,6 +69,27 @@ namespace Ultimate_Game_Winner.Main_Pages
                 await Task.Delay(2500);
                 Submit.Content = "SUBMIT";
 
+            }
+
+        }
+
+        private void UpdateFilterOptions(string nameOfGame)
+        {
+            string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
+            var ID = UtilityFunctions.GetID(nameOfGame);
+            var (URL, theGenre) = UtilityFunctions.GetAPIImageGenre(ID);
+            
+            var textFile = File.ReadAllLines(filePath);
+            var currentGenres = textFile[5].Split(",");
+            bool addGameIsAGo = false;
+
+            if (!currentGenres.Contains(theGenre))
+                addGameIsAGo = true;
+
+            if (addGameIsAGo)
+            {
+                textFile[5] += $",{theGenre}";
+                File.WriteAllLines(filePath, textFile);
             }
 
         }

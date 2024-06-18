@@ -1,4 +1,6 @@
+1.2
 1.0
 1.0
-1.0
-Normal
+Custom
+childrensgames
+All Games,Strategy,Testing,familygames,strategygames,thematic,partygames,abstracts,wargames,childrensgames
