@@ -1,10 +1,7 @@
-Spades,,,4,,,1st Place...,,,2nd Place...,,,3rd Place...,,,4th Place...,,,N/A,,,6/17/24
-Jenga,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
-Operation,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
-Anansi,,,3,,,1st Place...,,,2nd Place...,,,3rd Place...,,,N/A,,,6/17/24
-Chess,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
-CATAN,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
-Paths of Glory,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
-Power Grid,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
-Tic-Tac-Toe,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
-Candy Land,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/17/24
+Risk,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/18/24
+Ark Nova,,,3,,,1st Place...,,,2nd Place...,,,3rd Place...,,,N/A,,,6/18/24
+Candy Land,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/18/24
+Tic-Tac-Toe,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/18/24
+Chess,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/18/24
+Terraforming Mars,,,6,,,Alex,,,Eric,,,3rd Place...,,,4th Place...,,,5th Place...,,,6th Place...,,,N/A,,,6/18/24
+Terraforming Mars,,,2,,,Hannah,,,Eric,,,N/A,,,6/18/24

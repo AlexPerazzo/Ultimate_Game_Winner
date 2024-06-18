@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="96" d:DesignWidth="96" Background="White">
     <!--Exactly 96x High to match up with the LoggedGamePanels-->
-    <Grid Width="96" Height="96">
+    <Grid Width="91" Height="91">
         
         
 

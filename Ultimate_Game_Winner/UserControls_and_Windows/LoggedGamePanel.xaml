@@ -11,14 +11,14 @@
         <!--<Rectangle HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="800" Fill="DeepSkyBlue" RadiusX="20.897" RadiusY="20.897"/>-->
         <Border BorderBrush="#33658a" BorderThickness="2" Padding="5">
             <StackPanel x:Name="LogPanel" VerticalAlignment="Center" Margin="-1,0,1,0" Background="DeepSkyBlue" Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
-                <!--   -->
-                
-                   
-                <Label Content="{Binding PlayerName}" Margin="10,0,0,0" FontSize="60" FontFamily="Segoe" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic"/>
-                
-                <Label Content="{Binding GameName}" Margin="30,8,0,0" FontSize="36" VerticalAlignment="Center" FontWeight="DemiBold"/>
-                <Label Content="{Binding NumPlayers}" Margin="30,18,0,0" FontSize="24" VerticalAlignment="Center"/>
-                <Label Content="{Binding Date}" Margin="30,26,10,0" VerticalAlignment="Center" FontWeight="Light"/>
+                <!--     -->
+
+
+                <Label Content="{Binding PlayerName}" Margin="10,7,0,0" FontSize="50" FontFamily="Segoe" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic"/>
+
+                <Label Content="{Binding GameName}" Margin="28,8,0,0" FontSize="36" VerticalAlignment="Center" FontWeight="DemiBold"/>
+                <Label Content="{Binding NumPlayers}" Margin="28,18,0,0" FontSize="24" VerticalAlignment="Center"/>
+                <Label Content="{Binding Date}" Margin="28,26,10,0" VerticalAlignment="Center" FontWeight="Light"/>
             </StackPanel>
         </Border>
     </Grid>

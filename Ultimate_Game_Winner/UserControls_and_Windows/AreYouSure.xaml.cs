@@ -55,6 +55,16 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 {
                     writer.Write(string.Empty);
                 }
+                var textFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
+                {
+                    writer.WriteLine(textFile[0]);
+                    writer.WriteLine(textFile[1]);
+                    writer.WriteLine(textFile[2]);
+                    writer.WriteLine(textFile[3]);
+                    writer.WriteLine("All Games");
+                    writer.WriteLine("All Games");
+                }
                 ConfirmBtn.Content = "Success!";
                 await Task.Delay(500);
                 this.Close();

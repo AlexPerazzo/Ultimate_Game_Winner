@@ -83,12 +83,19 @@ namespace Ultimate_Game_Winner.Main_Pages
             var currentGenres = textFile[5].Split(",");
             bool addGameIsAGo = false;
 
-            if (!currentGenres.Contains(theGenre))
+            string fixedGenre;
+            if (theGenre.Substring(theGenre.Length - 5, 5) == "games")
+                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 6);
+            else
+                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 1);
+
+
+            if (!currentGenres.Contains(fixedGenre))
                 addGameIsAGo = true;
 
             if (addGameIsAGo)
             {
-                textFile[5] += $",{theGenre}";
+                textFile[5] += $",{fixedGenre}";
                 File.WriteAllLines(filePath, textFile);
             }
 

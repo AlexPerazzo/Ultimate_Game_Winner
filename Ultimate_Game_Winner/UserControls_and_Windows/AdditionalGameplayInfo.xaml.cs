@@ -60,8 +60,12 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             var imageUri = new Uri(URL);
             var bitmap = new BitmapImage(imageUri);
             BoardGameImage.Source = bitmap;
-            var fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length-6);
+            string fixedGenre;
 
+            if (theGenre.Substring(theGenre.Length - 5, 5) == "games")
+                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 6);
+            else
+                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 1);
             //Set all Data Bindings
             genre = $"Genre: {fixedGenre}";
             weight = $"Weight: {theWeight.ToString("0.00")}/5";
