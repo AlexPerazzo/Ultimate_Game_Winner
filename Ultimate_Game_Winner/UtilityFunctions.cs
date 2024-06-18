@@ -133,7 +133,25 @@ namespace Ultimate_Game_Winner
             return (averagePlaytime, averageWeight);
         }
 
-        public static (string, string) GetAPIImageGenre(int gameID)
+        public static string GetAPIImage(int gameID)
+        {
+            XDocument doc;
+            //Goes to API
+            using (var client = new HttpClient())
+            {
+                var endpoint = new Uri($"https://boardgamegeek.com/xmlapi2/thing?id={gameID}&stats=1");
+                var result = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
+                doc = XDocument.Parse(result);
+            }
+
+            //sorts through that information to grab image of game.
+            
+            XElement? item = doc.Element("items").Element("item");
+            var imageURL = item.Element("thumbnail").Value;
+
+            return imageURL;
+        }
+        public static string GetAPIGenre(int gameID)
         {
 
             XDocument doc;
@@ -148,7 +166,7 @@ namespace Ultimate_Game_Winner
             //sorts through that information to grab image and genre of game.
             string genre;
             XElement? item = doc.Element("items").Element("item");
-            var imageURL = item.Element("thumbnail").Value;
+            
             var almostGenre = item.Element("statistics").Element("ratings").Element("ranks").Elements("rank").ElementAtOrDefault(1);
             if (almostGenre == null)
                 genre = "familygames"; 
@@ -156,7 +174,7 @@ namespace Ultimate_Game_Winner
             else
                 genre = almostGenre.Attribute("name").Value;
 
-            return (imageURL, genre);
+            return genre;
         }
         public static int GetID(string nameOfGame)
         {
@@ -178,6 +196,17 @@ namespace Ultimate_Game_Winner
             }
             // Does not work if game does not exist
             return -1;
+        }
+
+        public static string FormatGenre(string theGenre)
+        {
+            string fixedGenre;
+            if (theGenre.Substring(theGenre.Length - 5, 5) == "games")
+                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 6);
+            else
+                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 1);
+
+            return fixedGenre;
         }
     }
 }

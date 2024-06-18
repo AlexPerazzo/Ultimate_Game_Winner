@@ -5,3 +5,5 @@ Tic-Tac-Toe,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/18/24
 Chess,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,6/18/24
 Terraforming Mars,,,6,,,Alex,,,Eric,,,3rd Place...,,,4th Place...,,,5th Place...,,,6th Place...,,,N/A,,,6/18/24
 Terraforming Mars,,,2,,,Hannah,,,Eric,,,N/A,,,6/18/24
+Run,,,2,,,Alex,,,2nd Place...,,,N/A,,,6/18/24
+Chess,,,2,,,Alex,,,2nd Place...,,,N/A,,,6/18/24

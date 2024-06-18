@@ -51,8 +51,23 @@ namespace Ultimate_Game_Winner.Main_Pages
                 Cancel_Click(sender, e);
 
 
+                var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+                var selectedGenre = foo[4];
+
                 //Update Leaderboard
-                UpdateLeaderboard(lineSaved);
+                if (selectedGenre != "All Games")
+                {
+                    var ID = UtilityFunctions.GetID(nameOfGame);
+                    var theGenre = UtilityFunctions.GetAPIGenre(ID);
+                    if (selectedGenre == UtilityFunctions.FormatGenre(theGenre))
+                    {
+                        UpdateLeaderboard(lineSaved);
+                    }
+                }
+                else
+                    UpdateLeaderboard(lineSaved);
+
+
                 UpdateFilterOptions(nameOfGame);
 
                 //Displays Success and then converts back to normal
@@ -77,17 +92,13 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
             var ID = UtilityFunctions.GetID(nameOfGame);
-            var (URL, theGenre) = UtilityFunctions.GetAPIImageGenre(ID);
+            var theGenre = UtilityFunctions.GetAPIGenre(ID);
             
             var textFile = File.ReadAllLines(filePath);
             var currentGenres = textFile[5].Split(",");
             bool addGameIsAGo = false;
 
-            string fixedGenre;
-            if (theGenre.Substring(theGenre.Length - 5, 5) == "games")
-                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 6);
-            else
-                fixedGenre = char.ToUpper(theGenre[0]) + theGenre.Substring(1, theGenre.Length - 1);
+            string fixedGenre = UtilityFunctions.FormatGenre(theGenre);
 
 
             if (!currentGenres.Contains(fixedGenre))

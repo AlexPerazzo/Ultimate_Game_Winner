@@ -1,6 +1,6 @@
 1.0
-1.1
 1.0
-Custom
-All Games
-All Games,War,Strategy,Childrens,Abstracts
+1.0
+Normal
+Strategy
+All Games,War,Strategy,Childrens,Abstracts,Thematic

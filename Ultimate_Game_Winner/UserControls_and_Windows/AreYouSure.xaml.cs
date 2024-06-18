@@ -83,6 +83,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 File.WriteAllLines(filePath, lines);
 
                 Leaderboard.RefreshLeaderboard();
+                
                 ConfirmBtn.Content = "Success!";
                 await Task.Delay(500);
 

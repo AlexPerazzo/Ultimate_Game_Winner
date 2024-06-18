@@ -88,30 +88,38 @@ namespace Ultimate_Game_Winner.Main_Pages
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
             {
                 string line;
+                var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+                var selectedGenre = foo[4];
                 while ((line = reader.ReadLine()) != null)
                 {
                     String[] parts = line.Split(",,,");
-                    for (int i = 0; i < parts.Length; i++)
+                    int ID = UtilityFunctions.GetID(parts[0]);
+                    string genre = UtilityFunctions.GetAPIGenre(ID);
+
+                    if (selectedGenre == "All Games" || selectedGenre == UtilityFunctions.FormatGenre(genre))
                     {
-                        //skips over Game Name, Number of Players, Date, and Additional Comments
-                        if (i != 0 && i != 1 && i != (parts.Length - 1) && i != (parts.Length - 2))
+
+                        for (int i = 0; i < parts.Length; i++)
                         {
-                            int ID = UtilityFunctions.GetID(parts[0]);
-                            (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
-                            double points = RecordaGame.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
-
-
-                            //checks if person is already in the dictionary and adds them accordingly
-                            if (!newLeaderboard.ContainsKey(parts[i]))
+                            //skips over Game Name, Number of Players, Date, and Additional Comments
+                            if (i != 0 && i != 1 && i != (parts.Length - 1) && i != (parts.Length - 2))
                             {
-                                newLeaderboard.Add(parts[i], points);
-                            }
+                                (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
+                                double points = RecordaGame.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
 
-                            else
-                            {
-                                newLeaderboard[parts[i]] += points;
-                            }
 
+                                //checks if person is already in the dictionary and adds them accordingly
+                                if (!newLeaderboard.ContainsKey(parts[i]))
+                                {
+                                    newLeaderboard.Add(parts[i], points);
+                                }
+
+                                else
+                                {
+                                    newLeaderboard[parts[i]] += points;
+                                }
+
+                            }
                         }
                     }
                 }

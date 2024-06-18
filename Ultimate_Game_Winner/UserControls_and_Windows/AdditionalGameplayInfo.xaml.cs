@@ -56,7 +56,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             
             var ID = UtilityFunctions.GetID(allInfo[0]);
             (float thePlaytime, float theWeight) = UtilityFunctions.GetAPIData(ID);
-            var (URL, theGenre) = UtilityFunctions.GetAPIImageGenre(ID);
+            var theGenre = UtilityFunctions.GetAPIGenre(ID);
+            var URL = UtilityFunctions.GetAPIImage(ID);
             var imageUri = new Uri(URL);
             var bitmap = new BitmapImage(imageUri);
             BoardGameImage.Source = bitmap;
