@@ -46,7 +46,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
 
                 string nameOfGame = GameName.Text; string numPlayers = NumPlayers.Text;
-                string lineSaved = SaveToLog(nameOfGame, numPlayers);
+                (string lineSaved, bool filterBool) = SaveToLog(nameOfGame, numPlayers);
                 //Reset page's text
                 Cancel_Click(sender, e);
 
@@ -54,17 +54,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
                 var selectedGenre = foo[4];
 
-                //Update Leaderboard
-                if (selectedGenre != "All Games")
-                {
-                    var ID = UtilityFunctions.GetID(nameOfGame);
-                    var theGenre = UtilityFunctions.GetAPIGenre(ID);
-                    if (selectedGenre == UtilityFunctions.FormatGenre(theGenre))
-                    {
-                        UpdateLeaderboard(lineSaved);
-                    }
-                }
-                else
+                if (filterBool)
                     UpdateLeaderboard(lineSaved);
 
 
@@ -112,9 +102,9 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
-        private string SaveToLog(string nameOfGame, string numPlayers)
+        private (string, bool) SaveToLog(string nameOfGame, string numPlayers)
         {
-            
+            bool filterBool;
             var officialName = UtilityFunctions.ReturnOfficialGameName(nameOfGame);
             // Append each item from the list, separated by commas
             string line = $"{officialName},,,{numPlayers},,,";
@@ -126,6 +116,35 @@ namespace Ultimate_Game_Winner.Main_Pages
                     line += UtilityFunctions.CapitalizeEachWord(textBox.Text) + ",,,";
                 
             }
+
+            var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var selectedGenre = foo[4];
+
+            if (selectedGenre == "All Games")
+            {
+                line += "true,,,";
+                filterBool = true;
+            }
+            else
+            {
+                var ID = UtilityFunctions.GetID(nameOfGame);
+                var theGenre = UtilityFunctions.GetAPIGenre(ID);
+                if (selectedGenre == UtilityFunctions.FormatGenre(theGenre))
+                {
+                    line += "true,,,";
+                    filterBool = true;
+                }
+            
+                else
+                {
+                    line += "false,,,";
+                    filterBool = false;
+                }
+
+
+
+            }
+
             DateTime currentDate = DateTime.Now;
             var correctFormatDate = currentDate.ToString("M/d/yy");
             line += correctFormatDate;
@@ -141,7 +160,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     writer.WriteLine(stringToSave);
                 }
             }
-            return line;
+            return (line, filterBool);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -229,7 +248,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             }
                 //Loops through from first player (index 2) to last player (index third to last (there's a date and notes at the end))
-                for (int i = 2; i < gameParts.Length - 2; i++)
+                for (int i = 2; i < gameParts.Length - 3; i++)
                 {
 
                     double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);

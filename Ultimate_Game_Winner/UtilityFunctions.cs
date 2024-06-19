@@ -208,5 +208,41 @@ namespace Ultimate_Game_Winner
 
             return fixedGenre;
         }
+
+        public static void UpdateFilterInLog()
+        {
+            string resultString = "";
+            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+            {
+                var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+                var chosenGenre = foo[4];
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] lineList = line.Split(",,,");
+                    if (chosenGenre == "All Games")
+                        lineList[lineList.Length - 2] = "true";
+                    else
+                    {
+                        var gameName = lineList[0];
+                        var ID = UtilityFunctions.GetID(gameName);
+                        var theGenre = UtilityFunctions.GetAPIGenre(ID);
+
+                        if (UtilityFunctions.FormatGenre(theGenre) == chosenGenre)
+                            lineList[lineList.Length - 2] = "true";
+                        else
+                            lineList[lineList.Length - 2] = "false";
+                    }
+
+                    var updatedLine = string.Join(",,,", lineList);
+                    resultString += updatedLine + Environment.NewLine;
+                }
+            }
+
+            File.WriteAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt", resultString);
+
+        }
+
+
     }
 }

@@ -1,9 +1,7 @@
-Alex,9.25
-Eric,5.18
-1st Place...,3.88
-2nd Place...,1.94
-Hannah,1.85
-3rd Place...,1.02
-4th Place...,-2.96
-5th Place...,-4.81
-6th Place...,-6.29
+1st Place...,8.02
+2nd Place...,2.87
+Alex,1.55
+Hannah,1.55
+Eric,-0.93
+Mom,-0.93
+3rd Place...,-3.49

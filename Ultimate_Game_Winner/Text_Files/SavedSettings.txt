@@ -2,5 +2,5 @@
 1.0
 1.0
 Normal
-Strategy
-All Games,War,Strategy,Childrens,Abstracts,Thematic
+All Games
+All Games,Thematic,Strategy,War

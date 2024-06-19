@@ -48,7 +48,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 {
                     
                     string[] parts = line.Split(",,,");
-                    var numPlayers = parts.Length - 4;
+                    var numPlayers = parts.Length - 5;
 
                     
                     var ID = UtilityFunctions.GetID(parts[0]);
@@ -56,7 +56,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     PlacementPointsPanel statsPanel = new PlacementPointsPanel();
                     
 
-                    for (var i = 2; i < numPlayers + 2; i++)
+                    for (var i = 2; i < numPlayers + 3; i++)
                     {
                         if (parts[i] == playerName)
                         {

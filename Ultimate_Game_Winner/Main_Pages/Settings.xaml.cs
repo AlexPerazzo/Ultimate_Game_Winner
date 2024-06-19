@@ -237,9 +237,9 @@ namespace Ultimate_Game_Winner.Main_Pages
                 string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
                 string?[] lines = File.ReadAllLines(filePath);
                 lines[4] = FilterBox.SelectedItem.ToString();
-                //lines[4] = (FilterBox.SelectedItem as ComboBoxItem).Content.ToString();
-                File.WriteAllLines(filePath, lines);
                 
+                File.WriteAllLines(filePath, lines);
+                Leaderboard.RefreshLeaderboard();
             }
             else
             {
