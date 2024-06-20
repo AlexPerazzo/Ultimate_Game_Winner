@@ -3,4 +3,4 @@
 1.0
 Normal
 All Games
-All Games,Thematic,Strategy,War
+All Games,Thematic,Strategy,War,Childrens

@@ -25,12 +25,17 @@ namespace Ultimate_Game_Winner.Main_Pages
         /// Displays every single person ranked based off points.
         /// Displayed through LeaderboardPanel UserControl in a stack panel
         /// </summary>
+        public string Filtered { get; set; }
+
         public Leaderboard()
         {
             
             InitializeComponent();
-            //Testing
             //Calls LoadLeaderboard when the page is loaded.
+            this.DataContext = this;
+
+            Filtered = UtilityFunctions.FilterVisibility();
+
             Loaded += LoadLeaderboard;
         }
 

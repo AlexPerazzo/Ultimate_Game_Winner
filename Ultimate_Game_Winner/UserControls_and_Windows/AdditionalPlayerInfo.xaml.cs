@@ -28,11 +28,14 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         string playerName {  get; set; }
         string Title { get; set; }
 
+        public string Filtered {  get; set; }
+
         public AdditionalPlayerInfo(string PlayerName)
         {
             InitializeComponent();
             this.DataContext = this;
             playerName = PlayerName;
+            Filtered = UtilityFunctions.FilterVisibility();
             Loaded += LoadGames;
         }
 
@@ -48,7 +51,10 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 {
                     
                     string[] parts = line.Split(",,,");
-                    var numPlayers = parts.Length - 5;
+                    if (parts[parts.Length - 2] == "true")
+                    {
+
+                        var numPlayers = parts.Length - 5;
 
                     
                     var ID = UtilityFunctions.GetID(parts[0]);
@@ -81,6 +87,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                             AllGamesPlayed.Children.Insert(0, panel);
                             break;
                         }
+                    }
                     }
 
                     

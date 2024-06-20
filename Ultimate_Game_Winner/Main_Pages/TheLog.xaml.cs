@@ -22,9 +22,13 @@ namespace Ultimate_Game_Winner.Main_Pages
         /// <summary>
         /// Displays every single recorded game using the LoggedGamePanel UserControl in a stack panel
         /// </summary>
+        public string Filtered { get; set; }
+
         public TheLog()
         {
             InitializeComponent();
+            this.DataContext = this;
+            Filtered = UtilityFunctions.FilterVisibility();
             Loaded += LoadLog;
         }
 
@@ -39,20 +43,22 @@ namespace Ultimate_Game_Winner.Main_Pages
                 string? line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    //logList.Add(line);
-                    this.DataContext = this;
-                    LoggedGamePanel panel = new LoggedGamePanel();
                     string[] parts = line.Split(",,,");
-                    panel.GameName = parts[0];
-                    var numPlayers = parts.Length - 5;
-                    panel.NumPlayers = $"{numPlayers} players";
-                    panel.PlayerName = parts[2];
-                    panel.Date = parts[parts.Length - 1];
-                    panel.Margin = new Thickness(12, 12, 0, 0);
-                    panel.AllInfo = parts;
 
-                    
-                    theLog.Children.Insert(0, panel);
+                    if (parts[parts.Length-2] == "true")
+                    {
+                        //logList.Add(line);
+                        LoggedGamePanel panel = new LoggedGamePanel();
+                        panel.GameName = parts[0];
+                        var numPlayers = parts.Length - 5;
+                        panel.NumPlayers = $"{numPlayers} players";
+                        panel.PlayerName = parts[2];
+                        panel.Date = parts[parts.Length - 1];
+                        panel.Margin = new Thickness(12, 12, 0, 0);
+                        panel.AllInfo = parts;
+
+                        theLog.Children.Insert(0, panel);
+                    }
                 }
             }
 

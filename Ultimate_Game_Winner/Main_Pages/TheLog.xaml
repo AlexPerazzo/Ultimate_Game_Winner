@@ -28,8 +28,9 @@
 
             <!--Title-->
             <Label Content="All Logged Games" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
+            <Label Content="(Filtered)" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,79,9" FontStyle="Italic" Foreground="Gray" Visibility="{Binding Filtered}"/>
             <Rectangle Height="3" VerticalAlignment="Bottom" Width="550" Fill="Black"/>
-
+            
             <!--Info-->
             <Label Content="(Winner, Game Name, # of Players, Date Recorded)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Gray"></Label>
 

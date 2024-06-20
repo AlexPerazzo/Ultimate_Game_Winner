@@ -30,6 +30,8 @@
         
         <!--Additional Info Text-->
         <Label Content="(Game Name, Placement, # of Players, Date Recorded)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
+        <Label Content="(Filtered)" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,20" FontStyle="Italic" Foreground="Gray" Visibility="{Binding Filtered}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+
         <TextBlock Text="(Weight Factor + Time Factor) * Placement Factor" Margin="9,0,0,0" TextWrapping="Wrap" TextAlignment="Center" Grid.RowSpan="2" Grid.Column="0" Grid.Row="0" FontSize="15" FontStyle="Italic" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="Gray"></TextBlock>
 
         <!--Title-->

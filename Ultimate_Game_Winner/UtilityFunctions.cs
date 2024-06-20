@@ -243,6 +243,14 @@ namespace Ultimate_Game_Winner
 
         }
 
+        public static string FilterVisibility()
+        {
+            var settingsText = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
 
+            if (settingsText[4] == "All Games")
+                return "Hidden";
+            else
+                return "Visible";
+        }
     }
 }

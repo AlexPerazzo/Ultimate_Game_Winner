@@ -1,7 +1,10 @@
-1st Place...,8.02
-2nd Place...,2.87
+1st Place...,10.76
+2nd Place...,4.74
 Alex,1.55
 Hannah,1.55
+4th Place...,-0.88
 Eric,-0.93
 Mom,-0.93
-3rd Place...,-3.49
+5th Place...,-1.43
+6th Place...,-1.87
+3rd Place...,-2.6100000000000003
