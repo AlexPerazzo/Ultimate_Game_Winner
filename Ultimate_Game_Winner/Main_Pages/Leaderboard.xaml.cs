@@ -94,23 +94,22 @@ namespace Ultimate_Game_Winner.Main_Pages
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
             {
                 string line;
-                //var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-                //var selectedGenre = foo[4];
+                
                 while ((line = reader.ReadLine()) != null)
                 {
                     String[] parts = line.Split(",,,");
-                    int ID = UtilityFunctions.GetID(parts[0]);
-                    //string genre = UtilityFunctions.GetAPIGenre(ID);
-                    // if (selectedGenre == "All Games" || selectedGenre == UtilityFunctions.FormatGenre(genre))
-                    //
+                    
+                    
                     if (parts[parts.Length - 2] == "true")
                     {
+
+                        int ID = UtilityFunctions.GetID(parts[0]);
+                        (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
 
                         //skips over Game Name, Number of Players, Date, Additional Comments, and filterBool
                         for (int i = 2; i < parts.Length - 3; i++)
                         {
                             
-                            (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
                             double points = RecordaGame.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
 
 

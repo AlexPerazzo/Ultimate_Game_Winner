@@ -88,7 +88,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             var currentGenres = textFile[5].Split(",");
             bool addGameIsAGo = false;
 
-            string fixedGenre = UtilityFunctions.FormatGenre(theGenre);
+            string fixedGenre = theGenre;
 
 
             if (!currentGenres.Contains(fixedGenre))
@@ -129,7 +129,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 var ID = UtilityFunctions.GetID(nameOfGame);
                 var theGenre = UtilityFunctions.GetAPIGenre(ID);
-                if (selectedGenre == UtilityFunctions.FormatGenre(theGenre))
+                if (selectedGenre == theGenre)
                 {
                     line += "true,,,";
                     filterBool = true;
