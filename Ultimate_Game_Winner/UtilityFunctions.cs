@@ -236,7 +236,7 @@ namespace Ultimate_Game_Winner
 
             //Grab User Chosen Genre
             var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            var chosenGenre = foo[4];
+            var chosenGenre = foo[4].Split(",")[0];
 
             //Read through all Logged Games
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
@@ -247,7 +247,7 @@ namespace Ultimate_Game_Winner
                     string[] lineList = line.Split(",,,");
 
                     //If no filter chosen, all games are set to true
-                    if (chosenGenre == "All Games")
+                    if (chosenGenre == "All Genres")
                         lineList[lineList.Length - 2] = "true";
                     //Otherwise, check the game's genre and compare it to the chosenGenre. Set to true/false accordingly
                     else
@@ -278,7 +278,7 @@ namespace Ultimate_Game_Winner
         {
             var settingsText = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             //If No selected Genre, Filter text remains hidden
-            if (settingsText[4] == "All Games")
+            if (settingsText[4] == "All Genres")
                 return "Hidden";
             else
                 return "Visible";

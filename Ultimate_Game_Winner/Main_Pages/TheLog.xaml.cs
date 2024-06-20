@@ -66,6 +66,10 @@ namespace Ultimate_Game_Winner.Main_Pages
             
         }
 
-
+        private void RefreshLogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            theLog.Children.Clear();
+            LoadLog(sender, e);
+        }
     }
 }

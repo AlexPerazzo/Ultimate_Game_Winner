@@ -73,7 +73,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             playtime = $"Average Playtime: {thePlaytime.ToString()} min";
             gameName = allInfo[0];
             date = $"Date Recorded: {allInfo[allInfo.Length-1]}";
-            additionalNotes = $"Additional Notes: {allInfo[allInfo.Length-2]}";
+            additionalNotes = $"Additional Notes: {allInfo[allInfo.Length-3]}";
             
 
             //Populate Players StackPanel (loop through to calculate proper number of points)

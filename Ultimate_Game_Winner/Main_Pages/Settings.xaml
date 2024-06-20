@@ -16,7 +16,7 @@
             <!--Title Row-->
             <RowDefinition Height="71"/>
             <!--Filter Row-->
-            <RowDefinition Height="90"/>
+            <RowDefinition Height="155"/>
             <!--Ranking System Box Row-->
             <RowDefinition Height="80"/>
 
@@ -57,14 +57,40 @@
                 <Button x:Name="SetBtn" Content="Set" Margin="0,85,0,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Click="SetBtn_Click"/>
                     </Grid>
 
+        <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="127"/>
+                    <ColumnDefinition Width="127"/>
+                    <ColumnDefinition Width="127"/>
+                    <ColumnDefinition Width="127"/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+
+
         <!--Filter-->
-        <TextBlock Text="Filter" FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="1"/>
-        <ComboBox x:Name="FilterBox" Height="23" Width="100" Margin="0,0,0,10" VerticalAlignment="Bottom" Grid.Row="1" SelectionChanged="FilterBox_SelectionChanged" >
-            <!--<ComboBoxItem Content="All Games" IsSelected="True"/>
-            <ComboBoxItem Content="Strategy"/>-->
-        </ComboBox>
-        
-        <!--Ranking System-->
+            
+            <!--Filter Text-->
+                <TextBlock Text="Filter" FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2"/>
+            <!--Genre Filter-->
+                <TextBlock Text="Genre" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="1"/>
+                <ComboBox x:Name="GenreBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+            <!--Player Count Filter-->
+                <TextBlock Text="Player Count" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="2"/>
+                <ComboBox x:Name="PlayerBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <!--Wieght Filter-->
+                <TextBlock Text="Weight" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="3"/>
+                <ComboBox x:Name="WeightBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3"/>
+            <!--Playtime Filter-->
+                <TextBlock Text="Playtime" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="4"/>
+                <ComboBox x:Name="PlaytimeBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4"/>
+            <!--Filter Set Button-->
+                <Button x:Name="FilterSetBtn" Content="Set" Margin="0,110,0,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="FilterSetBtn_Click" Grid.Column="2" Grid.ColumnSpan="2"/>
+
+        </Grid>
+
+            <!--Ranking System-->
         <TextBlock Text="Ranking System" FontSize="25" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="2"/>
         <ComboBox x:Name ="RankingSysBox" Height="20" Width="100" Margin="0,0,0,10" VerticalAlignment="Bottom" Grid.Row="2">
             <ComboBoxItem x:Name="Normal" Content="Normal" Selected="Normal_Selected"/>

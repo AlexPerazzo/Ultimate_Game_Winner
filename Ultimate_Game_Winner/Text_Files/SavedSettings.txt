@@ -2,5 +2,5 @@
 1.0
 1.0
 Normal
-All Games
-All Games,Thematic,Strategy,War,Childrens
+Childrens,3 Players,1-2 (Light),All Playtimes
+All Genres,Childrens,Strategy

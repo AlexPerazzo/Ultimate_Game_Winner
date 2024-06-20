@@ -117,10 +117,11 @@ namespace Ultimate_Game_Winner.Main_Pages
                 
             }
 
-            var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            var selectedGenre = foo[4];
+            var textFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var boxDisplays = textFile[4].Split(",");
+            var selectedGenre = boxDisplays[0];
 
-            if (selectedGenre == "All Games")
+            if (selectedGenre == "All Genres")
             {
                 line += "true,,,";
                 filterBool = true;

@@ -1,6 +1,2 @@
-Run,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,true,,,6/18/24
-Ark Nova,,,3,,,1st Place...,,,2nd Place...,,,3rd Place...,,,N/A,,,true,,,6/18/24
-Risk,,,3,,,1st Place...,,,2nd Place...,,,3rd Place...,,,N/A,,,true,,,6/18/24
-Risk,,,2,,,Alex,,,Eric,,,N/A,,,true,,,6/18/24
-Risk,,,2,,,Hannah,,,Mom,,,N/A,,,true,,,6/18/24
-Candy Land,,,6,,,1st Place...,,,2nd Place...,,,3rd Place...,,,4th Place...,,,5th Place...,,,6th Place...,,,N/A,,,true,,,6/18/24
+Tic-Tac-Toe,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,true,,,6/20/24
+Ark Nova,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,false,,,6/20/24
