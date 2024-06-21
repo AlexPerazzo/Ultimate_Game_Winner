@@ -45,5 +45,10 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         {
             mainFrame.Navigate(new Uri("Main_Pages\\Settings.xaml", UriKind.Relative));
         }
+
+        private void Secretbtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("I see you have discovered the secret button! Yes, yes congrats indeed! It was created to make pages feel more centered again because the scroll wheel through everything off.");
+        }
     }
 }

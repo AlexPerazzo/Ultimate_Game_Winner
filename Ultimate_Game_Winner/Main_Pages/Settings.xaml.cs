@@ -235,6 +235,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
         {
+            RefreshLeaderboardBtn.Content = "Note: This may take a second";
+            await Task.Delay(10);
             Leaderboard.RefreshLeaderboard();
             RefreshLeaderboardBtn.Content = "Done!";
             await Task.Delay(2000);
@@ -257,6 +259,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             var updatedFilterChoices = string.Join(",", filterChoices);
             if (lines[4] != updatedFilterChoices)
             {
+                FilterSetBtn.Content = "Note: This may take a second";
+                await Task.Delay(10);
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
                 Leaderboard.RefreshLeaderboard();
@@ -269,6 +273,42 @@ namespace Ultimate_Game_Winner.Main_Pages
                 FilterSetBtn.Content = "No Change Detected";
                 await Task.Delay(2000);
                 FilterSetBtn.Content = "Set";
+            }
+        }
+
+        private async void FilterResetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
+            string?[] lines = File.ReadAllLines(filePath);
+
+            var filterChoices = lines[4].Split(",");
+            filterChoices[0] = "All Genres";
+            filterChoices[1] = "All Player Counts";
+            filterChoices[2] = "All Weights";
+            filterChoices[3] = "All Playtimes";
+            GenreBox.SelectedItem = filterChoices[0];
+            PlayerBox.SelectedItem = filterChoices[1];
+            WeightBox.SelectedItem = filterChoices[2];
+            PlaytimeBox.SelectedItem = filterChoices[3];
+
+            var updatedFilterChoices = string.Join(",", filterChoices);
+            
+            if (lines[4] != updatedFilterChoices)
+            {
+                FilterResetBtn.Content = "Note: This may take a second";
+                await Task.Delay(10);
+                lines[4] = updatedFilterChoices;
+                File.WriteAllLines(filePath, lines);
+                Leaderboard.RefreshLeaderboard();
+                FilterResetBtn.Content = "Done!";
+                await Task.Delay(2500);
+                FilterResetBtn.Content = "Reset";
+            }
+            else
+            {
+                FilterResetBtn.Content = "No Change Detected";
+                await Task.Delay(2000);
+                FilterResetBtn.Content = "Reset";
             }
         }
     }
