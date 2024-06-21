@@ -192,7 +192,10 @@ namespace Ultimate_Game_Winner
             //Some genres end with the word "games" others don't
             //If they do, cut it off the end and capitalize the first letter
 
-            if (genre.Substring(genre.Length - 5, 5) == "games")
+            if (genre.Length < 5)
+                fixedGenre = char.ToUpper(genre[0]) + genre.Substring(1, genre.Length - 1);
+
+            else if (genre.Substring(genre.Length - 5, 5) == "games")
                 fixedGenre = char.ToUpper(genre[0]) + genre.Substring(1, genre.Length - 6);
 
             //If they don't, just capitalize the first letter
@@ -201,6 +204,7 @@ namespace Ultimate_Game_Winner
                 fixedGenre = char.ToUpper(genre[0]) + genre.Substring(1, genre.Length - 1);
 
 
+            
             return fixedGenre;
         }
         
@@ -228,15 +232,116 @@ namespace Ultimate_Game_Winner
             return -1;
         }
 
+        public static string FilterVisibility()
+        {
+            var settingsText = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            //If No selected Filters, Filter text remains hidden
+            if (settingsText[4] == "All Genres,All Player Counts,All Weights,All Playtimes")
+                return "Hidden";
+            else
+                return "Visible";
+        }
+
+        public static bool CheckGenre(string chosenGenre, string genre)
+        {
+            if (chosenGenre == "All Genres")
+                return true;
+            else
+                return (chosenGenre == genre);
+        }
+
+        public static bool CheckPlayerCount(string chosenPlayerCount, string playercount)
+        {
+            switch(chosenPlayerCount)
+            {
+                case "All Player Counts":
+                    return true;
+
+                case "2 Players":
+                    return (playercount == "2");
+
+                case "3 Players":
+                    return (playercount == "3");
+
+                case "4 Players":
+                    return (playercount == "4");
+
+                case "5 Players":
+                    return (playercount == "5");
+
+                case "6 Players":
+                    return (playercount == "6");
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool CheckWeight(string chosenWeight, float weight)
+        {
+            switch (chosenWeight)
+            {
+                case "All Weights":
+                    return true;
+
+                case "1-2 (Light)":
+                    return (weight >= 1 && weight <= 2);
+
+                case "2-3 (Medium-Light)":
+                    return (weight >= 2 && weight <= 3);
+
+                case "3-4 (Medium-Heavy)":
+                    return (weight  >= 3 && weight <= 4);
+
+                case "4-5 (Heavy)":
+                    return (weight >= 4);
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool CheckPlaytime(string chosenPlaytime, float playtime)
+        {
+
+            switch (chosenPlaytime)
+            {
+                case "All Playtimes":
+                    return true;
+
+                case "Less than 30 min":
+                    return (playtime <= 30);
+
+                case "30-60 min":
+                    return (playtime >= 30 && playtime <= 60);
+
+                case "60-90 min":
+                    return (playtime >= 60 && playtime <= 90);
+
+                case "90-120 min":
+                    return (playtime >= 90 && playtime <= 120);
+
+                case "Longer than 120 min":
+                    return (playtime > 120);
+
+                default:
+                    return false;
+            }
+        }
 
         public static void UpdateFilterInLog()
         {
-            
             string resultString = "";
 
-            //Grab User Chosen Genre
-            var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            var chosenGenre = foo[4].Split(",")[0];
+            //Grab User Chosen Filters
+            var settingsFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var chosenFilters = settingsFile[4].Split(",");
+
+            var chosenGenre = chosenFilters[0];
+            var chosenPlayerCount = chosenFilters[1];
+            var chosenWeight = chosenFilters[2];
+            var chosenPlaytime = chosenFilters[3];
+
 
             //Read through all Logged Games
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
@@ -247,17 +352,22 @@ namespace Ultimate_Game_Winner
                     string[] lineList = line.Split(",,,");
 
                     //If no filter chosen, all games are set to true
-                    if (chosenGenre == "All Genres")
+                    if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes")
                         lineList[lineList.Length - 2] = "true";
+
                     //Otherwise, check the game's genre and compare it to the chosenGenre. Set to true/false accordingly
                     else
                     {
-          
+
                         var gameName = lineList[0];
                         var ID = UtilityFunctions.GetID(gameName);
-                        var theGenre = UtilityFunctions.GetAPIGenre(ID);
 
-                        if (theGenre == chosenGenre)
+                        string thePlayerCount = lineList[1];
+                        var theGenre = UtilityFunctions.GetAPIGenre(ID);
+                        (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
+
+
+                        if (CheckGenre(chosenGenre, theGenre) && CheckPlayerCount(chosenPlayerCount, thePlayerCount) && CheckWeight(chosenWeight, weight) && CheckPlaytime(chosenPlaytime, playtime))
                             lineList[lineList.Length - 2] = "true";
                         else
                             lineList[lineList.Length - 2] = "false";
@@ -274,14 +384,5 @@ namespace Ultimate_Game_Winner
 
         }
 
-        public static string FilterVisibility()
-        {
-            var settingsText = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            //If No selected Genre, Filter text remains hidden
-            if (settingsText[4] == "All Genres")
-                return "Hidden";
-            else
-                return "Visible";
-        }
     }
 }

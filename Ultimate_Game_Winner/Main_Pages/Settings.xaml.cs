@@ -28,7 +28,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         private bool weightIsAGo = true;
         private bool playtimeIsAGo = true;
         private bool placementIsAGo = true;
-        private bool genreBoxChange = false;
+        
 
 
         public Settings()

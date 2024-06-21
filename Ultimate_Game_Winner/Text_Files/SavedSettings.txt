@@ -2,5 +2,5 @@
 1.0
 1.0
 Normal
-Childrens,3 Players,1-2 (Light),All Playtimes
-All Genres,Childrens,Strategy
+All Genres,All Player Counts,All Weights,All Playtimes
+All Genres,War,Strategy

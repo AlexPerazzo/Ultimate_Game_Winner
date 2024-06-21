@@ -1,2 +1,4 @@
-1st Place...,0.16
-2nd Place...,-0.09
+1st Place...,22.33
+2nd Place...,6.58
+4th Place...,-3.88
+3rd Place...,-7.67

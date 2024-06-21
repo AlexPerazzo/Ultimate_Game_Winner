@@ -50,10 +50,6 @@ namespace Ultimate_Game_Winner.Main_Pages
                 //Reset page's text
                 Cancel_Click(sender, e);
 
-
-                var foo = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-                var selectedGenre = foo[4];
-
                 if (filterBool)
                     UpdateLeaderboard(lineSaved);
 
@@ -80,6 +76,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void UpdateFilterOptions(string nameOfGame)
         {
+            //Grabs all genres currently in file and the genre of the game being added
             string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
             var ID = UtilityFunctions.GetID(nameOfGame);
             var theGenre = UtilityFunctions.GetAPIGenre(ID);
@@ -88,15 +85,16 @@ namespace Ultimate_Game_Winner.Main_Pages
             var currentGenres = textFile[5].Split(",");
             bool addGameIsAGo = false;
 
-            string fixedGenre = theGenre;
+            
 
 
-            if (!currentGenres.Contains(fixedGenre))
+            if (!currentGenres.Contains(theGenre))
                 addGameIsAGo = true;
 
+            //adds genre if it's new
             if (addGameIsAGo)
             {
-                textFile[5] += $",{fixedGenre}";
+                textFile[5] += $",{theGenre}";
                 File.WriteAllLines(filePath, textFile);
             }
 
@@ -118,10 +116,14 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
 
             var textFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            var boxDisplays = textFile[4].Split(",");
-            var selectedGenre = boxDisplays[0];
+            var chosenFilters = textFile[4].Split(",");
+            
+            var chosenGenre = chosenFilters[0];
+            var chosenPlayerCount = chosenFilters[1];
+            var chosenWeight = chosenFilters[2];
+            var chosenPlaytime = chosenFilters[3];
 
-            if (selectedGenre == "All Genres")
+            if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes")
             {
                 line += "true,,,";
                 filterBool = true;
@@ -130,7 +132,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 var ID = UtilityFunctions.GetID(nameOfGame);
                 var theGenre = UtilityFunctions.GetAPIGenre(ID);
-                if (selectedGenre == theGenre)
+                (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
+                if (UtilityFunctions.CheckGenre(chosenGenre, theGenre) && UtilityFunctions.CheckPlayerCount(chosenPlayerCount, chosenPlayerCount) && UtilityFunctions.CheckWeight(chosenWeight, weight) && UtilityFunctions.CheckPlaytime(chosenPlaytime, playtime))
                 {
                     line += "true,,,";
                     filterBool = true;

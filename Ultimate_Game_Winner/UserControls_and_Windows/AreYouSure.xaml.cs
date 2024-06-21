@@ -62,7 +62,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     writer.WriteLine(textFile[1]);
                     writer.WriteLine(textFile[2]);
                     writer.WriteLine(textFile[3]);
-                    writer.WriteLine("All Genres");
+                    writer.WriteLine("All Genres,All Player Counts,All Weights,All Playtimes");
                     writer.WriteLine("All Genres");
                 }
                 ConfirmBtn.Content = "Success!";
