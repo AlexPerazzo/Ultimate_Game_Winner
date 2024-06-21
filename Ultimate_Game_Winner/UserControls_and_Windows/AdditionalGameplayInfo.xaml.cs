@@ -75,7 +75,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             //Populate Players StackPanel (loop through to calculate proper number of points)
             for (int i = 2; i < allInfo.Length - 3; i++)
             {
-                var points = RecordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
+                var points = UtilityFunctions.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
 
                 LeaderboardPanel playerPanel = new LeaderboardPanel();
                 //playerPanel.Padding = new Thickness(5);

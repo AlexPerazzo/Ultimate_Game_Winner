@@ -41,7 +41,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
-            
+            //Purpose: Populates main StackPanel with LeaderboardPanel UserControls
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
 
@@ -73,6 +73,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Purpose: Event-listener for the RefreshLeaderboard Button
+            //Calls RefreshLeaderboard (which redoes all the math), clears theLeaderboard stackPanel, then repopulates it
             RefreshLeaderboardBtn.Content = "Note: This may take a second";
             await Task.Delay(20);
             RefreshLeaderboard();
@@ -87,7 +89,10 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         public static void RefreshLeaderboard()
         {
-            
+            //Purpose: Builds the Leaderboard point totals from the ground up
+            //Notes: Refreshes filters and incorporates custom ranking system
+
+
             UtilityFunctions.UpdateFilterInLog();
             
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
@@ -111,22 +116,15 @@ namespace Ultimate_Game_Winner.Main_Pages
                         //skips over Game Name, Number of Players, Date, Additional Comments, and filterBool
                         for (int i = 2; i < parts.Length - 3; i++)
                         {
-                            
-                            double points = RecordaGame.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
-
+                            double points = UtilityFunctions.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
 
                             //checks if person is already in the dictionary and adds them accordingly
                             if (!newLeaderboard.ContainsKey(parts[i]))
-                            {
                                 newLeaderboard.Add(parts[i], points);
-                            }
 
                             else
-                            {
                                 newLeaderboard[parts[i]] += points;
-                            }
 
-                            
                         }
                     }
                 }

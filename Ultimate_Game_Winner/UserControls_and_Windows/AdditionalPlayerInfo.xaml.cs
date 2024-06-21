@@ -73,7 +73,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
                             //Game Name in place of PlayerName
                             panel.PlayerName = parts[0];
-                            var points = RecordaGame.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), i - 1);
+                            var points = UtilityFunctions.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), i - 1);
                             
                             statsPanel.Points = $"{points}";
                             statsPanel.Margin = new Thickness(12,12,0,0);

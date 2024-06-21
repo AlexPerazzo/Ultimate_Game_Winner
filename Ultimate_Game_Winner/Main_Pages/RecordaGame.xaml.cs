@@ -43,6 +43,9 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
+            //Event Listener for Submit Game Button
+            //Purpose: If boxes have valid input, saves text to log file and updates points in leaderboard
+
             if (gameNameIsAGo && numPlayersIsAGo)
             {
                 Submit.Content = "Note: This may take a second";
@@ -55,7 +58,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 if (filterBool)
                     UpdateLeaderboard(lineSaved);
 
-
+                //If game is a new genre, update that option in settings
                 UpdateFilterOptions(nameOfGame);
 
                 //Displays Success and then converts back to normal
@@ -78,6 +81,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void UpdateFilterOptions(string nameOfGame)
         {
+            //Purpose: Checks if game's genre is new to the system. If it is, it adds it to the options displayed in settings
+
             //Grabs all genres currently in file and the genre of the game being added
             string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
             var ID = UtilityFunctions.GetID(nameOfGame);
@@ -102,8 +107,11 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
-        private (string, bool) SaveToLog(string nameOfGame, string numPlayers)
+        private (string, bool) SaveToLog(string nameOfGame, string numPlayers)  
         {
+            //Purpose: Records gameplay with all associated information to LogofPlayedGames.txt
+            //All associated information: Name of Game, # of players, player's names in order of placement, additional gameplay notes, if it passes the filter tests, and the date
+
             bool filterBool;
             var officialName = UtilityFunctions.ReturnOfficialGameName(nameOfGame);
             // Append each item from the list, separated by commas
@@ -163,6 +171,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            //Purpose: Resets entered information when clicked upon
+
             //Resets Texts of all TextBox's back to original display
             GameName.Text = "Name of Game";
             NumPlayers.Text = "# of Players";
@@ -180,52 +190,13 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
         
 
-        public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
-        {
-            //Gathers weights of different factors (in case custom ranking system is on)
-            string[] values;
-            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            
-            //Creates three factors that go into point total
-            var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
-            if (playtime <= 10)
-            {
-                playtime = 10;
-            }
-            var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10) * 2;
-            var placementFactor = float.Parse(values[2]) * CalculatePlacementPercentage(placement, numOfPlayers);
-  
-            //Creates a point value using the three factors
-            var points = (weightFactor + playtimeFactor) * placementFactor;
-
-            string stringPoints = points.ToString("0.00");
-            var finalPoints = double.Parse(stringPoints);
-
-
-            return finalPoints;
-
-            double CalculatePlacementPercentage(int placement, int numOfPlayers)
-            {
-                //reads from PlacementPercentages.txt and grabs the associated information needed for the math calculations.
-                using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\PlacementPercentages.txt"))
-                {
-                    reader.ReadLine();
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        string[] lineList = line.Split(",");
-                        if (int.Parse(lineList[0]) == numOfPlayers)
-                        {
-                            return double.Parse(lineList[placement]);
-                        }
-                    }
-                }
-                return -1;
-            }
-        }
+        
 
         private void UpdateLeaderboard(string gameplayToAdd)
         {
+            //Purpose updates current total points with new points from a gameplay
+            //Unlike RefreshLeaderboard, this adds one game to the already established leaderboard rather than building it from the ground up
+
             //Gathers necessary information about game
             string[] gameParts = gameplayToAdd.Split(",,,");
             int gameID = UtilityFunctions.GetID(gameParts[0]);
@@ -249,7 +220,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 for (int i = 2; i < gameParts.Length - 3; i++)
                 {
 
-                    double points = CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
+                    double points = UtilityFunctions.CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
                     
                     //If new person, add them with their points to newLeaderboard
                     if (!newLeaderboard.ContainsKey(gameParts[i]))
@@ -288,7 +259,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         
         private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
+            //Purpose: Verifies User Input to add specific number of boxes using UpdateTextBoxCollection function
             if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
             {
                 UpdateTextBoxCollection(numberOfTextBoxes);
@@ -298,6 +269,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void UpdateTextBoxCollection(int count)
         {
+            //Purpose: Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
+            
 
             // Clear the existing collection
             TextBoxCollection.Clear();
@@ -323,7 +296,9 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void GameName_LostFocus(object sender, RoutedEventArgs e)
         {
-            //If Invalid input, makes box read and pops up message
+            //Purpose: Validates User Input for Game Name
+
+            //If Invalid input, makes box red and pops up message
             //Turns necessary variable for submitting to false
             if (!UtilityFunctions.DoesGameExist(GameName.Text))
             {
@@ -343,6 +318,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Purpose: Validates User Input for Number of Players
+
             //If Invalid input, makes box read and pops up message
             //Turns necessary variable for submitting to false
             if (NumPlayers.Text != "2" && NumPlayers.Text != "3" && NumPlayers.Text != "4" && NumPlayers.Text != "5" && NumPlayers.Text != "6")

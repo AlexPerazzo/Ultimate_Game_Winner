@@ -39,42 +39,57 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void LoadSettings(object sender, RoutedEventArgs e)
         {
-            //Loads savedsettings in so it displays the same as the user last saved it
-            string[] values;
-            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            WeightNum.Text = values[0];
-            PlaytimeNum.Text = values[1];
-            PlacementNum.Text = values[2];
-            var ItemsList = values[5].Split(",");
+            //Purpose: Loads savedsettings in so it displays the same as the user last saved it
+            
+            string[] savedSettings = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            
+            LoadFilter(savedSettings);
+            LoadRankingSystem(savedSettings);
+
+        }
+        
+        private void LoadRankingSystem(string[] savedSettings)
+        {
+            //Purpose: Loads Ranking System with previous user saved information
+            WeightNum.Text = savedSettings[0];
+            PlaytimeNum.Text = savedSettings[1];
+            PlacementNum.Text = savedSettings[2];
+
+            if (float.Parse(savedSettings[0]) == 1 && float.Parse(savedSettings[1]) == 1 && float.Parse(savedSettings[2]) == 1)
+                RankingSysBox.Text = "Normal";
+            else
+                RankingSysBox.Text = savedSettings[3];
+        }
+
+        private void LoadFilter(string[] savedSettings)
+        {
+            //Purpose: Loads Filter with previous user saved information
+            var ItemsList = savedSettings[5].Split(",");
 
             GenreBox.ItemsSource = ItemsList;
             PlayerBox.ItemsSource = new string[] { "All Player Counts", "2 Players", "3 Players", "4 Players", "5 Players", "6 Players" };
-            WeightBox.ItemsSource = new string[] { "All Weights", "1-2 (Light)", "2-3 (Medium-Light)", "3-4 (Medium-Heavy)", "4-5 (Heavy)"};
-            PlaytimeBox.ItemsSource = new string[] { "All Playtimes", "Less than 30 min", "30-60 min", "60-90 min", "90-120 min", "Longer than 120 min"};
+            WeightBox.ItemsSource = new string[] { "All Weights", "1-2 (Light)", "2-3 (Medium-Light)", "3-4 (Medium-Heavy)", "4-5 (Heavy)" };
+            PlaytimeBox.ItemsSource = new string[] { "All Playtimes", "Less than 30 min", "30-60 min", "60-90 min", "90-120 min", "Longer than 120 min" };
 
-            var filterOptions = values[4].Split(",");
+            var filterOptions = savedSettings[4].Split(",");
             GenreBox.Text = filterOptions[0];
             PlayerBox.Text = filterOptions[1];
             WeightBox.Text = filterOptions[2];
             PlaytimeBox.Text = filterOptions[3];
-
-
-            if (float.Parse(values[0]) == 1 && float.Parse(values[1]) == 1 && float.Parse(values[2]) == 1)
-                RankingSysBox.Text = "Normal";
-            else
-                RankingSysBox.Text = values[3];
-
         }
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
         {
-            //Asks for confirmation. AreYouSure will do the work from there
+            //Purpose: Displays a window which will ask for confirmation and delete the entire log
+            
             AreYouSure areYouSure = new AreYouSure(true, [], null);
             areYouSure.Show();
         }
 
         private void Custom_Selected(object sender, RoutedEventArgs e)
         {
+            //Purpose: Displays custom ranking options when custom is selected
+
             string[] values;
             values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             WeightNum.Text = values[0];
@@ -88,6 +103,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void Normal_Selected(object sender, RoutedEventArgs e)
         {
+            //Purpose: Resets values back to normal and refreshes leaderboard with updated values when normal is selected
+
             var values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             
 
@@ -118,7 +135,9 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void SetBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Edits SavedSettings.txt which is used when calculating points
+           //Purpose: Edits SavedSettings.txt with user inputted data, which is used when calculating points
+            
+            //If legal input continue
             if (weightIsAGo && playtimeIsAGo && placementIsAGo)
                 {
 
@@ -158,6 +177,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     SetBtn.Content = "Set";
                 }
             }
+            //If not legal input display invalid inputs
             else
             {
                 SetBtn.Content = "Error";
@@ -172,6 +192,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void WeightNum_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Purpose: User verification for WeightNum
+
             //If valid, puts things to normal
             //Turns necessary variable for submitting to true
             if (float.TryParse(WeightNum.Text, out _))
@@ -193,6 +215,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void PlaytimeNum_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Purpose: User verification for PlaytimeNum
+
             //If valid, puts things to normal
             //Turns necessary variable for submitting to true
             if (float.TryParse(PlaytimeNum.Text, out _))
@@ -214,6 +238,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void PlacementNum_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Purpose: User verification for PlacementNum
+
             //If valid, puts things to normal
             //Turns necessary variable for submitting to true
             if (float.TryParse(PlacementNum.Text, out _))
@@ -235,6 +261,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Purpose: Calls RefreshLeaderboard to build the leaderboard from the ground up
             RefreshLeaderboardBtn.Content = "Note: This may take a second";
             await Task.Delay(20);
             Leaderboard.RefreshLeaderboard();
@@ -247,6 +274,9 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void FilterSetBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Purpose: Sets selected Filter options in SavedSettings and refreshes Leaderboard
+            //Note: From there, RefreshLeaderboard will update each game's status as to whether it passes the filters or not
+
             string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
             string?[] lines = File.ReadAllLines(filePath);
 
@@ -278,6 +308,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void FilterResetBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Purpose: Resets everything to non-filtered state
+
             string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
             string?[] lines = File.ReadAllLines(filePath);
 

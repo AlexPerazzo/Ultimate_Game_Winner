@@ -362,7 +362,49 @@ namespace Ultimate_Game_Winner
             return filterBool;
         }
 
+        public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
+        {
+            //Gathers weights of different factors (in case custom ranking system is on)
+            string[] values;
+            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
 
+            //Creates three factors that go into point total
+            var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
+            if (playtime <= 10)
+            {
+                playtime = 10;
+            }
+            var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10) * 2;
+            var placementFactor = float.Parse(values[2]) * CalculatePlacementPercentage(placement, numOfPlayers);
+
+            //Creates a point value using the three factors
+            var points = (weightFactor + playtimeFactor) * placementFactor;
+
+            string stringPoints = points.ToString("0.00");
+            var finalPoints = double.Parse(stringPoints);
+
+
+            return finalPoints;
+
+            double CalculatePlacementPercentage(int placement, int numOfPlayers)
+            {
+                //reads from PlacementPercentages.txt and grabs the associated information needed for the math calculations.
+                using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\PlacementPercentages.txt"))
+                {
+                    reader.ReadLine();
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] lineList = line.Split(",");
+                        if (int.Parse(lineList[0]) == numOfPlayers)
+                        {
+                            return double.Parse(lineList[placement]);
+                        }
+                    }
+                }
+                return -1;
+            }
+        }
 
         public static void UpdateFilterInLog()
         {
