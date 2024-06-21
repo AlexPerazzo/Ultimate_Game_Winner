@@ -3,4 +3,4 @@
 1.0
 Custom
 All Genres,All Player Counts,All Weights,All Playtimes
-All Genres,War,Strategy
+All Genres

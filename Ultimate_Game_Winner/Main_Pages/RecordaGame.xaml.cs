@@ -19,6 +19,7 @@ using System.Net.Http;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
 using Ultimate_Game_Winner;
+using System.Collections.Specialized;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
@@ -107,49 +108,40 @@ namespace Ultimate_Game_Winner.Main_Pages
             var officialName = UtilityFunctions.ReturnOfficialGameName(nameOfGame);
             // Append each item from the list, separated by commas
             string line = $"{officialName},,,{numPlayers},,,";
+
+            int count = -1;
             foreach (TextBox textBox in TextBoxCollection)
             {
+                count++;
+                //Checks if it's a player
+                if (count == int.Parse(numPlayers))
+                {
+                //If it's not, it does the checks for the Additional Gameplay notes
                 if (textBox.Text == "" || textBox.Text == "Additional gameplay notes... (leave blank or don't touch if none are wanted)")
                     line += "N/A,,,";
                 else
+                    line += textBox.Text + ",,,";
+                }
+                else
                     line += UtilityFunctions.CapitalizeEachWord(textBox.Text) + ",,,";
+                    
                 
             }
 
-            var textFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            var chosenFilters = textFile[4].Split(",");
             
-            var chosenGenre = chosenFilters[0];
-            var chosenPlayerCount = chosenFilters[1];
-            var chosenWeight = chosenFilters[2];
-            var chosenPlaytime = chosenFilters[3];
-
-            if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes")
+            //Add on the true or false for the filter
+            if (UtilityFunctions.ShouldFilter(officialName))
             {
                 line += "true,,,";
                 filterBool = true;
             }
             else
             {
-                var ID = UtilityFunctions.GetID(nameOfGame);
-                var theGenre = UtilityFunctions.GetAPIGenre(ID);
-                (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
-                if (UtilityFunctions.CheckGenre(chosenGenre, theGenre) && UtilityFunctions.CheckPlayerCount(chosenPlayerCount, chosenPlayerCount) && UtilityFunctions.CheckWeight(chosenWeight, weight) && UtilityFunctions.CheckPlaytime(chosenPlaytime, playtime))
-                {
-                    line += "true,,,";
-                    filterBool = true;
-                }
-            
-                else
-                {
-                    line += "false,,,";
-                    filterBool = false;
-                }
-
-
-
+                line += "false,,,";
+                filterBool = false;
             }
 
+            //Add the date
             DateTime currentDate = DateTime.Now;
             var correctFormatDate = currentDate.ToString("M/d/yy");
             line += correctFormatDate;
@@ -165,6 +157,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     writer.WriteLine(stringToSave);
                 }
             }
+
             return (line, filterBool);
         }
 

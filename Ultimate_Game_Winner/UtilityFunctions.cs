@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 using System.Xml.Linq;
 
 namespace Ultimate_Game_Winner
@@ -329,19 +330,43 @@ namespace Ultimate_Game_Winner
             }
         }
 
-        public static void UpdateFilterInLog()
+        public static bool ShouldFilter(string nameOfGame)
         {
-            string resultString = "";
 
-            //Grab User Chosen Filters
-            var settingsFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-            var chosenFilters = settingsFile[4].Split(",");
+            bool filterBool = false;
+            var textFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var chosenFilters = textFile[4].Split(",");
 
             var chosenGenre = chosenFilters[0];
             var chosenPlayerCount = chosenFilters[1];
             var chosenWeight = chosenFilters[2];
             var chosenPlaytime = chosenFilters[3];
 
+            if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes")
+            {
+                filterBool = true;
+            }
+            else
+            {
+                var ID = UtilityFunctions.GetID(nameOfGame);
+                var theGenre = UtilityFunctions.GetAPIGenre(ID);
+                (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
+
+                if (CheckGenre(chosenGenre, theGenre) && CheckPlayerCount(chosenPlayerCount, chosenPlayerCount) && CheckWeight(chosenWeight, weight) && CheckPlaytime(chosenPlaytime, playtime))
+                    filterBool = true;
+                
+                else
+                    filterBool = false;
+
+            }
+            return filterBool;
+        }
+
+
+
+        public static void UpdateFilterInLog()
+        {
+            string resultString = "";
 
             //Read through all Logged Games
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
@@ -350,28 +375,12 @@ namespace Ultimate_Game_Winner
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] lineList = line.Split(",,,");
+                    var gameName = lineList[0];
 
-                    //If no filter chosen, all games are set to true
-                    if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes")
+                    if (ShouldFilter(gameName))
                         lineList[lineList.Length - 2] = "true";
-
-                    //Otherwise, check the game's genre and compare it to the chosenGenre. Set to true/false accordingly
                     else
-                    {
-
-                        var gameName = lineList[0];
-                        var ID = UtilityFunctions.GetID(gameName);
-
-                        string thePlayerCount = lineList[1];
-                        var theGenre = UtilityFunctions.GetAPIGenre(ID);
-                        (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
-
-
-                        if (CheckGenre(chosenGenre, theGenre) && CheckPlayerCount(chosenPlayerCount, thePlayerCount) && CheckWeight(chosenWeight, weight) && CheckPlaytime(chosenPlaytime, playtime))
-                            lineList[lineList.Length - 2] = "true";
-                        else
-                            lineList[lineList.Length - 2] = "false";
-                    }
+                        lineList[lineList.Length - 2] = "false";
 
                     //Building updated version of the text file from the ground up
                     //Add newest line version to the resultString
@@ -383,6 +392,5 @@ namespace Ultimate_Game_Winner
             File.WriteAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt", resultString);
 
         }
-
     }
 }
