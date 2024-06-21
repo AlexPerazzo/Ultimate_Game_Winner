@@ -73,6 +73,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
         {
+            RefreshLeaderboardBtn.Content = "Note: This may take a second";
+            await Task.Delay(20);
             RefreshLeaderboard();
             theLeaderboard.Children.Clear();
             LoadLeaderboard(sender, e);

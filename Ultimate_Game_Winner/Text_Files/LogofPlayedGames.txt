@@ -5,3 +5,4 @@ Ark Nova,,,4,,,1st Place...,,,2nd Place...,,,3rd Place...,,,4th Place...,,,N/A,,
 Terraforming Mars,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,true,,,6/20/24
 Spirit Island,,,3,,,1st Place...,,,2nd Place...,,,3rd Place...,,,N/A,,,true,,,6/20/24
 Terraforming Mars,,,3,,,1st Place...,,,2nd Place...,,,3rd Place...,,,N/A,,,true,,,6/20/24
+Ark Nova,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,true,,,6/20/24

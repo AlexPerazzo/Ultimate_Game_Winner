@@ -141,7 +141,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 {
                     
                     SetBtn.Content = "Note: This may take a second";
-                    await Task.Delay(10);
+                    await Task.Delay(20);
                     using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
                     {
                         writer.WriteLine(weight);
@@ -154,7 +154,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     }
                     Leaderboard.RefreshLeaderboard();
                     SetBtn.Content = "Done!";
-                    await Task.Delay(2500);
+                    await Task.Delay(2000);
                     SetBtn.Content = "Set";
                 }
             }
@@ -236,7 +236,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
         {
             RefreshLeaderboardBtn.Content = "Note: This may take a second";
-            await Task.Delay(10);
+            await Task.Delay(20);
             Leaderboard.RefreshLeaderboard();
             RefreshLeaderboardBtn.Content = "Done!";
             await Task.Delay(2000);
@@ -260,7 +260,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             if (lines[4] != updatedFilterChoices)
             {
                 FilterSetBtn.Content = "Note: This may take a second";
-                await Task.Delay(10);
+                await Task.Delay(20);
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
                 Leaderboard.RefreshLeaderboard();
@@ -296,7 +296,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             if (lines[4] != updatedFilterChoices)
             {
                 FilterResetBtn.Content = "Note: This may take a second";
-                await Task.Delay(10);
+                await Task.Delay(20);
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
                 Leaderboard.RefreshLeaderboard();

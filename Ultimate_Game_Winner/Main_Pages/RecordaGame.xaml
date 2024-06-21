@@ -52,8 +52,8 @@
 				
 
                 <!--Submit and Cancel Buttons-->
-				<Button Name="Submit" Grid.Column="0" Content="SUBMIT" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
-                <Button Name="Cancel" Grid.Column="1" Content="CANCEL" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
+				<Button Name="Submit" Grid.Column="0" Content="Submit" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
+                <Button Name="Cancel" Grid.Column="1" Content="Cancel" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
             </Grid>
 
             

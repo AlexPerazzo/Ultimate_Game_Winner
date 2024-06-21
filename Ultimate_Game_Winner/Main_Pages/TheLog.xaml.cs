@@ -66,10 +66,13 @@ namespace Ultimate_Game_Winner.Main_Pages
             
         }
 
-        private void RefreshLogBtn_Click(object sender, RoutedEventArgs e)
+        private async void RefreshLogBtn_Click(object sender, RoutedEventArgs e)
         {
             theLog.Children.Clear();
             LoadLog(sender, e);
+            RefreshLogBtn.Content = "Done!";
+            await Task.Delay(2000);
+            RefreshLogBtn.Content = "Refresh Log";
         }
     }
 }

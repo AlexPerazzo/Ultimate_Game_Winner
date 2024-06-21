@@ -44,7 +44,8 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             if (gameNameIsAGo && numPlayersIsAGo)
             {
-
+                Submit.Content = "Note: This may take a second";
+                await Task.Delay(20);
                 string nameOfGame = GameName.Text; string numPlayers = NumPlayers.Text;
                 (string lineSaved, bool filterBool) = SaveToLog(nameOfGame, numPlayers);
                 //Reset page's text
@@ -59,7 +60,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 //Displays Success and then converts back to normal
                 Submit.Content = "Success!!";
                 await Task.Delay(2500);
-                Submit.Content = "SUBMIT";
+                Submit.Content = "Submit";
             }
             else 
             {
@@ -68,7 +69,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 GameName_LostFocus(sender, e);
                 Submit.Content = "Error";
                 await Task.Delay(2500);
-                Submit.Content = "SUBMIT";
+                Submit.Content = "Submit";
 
             }
 
