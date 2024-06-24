@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Ultimate_Game_Winner"
+      xmlns:userControls="clr-namespace:Ultimate_Game_Winner.UserControls_and_Windows" 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RecordaGame"
@@ -28,6 +29,7 @@
             <TextBox Name="GameName" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120" Grid.Row="1" LostFocus="GameName_LostFocus"/>
             <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="305,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
+            <userControls:PlaceholderTextBox Grid.Row="1" Margin="200,106,0,0"/>
             <TextBox Name="NumPlayers" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,81,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120" TextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1"/>
             <Label Name="NumPlayersVerification" HorizontalAlignment="Center" Margin="335,76,0,0" Content="*Please input a number between 2-6" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 

@@ -54,7 +54,7 @@
 
 
             <!--Set Button-->
-                <Button x:Name="SetBtn" Content="Set" Margin="0,85,0,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Click="SetBtn_Click"/>
+                <Button x:Name="CustomSetBtn" Content="Set" Margin="0,85,0,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Click="CustomSetBtn_Click"/>
                     </Grid>
 
         <Grid Grid.Row="1">

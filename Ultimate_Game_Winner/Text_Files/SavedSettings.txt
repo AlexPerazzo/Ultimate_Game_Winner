@@ -1,6 +1,6 @@
-1.5
 1.0
 1.0
-Custom
-All Genres,2 Players,All Weights,All Playtimes
+1.0
+Normal
+All Genres,All Player Counts,All Weights,All Playtimes
 All Genres,Strategy,War

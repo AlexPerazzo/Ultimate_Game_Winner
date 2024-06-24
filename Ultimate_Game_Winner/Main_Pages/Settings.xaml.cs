@@ -133,62 +133,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
 
 
-        private async void SetBtn_Click(object sender, RoutedEventArgs e)
-        {
-           //Purpose: Edits SavedSettings.txt with user inputted data, which is used when calculating points
-            
-            //If legal input continue
-            if (weightIsAGo && playtimeIsAGo && placementIsAGo)
-                {
-
-                var weight = WeightNum.Text;
-                var playtime = PlaytimeNum.Text;
-                var placement = PlacementNum.Text;
-
-                var textFileToChange = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-                
-                //Doesn't run API all over again if the input is already in place
-                if (textFileToChange[0] == weight && textFileToChange[1] == playtime && textFileToChange[2] == placement)
-                {
-                    SetBtn.Content = "No change detected";
-                    await Task.Delay(2000);
-                    SetBtn.Content = "Set";
-                }
-
-                //Saves the user's input and refreshes the leaderboard
-                else
-                {
-                    
-                    SetBtn.Content = "Note: This may take a second";
-                    await Task.Delay(20);
-                    using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
-                    {
-                        writer.WriteLine(weight);
-                        writer.WriteLine(playtime);
-                        writer.WriteLine(placement);
-                        writer.WriteLine("Custom");
-                        writer.WriteLine(textFileToChange[4]);
-                        writer.WriteLine(textFileToChange[5]);
-
-                    }
-                    Leaderboard.RefreshLeaderboard();
-                    SetBtn.Content = "Done!";
-                    await Task.Delay(2000);
-                    SetBtn.Content = "Set";
-                }
-            }
-            //If not legal input display invalid inputs
-            else
-            {
-                SetBtn.Content = "Error";
-                WeightNum_LostFocus(sender, e);
-                PlaytimeNum_LostFocus(sender, e);
-                PlacementNum_LostFocus(sender, e);
-                await Task.Delay(2500);
-                SetBtn.Content = "Set";
-            }
-            
-        }
+        
 
         private void WeightNum_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -342,6 +287,63 @@ namespace Ultimate_Game_Winner.Main_Pages
                 await Task.Delay(2000);
                 FilterResetBtn.Content = "Reset";
             }
+        }
+
+        private async void CustomSetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Purpose: Edits SavedSettings.txt with user inputted data, which is used when calculating points
+
+            //If legal input continue
+            if (weightIsAGo && playtimeIsAGo && placementIsAGo)
+            {
+
+                var weight = WeightNum.Text;
+                var playtime = PlaytimeNum.Text;
+                var placement = PlacementNum.Text;
+
+                var textFileToChange = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+
+                //Doesn't run API all over again if the input is already in place
+                if (textFileToChange[0] == weight && textFileToChange[1] == playtime && textFileToChange[2] == placement)
+                {
+                    CustomSetBtn.Content = "No change detected";
+                    await Task.Delay(2000);
+                    CustomSetBtn.Content = "Set";
+                }
+
+                //Saves the user's input and refreshes the leaderboard
+                else
+                {
+
+                    CustomSetBtn.Content = "Note: This may take a second";
+                    await Task.Delay(20);
+                    using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
+                    {
+                        writer.WriteLine(weight);
+                        writer.WriteLine(playtime);
+                        writer.WriteLine(placement);
+                        writer.WriteLine("Custom");
+                        writer.WriteLine(textFileToChange[4]);
+                        writer.WriteLine(textFileToChange[5]);
+
+                    }
+                    Leaderboard.RefreshLeaderboard();
+                    CustomSetBtn.Content = "Done!";
+                    await Task.Delay(2000);
+                    CustomSetBtn.Content = "Set";
+                }
+            }
+            //If not legal input display invalid inputs
+            else
+            {
+                CustomSetBtn.Content = "Error";
+                WeightNum_LostFocus(sender, e);
+                PlaytimeNum_LostFocus(sender, e);
+                PlacementNum_LostFocus(sender, e);
+                await Task.Delay(2500);
+                CustomSetBtn.Content = "Set";
+            }
+
         }
     }
     
