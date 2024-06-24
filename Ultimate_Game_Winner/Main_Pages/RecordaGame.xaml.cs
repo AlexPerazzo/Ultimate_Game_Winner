@@ -138,7 +138,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             
             //Add on the true or false for the filter
-            if (UtilityFunctions.ShouldFilter(officialName))
+            if (UtilityFunctions.ShouldFilter(officialName, numPlayers))
             {
                 line += "true,,,";
                 filterBool = true;

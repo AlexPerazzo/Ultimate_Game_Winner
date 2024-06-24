@@ -274,7 +274,8 @@ namespace Ultimate_Game_Winner
                     return (playercount == "6");
 
                 default:
-                    return false;
+                    throw new InvalidOperationException("Player Count went wrong.");
+                    return true;
             }
         }
 
@@ -298,7 +299,8 @@ namespace Ultimate_Game_Winner
                     return (weight >= 4);
 
                 default:
-                    return false;
+                    throw new InvalidOperationException("Weight went wrong.");
+                    return true;
             }
         }
 
@@ -326,11 +328,12 @@ namespace Ultimate_Game_Winner
                     return (playtime > 120);
 
                 default:
+                    throw new InvalidOperationException("Playtime went wrong.");
                     return false;
             }
         }
 
-        public static bool ShouldFilter(string nameOfGame)
+        public static bool ShouldFilter(string nameOfGame, string playerCount)
         {
 
             bool filterBool = false;
@@ -352,7 +355,7 @@ namespace Ultimate_Game_Winner
                 var theGenre = UtilityFunctions.GetAPIGenre(ID);
                 (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
 
-                if (CheckGenre(chosenGenre, theGenre) && CheckPlayerCount(chosenPlayerCount, chosenPlayerCount) && CheckWeight(chosenWeight, weight) && CheckPlaytime(chosenPlaytime, playtime))
+                if (CheckGenre(chosenGenre, theGenre) && CheckPlayerCount(chosenPlayerCount, playerCount) && CheckWeight(chosenWeight, weight) && CheckPlaytime(chosenPlaytime, playtime))
                     filterBool = true;
                 
                 else
@@ -418,8 +421,9 @@ namespace Ultimate_Game_Winner
                 {
                     string[] lineList = line.Split(",,,");
                     var gameName = lineList[0];
+                    var playerCount = lineList[1];
 
-                    if (ShouldFilter(gameName))
+                    if (ShouldFilter(gameName, playerCount))
                         lineList[lineList.Length - 2] = "true";
                     else
                         lineList[lineList.Length - 2] = "false";

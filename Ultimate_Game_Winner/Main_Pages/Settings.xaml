@@ -86,7 +86,7 @@
                 <TextBlock Text="Playtime" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="4"/>
                 <ComboBox x:Name="PlaytimeBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4"/>
             <!--Filter Set Button-->
-                <Button x:Name="FilterSetBtn" Content="Set" Margin="0,110,5,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Click="FilterSetBtn_Click" Grid.Column="2"/>
+                <Button x:Name="FilterSetBtn" Content="Set" Margin="0,110,5,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Click="FilterSetBtn_Click" Grid.Column="1" Grid.ColumnSpan="2"/>
             <!--Filter Reset Button-->
                 <Button x:Name="FilterResetBtn" Content="Reset" Margin="5,110,0,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Click="FilterResetBtn_Click" Grid.Column="3"/>
 
