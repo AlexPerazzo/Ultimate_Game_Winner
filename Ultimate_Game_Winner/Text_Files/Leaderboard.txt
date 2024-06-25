@@ -1,3 +1,2 @@
-1st Place...,6.59
-2nd Place...,-0.55
-3rd Place...,-1.55
+Test,1.94
+Test2,-1.17

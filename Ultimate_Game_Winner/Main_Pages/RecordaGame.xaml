@@ -26,11 +26,16 @@
 
 
             <!--TextBox's for all the needed information-->
-            <TextBox Name="GameName" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,41,0,0" TextWrapping="Wrap" Text="Name of Game" VerticalAlignment="Top" Width="120" Grid.Row="1" LostFocus="GameName_LostFocus"/>
+            <userControls:PlaceholderTextBox x:Name="GameName" HorizontalAlignment="Center" Margin="0,41,0,0" BindedWrap="NoWrap" placeholderText="Name of Game" VerticalAlignment="Top" BindedWidth="120" BindedHeight="18" Grid.Row="1" LostFocus="GameName_LostFocus"/>
             <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="305,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
-            <userControls:PlaceholderTextBox Grid.Row="1" Margin="200,106,0,0"/>
-            <TextBox Name="NumPlayers" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,81,0,0" TextWrapping="Wrap" Text="# of Players" VerticalAlignment="Top" Width="120" TextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1"/>
+            <!--<userControls:PlaceholderTextBox BindedWidth="100" BindedHeight="100" placeholderText="testing!" Grid.Row="1" Margin="200,106,0,0"/>-->
+            
+            
+            <!--<userControls:PlaceholderTextBox x:Name="NumPlayers" HorizontalAlignment="Center" Margin="0,81,0,0" BindedWrap="NoWrap" placeholderText="# of Players" VerticalAlignment="Top" BindedWidth="120" BindedTextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1"/>-->
+            <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="# of Players" Foreground="Gray" Margin="5,81,0,0" Width="120" Height="18" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="NumPlayers" Height="18" TextAlignment="Center" Width="120" Background="{x:Null}" TextWrapping="NoWrap" Margin="0,81,0,0" TextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
             <Label Name="NumPlayersVerification" HorizontalAlignment="Center" Margin="335,76,0,0" Content="*Please input a number between 2-6" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
 

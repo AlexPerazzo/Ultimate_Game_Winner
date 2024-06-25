@@ -20,6 +20,7 @@ using System.Xml.Linq;
 using System.Collections.ObjectModel;
 using Ultimate_Game_Winner;
 using System.Collections.Specialized;
+using Ultimate_Game_Winner.UserControls_and_Windows;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
@@ -33,12 +34,15 @@ namespace Ultimate_Game_Winner.Main_Pages
     {
         private bool numPlayersIsAGo = false;
         private bool gameNameIsAGo = false;
-        public ObservableCollection<TextBox> TextBoxCollection { get; set; }
+        public ObservableCollection<PlaceholderTextBox> TextBoxCollection { get; set; }
+        public ObservableCollection<TextBox> OldTextBoxCollection { get; set; }
+
         public RecordaGame()
         {
             InitializeComponent();
-            TextBoxCollection = new ObservableCollection<TextBox>();
+            TextBoxCollection = new ObservableCollection<PlaceholderTextBox>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
+            OldTextBoxCollection = new ObservableCollection<TextBox>();
         }
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
@@ -50,7 +54,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 Submit.Content = "Note: This may take a second";
                 await Task.Delay(20);
-                string nameOfGame = GameName.Text; string numPlayers = NumPlayers.Text;
+                string nameOfGame = GameName.Input.Text; string numPlayers = NumPlayers.Text;
                 (string lineSaved, bool filterBool) = SaveToLog(nameOfGame, numPlayers);
                 //Reset page's text
                 Cancel_Click(sender, e);
@@ -118,20 +122,20 @@ namespace Ultimate_Game_Winner.Main_Pages
             string line = $"{officialName},,,{numPlayers},,,";
 
             int count = -1;
-            foreach (TextBox textBox in TextBoxCollection)
+            foreach (PlaceholderTextBox textBox in TextBoxCollection)
             {
                 count++;
                 //Checks if it's a player
                 if (count == int.Parse(numPlayers))
                 {
                 //If it's not, it does the checks for the Additional Gameplay notes
-                if (textBox.Text == "" || textBox.Text == "Additional gameplay notes... (leave blank or don't touch if none are wanted)")
-                    line += "N/A,,,";
-                else
-                    line += textBox.Text + ",,,";
+                    if (textBox.Input.Text == "")
+                        line += "N/A,,,";
+                    else
+                        line += textBox.Input.Text + ",,,";
                 }
                 else
-                    line += UtilityFunctions.CapitalizeEachWord(textBox.Text) + ",,,";
+                    line += UtilityFunctions.CapitalizeEachWord(textBox.Input.Text) + ",,,";
                     
                 
             }
@@ -174,8 +178,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Purpose: Resets entered information when clicked upon
 
             //Resets Texts of all TextBox's back to original display
-            GameName.Text = "Name of Game";
-            NumPlayers.Text = "# of Players";
+            GameName.Input.Text = "";
+            NumPlayers.Text = "";
             TextBoxCollection.Clear();
 
             //Resets verification error messages
@@ -257,16 +261,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         
         
-        private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //Purpose: Verifies User Input to add specific number of boxes using UpdateTextBoxCollection function
-            if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
-            {
-                UpdateTextBoxCollection(numberOfTextBoxes);
-            }
-            
-        }
-
+        
+        
         private void UpdateTextBoxCollection(int count)
         {
             //Purpose: Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
@@ -278,20 +274,30 @@ namespace Ultimate_Game_Winner.Main_Pages
             // Add the required number of textboxes
             for (int i = 0; i < count; i++)
             {
-                TextBox textBox = new TextBox { Width = 100, Margin = new Thickness(0, 25, 0, 0) };
-                textBox.Text = $"{UtilityFunctions.AddOrdinal(i+1)} place...";
+                PlaceholderTextBox textBox = new PlaceholderTextBox {Margin = new Thickness(0, 25, 0, 0) };
+                TextBox oldtextBox = new TextBox { Width = 100, Margin = new Thickness(0, 25, 0, 0) };
+                textBox.BindedWidth = "100";
+                textBox.BindedHeight = "18";
+                textBox.placeholderText = $"{UtilityFunctions.AddOrdinal(i + 1)} place...";
                 textBox.VerticalAlignment = VerticalAlignment.Center;
                 textBox.HorizontalAlignment = HorizontalAlignment.Center;
+                textBox.BindedWrap = "NoWrap";
+                
                 TextBoxCollection.Add(textBox);
             }
 
             // Adds additional box for gameplay notes
-                TextBox notes = new TextBox { Width = 300, Height = 70, Margin = new Thickness(0, 25, 0, 0) };
-                notes.Text = "Additional gameplay notes... (leave blank or don't touch if none are wanted)";
-                notes.VerticalAlignment = VerticalAlignment.Center;
-                notes.HorizontalAlignment = HorizontalAlignment.Center;
-                notes.TextWrapping = TextWrapping.Wrap;
-                TextBoxCollection.Add(notes);
+            PlaceholderTextBox notes = new PlaceholderTextBox { Margin = new Thickness(0, 25, 0, 0) };
+            notes.BindedWidth = "300";
+            notes.BindedHeight = "70";
+            notes.placeholderText = "Additional gameplay notes...";
+            notes.VerticalAlignment = VerticalAlignment.Center;
+            notes.HorizontalAlignment = HorizontalAlignment.Center;
+            
+            notes.BindedWrap = "Wrap";
+            TextBoxCollection.Add(notes);
+
+
         }
 
         private void GameName_LostFocus(object sender, RoutedEventArgs e)
@@ -300,7 +306,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             //If Invalid input, makes box red and pops up message
             //Turns necessary variable for submitting to false
-            if (!UtilityFunctions.DoesGameExist(GameName.Text))
+            if (GameName.Input.Text == "" || !UtilityFunctions.DoesGameExist(GameName.Input.Text))
             {
                 GameName.BorderBrush = Brushes.Red;
                 GameNameVerification.Visibility = Visibility.Visible;
@@ -338,9 +344,18 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
-        
-       
+        private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(NumPlayers.Text))
+                tbPlaceholder.Visibility = Visibility.Visible;
+            else
+                tbPlaceholder.Visibility = Visibility.Hidden;
 
+            if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
+            {
+                UpdateTextBoxCollection(numberOfTextBoxes);
+            }
 
+        }
     }
 }

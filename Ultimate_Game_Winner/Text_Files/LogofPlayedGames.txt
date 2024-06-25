@@ -1,3 +1,1 @@
-Ark Nova,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,true,,,6/21/24
-Risk,,,2,,,1st Place...,,,2nd Place...,,,N/A,,,true,,,6/24/24
-Risk,,,3,,,1st Place...,,,2nd Place...,,,3rd Place...,,,N/A,,,true,,,6/24/24
+Ark Nova,,,2,,,Test,,,Test2,,,N/A,,,true,,,6/24/24

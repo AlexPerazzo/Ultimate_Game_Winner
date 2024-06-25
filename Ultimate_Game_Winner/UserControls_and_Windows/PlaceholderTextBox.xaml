@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="18" d:DesignWidth="100" Background="White">
     <Grid>
-        <TextBlock x:Name="tbPlaceholder" Text="Placeholder Text" Foreground="LightGray" Margin="5,0,0,0" VerticalAlignment="Center" Width="100"/>
-        <TextBox x:Name="Input" Height="18" VerticalContentAlignment="Center" Width="100" Background="{x:Null}" TextChanged="Input_TextChanged"/>
+        <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="{Binding placeholderText}" Foreground="Gray" Margin="5,0,0,0" Width="{Binding BindedWidth}" Height="{Binding BindedHeight}"/>
+        <TextBox x:Name="Input" Height="{Binding BindedHeight}" TextAlignment="Center" Width="{Binding BindedWidth}" Background="{x:Null}" TextWrapping="{Binding BindedWrap}" TextChanged="Input_TextChanged"/>
     </Grid>
 </UserControl>

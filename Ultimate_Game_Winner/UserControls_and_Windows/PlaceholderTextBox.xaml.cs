@@ -12,27 +12,41 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner.Main_Pages;
 
 namespace Ultimate_Game_Winner.UserControls_and_Windows
 {
     /// <summary>
     /// Interaction logic for PlaceholderTextBox.xaml
     /// </summary>
+    /// 
+
     public partial class PlaceholderTextBox : UserControl
     {
+
+        public string placeholderText { get; set; }
+        public string BindedHeight { get; set; }
+        public string BindedWidth { get; set; }
+        public string BindedWrap {  get; set; }
+        public string BindedTextChanged { get; set; }
+
         public PlaceholderTextBox()
         {
             InitializeComponent();
+            this.DataContext = this;
+            
         }
 
-        
 
+        
         private void Input_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(Input.Text))
                 tbPlaceholder.Visibility = Visibility.Visible;
             else
                 tbPlaceholder.Visibility = Visibility.Hidden;
+
+            
         }
     }
 }
