@@ -308,7 +308,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Turns necessary variable for submitting to false
             if (GameName.Input.Text == "" || !UtilityFunctions.DoesGameExist(GameName.Input.Text))
             {
-                GameName.BorderBrush = Brushes.Red;
+                GameName.Input.BorderBrush = Brushes.Red;
                 GameNameVerification.Visibility = Visibility.Visible;
                 gameNameIsAGo = false;
             }
@@ -316,7 +316,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Turns necessary variable for submitting to true
             else
             {
-                GameName.BorderBrush = SystemColors.ControlDarkBrush;
+                GameName.Input.BorderBrush = SystemColors.ControlDarkBrush;
                 GameNameVerification.Visibility = Visibility.Hidden;
                 gameNameIsAGo = true;
             }

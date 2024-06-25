@@ -30,6 +30,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         public string BindedWrap {  get; set; }
         public string BindedTextChanged { get; set; }
 
+        public string BrushColor { get; set; }
+
         public PlaceholderTextBox()
         {
             InitializeComponent();
