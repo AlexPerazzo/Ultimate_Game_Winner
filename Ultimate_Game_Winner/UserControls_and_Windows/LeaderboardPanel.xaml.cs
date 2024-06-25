@@ -35,7 +35,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
         {
-            //Add Dropshadow when hovering over
+            //Purpose: Add Dropshadow when hovering over
             DropShadowEffect dropShadowEffect = new DropShadowEffect
             {
                 Color = Colors.Black,
@@ -49,7 +49,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void Rectangle_MouseLeave(object sender, MouseEventArgs e)
         {
-            //Turn Dropshadow back to normal when mouse leaves
+            //Purpose: Turn Dropshadow back to normal when mouse leaves
             DropShadowEffect dropShadowEffect = new DropShadowEffect
             {
                 Color = Colors.Gray,
@@ -59,7 +59,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void LeaderPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //Displays Addtional Player Info when clicked upon
+            //Purpose: Displays AddtionalPlayerInfo Window when clicked upon
             AdditionalPlayerInfo additionalPlayerInfo = new AdditionalPlayerInfo(PlayerName);
             additionalPlayerInfo.Title = $"{PlayerName}'s Games Played";
             additionalPlayerInfo.Show();

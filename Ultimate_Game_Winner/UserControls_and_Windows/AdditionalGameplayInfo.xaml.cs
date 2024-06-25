@@ -51,7 +51,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         
         private void LoadPlayers(object sender, RoutedEventArgs e)
         {
-            
+            //Purpose: Populates Window
+
             //Gather Information from API
             
             var ID = UtilityFunctions.GetID(allInfo[0]);
@@ -73,7 +74,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             
 
             //Populate Players StackPanel (loop through to calculate proper number of points)
-            for (int i = 2; i < allInfo.Length - 4; i++)
+            for (int i = 2; i < int.Parse(allInfo[1]) + 2; i++)
             {
                 var points = UtilityFunctions.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
 
@@ -91,6 +92,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void DeleteGameplayBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Purpose: Calls a confirmation window which will handle deleting the gameplay
+
             AreYouSure areYouSure = new AreYouSure(false, allInfo, this);
             areYouSure.Show();
         }

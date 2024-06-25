@@ -1,6 +1,2 @@
-Run,,,2,,,Al,,,A,,,N/A,,,Family,,,true,,,6/25/24
-Ark Nova,,,2,,,Er,,,A,,,N/A,,,Extended Family,,,true,,,6/25/24
-Ark,,,2,,,A,,,B,,,N/A,,,No Group,,,true,,,6/25/24
-Run,,,2,,,A,,,B,,,N/A,,,Other,,,true,,,6/25/24
-Ark,,,3,,,A,,,B,,,C,,,N/A,,,Other,,,true,,,6/25/24
-Ark,,,3,,,A,,,B,,,C,,,N/A,,,Other,,,true,,,6/25/24
+Ark,,,3,,,A,,,B,,,C,,,N/A,,,No Group,,,true,,,6/25/24
+Ark,,,6,,,A,,,B,,,C,,,D,,,E,,,F,,,N/A,,,No Group,,,true,,,6/25/24

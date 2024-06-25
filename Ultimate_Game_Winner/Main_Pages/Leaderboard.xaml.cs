@@ -31,17 +31,18 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             
             InitializeComponent();
-            //Calls LoadLeaderboard when the page is loaded.
             this.DataContext = this;
 
             Filtered = UtilityFunctions.FilterVisibility();
 
+            //Calls LoadLeaderboard when the page is loaded.
             Loaded += LoadLeaderboard;
         }
 
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
             //Purpose: Populates main StackPanel with LeaderboardPanel UserControls
+
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
             {
 
@@ -74,12 +75,15 @@ namespace Ultimate_Game_Winner.Main_Pages
         private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Event-listener for the RefreshLeaderboard Button
+
             //Calls RefreshLeaderboard (which redoes all the math), clears theLeaderboard stackPanel, then repopulates it
             RefreshLeaderboardBtn.Content = "Note: This may take a second";
             await Task.Delay(20);
             RefreshLeaderboard();
+
             theLeaderboard.Children.Clear();
             LoadLeaderboard(sender, e);
+
             RefreshLeaderboardBtn.Content = "Done!";
             await Task.Delay(2000);
             RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
@@ -113,8 +117,8 @@ namespace Ultimate_Game_Winner.Main_Pages
                         int ID = UtilityFunctions.GetID(parts[0]);
                         (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
 
-                        //skips over Game Name, Number of Players, Date, Additional Comments, and filterBool
-                        for (int i = 2; i < parts.Length - 4; i++)
+                        //skips over Game Name, Number of Players, Date, Additional Comments, filterBool, and Group
+                        for (int i = 2; i < int.Parse(parts[1]) + 2; i++)
                         {
                             double points = UtilityFunctions.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
 
@@ -144,8 +148,8 @@ namespace Ultimate_Game_Winner.Main_Pages
                     //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
                     var key = entry.Key;
                     var value = entry.Value;
-                    string writeThis = $"{key},{value}";
-                    writer.WriteLine(writeThis);
+                    
+                    writer.WriteLine($"{key},{value}");
                 }
             }
             

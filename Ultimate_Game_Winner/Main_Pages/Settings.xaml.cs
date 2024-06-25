@@ -117,7 +117,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             //Doesn't waste time doing API calls if the input is already in place
             //textFileToChange[0] == weight && textFileToChange[1] == playtime && textFileToChange[2] == placement
-            if (!(textFileToChange[0] == "1.0" && textFileToChange[1] == "1.0" && textFileToChange[2] == "1.0"))
+            if (!(float.Parse(textFileToChange[0]) == 1 && float.Parse(textFileToChange[1]) == 1 && float.Parse(textFileToChange[2]) == 1))
             {
                 //sets the settings back to normal and refreshes the leaderboard
                 using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
@@ -226,7 +226,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Note: From there, RefreshLeaderboard will update each game's status as to whether it passes the filters or not
 
             string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
-            string?[] lines = File.ReadAllLines(filePath);
+            string[] lines = File.ReadAllLines(filePath);
 
             var filterChoices = lines[4].Split(",");
             filterChoices[0] = GenreBox.SelectedItem.ToString();
@@ -240,9 +240,11 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 FilterSetBtn.Content = "Note: This may take a second";
                 await Task.Delay(20);
+
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
                 Leaderboard.RefreshLeaderboard();
+
                 FilterSetBtn.Content = "Done!";
                 await Task.Delay(2500);
                 FilterSetBtn.Content = "Set";
@@ -260,7 +262,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Purpose: Resets everything to non-filtered state
 
             string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
-            string?[] lines = File.ReadAllLines(filePath);
+            string[] lines = File.ReadAllLines(filePath);
 
             var filterChoices = lines[4].Split(",");
             filterChoices[0] = "All Genres";
@@ -280,9 +282,11 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 FilterResetBtn.Content = "Note: This may take a second";
                 await Task.Delay(20);
+
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
                 Leaderboard.RefreshLeaderboard();
+
                 FilterResetBtn.Content = "Done!";
                 await Task.Delay(2500);
                 FilterResetBtn.Content = "Reset";
@@ -346,7 +350,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 WeightNum_LostFocus(sender, e);
                 PlaytimeNum_LostFocus(sender, e);
                 PlacementNum_LostFocus(sender, e);
-                await Task.Delay(2500);
+                await Task.Delay(2000);
                 CustomSetBtn.Content = "Set";
             }
 

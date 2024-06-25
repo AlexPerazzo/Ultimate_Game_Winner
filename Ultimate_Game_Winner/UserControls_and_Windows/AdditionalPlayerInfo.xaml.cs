@@ -41,6 +41,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void LoadGames(object sender, RoutedEventArgs e)
         {
+            //Purpose: Populates Window
 
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
             {
@@ -54,7 +55,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     if (parts[parts.Length - 2] == "true")
                     {
 
-                        var numPlayers = parts.Length - 6;
+                        int numPlayers = int.Parse(parts[1]);
 
                     
                     var ID = UtilityFunctions.GetID(parts[0]);
@@ -62,7 +63,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     PlacementPointsPanel statsPanel = new PlacementPointsPanel();
                     
 
-                    for (var i = 2; i < numPlayers + 3; i++)
+                    for (var i = 2; i < numPlayers + 2; i++)
                     {
                         if (parts[i] == playerName)
                         {

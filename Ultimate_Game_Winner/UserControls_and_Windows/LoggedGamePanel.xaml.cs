@@ -41,7 +41,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //Display Additional Gameplay Information when clicked upon
+            //Purpose Display AdditionalGameplayInfo Window when clicked upon
             AdditionalGameplayInfo additionalGameplayInfo = new AdditionalGameplayInfo(AllInfo);
             
             
@@ -51,7 +51,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             
-            //Add drop shadow when hovered upon
+            //Purpose: Add drop shadow when hovered upon
             DropShadowEffect dropShadowEffect = new DropShadowEffect
             {
                 Color = Colors.Black,
@@ -65,7 +65,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
         {
-            //remove drop shadow when not hovered upon
+            //Purpose: Remove drop shadow when not hovered upon
             LogPanel.Effect = null;
         }
     }

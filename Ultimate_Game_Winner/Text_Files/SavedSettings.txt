@@ -1,6 +1,6 @@
 1.0
+1.2
 1.0
-1.0
-Normal
+Custom
 All Genres,All Player Counts,All Weights,All Playtimes,All Groups
-All Genres,Thematic,Strategy
+All Genres,Strategy

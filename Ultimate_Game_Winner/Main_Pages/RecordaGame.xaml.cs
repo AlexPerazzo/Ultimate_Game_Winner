@@ -56,6 +56,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 await Task.Delay(20);
                 string nameOfGame = GameName.Input.Text; string numPlayers = NumPlayers.Text;
                 (string lineSaved, bool filterBool) = SaveToLog(nameOfGame, numPlayers);
+                
                 //Reset page's text
                 Cancel_Click(sender, e);
 
@@ -67,7 +68,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
                 //Displays Success and then converts back to normal
                 Submit.Content = "Success!!";
-                await Task.Delay(2500);
+                await Task.Delay(2000);
                 Submit.Content = "Submit";
             }
             else 
@@ -76,7 +77,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 NumPlayers_LostFocus(sender, e);
                 GameName_LostFocus(sender, e);
                 Submit.Content = "Error";
-                await Task.Delay(2500);
+                await Task.Delay(1500);
                 Submit.Content = "Submit";
 
             }
@@ -94,16 +95,10 @@ namespace Ultimate_Game_Winner.Main_Pages
             
             var textFile = File.ReadAllLines(filePath);
             var currentGenres = textFile[5].Split(",");
-            bool addGameIsAGo = false;
-
             
 
-
-            if (!currentGenres.Contains(theGenre))
-                addGameIsAGo = true;
-
             //adds genre if it's new
-            if (addGameIsAGo)
+            if (!currentGenres.Contains(theGenre))
             {
                 textFile[5] += $",{theGenre}";
                 File.WriteAllLines(filePath, textFile);
@@ -225,7 +220,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             }
                 //Loops through from first player (index 2) to last player (index fourth to last (there's a group, date, and notes at the end))
-                for (int i = 2; i < gameParts.Length - 4; i++)
+                for (int i = 2; i < int.Parse(gameParts[1]) + 2; i++)
                 {
 
                     double points = UtilityFunctions.CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);
@@ -279,13 +274,14 @@ namespace Ultimate_Game_Winner.Main_Pages
             for (int i = 0; i < count; i++)
             {
                 PlaceholderTextBox textBox = new PlaceholderTextBox {Margin = new Thickness(0, 25, 0, 0) };
-                TextBox oldtextBox = new TextBox { Width = 100, Margin = new Thickness(0, 25, 0, 0) };
+                
                 textBox.BindedWidth = "100";
                 textBox.BindedHeight = "18";
+                textBox.BindedWrap = "NoWrap";
                 textBox.placeholderText = $"{UtilityFunctions.AddOrdinal(i + 1)} place...";
+
                 textBox.VerticalAlignment = VerticalAlignment.Center;
                 textBox.HorizontalAlignment = HorizontalAlignment.Center;
-                textBox.BindedWrap = "NoWrap";
                 
                 TextBoxCollection.Add(textBox);
             }
@@ -295,10 +291,11 @@ namespace Ultimate_Game_Winner.Main_Pages
             notes.BindedWidth = "300";
             notes.BindedHeight = "70";
             notes.placeholderText = "Additional gameplay notes...";
+            notes.BindedWrap = "Wrap";
+
             notes.VerticalAlignment = VerticalAlignment.Center;
             notes.HorizontalAlignment = HorizontalAlignment.Center;
             
-            notes.BindedWrap = "Wrap";
             TextBoxCollection.Add(notes);
 
 
@@ -332,6 +329,11 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             //If Invalid input, makes box read and pops up message
             //Turns necessary variable for submitting to false
+            
+                
+
+            
+
             if (NumPlayers.Text != "2" && NumPlayers.Text != "3" && NumPlayers.Text != "4" && NumPlayers.Text != "5" && NumPlayers.Text != "6")
             {
                 NumPlayers.BorderBrush = Brushes.Red;
@@ -350,11 +352,16 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //Purpose: When NumPlayers is changed, calls UpdateTextBoxCollection with number
+            //Do to event listener conflicts, I had to make a PlaceholderTextBox in this .xaml instead of just using a PlaceholderTextBox
+            
+            //Sets placeholder text to visible or hidden
             if (string.IsNullOrEmpty(NumPlayers.Text))
                 tbPlaceholder.Visibility = Visibility.Visible;
             else
                 tbPlaceholder.Visibility = Visibility.Hidden;
 
+            //If number is valid, calls UpdateTextBoxCollection
             if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
             {
                 UpdateTextBoxCollection(numberOfTextBoxes);

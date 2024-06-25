@@ -38,6 +38,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             
             using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
             {
+                //Purpose: Populates StackPanel with LoggedGamePanel User Controls
+
                 //Reads each line from the LogofPlayedGames.txt file and makes a TextBlock out of it
                 //Adds that TextBlock to the StackPanel from the xaml page
                 string? line;
@@ -47,10 +49,10 @@ namespace Ultimate_Game_Winner.Main_Pages
 
                     if (parts[parts.Length-2] == "true")
                     {
-                        //logList.Add(line);
+                        
                         LoggedGamePanel panel = new LoggedGamePanel();
                         panel.GameName = parts[0];
-                        var numPlayers = parts.Length - 6;
+                        var numPlayers = parts[1];
                         panel.NumPlayers = $"{numPlayers} players";
                         panel.PlayerName = parts[2];
                         panel.Date = parts[parts.Length - 1];

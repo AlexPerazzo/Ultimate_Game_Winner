@@ -43,6 +43,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         
         private void Input_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //Purpose: Makes Placeholder Text Visible or Hidden
             if (string.IsNullOrEmpty(Input.Text))
                 tbPlaceholder.Visibility = Visibility.Visible;
             else
