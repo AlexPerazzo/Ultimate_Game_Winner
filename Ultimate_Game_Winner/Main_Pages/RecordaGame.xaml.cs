@@ -140,9 +140,12 @@ namespace Ultimate_Game_Winner.Main_Pages
                 
             }
 
-            
+            //Add on the group
+            line += GroupComboBox.Text + ",,,";
+
+
             //Add on the true or false for the filter
-            if (UtilityFunctions.ShouldFilter(officialName, numPlayers))
+            if (UtilityFunctions.ShouldFilter(officialName, numPlayers, GroupComboBox.Text))
             {
                 line += "true,,,";
                 filterBool = true;
@@ -180,12 +183,13 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Resets Texts of all TextBox's back to original display
             GameName.Input.Text = "";
             NumPlayers.Text = "";
+            GroupComboBox.Text = "No Group";
             TextBoxCollection.Clear();
 
             //Resets verification error messages
             NumPlayers.BorderBrush = SystemColors.ControlDarkBrush;
             NumPlayersVerification.Visibility = Visibility.Hidden;
-            GameName.BorderBrush = SystemColors.ControlDarkBrush;
+            GameName.Input.BorderBrush = SystemColors.ControlDarkBrush;
             GameNameVerification.Visibility = Visibility.Hidden;
             gameNameIsAGo = false;
             numPlayersIsAGo = false;
@@ -220,8 +224,8 @@ namespace Ultimate_Game_Winner.Main_Pages
                 }
 
             }
-                //Loops through from first player (index 2) to last player (index third to last (there's a date and notes at the end))
-                for (int i = 2; i < gameParts.Length - 3; i++)
+                //Loops through from first player (index 2) to last player (index fourth to last (there's a group, date, and notes at the end))
+                for (int i = 2; i < gameParts.Length - 4; i++)
                 {
 
                     double points = UtilityFunctions.CalculatePoints(averageWeight, averagePlaytime, int.Parse(gameParts[1]), i-1);

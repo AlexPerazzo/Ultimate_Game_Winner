@@ -53,7 +53,7 @@
 
 
 
-            <!--Set Button-->
+            <!--Custom Set Button-->
                 <Button x:Name="CustomSetBtn" Content="Set" Margin="0,85,0,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Click="CustomSetBtn_Click"/>
                     </Grid>
 
@@ -64,6 +64,8 @@
                     <ColumnDefinition Width="127"/>
                     <ColumnDefinition Width="127"/>
                     <ColumnDefinition Width="127"/>
+                    <ColumnDefinition Width="127"/>
+
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
@@ -72,7 +74,7 @@
         <!--Filter-->
             
             <!--Filter Text-->
-                <TextBlock Text="Filter" FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock Text="Filter" FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="1" Grid.Column="3"/>
             <!--Genre Filter-->
                 <TextBlock Text="Genre" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="1"/>
                 <ComboBox x:Name="GenreBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
@@ -85,10 +87,15 @@
             <!--Playtime Filter-->
                 <TextBlock Text="Playtime" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="4"/>
                 <ComboBox x:Name="PlaytimeBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4"/>
-            <!--Filter Set Button-->
-                <Button x:Name="FilterSetBtn" Content="Set" Margin="0,110,5,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Click="FilterSetBtn_Click" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <!--Filter Reset Button-->
-                <Button x:Name="FilterResetBtn" Content="Reset" Margin="5,110,0,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Click="FilterResetBtn_Click" Grid.Column="3"/>
+            <!--Group Filter-->
+                <TextBlock Text="Group" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="5"/>
+                <ComboBox x:Name="GroupBox" Height="23" Width="117" Margin="0,40,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="5"/>
+
+
+                <!--Filter Set Button-->
+                <Button x:Name="FilterSetBtn" Content="Set" Margin="0,110,69,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Click="FilterSetBtn_Click" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <!--Filter Reset Button-->
+                <Button x:Name="FilterResetBtn" Content="Reset" Margin="69,110,0,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Click="FilterResetBtn_Click" Grid.Column="3" Grid.ColumnSpan="2"/>
 
             </Grid>
 

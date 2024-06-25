@@ -237,7 +237,7 @@ namespace Ultimate_Game_Winner
         {
             var settingsText = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
             //If No selected Filters, Filter text remains hidden
-            if (settingsText[4] == "All Genres,All Player Counts,All Weights,All Playtimes")
+            if (settingsText[4] == "All Genres,All Player Counts,All Weights,All Playtimes,All Groups")
                 return "Hidden";
             else
                 return "Visible";
@@ -333,7 +333,14 @@ namespace Ultimate_Game_Winner
             }
         }
 
-        public static bool ShouldFilter(string nameOfGame, string playerCount)
+        public static bool CheckGroup(string chosenGroup, string group)
+        {
+            if (chosenGroup == "All Groups")
+                return true;
+            else
+                return (chosenGroup == group);
+        }
+        public static bool ShouldFilter(string nameOfGame, string playerCount, string group)
         {
 
             bool filterBool = false;
@@ -344,8 +351,9 @@ namespace Ultimate_Game_Winner
             var chosenPlayerCount = chosenFilters[1];
             var chosenWeight = chosenFilters[2];
             var chosenPlaytime = chosenFilters[3];
+            var chosenGroup = chosenFilters[4];
 
-            if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes")
+            if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes" && chosenGroup == "All Groups")
             {
                 filterBool = true;
             }
@@ -355,7 +363,7 @@ namespace Ultimate_Game_Winner
                 var theGenre = UtilityFunctions.GetAPIGenre(ID);
                 (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
 
-                if (CheckGenre(chosenGenre, theGenre) && CheckPlayerCount(chosenPlayerCount, playerCount) && CheckWeight(chosenWeight, weight) && CheckPlaytime(chosenPlaytime, playtime))
+                if (CheckGenre(chosenGenre, theGenre) && CheckPlayerCount(chosenPlayerCount, playerCount) && CheckWeight(chosenWeight, weight) && CheckPlaytime(chosenPlaytime, playtime) && CheckGroup(chosenGroup, group))
                     filterBool = true;
                 
                 else
@@ -422,8 +430,9 @@ namespace Ultimate_Game_Winner
                     string[] lineList = line.Split(",,,");
                     var gameName = lineList[0];
                     var playerCount = lineList[1];
+                    var group = lineList[lineList.Length - 3];
 
-                    if (ShouldFilter(gameName, playerCount))
+                    if (ShouldFilter(gameName, playerCount, group))
                         lineList[lineList.Length - 2] = "true";
                     else
                         lineList[lineList.Length - 2] = "false";

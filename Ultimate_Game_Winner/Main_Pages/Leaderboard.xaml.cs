@@ -114,7 +114,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                         (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
 
                         //skips over Game Name, Number of Players, Date, Additional Comments, and filterBool
-                        for (int i = 2; i < parts.Length - 3; i++)
+                        for (int i = 2; i < parts.Length - 4; i++)
                         {
                             double points = UtilityFunctions.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
 

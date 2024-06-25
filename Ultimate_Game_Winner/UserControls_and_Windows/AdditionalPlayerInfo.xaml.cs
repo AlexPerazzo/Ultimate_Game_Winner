@@ -54,7 +54,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     if (parts[parts.Length - 2] == "true")
                     {
 
-                        var numPlayers = parts.Length - 5;
+                        var numPlayers = parts.Length - 6;
 
                     
                     var ID = UtilityFunctions.GetID(parts[0]);

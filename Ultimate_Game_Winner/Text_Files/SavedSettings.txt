@@ -2,5 +2,5 @@
 1.0
 1.0
 Normal
-All Genres,All Player Counts,All Weights,All Playtimes
-All Genres,Strategy
+All Genres,All Player Counts,All Weights,All Playtimes,All Groups
+All Genres,Thematic,Strategy

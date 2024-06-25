@@ -16,8 +16,8 @@
                 <RowDefinition Height="71"/>
                 <!--Textboxes in bigger main row-->
                 <RowDefinition />
-                <!--Submit/Cancel Buttons in smaller bottom row-->
-                <RowDefinition Height="60"/>
+                <!--Submit/Cancel Buttons in smaller bottom row. Alongside Group-->
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
             <!--Title-->
@@ -29,13 +29,12 @@
             <userControls:PlaceholderTextBox x:Name="GameName" HorizontalAlignment="Center" Margin="0,41,0,0" BindedWrap="NoWrap" placeholderText="Name of Game" VerticalAlignment="Top" BindedWidth="120" BindedHeight="18" Grid.Row="1" LostFocus="GameName_LostFocus"/>
             <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="305,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
-            <!--<userControls:PlaceholderTextBox BindedWidth="100" BindedHeight="100" placeholderText="testing!" Grid.Row="1" Margin="200,106,0,0"/>-->
             
             
-            <!--<userControls:PlaceholderTextBox x:Name="NumPlayers" HorizontalAlignment="Center" Margin="0,81,0,0" BindedWrap="NoWrap" placeholderText="# of Players" VerticalAlignment="Top" BindedWidth="120" BindedTextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1"/>-->
+            <!--Num Players-->
+            <!--Due to TextChanged event listener weirdness, needed to make PlaceholderTextBox by hand here-->
             <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="# of Players" Foreground="Gray" Margin="5,81,0,0" Width="120" Height="18" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <TextBox x:Name="NumPlayers" Height="18" TextAlignment="Center" Width="120" Background="{x:Null}" TextWrapping="NoWrap" Margin="0,81,0,0" TextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-
             <Label Name="NumPlayersVerification" HorizontalAlignment="Center" Margin="335,76,0,0" Content="*Please input a number between 2-6" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
 
@@ -56,11 +55,26 @@
                     <ColumnDefinition />
 
                 </Grid.ColumnDefinitions>
+                <ComboBox x:Name="GroupComboBox" Grid.Row="1" Height="24" Width="120" Grid.ColumnSpan="2" Margin="0,0,0,45">
+                    <ComboBoxItem Content="No Group" IsSelected="True"/>
+                    <ComboBoxItem Content="Family" />
+                    <ComboBoxItem Content="Friends" />
+                    <ComboBoxItem Content="Extended Family" />
+                    <ComboBoxItem Content="Work/Colleagues" />
+                    <ComboBoxItem Content="Neighbors" />
+                    <ComboBoxItem Content="School/Classmates" />
+                    <ComboBoxItem Content="Other" />
+            </ComboBox>
 				
 
                 <!--Submit and Cancel Buttons-->
-				<Button Name="Submit" Grid.Column="0" Content="Submit" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Click="Submit_Click"/>
-                <Button Name="Cancel" Grid.Column="1" Content="Cancel" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Click="Cancel_Click"/>
+				<Button Name="Submit" Grid.Column="0" Content="Submit" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,45,5,0" Click="Submit_Click"/>
+                <Button Name="Cancel" Grid.Column="1" Content="Cancel" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,45,0,0" Click="Cancel_Click"/>
+
+
+
+
+
             </Grid>
 
             

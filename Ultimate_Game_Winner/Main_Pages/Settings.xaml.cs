@@ -70,12 +70,15 @@ namespace Ultimate_Game_Winner.Main_Pages
             PlayerBox.ItemsSource = new string[] { "All Player Counts", "2 Players", "3 Players", "4 Players", "5 Players", "6 Players" };
             WeightBox.ItemsSource = new string[] { "All Weights", "1-2 (Light)", "2-3 (Medium-Light)", "3-4 (Medium-Heavy)", "4-5 (Heavy)" };
             PlaytimeBox.ItemsSource = new string[] { "All Playtimes", "Less than 30 min", "30-60 min", "60-90 min", "90-120 min", "Longer than 120 min" };
+            GroupBox.ItemsSource = new string[] { "All Groups", "Family", "Friends", "Extended Family", "Work/Colleagues", "Neighbors", "School/Classmates", "Other" };
+
 
             var filterOptions = savedSettings[4].Split(",");
             GenreBox.Text = filterOptions[0];
             PlayerBox.Text = filterOptions[1];
             WeightBox.Text = filterOptions[2];
             PlaytimeBox.Text = filterOptions[3];
+            GroupBox.Text = filterOptions[4];
         }
 
         private void DeleteLog_Click(object sender, RoutedEventArgs e)
@@ -230,6 +233,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             filterChoices[1] = PlayerBox.SelectedItem.ToString();
             filterChoices[2] = WeightBox.SelectedItem.ToString();
             filterChoices[3] = PlaytimeBox.SelectedItem.ToString();
+            filterChoices[4] = GroupBox.SelectedItem.ToString();
 
             var updatedFilterChoices = string.Join(",", filterChoices);
             if (lines[4] != updatedFilterChoices)
@@ -263,10 +267,12 @@ namespace Ultimate_Game_Winner.Main_Pages
             filterChoices[1] = "All Player Counts";
             filterChoices[2] = "All Weights";
             filterChoices[3] = "All Playtimes";
+            filterChoices[4] = "All Groups";
             GenreBox.SelectedItem = filterChoices[0];
             PlayerBox.SelectedItem = filterChoices[1];
             WeightBox.SelectedItem = filterChoices[2];
             PlaytimeBox.SelectedItem = filterChoices[3];
+            GroupBox.SelectedItem = filterChoices[4];
 
             var updatedFilterChoices = string.Join(",", filterChoices);
             
