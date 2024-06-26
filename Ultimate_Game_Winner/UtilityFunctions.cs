@@ -33,7 +33,8 @@ namespace Ultimate_Game_Winner
                     }
                 }
                 //if no real game name matched the inputted game name, the string "error" is returned
-                return "Error";
+                MessageBox.Show("No game with that name has been found; this is a very rare error. The game 'Dominion' has been inputted instead. Try deleting the gameplay and trying again. (Note for Developer: ReturnOfficialGameName)");
+                return "Dominion";
             }
         }
 
@@ -230,7 +231,8 @@ namespace Ultimate_Game_Winner
                 }
             }
             // Does not work if game does not exist
-            return -1;
+            MessageBox.Show("No game with that name has been found; this is a very rare error. The game 'Dominion' has been inputted instead. Try deleting the gameplay and trying again. (Note for developer: GetID function)");
+            return 64777;
         }
 
         public static string FilterVisibility()
@@ -274,7 +276,7 @@ namespace Ultimate_Game_Winner
                     return (playercount == "6");
 
                 default:
-                    throw new InvalidOperationException("Player Count went wrong.");
+                    MessageBox.Show("Something went wrong with the player count filter. It is being set as true. Please reset and try again.");
                     return true;
             }
         }
@@ -299,7 +301,7 @@ namespace Ultimate_Game_Winner
                     return (weight >= 4);
 
                 default:
-                    throw new InvalidOperationException("Weight went wrong.");
+                    MessageBox.Show("Something went wrong with the weight filter. It is being set as true. Please reset and try again.");
                     return true;
             }
         }
@@ -328,8 +330,8 @@ namespace Ultimate_Game_Winner
                     return (playtime > 120);
 
                 default:
-                    throw new InvalidOperationException("Playtime went wrong.");
-                    return false;
+                    MessageBox.Show("Something went wrong with the playtime filter. It is being set as true. Please reset and try again.");
+                    return true;
             }
         }
 
@@ -413,7 +415,8 @@ namespace Ultimate_Game_Winner
                         }
                     }
                 }
-                return -1;
+                MessageBox.Show("Something went wrong with CalculatePlacementPercentage. The number 1 was simply used instead.");
+                return 1;
             }
         }
 
