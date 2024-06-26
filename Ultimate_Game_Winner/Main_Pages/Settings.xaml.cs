@@ -41,7 +41,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             //Purpose: Loads savedsettings in so it displays the same as the user last saved it
             
-            string[] savedSettings = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            string[] savedSettings = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
             
             LoadFilter(savedSettings);
             LoadRankingSystem(savedSettings);
@@ -94,7 +94,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Purpose: Displays custom ranking options when custom is selected
 
             string[] values;
-            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            values = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
             WeightNum.Text = values[0];
             PlaytimeNum.Text = values[1];
             PlacementNum.Text = values[2];
@@ -108,19 +108,19 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             //Purpose: Resets values back to normal and refreshes leaderboard with updated values when normal is selected
 
-            var values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var values = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
             
 
             CustomRankItems.Visibility = Visibility.Collapsed;
 
-            var textFileToChange = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var textFileToChange = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
 
             //Doesn't waste time doing API calls if the input is already in place
             //textFileToChange[0] == weight && textFileToChange[1] == playtime && textFileToChange[2] == placement
             if (!(float.Parse(textFileToChange[0]) == 1 && float.Parse(textFileToChange[1]) == 1 && float.Parse(textFileToChange[2]) == 1))
             {
                 //sets the settings back to normal and refreshes the leaderboard
-                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
+                using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
                 {
                     writer.WriteLine("1.0");
                     writer.WriteLine("1.0");
@@ -225,7 +225,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Purpose: Sets selected Filter options in SavedSettings and refreshes Leaderboard
             //Note: From there, RefreshLeaderboard will update each game's status as to whether it passes the filters or not
 
-            string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
+            string filePath = "..\\..\\..\\Text_Files\\SavedSettings.txt";
             string[] lines = File.ReadAllLines(filePath);
 
             var filterChoices = lines[4].Split(",");
@@ -261,7 +261,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             //Purpose: Resets everything to non-filtered state
 
-            string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
+            string filePath = "..\\..\\..\\Text_Files\\SavedSettings.txt";
             string[] lines = File.ReadAllLines(filePath);
 
             var filterChoices = lines[4].Split(",");
@@ -311,7 +311,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 var playtime = PlaytimeNum.Text;
                 var placement = PlacementNum.Text;
 
-                var textFileToChange = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+                var textFileToChange = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
 
                 //Doesn't run API all over again if the input is already in place
                 if (textFileToChange[0] == weight && textFileToChange[1] == playtime && textFileToChange[2] == placement)
@@ -327,7 +327,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
                     CustomSetBtn.Content = "Note: This may take a second";
                     await Task.Delay(20);
-                    using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
+                    using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
                     {
                         writer.WriteLine(weight);
                         writer.WriteLine(playtime);

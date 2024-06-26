@@ -47,16 +47,16 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             {
 
                 //replaces anything in LogofPlayedGames.txt and Leaderboard.txt with an empty line.
-                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+                using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
                 {
                     writer.Write(string.Empty);
                 }
-                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+                using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\Leaderboard.txt"))
                 {
                     writer.Write(string.Empty);
                 }
-                var textFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
-                using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt"))
+                var textFile = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
+                using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
                 {
                     writer.WriteLine(textFile[0]);
                     writer.WriteLine(textFile[1]);
@@ -74,7 +74,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             else
             {
                 
-                string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt";
+                string filePath = "..\\..\\..\\Text_Files\\LogofPlayedGames.txt";
               
                 List<string> lines = new List<string>(File.ReadAllLines(filePath));
 

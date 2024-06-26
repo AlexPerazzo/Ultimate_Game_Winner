@@ -89,7 +89,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Purpose: Checks if game's genre is new to the system. If it is, it adds it to the options displayed in settings
 
             //Grabs all genres currently in file and the genre of the game being added
-            string filePath = "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt";
+            string filePath = "..\\..\\..\\Text_Files\\SavedSettings.txt";
             var ID = UtilityFunctions.GetID(nameOfGame);
             var theGenre = UtilityFunctions.GetAPIGenre(ID);
             
@@ -157,7 +157,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             line += correctFormatDate;
             
             //Save all information to LogofPlayedGames.txt
-            SaveStringIntoTxt(line, "C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt");
+            SaveStringIntoTxt(line, "..\\..\\..\\Text_Files\\LogofPlayedGames.txt");
 
             void SaveStringIntoTxt(string stringToSave, string fileName)
             {
@@ -209,7 +209,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
             //puts currently leaderboard onto newLeaderboard
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\Leaderboard.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null) 
@@ -241,7 +241,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
             //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+            using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\Leaderboard.txt"))
             {
                 
                 writer.Write(string.Empty);

@@ -36,7 +36,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         private void LoadLog(object sender, RoutedEventArgs e)
         {
             
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
             {
                 //Purpose: Populates StackPanel with LoggedGamePanel User Controls
 

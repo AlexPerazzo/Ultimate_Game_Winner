@@ -43,7 +43,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             //Purpose: Populates main StackPanel with LeaderboardPanel UserControls
 
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\Leaderboard.txt"))
             {
 
                 //Reads each line from the text file and makes a TextBlock out of it
@@ -102,7 +102,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
 
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
             {
                 string line;
                 
@@ -137,7 +137,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\Leaderboard.txt"))
+            using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\Leaderboard.txt"))
             {
 
                 writer.Write(string.Empty);

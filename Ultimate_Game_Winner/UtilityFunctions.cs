@@ -19,7 +19,7 @@ namespace Ultimate_Game_Winner
             //this fixes that so other parts of the code (and the GUI) are better
 
             //reads through all the game names
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\GamesAndIDs.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -43,7 +43,7 @@ namespace Ultimate_Game_Winner
             //Purpose: Easy way to check if game is in our text file for purposes of verification
 
             //Reads list of all games and their ids
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\GamesAndIDs.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -214,7 +214,7 @@ namespace Ultimate_Game_Winner
             //Purpose: Grab's ID of a game. The ID is critical for access bgg's API
 
             //Reads list of all games and their ids
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\GamesAndIDs.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -235,7 +235,7 @@ namespace Ultimate_Game_Winner
 
         public static string FilterVisibility()
         {
-            var settingsText = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var settingsText = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
             //If No selected Filters, Filter text remains hidden
             if (settingsText[4] == "All Genres,All Player Counts,All Weights,All Playtimes,All Groups")
                 return "Hidden";
@@ -344,7 +344,7 @@ namespace Ultimate_Game_Winner
         {
 
             bool filterBool = false;
-            var textFile = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            var textFile = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
             var chosenFilters = textFile[4].Split(",");
 
             var chosenGenre = chosenFilters[0];
@@ -377,7 +377,7 @@ namespace Ultimate_Game_Winner
         {
             //Gathers weights of different factors (in case custom ranking system is on)
             string[] values;
-            values = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            values = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
 
             //Creates three factors that go into point total
             var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
@@ -400,7 +400,7 @@ namespace Ultimate_Game_Winner
             double CalculatePlacementPercentage(int placement, int numOfPlayers)
             {
                 //reads from PlacementPercentages.txt and grabs the associated information needed for the math calculations.
-                using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\PlacementPercentages.txt"))
+                using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\PlacementPercentages.txt"))
                 {
                     reader.ReadLine();
                     string line;
@@ -422,7 +422,7 @@ namespace Ultimate_Game_Winner
             string resultString = "";
 
             //Read through all Logged Games
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -444,7 +444,7 @@ namespace Ultimate_Game_Winner
                 }
             }
             //Write the resultString to the text file
-            File.WriteAllText("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt", resultString);
+            File.WriteAllText("..\\..\\..\\Text_Files\\LogofPlayedGames.txt", resultString);
 
         }
     }

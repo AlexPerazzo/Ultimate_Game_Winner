@@ -43,7 +43,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         {
             //Purpose: Populates Window
 
-            using (StreamReader reader = new StreamReader("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\LogofPlayedGames.txt"))
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
             {
                 //Reads each line from the LogofPlayedGames.txt file and makes a TextBlock out of it
                 //Adds that TextBlock to the StackPanel from the xaml page
