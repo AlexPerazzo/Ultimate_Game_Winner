@@ -140,6 +140,16 @@ namespace Ultimate_Game_Winner
 
             float averageWeight = float.Parse(averageWeightString); float minPlaytime = float.Parse(minPlaytimeString); float maxPlaytime = float.Parse(maxPlaytimeString); float averagePlaytime = (minPlaytime + maxPlaytime) / 2;
 
+            //error-handling. If game is obscure and doesn't have weight or playtime set: Set it for them
+            if (averageWeight < 1 || averageWeight > 5)
+            {
+                averageWeight = 1.75f;
+            }
+
+            if (averagePlaytime < 1)
+            {
+                averagePlaytime = 30;
+            }
 
             return (averagePlaytime, averageWeight);
         }
@@ -159,7 +169,21 @@ namespace Ultimate_Game_Winner
             //sorts through that information to grab image of game.
             
             XElement? item = doc.Element("items").Element("item");
-            var imageURL = item.Element("thumbnail").Value;
+            var backupURL = "https://cf.geekdo-images.com/zxVVmggfpHJpmnJY9j-k1w__itemrep/img/Py7CTY0tSBSwKQ0sgVjRFfsVUZU=/fit-in/246x300/filters:strip_icc()/pic1657689.jpg";
+            string imageURL;
+            
+
+                var thumbnailElement = item.Element("thumbnail");
+
+            if (thumbnailElement != null)
+            {
+                // Thumbnail element exists, get its value
+                imageURL = thumbnailElement.Value;
+            }
+            else
+                imageURL = backupURL;
+            
+            
 
             return imageURL;
         }
