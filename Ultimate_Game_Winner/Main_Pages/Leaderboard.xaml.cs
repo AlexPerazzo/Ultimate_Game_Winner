@@ -33,9 +33,9 @@ namespace Ultimate_Game_Winner.Main_Pages
             InitializeComponent();
             this.DataContext = this;
 
+            //Checks if "(Filtered)" should appear on screen
             Filtered = UtilityFunctions.FilterVisibility();
 
-            //Calls LoadLeaderboard when the page is loaded.
             Loaded += LoadLeaderboard;
         }
 
@@ -76,14 +76,16 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             //Purpose: Event-listener for the RefreshLeaderboard Button
 
-            //Calls RefreshLeaderboard (which redoes all the math), clears theLeaderboard stackPanel, then repopulates it
+            //Calls RefreshLeaderboard (which redoes all the math)
             RefreshLeaderboardBtn.Content = "Note: This may take a second";
             await Task.Delay(20);
             RefreshLeaderboard();
 
+            //Clears theLeaderboard stackPanel, then repopulates it
             theLeaderboard.Children.Clear();
             LoadLeaderboard(sender, e);
 
+            
             RefreshLeaderboardBtn.Content = "Done!";
             await Task.Delay(2000);
             RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
@@ -96,12 +98,12 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Purpose: Builds the Leaderboard point totals from the ground up
             //Notes: Refreshes filters and incorporates custom ranking system
 
-
+            //Checks each game and updates in LogofPlayedGames whether it should be filtered out or not
             UtilityFunctions.UpdateFilterInLog();
             
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
-
+            //Reads from LogofPlayedGames line by line
             using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
             {
                 string line;
@@ -110,19 +112,21 @@ namespace Ultimate_Game_Winner.Main_Pages
                 {
                     String[] parts = line.Split(",,,");
                     
-                    
+                    //If it shouldn't be filtered out
                     if (parts[parts.Length - 2] == "true")
                     {
 
+                        //Gather API Information
                         int ID = UtilityFunctions.GetID(parts[0]);
                         (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
 
-                        //skips over Game Name, Number of Players, Date, Additional Comments, filterBool, and Group
+                        //Goes through players in the game played (skips over everything except the names of the players)
                         for (int i = 2; i < int.Parse(parts[1]) + 2; i++)
                         {
                             double points = UtilityFunctions.CalculatePoints(weight, playtime, int.Parse(parts[1]), (i - 1));
 
-                            //checks if person is already in the dictionary and adds them accordingly
+                            //checks if person is already in the dictionary
+                            //initializes them in the dictionary or simply adds to their ongoing total of points
                             if (!newLeaderboard.ContainsKey(parts[i]))
                                 newLeaderboard.Add(parts[i], points);
 
@@ -134,18 +138,21 @@ namespace Ultimate_Game_Winner.Main_Pages
                 }
             }
 
-
+            //Sorts the dictionary so 1st place is the first item in the dictionary
             var sortedDictionary = newLeaderboard.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
+            //Updates Leaderboard.txt with our new completely remade leaderboard
             using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\Leaderboard.txt"))
             {
-
+                //empties out the old leaderboard
                 writer.Write(string.Empty);
                 int i = 0;
+
+                
+                //Adds each person's new point total into Leaderboard.txt
                 foreach (var entry in sortedDictionary)
                 {
                     i += 1;
-                    //Write onto Leaderboard.txt by iterating through a sorted dictionary and putting their placement, name, and points
                     var key = entry.Key;
                     var value = entry.Value;
                     

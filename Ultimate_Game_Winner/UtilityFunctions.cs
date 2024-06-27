@@ -271,6 +271,7 @@ namespace Ultimate_Game_Winner
 
         public static bool CheckGenre(string chosenGenre, string genre)
         {
+            //Purpose: Checks Genre compared to Filter
             if (chosenGenre == "All Genres")
                 return true;
             else
@@ -279,7 +280,9 @@ namespace Ultimate_Game_Winner
 
         public static bool CheckPlayerCount(string chosenPlayerCount, string playercount)
         {
-            switch(chosenPlayerCount)
+            //Purpose: Checks Player Count compared to Filter
+
+            switch (chosenPlayerCount)
             {
                 case "All Player Counts":
                     return true;
@@ -307,6 +310,8 @@ namespace Ultimate_Game_Winner
 
         public static bool CheckWeight(string chosenWeight, float weight)
         {
+            //Purpose: Checks Weight compared to Filter
+
             switch (chosenWeight)
             {
                 case "All Weights":
@@ -332,6 +337,7 @@ namespace Ultimate_Game_Winner
 
         public static bool CheckPlaytime(string chosenPlaytime, float playtime)
         {
+            //Purpose: Checks Playtime compared to Filter
 
             switch (chosenPlaytime)
             {
@@ -361,6 +367,8 @@ namespace Ultimate_Game_Winner
 
         public static bool CheckGroup(string chosenGroup, string group)
         {
+            //Purpose: Checks Group compared to Filter
+
             if (chosenGroup == "All Groups")
                 return true;
             else
@@ -368,21 +376,25 @@ namespace Ultimate_Game_Winner
         }
         public static bool ShouldFilter(string nameOfGame, string playerCount, string group)
         {
+            //Purpose: Checks all information and returns True if a gameplay is good to be displayed or false if it is not
 
             bool filterBool = false;
             var textFile = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
             var chosenFilters = textFile[4].Split(",");
 
+            //Gathers user chosen Filters for all categories
             var chosenGenre = chosenFilters[0];
             var chosenPlayerCount = chosenFilters[1];
             var chosenWeight = chosenFilters[2];
             var chosenPlaytime = chosenFilters[3];
             var chosenGroup = chosenFilters[4];
 
+            //If all are base choices, sets to true
             if (chosenGenre == "All Genres" && chosenPlayerCount == "All Player Counts" && chosenWeight == "All Weights" && chosenPlaytime == "All Playtimes" && chosenGroup == "All Groups")
             {
                 filterBool = true;
             }
+            //Otherwise: Gathers necessary info and checks each filter
             else
             {
                 var ID = UtilityFunctions.GetID(nameOfGame);
@@ -401,7 +413,11 @@ namespace Ultimate_Game_Winner
 
         public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
         {
-            //Gathers weights of different factors (in case custom ranking system is on)
+            //Purpose: Returns a point total to award
+            //Depends on the weight/playtime of the game, and the number of players who participated, and the individual's placement
+            
+            
+            //Gathers the multipliers (in case custom ranking system is on)
             string[] values;
             values = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
 
@@ -425,6 +441,8 @@ namespace Ultimate_Game_Winner
 
             double CalculatePlacementPercentage(int placement, int numOfPlayers)
             {
+                //Purpose: Helper function to gather the percentage of points to award based off placement
+
                 //reads from PlacementPercentages.txt and grabs the associated information needed for the math calculations.
                 using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\PlacementPercentages.txt"))
                 {
@@ -446,6 +464,7 @@ namespace Ultimate_Game_Winner
 
         public static void UpdateFilterInLog()
         {
+            //Purpose: Updates every game in the logofplayedgames with whether it should be displayed or not based off the filters
             string resultString = "";
 
             //Read through all Logged Games

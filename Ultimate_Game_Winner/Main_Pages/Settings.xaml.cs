@@ -116,7 +116,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             var textFileToChange = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
 
             //Doesn't waste time doing API calls if the input is already in place
-            //textFileToChange[0] == weight && textFileToChange[1] == playtime && textFileToChange[2] == placement
+            
             if (!(float.Parse(textFileToChange[0]) == 1 && float.Parse(textFileToChange[1]) == 1 && float.Parse(textFileToChange[2]) == 1))
             {
                 //sets the settings back to normal and refreshes the leaderboard
@@ -213,6 +213,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             RefreshLeaderboardBtn.Content = "Note: This may take a second";
             await Task.Delay(20);
             Leaderboard.RefreshLeaderboard();
+
             RefreshLeaderboardBtn.Content = "Done!";
             await Task.Delay(2000);
             RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
@@ -241,6 +242,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 FilterSetBtn.Content = "Note: This may take a second";
                 await Task.Delay(20);
 
+                //Updates Filter Choices then uses RefreshLeaderboard to update the game log depending on those choices
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
                 Leaderboard.RefreshLeaderboard();
@@ -278,11 +280,13 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             var updatedFilterChoices = string.Join(",", filterChoices);
             
+            
             if (lines[4] != updatedFilterChoices)
             {
                 FilterResetBtn.Content = "Note: This may take a second";
                 await Task.Delay(20);
 
+                //Updates Filter Choices then uses RefreshLeaderboard to update the game log depending on those choices
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
                 Leaderboard.RefreshLeaderboard();

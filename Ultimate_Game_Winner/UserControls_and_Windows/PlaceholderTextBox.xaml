@@ -7,7 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="18" d:DesignWidth="100" Background="White">
     <Grid>
+        <!--Background with placeholder text-->
         <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="{Binding placeholderText}" Foreground="Gray" Margin="5,0,0,0" Width="{Binding BindedWidth}" Height="{Binding BindedHeight}"/>
+        
+        <!--Textbox for user to input information-->
         <TextBox x:Name="Input" Height="{Binding BindedHeight}" TextAlignment="Center" Width="{Binding BindedWidth}" Background="{x:Null}" TextWrapping="{Binding BindedWrap}" TextChanged="Input_TextChanged"/>
     </Grid>
 </UserControl>

@@ -26,9 +26,8 @@ namespace Ultimate_Game_Winner.Main_Pages
 {
     /// <summary>
     /// Gathers information about a gameplay.
-    /// (including Game Name, # of Players, their placements, and any other optional gameplay notes)
+    /// (including Game Name, # of Players, their placements, group, and any other optional gameplay notes)
     /// Saves that information for later use in the Log. Also calculate points and updates the Leaderboard.
-    /// The fact that this xaml/xaml.cs dabbles into both the Log and the Leaderboard may suggest that it should be better organized
     /// </summary>
     public partial class RecordaGame : Page
     {
@@ -54,6 +53,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 Submit.Content = "Note: This may take a second";
                 await Task.Delay(20);
+
+                //Save information
                 string nameOfGame = GameName.Input.Text; string numPlayers = NumPlayers.Text;
                 (string lineSaved, bool filterBool) = SaveToLog(nameOfGame, numPlayers);
                 
@@ -73,7 +74,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
             else 
             {
-                
+                //If invalid inputs, display error to user
                 NumPlayers_LostFocus(sender, e);
                 GameName_LostFocus(sender, e);
                 Submit.Content = "Error";
@@ -113,10 +114,12 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             bool filterBool;
             var officialName = UtilityFunctions.ReturnOfficialGameName(nameOfGame);
-            // Append each item from the list, separated by commas
+
+            
             string line = $"{officialName},,,{numPlayers},,,";
 
             int count = -1;
+            // Append each item from the list, separated by commas
             foreach (PlaceholderTextBox textBox in TextBoxCollection)
             {
                 count++;
@@ -155,18 +158,13 @@ namespace Ultimate_Game_Winner.Main_Pages
             DateTime currentDate = DateTime.Now;
             var correctFormatDate = currentDate.ToString("M/d/yy");
             line += correctFormatDate;
-            
-            //Save all information to LogofPlayedGames.txt
-            SaveStringIntoTxt(line, "..\\..\\..\\Text_Files\\LogofPlayedGames.txt");
 
-            void SaveStringIntoTxt(string stringToSave, string fileName)
+            //Save all information to LogofPlayedGames.txt
+            using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\LogofPlayedGames.txt", true))
             {
-                //writes line to file
-                using (StreamWriter writer = new StreamWriter(fileName, true))
-                {
-                    writer.WriteLine(stringToSave);
-                }
+                writer.WriteLine(line);
             }
+            
 
             return (line, filterBool);
         }
@@ -208,7 +206,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
 
-            //puts currently leaderboard onto newLeaderboard
+            //puts current leaderboard into newLeaderboard
             using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\Leaderboard.txt"))
             {
                 string line;

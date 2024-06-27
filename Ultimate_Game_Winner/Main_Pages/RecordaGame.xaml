@@ -38,6 +38,7 @@
             <Label Name="NumPlayersVerification" HorizontalAlignment="Center" Margin="335,76,0,0" Content="*Please input a number between 2-6" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
 
+            <!--StackPanel where inputs for 1st place 2nd place etc. go-->
             <StackPanel Margin="0,90,0,0" Grid.Row="1">
                 <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
                     <ItemsControl.ItemTemplate>
@@ -48,13 +49,15 @@
                 </ItemsControl>
             </StackPanel>
 
-            <!--Two buttons centered on the bottom row with some margin-->
+            <!--Two buttons + Group centered on the bottom row with some margin-->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
 
                 </Grid.ColumnDefinitions>
+                
+                <!--Group Combo Box-->
                 <ComboBox x:Name="GroupComboBox" Grid.Row="1" Height="24" Width="120" Grid.ColumnSpan="2" Margin="0,0,0,45">
                     <ComboBoxItem Content="No Group" IsSelected="True"/>
                     <ComboBoxItem Content="Family" />
@@ -64,7 +67,7 @@
                     <ComboBoxItem Content="Neighbors" />
                     <ComboBoxItem Content="School/Classmates" />
                     <ComboBoxItem Content="Other" />
-            </ComboBox>
+                </ComboBox>
 				
 
                 <!--Submit and Cancel Buttons-->

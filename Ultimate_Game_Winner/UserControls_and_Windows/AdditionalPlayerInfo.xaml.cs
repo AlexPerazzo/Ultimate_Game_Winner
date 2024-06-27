@@ -52,50 +52,45 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 {
                     
                     string[] parts = line.Split(",,,");
-                    if (parts[parts.Length - 2] == "true")
-                    {
 
+                    //If it passes the filters, and the player is part of that gameplay: gather and add the info
+                    if (parts[parts.Length - 2] == "true" && parts.Contains(playerName))
+                    {
                         int numPlayers = int.Parse(parts[1]);
+                        var ID = UtilityFunctions.GetID(parts[0]);
+                        (float thePlaytime, float theWeight) = UtilityFunctions.GetAPIData(ID);
 
-                    
-                    var ID = UtilityFunctions.GetID(parts[0]);
-                    (float thePlaytime, float theWeight) = UtilityFunctions.GetAPIData(ID);
-                    PlacementPointsPanel statsPanel = new PlacementPointsPanel();
-                    
+                        PlacementPointsPanel statsPanel = new PlacementPointsPanel();
+                        LoggedGamePanel panel = new LoggedGamePanel();
 
-                    for (var i = 2; i < numPlayers + 2; i++)
-                    {
-                        if (parts[i] == playerName)
-                        {
-                            LoggedGamePanel panel = new LoggedGamePanel();
-                            //Swaps various normal parts of LoggedGamePanel with different wanted information
-                            
-                            panel.GameName = $"{UtilityFunctions.AddOrdinal(i - 1)}";
+                        //Swaps various normal parts of LoggedGamePanel with different wanted information
+                        //Placement in place of Game Name
+                        //Game Name in place of PlayerName
+                        //Points and Date stay points and date
 
-                            //Game Name in place of PlayerName
-                            panel.PlayerName = parts[0];
-                            var points = UtilityFunctions.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), i - 1);
-                            
-                            statsPanel.Points = $"{points}";
-                            statsPanel.Margin = new Thickness(12,12,0,0);
-                            StatsPanels.Children.Insert(0, statsPanel);
-                            
-                            panel.NumPlayers = $"{numPlayers} players";
-                            panel.Date = parts[parts.Length - 1];
-                            panel.Margin = new Thickness(12, 12, 0, 0);
-                            panel.HorizontalAlignment= HorizontalAlignment.Left;
-                            panel.AllInfo = parts;
-                            AllGamesPlayed.Children.Insert(0, panel);
-                            break;
-                        }
+                        var placement = Array.IndexOf(parts, playerName) - 1;
+                        var points = UtilityFunctions.CalculatePoints(theWeight, thePlaytime, int.Parse(parts[1]), placement);
+                        
+                        //Panel is main information
+                        panel.GameName = $"{UtilityFunctions.AddOrdinal(placement)}";
+                        panel.PlayerName = parts[0];
+                        panel.NumPlayers = $"{numPlayers} players";
+                        panel.Date = parts[parts.Length - 1];
+                        panel.Margin = new Thickness(12, 12, 0, 0);
+                        panel.HorizontalAlignment= HorizontalAlignment.Left;
+                        panel.AllInfo = parts;
+                        
+                        //Statspanel has points earned displayed on it
+                        statsPanel.Points = $"{points}";
+                        statsPanel.Margin = new Thickness(12,12,0,0);
+                        
+
+                        //Insert Panels Into respective StackPanels
+                        StatsPanels.Children.Insert(0, statsPanel);
+                        AllGamesPlayed.Children.Insert(0, panel);
                     }
-                    }
-
-                    
                 }
             }
-
-
         }
     }
 }
