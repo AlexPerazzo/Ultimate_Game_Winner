@@ -1,1 +1,7 @@
 Ark Nova,,,2,,,Andrew,,,Alex,,,N/A,,,No Group,,,true,,,6/26/24
+Ark Nova,,,2,,,Alex,,,Mom,,,N/A,,,No Group,,,true,,,7/3/24
+Run,,,2,,,Alex,,,Eric,,,N/A,,,No Group,,,true,,,7/3/24
+Run,,,2,,,Mom,,,Alex,,,N/A,,,No Group,,,true,,,7/3/24
+Run,,,3,,,Hannah,,,Andrew,,,Alex,,,N/A,,,No Group,,,true,,,7/3/24
+Run,,,3,,,A,,,B,,,Andrew,,,N/A,,,No Group,,,true,,,7/3/24
+Run,,,3,,,Idk,,,Idk2,,,Last,,,N/A,,,No Group,,,true,,,7/3/24

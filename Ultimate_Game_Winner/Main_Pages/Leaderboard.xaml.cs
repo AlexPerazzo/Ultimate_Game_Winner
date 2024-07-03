@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ultimate_Game_Winner.UserControls_and_Windows;
 using Ultimate_Game_Winner;
+using System.Collections;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
@@ -38,8 +39,15 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             Loaded += LoadLeaderboard;
         }
-
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
+        {
+            string[] savedSettings = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            if (savedSettings[3] == "# of Wins")
+                LoadWinsLeaderboard(sender, e);
+            else
+                LoadNormalLeaderboard(sender, e);
+        }
+        private void LoadNormalLeaderboard(object sender, RoutedEventArgs e)
         {
             //Purpose: Populates main StackPanel with LeaderboardPanel UserControls
 
@@ -69,6 +77,92 @@ namespace Ultimate_Game_Winner.Main_Pages
                 }
             }
             
+
+        }
+
+        private void LoadWinsLeaderboard(object sender, RoutedEventArgs e)
+        {
+
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
+            {
+                //Purpose: Populates StackPanel with LoggedGamePanel User Controls
+
+                //Reads each line from the LogofPlayedGames.txt file and makes a TextBlock out of it
+                //Adds that TextBlock to the StackPanel from the xaml page
+
+                var playerWins = new Dictionary<string, int[]>();
+                string? line;
+                while ((line = reader.ReadLine()) != null)
+                {
+
+                    string[] parts = line.Split(",,,");
+                    if (parts[parts.Length - 2] == "true")
+                    {
+                        for (int i = 2; i < int.Parse(parts[1]) + 2; i++)
+                        {
+
+                            if (!playerWins.ContainsKey(parts[i]))
+                            {
+                                playerWins.Add(parts[i], [0, 0, 0]);
+                            }
+
+                            if (i == 2)
+                                playerWins[parts[i]][0] += 1;
+                            else if (i == 3)
+                                playerWins[parts[i]][1] += 1;
+
+                            playerWins[parts[i]][2] += 1;
+
+                        }
+
+                    }
+                }
+
+                
+                //sort Dictionary for Leaderboard
+                var sortedDictionary = playerWins
+                .OrderByDescending(kv => kv.Value[0])    // Sort by the first int (descending)
+                .ThenByDescending(kv => kv.Value[1])     // Sort by the second int (descending)
+                .ThenBy(kv => kv.Value[2])               // Sort by the third int (ascending)
+                .ToDictionary(kv => kv.Key, kv => kv.Value);
+
+
+                foreach (var item in sortedDictionary)
+                {
+
+
+
+                    {
+
+                        LoggedGamePanel panel = new LoggedGamePanel();
+                        //restructure everything
+                        //GameName is now # of 1sts
+                        //
+                        //NumPlayers is now # of 2nds
+                        //Date is now # of total games
+
+                        panel.PlayerName = item.Key;
+
+                        var firstPlaces = item.Value[0];
+                        panel.GameName = $"{firstPlaces} 1sts";
+
+                        var secondPlaces = item.Value[1];
+                        panel.NumPlayers = $"{secondPlaces} 2nds";
+
+                        var gamesPlayed = item.Value[2];
+                        panel.Date = $"{gamesPlayed} Games Played";
+                        panel.Margin = new Thickness(12, 12, 0, 0);
+                        //panel.AllInfo = parts;
+
+
+                        panel.IsClickable = false;
+                        theLeaderboard.Children.Add(panel);
+                        //theLeaderboard.Children.Insert(0, panel);
+                    }
+                }
+            }
+
+
 
         }
 

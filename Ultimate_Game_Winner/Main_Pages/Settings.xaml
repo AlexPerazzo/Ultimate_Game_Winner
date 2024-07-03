@@ -104,22 +104,28 @@
         <TextBlock Text="Ranking System" FontSize="25" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="2"/>
         <ComboBox x:Name ="RankingSysBox" Height="20" Width="100" Margin="0,0,0,10" VerticalAlignment="Bottom" Grid.Row="2">
             <ComboBoxItem x:Name="Normal" Content="Normal" Selected="Normal_Selected"/>
+            <ComboBoxItem x:Name="NumofWins" Content="# of Wins" Selected="NumofWins_Selected"/>
             <ComboBoxItem x:Name="Custom" Content="Custom" Selected="Custom_Selected"/>
-        </ComboBox>
+            </ComboBox>
 
         <!--Grid for buttons at bottom-->
             <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    
+                    
+
                 </Grid.ColumnDefinitions>
                 
-                <!--Refresh Leaderboard-->
-                <Button Name="RefreshLeaderboardBtn" Margin="0,25,5,0" Content="Refresh Leaderboard" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Click="RefreshLeaderboardBtn_Click" Grid.Row="4"/>
+                <!--Refresh Leaderboard Button-->
+                <Button Name="RefreshLeaderboardBtn" Margin="0,25,5,0" Content="Refresh Leaderboard" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Click="RefreshLeaderboardBtn_Click" Grid.Column="0"/>
          
-                <!--Delete Entire Log-->
-                <Button Name="DeleteLog" Margin="5,25,0,0" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DeleteLog_Click" Grid.Row="4"  Grid.Column="1"/>
+                <!--Delete Entire Log Button-->
+                <Button Name="DeleteLog" Margin="5,25,0,0" Content="Delete Entire Log" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DeleteLog_Click" Grid.Column="1"/>
             
+                
+
             </Grid>
 
         </Grid>

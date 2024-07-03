@@ -28,7 +28,9 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         public string NumPlayers { get; set; }
         public string Date { get; set; }
         public string[] AllInfo { get; set; }
-        
+
+        public bool IsClickable { get; set; } = true;
+
         public LoggedGamePanel()
         {
             InitializeComponent();
@@ -41,16 +43,29 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (IsClickable)
+            {
+
             //Purpose Display AdditionalGameplayInfo Window when clicked upon
             AdditionalGameplayInfo additionalGameplayInfo = new AdditionalGameplayInfo(AllInfo);
             
             
             additionalGameplayInfo.Show();
+            }
+            //This else clause is just for PlayersWinsWindow
+            else
+            {
+                AdditionalPlayerInfo additionalPlayerInfo = new AdditionalPlayerInfo(PlayerName);
+                additionalPlayerInfo.Title = $"{PlayerName}'s Games Played";
+                additionalPlayerInfo.Show();
+            }
+
         }
 
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             
+
             //Purpose: Add drop shadow when hovered upon
             DropShadowEffect dropShadowEffect = new DropShadowEffect
             {
@@ -61,12 +76,16 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             };
 
             LogPanel.Effect = dropShadowEffect;
+            
         }
 
         private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
         {
+            
+
             //Purpose: Remove drop shadow when not hovered upon
             LogPanel.Effect = null;
+            
         }
     }
 }

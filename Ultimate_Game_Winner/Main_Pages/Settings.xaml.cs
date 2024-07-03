@@ -55,7 +55,9 @@ namespace Ultimate_Game_Winner.Main_Pages
             PlaytimeNum.Text = savedSettings[1];
             PlacementNum.Text = savedSettings[2];
 
-            if (float.Parse(savedSettings[0]) == 1 && float.Parse(savedSettings[1]) == 1 && float.Parse(savedSettings[2]) == 1)
+            if (savedSettings[3] == "# of Wins")
+                RankingSysBox.Text = savedSettings[3];
+            else if (float.Parse(savedSettings[0]) == 1 && float.Parse(savedSettings[1]) == 1 && float.Parse(savedSettings[2]) == 1)
                 RankingSysBox.Text = "Normal";
             else
                 RankingSysBox.Text = savedSettings[3];
@@ -109,7 +111,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             //Purpose: Resets values back to normal and refreshes leaderboard with updated values when normal is selected
 
             var values = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
-            
+            bool refreshLeaderboard = false;
 
             CustomRankItems.Visibility = Visibility.Collapsed;
 
@@ -119,19 +121,25 @@ namespace Ultimate_Game_Winner.Main_Pages
             
             if (!(float.Parse(textFileToChange[0]) == 1 && float.Parse(textFileToChange[1]) == 1 && float.Parse(textFileToChange[2]) == 1))
             {
-                //sets the settings back to normal and refreshes the leaderboard
-                using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
-                {
-                    writer.WriteLine("1.0");
-                    writer.WriteLine("1.0");
-                    writer.WriteLine("1.0");
-                    writer.WriteLine("Normal");
-                    writer.WriteLine(values[4]);
-                    writer.WriteLine(values[5]);
-                }
-                Leaderboard.RefreshLeaderboard();
+                //checks if leaderboard should be refreshed
+                refreshLeaderboard = true;
                 
             }
+
+            //sets the settings regardless (due to # of wins existing; can't just clump it into one)
+            using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
+            {
+                writer.WriteLine("1.0");
+                writer.WriteLine("1.0");
+                writer.WriteLine("1.0");
+                writer.WriteLine("Normal");
+                writer.WriteLine(values[4]);
+                writer.WriteLine(values[5]);
+            }
+
+            //refreshes leaderboard if necessary
+            if (refreshLeaderboard)
+                Leaderboard.RefreshLeaderboard();
         }
 
 
@@ -358,6 +366,28 @@ namespace Ultimate_Game_Winner.Main_Pages
                 CustomSetBtn.Content = "Set";
             }
 
+        }
+
+        private void ViewWins_Click(object sender, RoutedEventArgs e)
+        {
+            PlayersWinsWindow winsWindow = new PlayersWinsWindow();
+            winsWindow.Show();
+        }
+
+        private void NumofWins_Selected(object sender, RoutedEventArgs e)
+        {
+            //Purpose: Edits SavedSettings.txt with "# of wins" so Leaderboard displays correctly
+
+                var textFileToChange = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
+                using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
+                {
+                    writer.WriteLine(textFileToChange[0]);
+                    writer.WriteLine(textFileToChange[1]);
+                    writer.WriteLine(textFileToChange[2]);
+                    writer.WriteLine("# of Wins");
+                    writer.WriteLine(textFileToChange[4]);
+                    writer.WriteLine(textFileToChange[5]);
+                }
         }
     }
     
