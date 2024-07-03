@@ -144,10 +144,10 @@ namespace Ultimate_Game_Winner.Main_Pages
                         panel.PlayerName = item.Key;
 
                         var firstPlaces = item.Value[0];
-                        panel.GameName = $"{firstPlaces} 1sts";
+                        panel.GameName = $"{firstPlaces} Wins";
 
                         var secondPlaces = item.Value[1];
-                        panel.NumPlayers = $"{secondPlaces} 2nds";
+                        panel.NumPlayers = $"{secondPlaces} Runner-ups";
 
                         var gamesPlayed = item.Value[2];
                         panel.Date = $"{gamesPlayed} Games Played";
