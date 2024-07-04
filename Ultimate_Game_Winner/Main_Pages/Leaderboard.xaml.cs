@@ -38,6 +38,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             Filtered = UtilityFunctions.FilterVisibility();
 
             Loaded += LoadLeaderboard;
+            Loaded += ResizePage;
         }
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
@@ -166,6 +167,17 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
+        private void ResizePage(object sender, RoutedEventArgs e)
+        {
+            // Get the parent window
+            Window parentWindow = Window.GetWindow(this);
+
+            parentWindow.SizeToContent = SizeToContent.Width;
+            if (parentWindow.ActualWidth < 800)
+            {
+                parentWindow.Width = 800;
+            }
+        }
         private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Event-listener for the RefreshLeaderboard Button
@@ -196,6 +208,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             UtilityFunctions.UpdateFilterInLog();
             
             Dictionary<String, double> newLeaderboard = new Dictionary<string, double>();
+            Dictionary<String, (float, float)> repeatedGameInfo = new Dictionary<string, (float, float)>();
 
             //Reads from LogofPlayedGames line by line
             using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\LogofPlayedGames.txt"))
@@ -209,10 +222,22 @@ namespace Ultimate_Game_Winner.Main_Pages
                     //If it shouldn't be filtered out
                     if (parts[parts.Length - 2] == "true")
                     {
+                        float playtime;
+                        float weight;
 
-                        //Gather API Information
-                        int ID = UtilityFunctions.GetID(parts[0]);
-                        (float playtime, float weight) = UtilityFunctions.GetAPIData(ID);
+                        //If we've already done the API call once, just look up the information in dictionary
+                        if (repeatedGameInfo.ContainsKey(parts[0]))
+                        {
+                            (playtime, weight) = repeatedGameInfo[parts[0]];
+                        }
+                        else
+                        {
+                            //Gather API Information
+                            int ID = UtilityFunctions.GetID(parts[0]);
+                            (playtime, weight) = UtilityFunctions.GetAPIData(ID);
+                            repeatedGameInfo.Add(parts[0], (playtime, weight));
+                        }
+
 
                         //Goes through players in the game played (skips over everything except the names of the players)
                         for (int i = 2; i < int.Parse(parts[1]) + 2; i++)

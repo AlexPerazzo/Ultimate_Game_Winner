@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ultimate_Game_Winner.UserControls_and_Windows"
         mc:Ignorable="d"
-        Title="AdditionalPlayerInfoPanel" Height="450" Width="800">
+        Title="AdditionalPlayerInfoPanel" Height="450" Width="800" SizeToContent="WidthAndHeight">
     <ScrollViewer>
         
-    <Grid>
+    <Grid Margin="0,0,13,0">
             <Grid.ColumnDefinitions>
                 <!--Points Received Column-->
                 <ColumnDefinition Width="105"/>

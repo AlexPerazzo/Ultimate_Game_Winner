@@ -5,3 +5,8 @@ Run,,,2,,,Mom,,,Alex,,,N/A,,,No Group,,,true,,,7/3/24
 Run,,,3,,,Hannah,,,Andrew,,,Alex,,,N/A,,,No Group,,,true,,,7/3/24
 Run,,,3,,,A,,,B,,,Andrew,,,N/A,,,No Group,,,true,,,7/3/24
 Run,,,3,,,Idk,,,Idk2,,,Last,,,N/A,,,No Group,,,true,,,7/3/24
+Run,,,2,,,Hannah,,,Alex,,,N/A,,,No Group,,,true,,,7/4/24
+Terraforming Mars,,,4,,,Alex,,,Mom,,,Eric,,,Ryan,,,N/A,,,No Group,,,true,,,7/4/24
+Trickerion: Legends of Illusion,,,4,,,Ryan,,,Alex,,,Angeles,,,Eric,,,N/A,,,No Group,,,true,,,7/4/24
+Dominion: Intrigue,,,3,,,Alex,,,Eric,,,Mom,,,N/A,,,No Group,,,true,,,7/4/24
+Run,,,2,,,Alex,,,Grandmamamamama,,,N/A,,,No Group,,,true,,,7/4/24

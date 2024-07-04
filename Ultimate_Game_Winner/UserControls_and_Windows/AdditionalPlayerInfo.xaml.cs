@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using Ultimate_Game_Winner.Main_Pages;
 
@@ -48,6 +49,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                 //Reads each line from the LogofPlayedGames.txt file and makes a TextBlock out of it
                 //Adds that TextBlock to the StackPanel from the xaml page
                 string? line;
+                Dictionary<String, (float, float)> repeatedGameInfo = new Dictionary<string, (float, float)>();
+
                 while ((line = reader.ReadLine()) != null)
                 {
                     
@@ -56,9 +59,24 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     //If it passes the filters, and the player is part of that gameplay: gather and add the info
                     if (parts[parts.Length - 2] == "true" && parts.Contains(playerName))
                     {
+                        float thePlaytime;
+                        float theWeight;
+
+
+                        if (repeatedGameInfo.ContainsKey(parts[0]))
+                        {
+                            (thePlaytime, theWeight) = repeatedGameInfo[parts[0]];
+                        }
+                        else
+                        {
+                            //Gather API Information
+                            int ID = UtilityFunctions.GetID(parts[0]);
+                            (thePlaytime, theWeight) = UtilityFunctions.GetAPIData(ID);
+                            repeatedGameInfo.Add(parts[0], (thePlaytime, theWeight));
+                        }
+
+
                         int numPlayers = int.Parse(parts[1]);
-                        var ID = UtilityFunctions.GetID(parts[0]);
-                        (float thePlaytime, float theWeight) = UtilityFunctions.GetAPIData(ID);
 
                         PlacementPointsPanel statsPanel = new PlacementPointsPanel();
                         LoggedGamePanel panel = new LoggedGamePanel();

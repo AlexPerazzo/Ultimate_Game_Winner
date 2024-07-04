@@ -143,7 +143,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
 
             //Add on the true or false for the filter
-            if (UtilityFunctions.ShouldFilter(officialName, numPlayers, GroupComboBox.Text))
+            if (UtilityFunctions.ShouldShow(officialName, numPlayers, GroupComboBox.Text))
             {
                 line += "true,,,";
                 filterBool = true;

@@ -7,11 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Leaderboard"
-      Background="White">
+      Background="White" MinWidth="800">
 
     <!--Simple ScrollViewer with a StackPanel to be added upon.-->
     <ScrollViewer>
-        <Grid>
+        <Grid Margin="0,0,10,0">
 
             <Grid.RowDefinitions>
                 <!--Title row-->

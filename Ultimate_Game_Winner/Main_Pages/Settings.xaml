@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="520" d:DesignWidth="800"
       Title="Settings"
-      Background="White">
+      Background="White" MinWidth="800">
 
     <ScrollViewer>
         

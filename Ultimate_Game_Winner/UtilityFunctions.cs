@@ -374,7 +374,7 @@ namespace Ultimate_Game_Winner
             else
                 return (chosenGroup == group);
         }
-        public static bool ShouldFilter(string nameOfGame, string playerCount, string group)
+        public static bool ShouldShow(string nameOfGame, string playerCount, string group)
         {
             //Purpose: Checks all information and returns True if a gameplay is good to be displayed or false if it is not
 
@@ -478,7 +478,7 @@ namespace Ultimate_Game_Winner
                     var playerCount = lineList[1];
                     var group = lineList[lineList.Length - 3];
 
-                    if (ShouldFilter(gameName, playerCount, group))
+                    if (ShouldShow(gameName, playerCount, group))
                         lineList[lineList.Length - 2] = "true";
                     else
                         lineList[lineList.Length - 2] = "false";

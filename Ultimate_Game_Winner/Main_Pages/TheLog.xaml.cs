@@ -30,9 +30,20 @@ namespace Ultimate_Game_Winner.Main_Pages
             this.DataContext = this;
             Filtered = UtilityFunctions.FilterVisibility();
             Loaded += LoadLog;
+            Loaded += ResizePage;
         }
 
-        
+        private void ResizePage(object sender, RoutedEventArgs e)
+        {
+            // Get the parent window
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow != null)
+            {
+                // Adjust the size of the parent window
+                parentWindow.SizeToContent = SizeToContent.Width;
+            }
+        }
         private void LoadLog(object sender, RoutedEventArgs e)
         {
             

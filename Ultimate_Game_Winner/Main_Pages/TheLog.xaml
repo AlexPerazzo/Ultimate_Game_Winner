@@ -8,9 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TheLog"
       Background="White"
-      >
+       MinWidth="800">
     <ScrollViewer>
-        <Grid>
+        <Grid Margin="0,0,10,0">
             <Grid.RowDefinitions>
                 <!--Title row-->
                 <RowDefinition Height="71"/>

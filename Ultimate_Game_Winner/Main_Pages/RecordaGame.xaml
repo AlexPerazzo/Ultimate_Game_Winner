@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RecordaGame"
-      Background="White">
+      Background="White" MinWidth="800">
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
