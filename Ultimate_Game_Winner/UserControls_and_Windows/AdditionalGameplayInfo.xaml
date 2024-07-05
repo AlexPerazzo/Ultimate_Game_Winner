@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ultimate_Game_Winner"
         mc:Ignorable="d"
-        Title="AdditionalGameInfoPanel" Height="450" Width="800">
+        Title="AdditionalGameInfoPanel" Height="475" Width="800">
     <ScrollViewer>
     <Grid>
         <Grid.ColumnDefinitions>
