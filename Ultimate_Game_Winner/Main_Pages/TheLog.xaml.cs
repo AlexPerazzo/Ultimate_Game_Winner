@@ -42,6 +42,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             {
                 // Adjust the size of the parent window
                 parentWindow.SizeToContent = SizeToContent.Width;
+                parentWindow.Height = parentWindow.Height;
             }
         }
         private void LoadLog(object sender, RoutedEventArgs e)
