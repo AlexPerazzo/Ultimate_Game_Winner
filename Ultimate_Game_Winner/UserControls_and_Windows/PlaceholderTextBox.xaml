@@ -11,6 +11,6 @@
         <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="{Binding placeholderText}" Foreground="Gray" Margin="5,0,0,0" Width="{Binding BindedWidth}" Height="{Binding BindedHeight}"/>
         
         <!--Textbox for user to input information-->
-        <TextBox x:Name="Input" Height="{Binding BindedHeight}" TextAlignment="Center" Width="{Binding BindedWidth}" Background="{x:Null}" TextWrapping="{Binding BindedWrap}" TextChanged="Input_TextChanged"/>
+        <TextBox x:Name="Input" Height="{Binding BindedHeight}" TextAlignment="Center" Width="{Binding BindedWidth}" Background="{x:Null}" TextWrapping="{Binding BindedWrap}" TextChanged="Input_TextChanged" BorderBrush="{Binding BindedBorderColor, TargetNullValue={x:Static SystemColors.ControlDarkBrush}, FallbackValue={x:Static SystemColors.ControlDarkBrush}}"/>
     </Grid>
 </UserControl>

@@ -21,6 +21,7 @@ using System.Collections.ObjectModel;
 using Ultimate_Game_Winner;
 using System.Collections.Specialized;
 using Ultimate_Game_Winner.UserControls_and_Windows;
+using Microsoft.VisualBasic;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
@@ -39,6 +40,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         public RecordaGame()
         {
             InitializeComponent();
+            this.DataContext = this;
             TextBoxCollection = new ObservableCollection<PlaceholderTextBox>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
             OldTextBoxCollection = new ObservableCollection<TextBox>();
@@ -48,8 +50,27 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             //Event Listener for Submit Game Button
             //Purpose: If boxes have valid input, saves text to log file and updates points in leaderboard
+            bool namesIsAGo = true;
 
-            if (gameNameIsAGo && numPlayersIsAGo)
+            int count = TextBoxCollection.Count;
+            int index = 0;
+            foreach (PlaceholderTextBox textBox in TextBoxCollection)
+            {
+                if (index < count - 1)
+                {
+                if (textBox.Input.Text == "")
+                {
+                    
+                    textBox.BindedBorderColor = Brushes.Red;
+                    namesIsAGo = false;
+                }
+                    
+                }
+                index++;
+            }
+
+
+            if (gameNameIsAGo && numPlayersIsAGo && namesIsAGo)
             {
                 Submit.Content = "Note: This may take a second";
                 await Task.Delay(20);
@@ -276,11 +297,14 @@ namespace Ultimate_Game_Winner.Main_Pages
                 textBox.BindedWidth = "100";
                 textBox.BindedHeight = "18";
                 textBox.BindedWrap = "NoWrap";
+                //textBox.BindedBorderColor = Brushes.Red;
                 textBox.placeholderText = $"{UtilityFunctions.AddOrdinal(i + 1)} place...";
 
                 textBox.VerticalAlignment = VerticalAlignment.Center;
                 textBox.HorizontalAlignment = HorizontalAlignment.Center;
-                
+
+                //
+
                 TextBoxCollection.Add(textBox);
             }
 

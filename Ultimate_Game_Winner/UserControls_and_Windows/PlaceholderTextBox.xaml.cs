@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
     /// </summary>
     /// 
 
-    public partial class PlaceholderTextBox : UserControl
+    public partial class PlaceholderTextBox : UserControl, INotifyPropertyChanged
     {
 
         public string placeholderText { get; set; }
@@ -29,8 +30,28 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         public string BindedWidth { get; set; }
         public string BindedWrap {  get; set; }
         public string BindedTextChanged { get; set; }
+        //public Brush BindedBorderColor { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-        public string BrushColor { get; set; }
+        private Brush _bindedBorderColor;
+        public Brush BindedBorderColor
+        {
+            get { return _bindedBorderColor; }
+            set
+            {
+                if (_bindedBorderColor != value)
+                {
+                    _bindedBorderColor = value;
+                    OnPropertyChanged(nameof(BindedBorderColor));
+                }
+            }
+        }
+
+
 
         public PlaceholderTextBox()
         {

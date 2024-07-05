@@ -368,11 +368,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
-        private void ViewWins_Click(object sender, RoutedEventArgs e)
-        {
-            PlayersWinsWindow winsWindow = new PlayersWinsWindow();
-            winsWindow.Show();
-        }
+        
 
         private void NumofWins_Selected(object sender, RoutedEventArgs e)
         {
