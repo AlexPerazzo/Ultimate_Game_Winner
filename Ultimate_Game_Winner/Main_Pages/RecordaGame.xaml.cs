@@ -34,43 +34,45 @@ namespace Ultimate_Game_Winner.Main_Pages
     {
         private bool numPlayersIsAGo = false;
         private bool gameNameIsAGo = false;
+        private bool playerNamesAreAGo = true;
+        
         public ObservableCollection<PlaceholderTextBox> TextBoxCollection { get; set; }
-        public ObservableCollection<TextBox> OldTextBoxCollection { get; set; }
+        public ObservableCollection<Label> VerificationLabelCollection { get; set; }
 
         public RecordaGame()
         {
             InitializeComponent();
             this.DataContext = this;
             TextBoxCollection = new ObservableCollection<PlaceholderTextBox>();
+            VerificationLabelCollection = new ObservableCollection<Label>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
-            OldTextBoxCollection = new ObservableCollection<TextBox>();
+            NameLabelVerificationControl.ItemsSource = VerificationLabelCollection;
+            
         }
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
             //Event Listener for Submit Game Button
             //Purpose: If boxes have valid input, saves text to log file and updates points in leaderboard
-            bool namesIsAGo = true;
+            
+            playerNamesAreAGo = true;
+
 
             int count = TextBoxCollection.Count;
             int index = 0;
             foreach (PlaceholderTextBox textBox in TextBoxCollection)
             {
+                
                 if (index < count - 1)
                 {
-                if (textBox.Input.Text == "")
-                {
-                    
-                    textBox.BindedBorderColor = Brushes.Red;
-                    namesIsAGo = false;
-                }
+                    PlayerName_LostFocus(textBox, e);
                     
                 }
                 index++;
             }
 
 
-            if (gameNameIsAGo && numPlayersIsAGo && namesIsAGo)
+            if (gameNameIsAGo && numPlayersIsAGo && playerNamesAreAGo)
             {
                 Submit.Content = "Note: This may take a second";
                 await Task.Delay(20);
@@ -199,6 +201,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             NumPlayers.Text = "";
             GroupComboBox.Text = "No Group";
             TextBoxCollection.Clear();
+            VerificationLabelCollection.Clear();
 
             //Resets verification error messages
             NumPlayers.BorderBrush = SystemColors.ControlDarkBrush;
@@ -280,7 +283,6 @@ namespace Ultimate_Game_Winner.Main_Pages
         
         
         
-        
         private void UpdateTextBoxCollection(int count)
         {
             //Purpose: Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
@@ -288,24 +290,35 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             // Clear the existing collection
             TextBoxCollection.Clear();
+            VerificationLabelCollection.Clear();
 
-            // Add the required number of textboxes
             for (int i = 0; i < count; i++)
             {
+            // Add the required number of textboxes
                 PlaceholderTextBox textBox = new PlaceholderTextBox {Margin = new Thickness(0, 25, 0, 0) };
                 
                 textBox.BindedWidth = "100";
                 textBox.BindedHeight = "18";
                 textBox.BindedWrap = "NoWrap";
-                //textBox.BindedBorderColor = Brushes.Red;
+                
                 textBox.placeholderText = $"{UtilityFunctions.AddOrdinal(i + 1)} place...";
 
                 textBox.VerticalAlignment = VerticalAlignment.Center;
                 textBox.HorizontalAlignment = HorizontalAlignment.Center;
 
                 //
-
+                textBox.LostFocus += PlayerName_LostFocus;
                 TextBoxCollection.Add(textBox);
+
+                // Add Matching Verification Labels
+                Label verificationLabel = new Label();
+                verificationLabel.Content = "*Please Enter a Name";
+                verificationLabel.HorizontalAlignment = HorizontalAlignment.Center;
+                verificationLabel.VerticalAlignment = VerticalAlignment.Center;
+                verificationLabel.Foreground = Brushes.Red;
+                verificationLabel.Margin = new Thickness(0, 17, 0, 0);
+                verificationLabel.Visibility = Visibility.Hidden;
+                VerificationLabelCollection.Add(verificationLabel);
             }
 
             // Adds additional box for gameplay notes
@@ -323,6 +336,25 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
+        private void PlayerName_LostFocus(object sender, RoutedEventArgs e) 
+        {
+            var placeholderTextBox = sender as PlaceholderTextBox;
+            int associatedIndex = TextBoxCollection.IndexOf(placeholderTextBox);
+            var verificationLabel = VerificationLabelCollection[associatedIndex];
+
+            if (placeholderTextBox.Input.Text == "")
+            {
+                placeholderTextBox.BindedBorderColor = Brushes.Red;
+                verificationLabel.Visibility = Visibility.Visible;
+                playerNamesAreAGo = false;
+            }
+            else
+            {
+                placeholderTextBox.BindedBorderColor = SystemColors.ControlDarkBrush;
+                verificationLabel.Visibility = Visibility.Hidden;
+            }
+
+        }
         private void GameName_LostFocus(object sender, RoutedEventArgs e)
         {
             //Purpose: Validates User Input for Game Name

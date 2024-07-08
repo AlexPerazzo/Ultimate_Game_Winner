@@ -1,13 +1,3 @@
-Alex,12.26
-Hannah,3.11
-Mom,2.52
-Ryan,2.37
-A,2.07
-Idk,2.07
-Andrew,1.94
-B,1.04
-Idk2,1.04
-Grandmamamamama,-0.62
-Last,-1.04
-Angeles,-2.02
-Eric,-5.46
+Alex,3.88
+Mom,1.94
+Eric,-1.94

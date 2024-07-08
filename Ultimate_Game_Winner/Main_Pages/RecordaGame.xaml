@@ -19,6 +19,7 @@
                 <!--Submit/Cancel Buttons in smaller bottom row. Alongside Group-->
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
+            
 
             <!--Title-->
             <Label Content="Record a Game" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
@@ -44,6 +45,17 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            
+            <!--StackPanel for verification for 1st place 2nd place etc. go-->
+            <StackPanel Margin="240,94,0,0" Grid.Row="1">
+                <ItemsControl x:Name="NameLabelVerificationControl" Margin="10">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

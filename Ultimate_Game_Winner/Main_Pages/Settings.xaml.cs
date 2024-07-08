@@ -142,6 +142,21 @@ namespace Ultimate_Game_Winner.Main_Pages
                 Leaderboard.RefreshLeaderboard();
         }
 
+        private void NumofWins_Selected(object sender, RoutedEventArgs e)
+        {
+            //Purpose: Edits SavedSettings.txt with "# of wins" so Leaderboard displays correctly
+            CustomRankItems.Visibility = Visibility.Collapsed;
+            var textFileToChange = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
+            using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
+            {
+                writer.WriteLine(textFileToChange[0]);
+                writer.WriteLine(textFileToChange[1]);
+                writer.WriteLine(textFileToChange[2]);
+                writer.WriteLine("# of Wins");
+                writer.WriteLine(textFileToChange[4]);
+                writer.WriteLine(textFileToChange[5]);
+            }
+        }
 
 
         
@@ -215,17 +230,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
-        private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //Purpose: Calls RefreshLeaderboard to build the leaderboard from the ground up
-            RefreshLeaderboardBtn.Content = "Note: This may take a second";
-            await Task.Delay(20);
-            Leaderboard.RefreshLeaderboard();
-
-            RefreshLeaderboardBtn.Content = "Done!";
-            await Task.Delay(2000);
-            RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
-        }
+        
 
         
 
@@ -370,21 +375,6 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         
 
-        private void NumofWins_Selected(object sender, RoutedEventArgs e)
-        {
-            //Purpose: Edits SavedSettings.txt with "# of wins" so Leaderboard displays correctly
-
-                var textFileToChange = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
-                using (StreamWriter writer = new StreamWriter("..\\..\\..\\Text_Files\\SavedSettings.txt"))
-                {
-                    writer.WriteLine(textFileToChange[0]);
-                    writer.WriteLine(textFileToChange[1]);
-                    writer.WriteLine(textFileToChange[2]);
-                    writer.WriteLine("# of Wins");
-                    writer.WriteLine(textFileToChange[4]);
-                    writer.WriteLine(textFileToChange[5]);
-                }
-        }
     }
     
 }
