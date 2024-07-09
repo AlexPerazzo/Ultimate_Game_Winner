@@ -21,7 +21,7 @@
 
                 <!--Main content row-->
                 <RowDefinition/>
-                <!--White Space Row-->
+                <!--Button Row-->
                 <RowDefinition Height="45"/>
 
             </Grid.RowDefinitions>

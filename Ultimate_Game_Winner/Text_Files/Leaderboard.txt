@@ -1,3 +1,4 @@
-Alex,3.88
+Alex,4.62
 Mom,1.94
+Hannah,0.74
 Eric,-1.94

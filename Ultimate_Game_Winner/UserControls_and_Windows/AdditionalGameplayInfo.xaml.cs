@@ -97,5 +97,11 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             AreYouSure areYouSure = new AreYouSure(false, allInfo, this);
             areYouSure.Show();
         }
+
+        private void EditGameplayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EditGameplayWindow editWindow = new EditGameplayWindow();
+            editWindow.Show();
+        }
     }
 }
