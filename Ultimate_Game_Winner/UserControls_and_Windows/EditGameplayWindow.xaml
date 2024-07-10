@@ -20,23 +20,25 @@
         <Label Content="Edit Gameplay" HorizontalAlignment="Center" FontSize="33" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal" Margin="0"/>
         <Rectangle Height="2.3" VerticalAlignment="Bottom" Width="280" Fill="Black"/>
 
+        <Label Content="(Please refresh original window after saving any changes)" Grid.Column="1" Grid.Row="1" FontSize="12" FontStyle="Italic" HorizontalAlignment="Center" Foreground="Gray"></Label>
 
-        <!--TextBoxes for all the needed information-->
+
+            <!--TextBoxes for all the needed information-->
         <userControls:PlaceholderTextBox x:Name="GameName" HorizontalAlignment="Center" Margin="0,41,0,0" BindedWrap="NoWrap" placeholderText="Name of Game" VerticalAlignment="Top" BindedWidth="120" BindedHeight="18" Grid.Row="1" LostFocus="GameName_LostFocus"/>
-        <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="305,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
+        <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="140,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
 
 
         <!--Num Players-->
         <!--Due to TextChanged event listener weirdness, needed to make PlaceholderTextBox by hand here-->
-        <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="# of Players" Foreground="Gray" Margin="5,81,0,0" Width="120" Height="18" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="# of Players" Foreground="Gray" Margin="0,81,0,0" Width="120" Height="18" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="NumPlayers" Height="18" TextAlignment="Center" Width="120" Background="{x:Null}" TextWrapping="NoWrap" Margin="0,81,0,0" TextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Name="NumPlayersVerification" HorizontalAlignment="Center" Margin="335,76,0,0" Content="*Please input a number between 2-6" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
+        <Label Name="NumPlayersVerification" HorizontalAlignment="Center" Margin="150,76,0,0" Content="*Please input a number between 2-6" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
 
         <!--StackPanel where inputs for 1st place 2nd place etc. go-->
         <StackPanel Margin="0,90,0,0" Grid.Row="1">
-            <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
+            <ItemsControl x:Name="NameTextBoxesControl" Margin="10,10,10,10">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
 
@@ -46,7 +48,7 @@
         </StackPanel>
 
         <!--StackPanel for verification for 1st place 2nd place etc. go-->
-        <StackPanel Margin="240,94,0,0" Grid.Row="1">
+        <StackPanel Margin="205,94,0,0" Grid.Row="1">
             <ItemsControl x:Name="NameLabelVerificationControl" Margin="10">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

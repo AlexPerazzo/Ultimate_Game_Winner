@@ -108,7 +108,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         }
 
-        private void UpdateFilterOptions(string nameOfGame)
+        public static void UpdateFilterOptions(string nameOfGame)
         {
             //Purpose: Checks if game's genre is new to the system. If it is, it adds it to the options displayed in settings
 
