@@ -4,20 +4,60 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ultimate_Game_Winner.UserControls_and_Windows"
+        xmlns:userControls="clr-namespace:Ultimate_Game_Winner.UserControls_and_Windows" 
+        
         mc:Ignorable="d"
-        Title="EditGameplayWindow" Height="500" Width="325">
+        Title="EditGameplayWindow" Height="500" Width="400">
+    <ScrollViewer>
+        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="51"/>
             <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
             <!--Edit Gameplay Title-->
         <Label Content="Edit Gameplay" HorizontalAlignment="Center" FontSize="33" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal" Margin="0"/>
         <Rectangle Height="2.3" VerticalAlignment="Bottom" Width="280" Fill="Black"/>
 
 
-        <!--Game Name-->
+        <!--TextBoxes for all the needed information-->
+        <userControls:PlaceholderTextBox x:Name="GameName" HorizontalAlignment="Center" Margin="0,41,0,0" BindedWrap="NoWrap" placeholderText="Name of Game" VerticalAlignment="Top" BindedWidth="120" BindedHeight="18" Grid.Row="1" LostFocus="GameName_LostFocus"/>
+        <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="305,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
+
+
+
+        <!--Num Players-->
+        <!--Due to TextChanged event listener weirdness, needed to make PlaceholderTextBox by hand here-->
+        <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="# of Players" Foreground="Gray" Margin="5,81,0,0" Width="120" Height="18" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="NumPlayers" Height="18" TextAlignment="Center" Width="120" Background="{x:Null}" TextWrapping="NoWrap" Margin="0,81,0,0" TextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Name="NumPlayersVerification" HorizontalAlignment="Center" Margin="335,76,0,0" Content="*Please input a number between 2-6" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
+
+
+        <!--StackPanel where inputs for 1st place 2nd place etc. go-->
+        <StackPanel Margin="0,90,0,0" Grid.Row="1">
+            <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <!--StackPanel for verification for 1st place 2nd place etc. go-->
+        <StackPanel Margin="240,94,0,0" Grid.Row="1">
+            <ItemsControl x:Name="NameLabelVerificationControl" Margin="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+
+            <!--Game Name-->
         
         <!--Number of Players-->
         
@@ -33,10 +73,26 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             
-        <Button Content="Save" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0"/>
-        <Button Content="Reset" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
-        <Button Content="Cancel" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2"/>
+        <!--Buttons + Group centered on the bottom row with some margin-->
+        
+
+            <!--Group Combo Box-->
+            <ComboBox x:Name="GroupComboBox" Grid.Row="1" Height="24" Width="100" Grid.ColumnSpan="5" Margin="0,0,0,45" HorizontalAlignment="Center">
+                <ComboBoxItem Content="No Group" IsSelected="True"/>
+                <ComboBoxItem Content="Family" />
+                <ComboBoxItem Content="Friends" />
+                <ComboBoxItem Content="Extended Family" />
+                <ComboBoxItem Content="Work/Colleagues" />
+                <ComboBoxItem Content="Neighbors" />
+                <ComboBoxItem Content="School/Classmates" />
+                <ComboBoxItem Content="Other" />
+            </ComboBox>
+            
+        <Button x:Name="SaveBtn" Content="Save" Grid.Row="3" Margin="0,45,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Click="SaveBtn_Click"/>
+            <Button x:Name="ResetBtn" Content="Reset" Grid.Row="3" Margin="0,45,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Click="ResetBtn_Click"/>
+            <Button x:Name="CancelBtn" Content="Cancel" Grid.Row="3" Margin="5,45,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Click="CancelBtn_Click"/>
         </Grid>
 
     </Grid>
+    </ScrollViewer>
 </Window>

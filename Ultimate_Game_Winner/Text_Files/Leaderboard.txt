@@ -1,4 +1,9 @@
-Alex,4.62
+Alex,8.8
+A,3.51
+Thomas,2.79
 Mom,1.94
 Hannah,0.74
+Penelope,-1.39
 Eric,-1.94
+B,-2.11
+Nile,-2.79

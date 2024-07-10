@@ -26,7 +26,7 @@
             <Rectangle Height="3" VerticalAlignment="Bottom" Width="550" Fill="Black"/>
 
 
-            <!--TextBox's for all the needed information-->
+            <!--TextBoxes for all the needed information-->
             <userControls:PlaceholderTextBox x:Name="GameName" HorizontalAlignment="Center" Margin="0,41,0,0" BindedWrap="NoWrap" placeholderText="Name of Game" VerticalAlignment="Top" BindedWidth="120" BindedHeight="18" Grid.Row="1" LostFocus="GameName_LostFocus"/>
             <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="305,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden"/>
 
