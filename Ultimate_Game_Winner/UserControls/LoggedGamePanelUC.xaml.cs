@@ -13,14 +13,16 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner.Windows;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+
+namespace Ultimate_Game_Winner.UserControls
 {
     /// <summary>
     /// Each gameplay individually will be displayed on the Log with the winner, game, # of players, and date recorded
     /// Each individual game with said info will be displayed through this UserControl
     /// </summary>
-    public partial class LoggedGamePanel : UserControl
+    public partial class LoggedGamePanelUC : UserControl
     {
         public string PlayerName { get; set; }
         public string GameName { get; set; }
@@ -31,7 +33,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         public bool IsClickable { get; set; } = true;
 
-        public LoggedGamePanel()
+        public LoggedGamePanelUC()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -47,7 +49,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             {
 
             //Purpose Display AdditionalGameplayInfo Window when clicked upon
-            AdditionalGameplayInfo additionalGameplayInfo = new AdditionalGameplayInfo(AllInfo);
+            AdditionalGameplayInfoWindow additionalGameplayInfo = new AdditionalGameplayInfoWindow(AllInfo);
             
             
             additionalGameplayInfo.Show();
@@ -55,7 +57,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             //This else clause is just for PlayersWinsWindow
             else
             {
-                AdditionalPlayerInfo additionalPlayerInfo = new AdditionalPlayerInfo(PlayerName);
+                AdditionalPlayerInfoWindow additionalPlayerInfo = new AdditionalPlayerInfoWindow(PlayerName);
                 additionalPlayerInfo.Title = $"{PlayerName}'s Games Played";
                 additionalPlayerInfo.Show();
             }

@@ -14,16 +14,17 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ultimate_Game_Winner.Windows;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+namespace Ultimate_Game_Winner.UserControls
 {
     /// <summary>
     /// Each person individually will be displayed on the Leaderboard with their ranking and point totals
     /// Each individual person with said info will be displayed through this UserControl
     /// </summary>
-    public partial class LeaderboardPanel : UserControl
+    public partial class LeaderboardPanelUC : UserControl
     {
-        public LeaderboardPanel()
+        public LeaderboardPanelUC()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -60,7 +61,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         private void LeaderPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //Purpose: Displays AddtionalPlayerInfo Window when clicked upon
-            AdditionalPlayerInfo additionalPlayerInfo = new AdditionalPlayerInfo(PlayerName);
+            AdditionalPlayerInfoWindow additionalPlayerInfo = new AdditionalPlayerInfoWindow(PlayerName);
             additionalPlayerInfo.Title = $"{PlayerName}'s Games Played";
             additionalPlayerInfo.Show();
         }

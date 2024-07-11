@@ -13,18 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+namespace Ultimate_Game_Winner.UserControls
 {
     /// <summary>
     /// Meant to work in tandem with LoggedGamePanels when shown in the AdditionalPlayerInfo Windows
     /// The LoggedGamePanel will pop up with its normal info. 
     /// This UserControl will pop up next to it with info about that player's placement and points earned in each game.
     /// </summary>
-    public partial class PlacementPointsPanel : UserControl
+    public partial class PlacementPointsPanelUC : UserControl
     {
         
         public string Points { get; set; }
-        public PlacementPointsPanel()
+        public PlacementPointsPanelUC()
         {
             InitializeComponent();
             this.DataContext = this;

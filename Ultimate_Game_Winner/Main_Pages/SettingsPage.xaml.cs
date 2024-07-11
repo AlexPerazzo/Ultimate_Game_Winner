@@ -16,14 +16,15 @@ using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ultimate_Game_Winner;
-using Ultimate_Game_Winner.UserControls_and_Windows;
+using Ultimate_Game_Winner.UserControls;
+using Ultimate_Game_Winner.Windows;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
     /// <summary>
     /// Contains options for changing ranking system and clearing the log of all recorded games
     /// </summary>
-    public partial class Settings : Page
+    public partial class SettingsPage : Page
     {
         private bool weightIsAGo = true;
         private bool playtimeIsAGo = true;
@@ -31,7 +32,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         
 
 
-        public Settings()
+        public SettingsPage()
         {
             InitializeComponent();
             Loaded += LoadSettings;
@@ -87,7 +88,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             //Purpose: Displays a window which will ask for confirmation and delete the entire log
             
-            AreYouSure areYouSure = new AreYouSure(true, [], null);
+            AreYouSureWindow areYouSure = new AreYouSureWindow(true, [], null);
             areYouSure.Show();
         }
 
@@ -139,7 +140,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             //refreshes leaderboard if necessary
             if (refreshLeaderboard)
-                Leaderboard.RefreshLeaderboard();
+                LeaderboardPage.RefreshLeaderboard();
         }
 
         private void NumofWins_Selected(object sender, RoutedEventArgs e)
@@ -258,7 +259,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 //Updates Filter Choices then uses RefreshLeaderboard to update the game log depending on those choices
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
-                Leaderboard.RefreshLeaderboard();
+                LeaderboardPage.RefreshLeaderboard();
 
                 FilterSetBtn.Content = "Done!";
                 await Task.Delay(2500);
@@ -302,7 +303,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 //Updates Filter Choices then uses RefreshLeaderboard to update the game log depending on those choices
                 lines[4] = updatedFilterChoices;
                 File.WriteAllLines(filePath, lines);
-                Leaderboard.RefreshLeaderboard();
+                LeaderboardPage.RefreshLeaderboard();
 
                 FilterResetBtn.Content = "Done!";
                 await Task.Delay(2500);
@@ -354,7 +355,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                         writer.WriteLine(textFileToChange[5]);
 
                     }
-                    Leaderboard.RefreshLeaderboard();
+                    LeaderboardPage.RefreshLeaderboard();
                     CustomSetBtn.Content = "Done!";
                     await Task.Delay(2000);
                     CustomSetBtn.Content = "Set";

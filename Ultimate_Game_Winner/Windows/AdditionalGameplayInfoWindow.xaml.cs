@@ -14,15 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using Ultimate_Game_Winner.Main_Pages;
+using Ultimate_Game_Winner.UserControls;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+namespace Ultimate_Game_Winner.Windows
 {
     /// <summary>
     /// When the User Clicks on a Gameplay, Information about that gameplay
     /// (including players participating, their placements, and information about the game itself)
     /// will be displayed through this Window
     /// </summary>
-    public partial class AdditionalGameplayInfo : Window
+    public partial class AdditionalGameplayInfoWindow : Window
     {
         private string[] allInfo;
        
@@ -36,7 +37,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         
 
        
-        public AdditionalGameplayInfo(string[] alltheInfo)
+        public AdditionalGameplayInfoWindow(string[] alltheInfo)
         {
             InitializeComponent();
             
@@ -78,7 +79,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             {
                 var points = UtilityFunctions.CalculatePoints(theWeight, thePlaytime, int.Parse(allInfo[1]), i-1);
 
-                LeaderboardPanel playerPanel = new LeaderboardPanel();
+                LeaderboardPanelUC playerPanel = new LeaderboardPanelUC();
                 //playerPanel.Padding = new Thickness(5);
                 playerPanel.PlayerName = allInfo[i];
                 playerPanel.Placement = $"{i-1}";
@@ -94,7 +95,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         {
             //Purpose: Calls a confirmation window which will handle deleting the gameplay
 
-            AreYouSure areYouSure = new AreYouSure(false, allInfo, this);
+            AreYouSureWindow areYouSure = new AreYouSureWindow(false, allInfo, this);
             areYouSure.Show();
         }
 

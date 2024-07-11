@@ -20,7 +20,7 @@ using System.Xml.Linq;
 using System.Collections.ObjectModel;
 using Ultimate_Game_Winner;
 using System.Collections.Specialized;
-using Ultimate_Game_Winner.UserControls_and_Windows;
+using Ultimate_Game_Winner.UserControls;
 using Microsoft.VisualBasic;
 
 namespace Ultimate_Game_Winner.Main_Pages
@@ -30,20 +30,20 @@ namespace Ultimate_Game_Winner.Main_Pages
     /// (including Game Name, # of Players, their placements, group, and any other optional gameplay notes)
     /// Saves that information for later use in the Log. Also calculate points and updates the Leaderboard.
     /// </summary>
-    public partial class RecordaGame : Page
+    public partial class RecordGameplayPage : Page
     {
         private bool numPlayersIsAGo = false;
         private bool gameNameIsAGo = false;
         private bool playerNamesAreAGo = true;
         
-        public ObservableCollection<PlaceholderTextBox> TextBoxCollection { get; set; }
+        public ObservableCollection<PlaceholderTextBoxUC> TextBoxCollection { get; set; }
         public ObservableCollection<Label> VerificationLabelCollection { get; set; }
 
-        public RecordaGame()
+        public RecordGameplayPage()
         {
             InitializeComponent();
             this.DataContext = this;
-            TextBoxCollection = new ObservableCollection<PlaceholderTextBox>();
+            TextBoxCollection = new ObservableCollection<PlaceholderTextBoxUC>();
             VerificationLabelCollection = new ObservableCollection<Label>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
             NameLabelVerificationControl.ItemsSource = VerificationLabelCollection;
@@ -60,7 +60,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             int count = TextBoxCollection.Count;
             int index = 0;
-            foreach (PlaceholderTextBox textBox in TextBoxCollection)
+            foreach (PlaceholderTextBoxUC textBox in TextBoxCollection)
             {
                 
                 if (index < count - 1)
@@ -143,7 +143,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
             int count = -1;
             // Append each item from the list, separated by commas
-            foreach (PlaceholderTextBox textBox in TextBoxCollection)
+            foreach (PlaceholderTextBoxUC textBox in TextBoxCollection)
             {
                 count++;
                 //Checks if it's a player
@@ -295,7 +295,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             for (int i = 0; i < count; i++)
             {
             // Add the required number of textboxes
-                PlaceholderTextBox textBox = new PlaceholderTextBox {Margin = new Thickness(0, 25, 0, 0) };
+                PlaceholderTextBoxUC textBox = new PlaceholderTextBoxUC {Margin = new Thickness(0, 25, 0, 0) };
                 
                 textBox.BindedWidth = "100";
                 textBox.BindedHeight = "18";
@@ -322,7 +322,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
 
             // Adds additional box for gameplay notes
-            PlaceholderTextBox notes = new PlaceholderTextBox { Margin = new Thickness(0, 25, 0, 0) };
+            PlaceholderTextBoxUC notes = new PlaceholderTextBoxUC { Margin = new Thickness(0, 25, 0, 0) };
             notes.BindedWidth = "300";
             notes.BindedHeight = "70";
             notes.placeholderText = "Additional gameplay notes...";
@@ -338,7 +338,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         private void PlayerName_LostFocus(object sender, RoutedEventArgs e) 
         {
-            var placeholderTextBox = sender as PlaceholderTextBox;
+            var placeholderTextBox = sender as PlaceholderTextBoxUC;
             int associatedIndex = TextBoxCollection.IndexOf(placeholderTextBox);
             var verificationLabel = VerificationLabelCollection[associatedIndex];
 

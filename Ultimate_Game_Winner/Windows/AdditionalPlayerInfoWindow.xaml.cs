@@ -15,15 +15,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using Ultimate_Game_Winner.Main_Pages;
+using Ultimate_Game_Winner.UserControls;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+namespace Ultimate_Game_Winner.Windows
 {
     /// <summary>
     /// When the User Clicks on a Person, Information about that person
     /// (including all games they've played in and their placements/points earned during those games)
     /// will be displayed through this Window
     /// </summary>
-    public partial class AdditionalPlayerInfo : Window
+    public partial class AdditionalPlayerInfoWindow : Window
     {
 
         string playerName {  get; set; }
@@ -31,7 +32,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
         public string Filtered {  get; set; }
 
-        public AdditionalPlayerInfo(string PlayerName)
+        public AdditionalPlayerInfoWindow(string PlayerName)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -78,8 +79,8 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
                         int numPlayers = int.Parse(parts[1]);
 
-                        PlacementPointsPanel statsPanel = new PlacementPointsPanel();
-                        LoggedGamePanel panel = new LoggedGamePanel();
+                        PlacementPointsPanelUC statsPanel = new PlacementPointsPanelUC();
+                        LoggedGamePanelUC panel = new LoggedGamePanelUC();
 
                         //Swaps various normal parts of LoggedGamePanel with different wanted information
                         //Placement in place of Game Name

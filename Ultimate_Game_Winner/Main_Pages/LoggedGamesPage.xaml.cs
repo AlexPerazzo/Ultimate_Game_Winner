@@ -13,18 +13,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Ultimate_Game_Winner.UserControls_and_Windows;
+using Ultimate_Game_Winner.UserControls;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
-    public partial class TheLog : Page
+    public partial class LoggedGamesPage : Page
     {
         /// <summary>
         /// Displays every single recorded game using the LoggedGamePanel UserControl in a stack panel
         /// </summary>
         public string Filtered { get; set; }
 
-        public TheLog()
+        public LoggedGamesPage()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -62,7 +62,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                     if (parts[parts.Length-2] == "true")
                     {
                         
-                        LoggedGamePanel panel = new LoggedGamePanel();
+                        LoggedGamePanelUC panel = new LoggedGamePanelUC();
                         panel.GameName = parts[0];
                         var numPlayers = parts[1];
                         panel.NumPlayers = $"{numPlayers} players";

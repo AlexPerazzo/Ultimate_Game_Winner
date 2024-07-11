@@ -15,14 +15,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ultimate_Game_Winner.Main_Pages;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+
+namespace Ultimate_Game_Winner.UserControls
 {
     /// <summary>
     /// Interaction logic for PlaceholderTextBox.xaml
     /// </summary>
     /// 
 
-    public partial class PlaceholderTextBox : UserControl, INotifyPropertyChanged
+    public partial class PlaceholderTextBoxUC : UserControl, INotifyPropertyChanged
     {
 
         public string placeholderText { get; set; }
@@ -53,7 +54,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
 
 
-        public PlaceholderTextBox()
+        public PlaceholderTextBoxUC()
         {
             InitializeComponent();
             this.DataContext = this;

@@ -13,14 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Ultimate_Game_Winner.UserControls_and_Windows;
+using Ultimate_Game_Winner.UserControls;
 using Ultimate_Game_Winner;
 using System.Collections;
 
 namespace Ultimate_Game_Winner.Main_Pages
 {
 
-    public partial class Leaderboard : Page
+    public partial class LeaderboardPage : Page
     {
         /// <summary>
         /// Displays every single person ranked based off points.
@@ -28,7 +28,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         /// </summary>
         public string Filtered { get; set; }
 
-        public Leaderboard()
+        public LeaderboardPage()
         {
             
             InitializeComponent();
@@ -64,7 +64,7 @@ namespace Ultimate_Game_Winner.Main_Pages
                 {
                     placement++;
                     
-                    LeaderboardPanel panel = new LeaderboardPanel();
+                    LeaderboardPanelUC panel = new LeaderboardPanelUC();
                     string[] parts = line.Split(",");
                     panel.PlayerName = parts[0];
                     
@@ -135,7 +135,7 @@ namespace Ultimate_Game_Winner.Main_Pages
 
                     {
 
-                        LoggedGamePanel panel = new LoggedGamePanel();
+                        LoggedGamePanelUC panel = new LoggedGamePanelUC();
                         //restructure everything
                         //GameName is now # of 1sts
                         //

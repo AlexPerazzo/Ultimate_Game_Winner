@@ -13,20 +13,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Ultimate_Game_Winner.Main_Pages;
+using Ultimate_Game_Winner.UserControls;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+namespace Ultimate_Game_Winner.Windows
 {
     /// <summary>
     /// This Window will ask a confirmation for deleting all the games that have been recorded since it's a major decision
     /// </summary>
-    public partial class AreYouSure : Window
+    public partial class AreYouSureWindow : Window
     {
         bool deleteAll;
         string[] allInfo;
         Window oldWindow;
         
 
-        public AreYouSure(bool DeleteAll, string[] AllInfo, Window OldWindow)
+        public AreYouSureWindow(bool DeleteAll, string[] AllInfo, Window OldWindow)
         {
 
             InitializeComponent();
@@ -82,7 +83,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
                 File.WriteAllLines(filePath, lines);
 
-                Leaderboard.RefreshLeaderboard();
+                LeaderboardPage.RefreshLeaderboard();
                 
                 ConfirmBtn.Content = "Success!";
                 await Task.Delay(500);

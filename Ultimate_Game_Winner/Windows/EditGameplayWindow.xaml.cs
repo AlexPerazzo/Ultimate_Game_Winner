@@ -14,9 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Ultimate_Game_Winner.Main_Pages;
-using Ultimate_Game_Winner.UserControls_and_Windows;
+using Ultimate_Game_Winner.UserControls;
 
-namespace Ultimate_Game_Winner.UserControls_and_Windows
+
+namespace Ultimate_Game_Winner.Windows
 {
     /// <summary>
     /// Interaction logic for EditGameplayWindow.xaml
@@ -28,7 +29,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         private bool gameNameIsAGo = false;
         private bool playerNamesAreAGo = true;
 
-        public ObservableCollection<PlaceholderTextBox> TextBoxCollection { get; set; }
+        public ObservableCollection<PlaceholderTextBoxUC> TextBoxCollection { get; set; }
         public ObservableCollection<Label> VerificationLabelCollection { get; set; }
 
         private string[] allInfo;
@@ -39,7 +40,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
         {
             InitializeComponent();
             this.DataContext = this;
-            TextBoxCollection = new ObservableCollection<PlaceholderTextBox>();
+            TextBoxCollection = new ObservableCollection<PlaceholderTextBoxUC>();
             VerificationLabelCollection = new ObservableCollection<Label>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
             NameLabelVerificationControl.ItemsSource = VerificationLabelCollection;
@@ -57,7 +58,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             GameName.Input.Text = allInfo[0];
             NumPlayers.Text = allInfo[1];
             var count = 1;
-            foreach (PlaceholderTextBox textBox in TextBoxCollection)
+            foreach (PlaceholderTextBoxUC textBox in TextBoxCollection)
             {
                 count++;
                 textBox.Input.Text = allInfo[count];
@@ -102,7 +103,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
             int count = -1;
             // Append each item from the list, separated by commas
-            foreach (PlaceholderTextBox textBox in TextBoxCollection)
+            foreach (PlaceholderTextBoxUC textBox in TextBoxCollection)
             {
                 count++;
                 //Checks if it's a player
@@ -156,7 +157,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             for (int i = 0; i < count; i++)
             {
                 // Add the required number of textboxes
-                PlaceholderTextBox textBox = new PlaceholderTextBox { Margin = new Thickness(0, 25, 0, 0) };
+                PlaceholderTextBoxUC textBox = new PlaceholderTextBoxUC { Margin = new Thickness(0, 25, 0, 0) };
 
                 textBox.BindedWidth = "100";
                 textBox.BindedHeight = "18";
@@ -183,7 +184,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             }
 
             // Adds additional box for gameplay notes
-            PlaceholderTextBox notes = new PlaceholderTextBox { Margin = new Thickness(0, 25, 0, 0) };
+            PlaceholderTextBoxUC notes = new PlaceholderTextBoxUC { Margin = new Thickness(0, 25, 0, 0) };
             notes.BindedWidth = "300";
             notes.BindedHeight = "70";
             notes.placeholderText = "Additional gameplay notes...";
@@ -202,7 +203,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             //Purpose: Verification for player's names
 
             //Finds associated Verification Label
-            var placeholderTextBox = sender as PlaceholderTextBox;
+            var placeholderTextBox = sender as PlaceholderTextBoxUC;
             int associatedIndex = TextBoxCollection.IndexOf(placeholderTextBox);
             var verificationLabel = VerificationLabelCollection[associatedIndex];
 
@@ -308,7 +309,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
 
             int count = TextBoxCollection.Count;
             int index = 0;
-            foreach (PlaceholderTextBox textBox in TextBoxCollection)
+            foreach (PlaceholderTextBoxUC textBox in TextBoxCollection)
             {
 
                 if (index < count - 1)
@@ -333,11 +334,11 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
                     await Task.Delay(20);
                     UpdateLog(lineToSave);
 
-                    Leaderboard.RefreshLeaderboard();
+                    LeaderboardPage.RefreshLeaderboard();
 
                     //If game is a new genre, update that option in settings
                     if (GameName.Input.Text != allInfo[0])
-                        RecordaGame.UpdateFilterOptions(GameName.Input.Text);
+                        RecordGameplayPage.UpdateFilterOptions(GameName.Input.Text);
 
                     //Displays Success and then converts back to normal
                     SaveBtn.Content = "Success!!";
@@ -383,7 +384,7 @@ namespace Ultimate_Game_Winner.UserControls_and_Windows
             int total = TextBoxCollection.Count;
             int currentIndex = 0;
 
-            foreach (PlaceholderTextBox textBox in TextBoxCollection)
+            foreach (PlaceholderTextBoxUC textBox in TextBoxCollection)
             {
                 //skip the additional game notes
                 if (currentIndex < total - 1)
