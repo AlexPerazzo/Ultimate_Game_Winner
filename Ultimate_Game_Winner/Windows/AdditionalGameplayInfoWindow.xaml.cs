@@ -34,6 +34,7 @@ namespace Ultimate_Game_Winner.Windows
         public string additionalNotes { get; set; }
         public string date { get; set; }
 
+        public string group {  get; set; }
         
 
        
@@ -72,6 +73,10 @@ namespace Ultimate_Game_Winner.Windows
             gameName = allInfo[0];
             date = $"Date Recorded: {allInfo[allInfo.Length-1]}";
             additionalNotes = $"Additional Notes: {allInfo[allInfo.Length-4]}";
+            if (allInfo[allInfo.Length - 3] == "No Group")
+                group = "Group: N/A";
+            else
+                group = $"Group: {allInfo[allInfo.Length-3]}";
             
 
             //Populate Players StackPanel (loop through to calculate proper number of points)

@@ -110,7 +110,8 @@
 
         <!--Delete Entire Log Button-->
         <Button Name="DeleteLog" Margin="0,25,0,0" Content="Delete Entire Log" Width="117" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DeleteLog_Click" Grid.Row="4"/>
-             
+
+            
         </Grid>
     </ScrollViewer>
 </Page>
