@@ -1,3 +1,5 @@
-Alex,5.82
-Mom,0.77
-Sarah,-1.94
+Alex,5.08
+Eric,0.99
+Ryan ,0.42
+Mom,-0.70
+Sarah,-1.17

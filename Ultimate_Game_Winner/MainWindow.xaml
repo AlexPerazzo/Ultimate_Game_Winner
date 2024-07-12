@@ -21,7 +21,9 @@
         <Label Content="Created by Alex Perazzo" HorizontalAlignment="Center" Height="42" Margin="398,0,0,130" VerticalAlignment="Center" Width="219" FontSize="20" FontStyle="Italic"/>
         <TextBlock Text="Select any of the options below to get started!" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Margin="0,150,0,0" Width="619" TextAlignment="Center"/>
 
-        <Label Content="Database last updated: May 2024 " VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Label Content="Database powered by boardgamegeek. Last updated: July 2024 " VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+
+        
 
         <Frame x:Name="mainFrame" Grid.Row="0" NavigationUIVisibility="Hidden" Navigated="mainFrame_Navigated"/>
         

@@ -39,6 +39,10 @@ namespace Ultimate_Game_Winner.Main_Pages
         public ObservableCollection<PlaceholderTextBoxUC> TextBoxCollection { get; set; }
         public ObservableCollection<Label> VerificationLabelCollection { get; set; }
 
+        private List<string> items;
+        private List<string> gameNames;
+
+
         public RecordGameplayPage()
         {
             InitializeComponent();
@@ -47,8 +51,66 @@ namespace Ultimate_Game_Winner.Main_Pages
             VerificationLabelCollection = new ObservableCollection<Label>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
             NameLabelVerificationControl.ItemsSource = VerificationLabelCollection;
-            
+            items = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt").ToList();
+            gameNames = items.Select(line => line.Split(',')[1]).ToList();
+            GameName.Input.TextChanged += InputTextBox_TextChanged;
         }
+
+        private async void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string query = GameName.Input.Text;
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                SuggestionsListBox.ItemsSource = null;
+                return;
+            }
+
+            // Use async to avoid blocking UI thread
+            var suggestions = await Task.Run(() => GetSuggestions(query));
+            SuggestionsListBox.ItemsSource = suggestions;
+        }
+
+        private List<string> GetSuggestions(string query)
+        {
+            return gameNames.Where(item => item.StartsWith(query, StringComparison.OrdinalIgnoreCase)).Take(20).ToList();
+        }
+
+        //private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+            
+        //}
+
+        
+
+
+        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SuggestionsListBox.SelectedItem != null)
+                GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
+            GameName_LostFocus(sender, e);
+        }
+
+
+        private void SuggestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SuggestionsListBox.SelectedItem != null)
+                GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
+            GameName_LostFocus(sender, e);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
@@ -422,5 +484,9 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
 
         }
+
+        
+
+        
     }
 }
