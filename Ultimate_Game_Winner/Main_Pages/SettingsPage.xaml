@@ -12,7 +12,7 @@
     <ScrollViewer>
         
     <Grid>
-        <Grid.RowDefinitions>
+            <Grid.RowDefinitions>
             <!--Title Row-->
             <RowDefinition Height="71"/>
             <!--Filter Row-->
@@ -28,6 +28,7 @@
 
         </Grid.RowDefinitions>
         
+            
         <!--Title-->
         <Label Content="Settings" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontStretch="Normal"/>
         <Rectangle Height="3" VerticalAlignment="Bottom" Width="550" Fill="Black"/>

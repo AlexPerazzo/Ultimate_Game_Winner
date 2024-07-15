@@ -54,40 +54,44 @@ namespace Ultimate_Game_Winner.Main_Pages
             items = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt").ToList();
             gameNames = items.Select(line => line.Split(',')[1]).ToList();
             GameName.Input.TextChanged += InputTextBox_TextChanged;
+            this.Width = 800;
         }
 
         private async void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            
             string query = GameName.Input.Text;
             if (string.IsNullOrWhiteSpace(query))
             {
                 SuggestionsListBox.ItemsSource = null;
+                SuggestionsListBox.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            // Use async to avoid blocking UI thread
-            var suggestions = await Task.Run(() => GetSuggestions(query));
+            
+            
+            var suggestions = GetSuggestions(query);
+
             SuggestionsListBox.ItemsSource = suggestions;
+            SuggestionsListBox.Visibility = Visibility.Visible;
+            
         }
 
         private List<string> GetSuggestions(string query)
         {
-            return gameNames.Where(item => item.StartsWith(query, StringComparison.OrdinalIgnoreCase)).Take(20).ToList();
+            return gameNames.Where(item => item.StartsWith(query, StringComparison.OrdinalIgnoreCase)).Take(25).ToList();
         }
-
-        //private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-            
-        //}
-
-        
 
 
         private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            GameName.Input.TextChanged -= InputTextBox_TextChanged;
             if (SuggestionsListBox.SelectedItem != null)
                 GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
             GameName_LostFocus(sender, e);
+            SuggestionsListBox.Visibility = Visibility.Collapsed;
+            
+            GameName.Input.TextChanged += InputTextBox_TextChanged;
         }
 
 

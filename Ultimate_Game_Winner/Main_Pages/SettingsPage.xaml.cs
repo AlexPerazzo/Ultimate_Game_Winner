@@ -376,9 +376,6 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
 
         }
-
-        
-        
     }
     
 }

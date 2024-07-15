@@ -1,6 +1,6 @@
 1.0
 1.0
 1.0
-Normal
+# of Wins
 All Genres,All Player Counts,All Weights,All Playtimes,All Groups
-All Genres,Strategy
+All Genres,Strategy,Family
