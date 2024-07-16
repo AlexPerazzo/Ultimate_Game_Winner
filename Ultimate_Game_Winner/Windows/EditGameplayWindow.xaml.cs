@@ -32,6 +32,9 @@ namespace Ultimate_Game_Winner.Windows
         public ObservableCollection<PlaceholderTextBoxUC> TextBoxCollection { get; set; }
         public ObservableCollection<Label> VerificationLabelCollection { get; set; }
 
+        private List<string> items;
+        private List<string> gameNames;
+
         private string[] allInfo;
 
         private Window oldWindow;
@@ -44,18 +47,77 @@ namespace Ultimate_Game_Winner.Windows
             VerificationLabelCollection = new ObservableCollection<Label>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
             NameLabelVerificationControl.ItemsSource = VerificationLabelCollection;
+
+            items = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt").ToList();
+            gameNames = items.Select(line => line.Split(',')[1]).ToList();
             allInfo = _allInfo;
             oldWindow = _oldWindow;
 
             LoadGameplayInfo(allInfo);
+            GameName.Input.TextChanged += InputTextBox_TextChanged;
 
         }
+
+        private async void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            string query = GameName.Input.Text;
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                SuggestionsListBox.ItemsSource = null;
+                SuggestionsListBox.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+
+
+            var suggestions = GetSuggestions(query);
+
+            SuggestionsListBox.ItemsSource = suggestions;
+            SuggestionsListBox.Visibility = Visibility.Visible;
+
+        }
+
+        private List<string> GetSuggestions(string query)
+        {
+            return gameNames.Where(item => item.StartsWith(query, StringComparison.OrdinalIgnoreCase)).Take(25).ToList();
+        }
+
+
+        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GameName.Input.TextChanged -= InputTextBox_TextChanged;
+            if (SuggestionsListBox.SelectedItem != null)
+                GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
+            GameName_LostFocus(sender, e);
+            SuggestionsListBox.Visibility = Visibility.Collapsed;
+
+            GameName.Input.TextChanged += InputTextBox_TextChanged;
+        }
+
+
+        private void SuggestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SuggestionsListBox.SelectedItem != null)
+                GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
+            GameName_LostFocus(sender, e);
+        }
+
+
+
+
+
+
+
+
+
 
         private void LoadGameplayInfo(string[] allInfo)
         {
             //Purpose: Fills in current game information for the user to edit
 
             GameName.Input.Text = allInfo[0];
+            SuggestionsListBox.SelectedItem = allInfo[0];
             NumPlayers.Text = allInfo[1];
             var count = 1;
             foreach (PlaceholderTextBoxUC textBox in TextBoxCollection)
@@ -213,14 +275,14 @@ namespace Ultimate_Game_Winner.Windows
                 placeholderTextBox.BindedBorderColor = Brushes.Red;
                 verificationLabel.Visibility = Visibility.Visible;
                 playerNamesAreAGo = false;
-                placeholderTextBox.Margin = new Thickness(0, 25, 30,0);
+                //placeholderTextBox.Margin = new Thickness(0, 25, 30,0);
             }
             //Otherwise sets it back to normal
             else
             {
                 placeholderTextBox.BindedBorderColor = SystemColors.ControlDarkBrush;
                 verificationLabel.Visibility = Visibility.Hidden;
-                placeholderTextBox.Margin = new Thickness(0, 25, 0, 0);
+                //placeholderTextBox.Margin = new Thickness(0, 25, 0, 0);
 
             }
 
@@ -236,7 +298,7 @@ namespace Ultimate_Game_Winner.Windows
                 GameName.Input.BorderBrush = Brushes.Red;
                 GameNameVerification.Visibility = Visibility.Visible;
                 gameNameIsAGo = false;
-                GameName.Margin = new Thickness(0,41,165,0);
+                //GameName.Margin = new Thickness(0,41,165,0);
             }
             //If valid, puts things to normal
             //Turns necessary variable for submitting to true
@@ -245,7 +307,7 @@ namespace Ultimate_Game_Winner.Windows
                 GameName.Input.BorderBrush = SystemColors.ControlDarkBrush;
                 GameNameVerification.Visibility = Visibility.Hidden;
                 gameNameIsAGo = true;
-                GameName.Margin = new Thickness(0, 41, 0, 0);
+                //GameName.Margin = new Thickness(0, 41, 0, 0);
 
             }
         }
@@ -266,8 +328,8 @@ namespace Ultimate_Game_Winner.Windows
                 NumPlayers.BorderBrush = Brushes.Red;
                 NumPlayersVerification.Visibility = Visibility.Visible;
                 numPlayersIsAGo = false;
-                NumPlayers.Margin = new Thickness(0, 81, 185, 0);
-                tbPlaceholder.Margin = new Thickness(0,81,185,0);
+                //NumPlayers.Margin = new Thickness(0, 81, 185, 0);
+                //tbPlaceholder.Margin = new Thickness(0,81,185,0);
             }
             //If valid, puts things to normal
             //Turns necessary variable for submitting to true
@@ -276,8 +338,8 @@ namespace Ultimate_Game_Winner.Windows
                 NumPlayers.BorderBrush = SystemColors.ControlDarkBrush;
                 NumPlayersVerification.Visibility = Visibility.Hidden;
                 numPlayersIsAGo = true;
-                NumPlayers.Margin = new Thickness(0, 81, 0, 0);
-                tbPlaceholder.Margin = new Thickness(0, 81, 0, 0);
+                //NumPlayers.Margin = new Thickness(0, 81, 0, 0);
+                //tbPlaceholder.Margin = new Thickness(0, 81, 0, 0);
             }
         }
 

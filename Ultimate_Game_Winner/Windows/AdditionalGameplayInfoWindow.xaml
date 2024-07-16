@@ -51,12 +51,12 @@
             <!--Weight Text-->
             <Label x:Name="Weight" Grid.Column="1" Grid.Row="3" Content="{Binding weight}" FontSize="20" VerticalAlignment="Top" Height="Auto" Margin="0,5,0,0" FontStyle="Italic" Foreground="#555555"/>
             <!--Date Text-->
-            <Label x:Name="Date" Grid.Column="1" Grid.Row="4" Content="{Binding date}" Height="Auto" FontSize="15" Margin="0,40,0,0"/>
+            <Label x:Name="Date" Grid.Column="1" Grid.Row="6" Content="{Binding date}" Height="Auto" FontSize="15" Margin="0,0,0,0"/>
             <!--Group Text-->
             <Label x:Name="Group" Grid.Column="1" Grid.Row="5" Content="{Binding group}" Height="Auto" FontSize="15" Margin="0,0,0,0"/>
             
             <!--TextBlock Text. TextBlock instead of Label to get access to TextWrapping-->
-            <TextBlock x:Name="AdditionalNotes" Padding="5" Grid.Column="1" Grid.Row="6" FontSize="15" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding additionalNotes}" Margin="0,0,0,0"/>
+            <TextBlock x:Name="AdditionalNotes" Padding="5" Grid.Column="1" Grid.Row="4" FontSize="15" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding additionalNotes}" Margin="0,40,0,0"/>
         </Grid>
         
             <!--Picture of the Game-->

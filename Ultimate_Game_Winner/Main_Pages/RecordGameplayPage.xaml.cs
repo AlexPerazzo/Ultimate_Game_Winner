@@ -51,6 +51,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             VerificationLabelCollection = new ObservableCollection<Label>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
             NameLabelVerificationControl.ItemsSource = VerificationLabelCollection;
+
             items = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt").ToList();
             gameNames = items.Select(line => line.Split(',')[1]).ToList();
             GameName.Input.TextChanged += InputTextBox_TextChanged;
