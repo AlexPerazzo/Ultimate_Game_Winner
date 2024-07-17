@@ -63,7 +63,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             
         }
 
-        private async void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             
             string query = GameName.Input.Text;
@@ -87,8 +87,6 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             return gameNames.Where(item => item.StartsWith(query, StringComparison.OrdinalIgnoreCase)).Take(25).ToList();
         }
-
-
 
         private void SuggestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -136,55 +134,11 @@ namespace Ultimate_Game_Winner.Main_Pages
                 SuggestionsListBox.Visibility = Visibility.Collapsed;
                 NumPlayers.Focus();
             }
+
+            
         }
 
-        private void SuggestionsListBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            //int currentIndex = SuggestionsListBox.SelectedIndex;
-
-            //if (e.Key == Key.Up)
-            //{
-            //    if (currentIndex == 0)
-            //    {
-            //        SuggestionsListBox.SelectedIndex = SuggestionsListBox.Items.Count - 1;
-            //    }
-            //    else
-            //    {
-            //        SuggestionsListBox.SelectedIndex--;
-            //    }
-            //}
-            //else if (e.Key == Key.Down)
-            //{
-            //    if (currentIndex == SuggestionsListBox.Items.Count - 1)
-            //    {
-            //        SuggestionsListBox.SelectedIndex = 0;
-            //    }
-            //    else
-            //    {
-            //        SuggestionsListBox.SelectedIndex++;
-            //    }
-            //}
-            //else if (e.Key == Key.Enter)
-            //{
-            //    if (SuggestionsListBox.SelectedItem != null)
-            //        GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
-            //    GameName_LostFocus(sender, e);
-            //}
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 
@@ -567,5 +521,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             SuggestionsListBox.ScrollIntoView(SuggestionsListBox.SelectedItem);
         }
+
+       
     }
 }

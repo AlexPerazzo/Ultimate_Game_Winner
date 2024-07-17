@@ -37,7 +37,7 @@
             <Label Name="GameNameVerification" HorizontalAlignment="Left" Margin="478,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden" Grid.ColumnSpan="2"/>
             <!--Suggestionsion Box-->
             <!--Trying to figure out how to get the vertical bar smaller-->
-            <ListBox Name="SuggestionsListBox" Width="143" Height="75" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="322,59,0,0" Grid.Row="1" MouseDoubleClick="SuggestionsListBox_MouseDoubleClick" SelectionChanged="SuggestionsListBox_SelectionChanged" Visibility="Collapsed">
+            <ListBox Name="SuggestionsListBox" Width="143" Height="75" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="322,59,0,0" Grid.Row="1" KeyDown="GameName_PreviewKeyDown" MouseDoubleClick="SuggestionsListBox_MouseDoubleClick" SelectionChanged="SuggestionsListBox_SelectionChanged" Visibility="Collapsed">
                 <ListBox.Resources>
                     <Style TargetType="ScrollBar">
                         <Setter Property="Width" Value="2"/>

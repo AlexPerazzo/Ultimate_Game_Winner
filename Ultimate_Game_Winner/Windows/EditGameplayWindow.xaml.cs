@@ -60,7 +60,7 @@ namespace Ultimate_Game_Winner.Windows
 
         }
 
-        private async void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
             string query = GameName.Input.Text;
@@ -130,9 +130,9 @@ namespace Ultimate_Game_Winner.Windows
             {
                 if (SuggestionsListBox.SelectedItem != null)
                     GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
-                GameName_LostFocus(sender, e);
-                SuggestionsListBox.Visibility = Visibility.Collapsed;
-                NumPlayers.Focus();
+                    GameName_LostFocus(sender, e);
+                    SuggestionsListBox.Visibility = Visibility.Collapsed;
+                    NumPlayers.Focus();
             }
         }
 
