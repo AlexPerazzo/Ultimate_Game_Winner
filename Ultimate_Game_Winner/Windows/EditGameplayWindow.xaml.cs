@@ -55,6 +55,8 @@ namespace Ultimate_Game_Winner.Windows
 
             LoadGameplayInfo(allInfo);
             GameName.Input.TextChanged += InputTextBox_TextChanged;
+            GameName.Input.PreviewKeyDown += GameName_PreviewKeyDown;
+
 
         }
 
@@ -84,16 +86,7 @@ namespace Ultimate_Game_Winner.Windows
         }
 
 
-        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            GameName.Input.TextChanged -= InputTextBox_TextChanged;
-            if (SuggestionsListBox.SelectedItem != null)
-                GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
-            GameName_LostFocus(sender, e);
-            SuggestionsListBox.Visibility = Visibility.Collapsed;
-
-            GameName.Input.TextChanged += InputTextBox_TextChanged;
-        }
+        
 
 
         private void SuggestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -101,9 +94,47 @@ namespace Ultimate_Game_Winner.Windows
             if (SuggestionsListBox.SelectedItem != null)
                 GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
             GameName_LostFocus(sender, e);
+            SuggestionsListBox.Visibility = Visibility.Collapsed;
+            NumPlayers.Focus();
         }
 
+        private void GameName_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
 
+            int currentIndex = SuggestionsListBox.SelectedIndex;
+
+            if (e.Key == Key.Up)
+            {
+                if (currentIndex == 0)
+                {
+                    SuggestionsListBox.SelectedIndex = SuggestionsListBox.Items.Count - 1;
+                }
+                else
+                {
+                    if (SuggestionsListBox.SelectedItem != null)
+                        SuggestionsListBox.SelectedIndex--;
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                if (currentIndex == SuggestionsListBox.Items.Count - 1)
+                {
+                    SuggestionsListBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    SuggestionsListBox.SelectedIndex++;
+                }
+            }
+            else if (e.Key == Key.Enter)
+            {
+                if (SuggestionsListBox.SelectedItem != null)
+                    GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
+                GameName_LostFocus(sender, e);
+                SuggestionsListBox.Visibility = Visibility.Collapsed;
+                NumPlayers.Focus();
+            }
+        }
 
 
 
@@ -458,5 +489,9 @@ namespace Ultimate_Game_Winner.Windows
 
         }
 
+        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SuggestionsListBox.ScrollIntoView(SuggestionsListBox.SelectedItem);
+        }
     }
 }
