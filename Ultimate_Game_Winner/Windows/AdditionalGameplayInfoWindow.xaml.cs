@@ -92,10 +92,16 @@ namespace Ultimate_Game_Winner.Windows
                 PlayersPanel.Children.Add(playerPanel);
             }
             
-            //Refresh Window so set Data Bindings will apply
-            UtilityFunctions.RefreshFramework(this);
+            
+
+            //turns the data context off and on again
+            var oldDataContext = this.DataContext;
+            this.DataContext = null;
+            this.DataContext = oldDataContext;
+            //This allows a reload to occur so those parts get loaded in
         }
 
+        
         private void DeleteGameplayBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Calls a confirmation window which will handle deleting the gameplay
@@ -103,7 +109,6 @@ namespace Ultimate_Game_Winner.Windows
             AreYouSureWindow areYouSure = new AreYouSureWindow(false, allInfo, this);
             areYouSure.Show();
         }
-
         private void EditGameplayBtn_Click(object sender, RoutedEventArgs e)
         {
             EditGameplayWindow editWindow = new EditGameplayWindow(allInfo, this);

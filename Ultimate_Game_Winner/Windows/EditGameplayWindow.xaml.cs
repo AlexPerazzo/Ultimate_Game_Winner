@@ -31,14 +31,13 @@ namespace Ultimate_Game_Winner.Windows
 
         public ObservableCollection<PlaceholderTextBoxUC> TextBoxCollection { get; set; }
         public ObservableCollection<Label> VerificationLabelCollection { get; set; }
-
         private List<string> items;
         private List<string> gameNames;
-
         private string[] allInfo;
-
         private Window oldWindow;
         
+
+
         public EditGameplayWindow(string[] _allInfo, Window _oldWindow)
         {
             InitializeComponent();
@@ -60,89 +59,11 @@ namespace Ultimate_Game_Winner.Windows
 
         }
 
-        private void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-            string query = GameName.Input.Text;
-            if (string.IsNullOrWhiteSpace(query))
-            {
-                SuggestionsListBox.ItemsSource = null;
-                SuggestionsListBox.Visibility = Visibility.Collapsed;
-                return;
-            }
-
-
-
-            var suggestions = GetSuggestions(query);
-
-            SuggestionsListBox.ItemsSource = suggestions;
-            SuggestionsListBox.Visibility = Visibility.Visible;
-
-        }
-
-        private List<string> GetSuggestions(string query)
-        {
-            return gameNames.Where(item => item.StartsWith(query, StringComparison.OrdinalIgnoreCase)).Take(25).ToList();
-        }
-
-
-        
-
-
-        private void SuggestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (SuggestionsListBox.SelectedItem != null)
-                GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
-            GameName_LostFocus(sender, e);
-            SuggestionsListBox.Visibility = Visibility.Collapsed;
-            NumPlayers.Focus();
-        }
-
-        private void GameName_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-
-            int currentIndex = SuggestionsListBox.SelectedIndex;
-
-            if (e.Key == Key.Up)
-            {
-                if (currentIndex == 0)
-                {
-                    SuggestionsListBox.SelectedIndex = SuggestionsListBox.Items.Count - 1;
-                }
-                else
-                {
-                    if (SuggestionsListBox.SelectedItem != null)
-                        SuggestionsListBox.SelectedIndex--;
-                }
-            }
-            else if (e.Key == Key.Down)
-            {
-                if (currentIndex == SuggestionsListBox.Items.Count - 1)
-                {
-                    SuggestionsListBox.SelectedIndex = 0;
-                }
-                else
-                {
-                    SuggestionsListBox.SelectedIndex++;
-                }
-            }
-            else if (e.Key == Key.Enter)
-            {
-                if (SuggestionsListBox.SelectedItem != null)
-                    GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
-                    GameName_LostFocus(sender, e);
-                    SuggestionsListBox.Visibility = Visibility.Collapsed;
-                    NumPlayers.Focus();
-            }
-        }
 
 
 
 
-
-
-
-
+        // Page Display Functions
         private void LoadGameplayInfo(string[] allInfo)
         {
             //Purpose: Fills in current game information for the user to edit
@@ -162,10 +83,64 @@ namespace Ultimate_Game_Winner.Windows
 
             GroupComboBox.Text = allInfo[allInfo.Length - 3];
         }
+        private void UpdateTextBoxCollection(int count)
+        {
+            //Purpose: Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
 
 
-       
+            // Clear the existing collection
+            TextBoxCollection.Clear();
+            VerificationLabelCollection.Clear();
 
+            for (int i = 0; i < count; i++)
+            {
+                // Add the required number of textboxes
+                PlaceholderTextBoxUC textBox = new PlaceholderTextBoxUC { Margin = new Thickness(0, 25, 0, 0) };
+
+                textBox.BindedWidth = "100";
+                textBox.BindedHeight = "18";
+                textBox.BindedWrap = "NoWrap";
+
+                textBox.placeholderText = $"{UtilityFunctions.AddOrdinal(i + 1)} place...";
+
+                textBox.VerticalAlignment = VerticalAlignment.Center;
+                textBox.HorizontalAlignment = HorizontalAlignment.Center;
+
+                //
+                textBox.LostFocus += PlayerName_LostFocus;
+                TextBoxCollection.Add(textBox);
+
+                // Add Matching Verification Labels
+                Label verificationLabel = new Label();
+                verificationLabel.Content = "*Please Enter a Name";
+                verificationLabel.HorizontalAlignment = HorizontalAlignment.Center;
+                verificationLabel.VerticalAlignment = VerticalAlignment.Center;
+                verificationLabel.Foreground = Brushes.Red;
+                verificationLabel.Margin = new Thickness(0, 17, 0, 0);
+                verificationLabel.Visibility = Visibility.Hidden;
+                VerificationLabelCollection.Add(verificationLabel);
+            }
+
+            // Adds additional box for gameplay notes
+            PlaceholderTextBoxUC notes = new PlaceholderTextBoxUC { Margin = new Thickness(0, 25, 0, 0) };
+            notes.BindedWidth = "300";
+            notes.BindedHeight = "70";
+            notes.placeholderText = "Additional gameplay notes...";
+            notes.BindedWrap = "Wrap";
+
+            notes.VerticalAlignment = VerticalAlignment.Center;
+            notes.HorizontalAlignment = HorizontalAlignment.Center;
+
+            TextBoxCollection.Add(notes);
+
+
+        }
+        
+        // Helper Functions
+        private List<string> GetSuggestions(string query)
+        {
+            return gameNames.Where(item => item.StartsWith(query, StringComparison.OrdinalIgnoreCase)).Take(25).ToList();
+        }
         private void UpdateLog(string lineToSave)
         {
             //Purpose: Replaces old info with new info
@@ -182,7 +157,6 @@ namespace Ultimate_Game_Winner.Windows
             File.WriteAllLines("..\\..\\..\\Text_Files\\LogofPlayedGames.txt", allLoggedGames);
 
         }
-
         private (string, bool) CompileInfoToSave(string nameOfGame, string numPlayers)
         {
             //Purpose: Records gameplay with all associated information to LogofPlayedGames.txt
@@ -238,59 +212,81 @@ namespace Ultimate_Game_Winner.Windows
             return (line, filterBool);
         }
 
-        private void UpdateTextBoxCollection(int count)
+
+        
+       
+        // Suggestions Box Event Listeners
+        private void SuggestionsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //Purpose: Adds an associated number of TextBoxes based on the number of players inputted (between 2 and 6)
+            if (SuggestionsListBox.SelectedItem != null)
+                GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
+            GameName_LostFocus(sender, e);
+            SuggestionsListBox.Visibility = Visibility.Collapsed;
+            NumPlayers.Focus();
+        }
+        private void InputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-
-            // Clear the existing collection
-            TextBoxCollection.Clear();
-            VerificationLabelCollection.Clear();
-
-            for (int i = 0; i < count; i++)
+            string query = GameName.Input.Text;
+            if (string.IsNullOrWhiteSpace(query))
             {
-                // Add the required number of textboxes
-                PlaceholderTextBoxUC textBox = new PlaceholderTextBoxUC { Margin = new Thickness(0, 25, 0, 0) };
-
-                textBox.BindedWidth = "100";
-                textBox.BindedHeight = "18";
-                textBox.BindedWrap = "NoWrap";
-
-                textBox.placeholderText = $"{UtilityFunctions.AddOrdinal(i + 1)} place...";
-
-                textBox.VerticalAlignment = VerticalAlignment.Center;
-                textBox.HorizontalAlignment = HorizontalAlignment.Center;
-
-                //
-                textBox.LostFocus += PlayerName_LostFocus;
-                TextBoxCollection.Add(textBox);
-
-                // Add Matching Verification Labels
-                Label verificationLabel = new Label();
-                verificationLabel.Content = "*Please Enter a Name";
-                verificationLabel.HorizontalAlignment = HorizontalAlignment.Center;
-                verificationLabel.VerticalAlignment = VerticalAlignment.Center;
-                verificationLabel.Foreground = Brushes.Red;
-                verificationLabel.Margin = new Thickness(0, 17, 0, 0);
-                verificationLabel.Visibility = Visibility.Hidden;
-                VerificationLabelCollection.Add(verificationLabel);
+                SuggestionsListBox.ItemsSource = null;
+                SuggestionsListBox.Visibility = Visibility.Collapsed;
+                return;
             }
 
-            // Adds additional box for gameplay notes
-            PlaceholderTextBoxUC notes = new PlaceholderTextBoxUC { Margin = new Thickness(0, 25, 0, 0) };
-            notes.BindedWidth = "300";
-            notes.BindedHeight = "70";
-            notes.placeholderText = "Additional gameplay notes...";
-            notes.BindedWrap = "Wrap";
 
-            notes.VerticalAlignment = VerticalAlignment.Center;
-            notes.HorizontalAlignment = HorizontalAlignment.Center;
 
-            TextBoxCollection.Add(notes);
+            var suggestions = GetSuggestions(query);
 
+            SuggestionsListBox.ItemsSource = suggestions;
+            SuggestionsListBox.Visibility = Visibility.Visible;
 
         }
+        private void GameName_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
 
+            int currentIndex = SuggestionsListBox.SelectedIndex;
+
+            if (e.Key == Key.Up)
+            {
+                if (currentIndex == 0)
+                {
+                    SuggestionsListBox.SelectedIndex = SuggestionsListBox.Items.Count - 1;
+                }
+                else
+                {
+                    if (SuggestionsListBox.SelectedItem != null)
+                        SuggestionsListBox.SelectedIndex--;
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                if (currentIndex == SuggestionsListBox.Items.Count - 1)
+                {
+                    SuggestionsListBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    SuggestionsListBox.SelectedIndex++;
+                }
+            }
+            else if (e.Key == Key.Enter)
+            {
+                if (SuggestionsListBox.SelectedItem != null)
+                    GameName.Input.Text = SuggestionsListBox.SelectedItem.ToString();
+                    GameName_LostFocus(sender, e);
+                    SuggestionsListBox.Visibility = Visibility.Collapsed;
+                    NumPlayers.Focus();
+            }
+        }
+        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SuggestionsListBox.ScrollIntoView(SuggestionsListBox.SelectedItem);
+        }
+
+
+        // Verification Event Listeners
         private void PlayerName_LostFocus(object sender, RoutedEventArgs e)
         {
             //Purpose: Verification for player's names
@@ -342,7 +338,6 @@ namespace Ultimate_Game_Winner.Windows
 
             }
         }
-
         private void NumPlayers_LostFocus(object sender, RoutedEventArgs e)
         {
             //Purpose: Validates User Input for Number of Players
@@ -374,25 +369,8 @@ namespace Ultimate_Game_Winner.Windows
             }
         }
 
-        private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //Purpose: When NumPlayers is changed, calls UpdateTextBoxCollection with number
-            //Do to event listener conflicts, I had to make a PlaceholderTextBox in this .xaml instead of just using a PlaceholderTextBox
 
-            //Sets placeholder text to visible or hidden
-            if (string.IsNullOrEmpty(NumPlayers.Text))
-                tbPlaceholder.Visibility = Visibility.Visible;
-            else
-                tbPlaceholder.Visibility = Visibility.Hidden;
-
-            //If number is valid, calls UpdateTextBoxCollection
-            if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
-            {
-                UpdateTextBoxCollection(numberOfTextBoxes);
-            }
-
-        }
-
+        // Button Event Listeners
         private async void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Collects and replaces old info with new info
@@ -459,12 +437,10 @@ namespace Ultimate_Game_Winner.Windows
 
             }
         }
-
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Resets Texts of all TextBox's back to original display
@@ -489,9 +465,27 @@ namespace Ultimate_Game_Winner.Windows
 
         }
 
-        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        // Player Name Slot Event Listeners
+        private void NumPlayers_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SuggestionsListBox.ScrollIntoView(SuggestionsListBox.SelectedItem);
+            //Purpose: When NumPlayers is changed, calls UpdateTextBoxCollection with number
+            //Do to event listener conflicts, I had to make a PlaceholderTextBox in this .xaml instead of just using a PlaceholderTextBox
+
+            //Sets placeholder text to visible or hidden
+            if (string.IsNullOrEmpty(NumPlayers.Text))
+                tbPlaceholder.Visibility = Visibility.Visible;
+            else
+                tbPlaceholder.Visibility = Visibility.Hidden;
+
+            //If number is valid, calls UpdateTextBoxCollection
+            if (int.TryParse(NumPlayers.Text, out int numberOfTextBoxes) && numberOfTextBoxes >= 2 && numberOfTextBoxes <= 6)
+            {
+                UpdateTextBoxCollection(numberOfTextBoxes);
+            }
+
         }
+
+
     }
 }

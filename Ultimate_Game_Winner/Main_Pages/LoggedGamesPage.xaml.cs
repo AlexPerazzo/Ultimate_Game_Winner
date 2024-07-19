@@ -28,23 +28,11 @@ namespace Ultimate_Game_Winner.Main_Pages
         {
             InitializeComponent();
             this.DataContext = this;
-            Filtered = UtilityFunctions.FilterVisibility();
+            Filtered = UtilityFunctions.FilterLabelVisibility();
             Loaded += LoadLog;
             Loaded += ResizePage;
         }
 
-        private void ResizePage(object sender, RoutedEventArgs e)
-        {
-            // Get the parent window
-            Window parentWindow = Window.GetWindow(this);
-
-            if (parentWindow != null)
-            {
-                // Adjust the size of the parent window
-                parentWindow.SizeToContent = SizeToContent.Width;
-                parentWindow.Height = parentWindow.Height;
-            }
-        }
         private void LoadLog(object sender, RoutedEventArgs e)
         {
             
@@ -79,6 +67,18 @@ namespace Ultimate_Game_Winner.Main_Pages
 
 
             
+        }
+        private void ResizePage(object sender, RoutedEventArgs e)
+        {
+            // Get the parent window
+            Window parentWindow = Window.GetWindow(this);
+
+            if (parentWindow != null)
+            {
+                // Adjust the size of the parent window
+                parentWindow.SizeToContent = SizeToContent.Width;
+                parentWindow.Height = parentWindow.Height;
+            }
         }
 
         private async void RefreshLogBtn_Click(object sender, RoutedEventArgs e)

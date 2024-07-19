@@ -35,11 +35,13 @@ namespace Ultimate_Game_Winner.Main_Pages
             this.DataContext = this;
 
             //Checks if "(Filtered)" should appear on screen
-            Filtered = UtilityFunctions.FilterVisibility();
+            Filtered = UtilityFunctions.FilterLabelVisibility();
 
             Loaded += LoadLeaderboard;
             Loaded += ResizePage;
         }
+        
+        // Page Display Functions
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
             string[] savedSettings = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
@@ -80,7 +82,6 @@ namespace Ultimate_Game_Winner.Main_Pages
             
 
         }
-
         private void LoadWinsLeaderboard(object sender, RoutedEventArgs e)
         {
 
@@ -165,7 +166,6 @@ namespace Ultimate_Game_Winner.Main_Pages
 
 
         }
-
         private void ResizePage(object sender, RoutedEventArgs e)
         {
             // Get the parent window
@@ -177,27 +177,10 @@ namespace Ultimate_Game_Winner.Main_Pages
                 parentWindow.Width = 800;
             }
         }
-        private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //Purpose: Event-listener for the RefreshLeaderboard Button
-
-            //Calls RefreshLeaderboard (which redoes all the math)
-            RefreshLeaderboardBtn.Content = "Note: This may take a second";
-            await Task.Delay(20);
-            RefreshLeaderboard();
-
-            //Clears theLeaderboard stackPanel, then repopulates it
-            theLeaderboard.Children.Clear();
-            LoadLeaderboard(sender, e);
-
-            
-            RefreshLeaderboardBtn.Content = "Done!";
-            await Task.Delay(2000);
-            RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
-
-        }
 
 
+
+        // Refresh Leaderboard and Event Listener
         public static void RefreshLeaderboard()
         {
             //Purpose: Builds the Leaderboard point totals from the ground up
@@ -280,6 +263,25 @@ namespace Ultimate_Game_Winner.Main_Pages
             
             
             
+        }
+        private async void RefreshLeaderboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Purpose: Event-listener for the RefreshLeaderboard Button
+
+            //Calls RefreshLeaderboard (which redoes all the math)
+            RefreshLeaderboardBtn.Content = "Note: This may take a second";
+            await Task.Delay(20);
+            RefreshLeaderboard();
+
+            //Clears theLeaderboard stackPanel, then repopulates it
+            theLeaderboard.Children.Clear();
+            LoadLeaderboard(sender, e);
+
+            
+            RefreshLeaderboardBtn.Content = "Done!";
+            await Task.Delay(2000);
+            RefreshLeaderboardBtn.Content = "Refresh Leaderboard";
+
         }
     }
 

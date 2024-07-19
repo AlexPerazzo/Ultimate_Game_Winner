@@ -93,7 +93,6 @@ namespace Ultimate_Game_Winner.Windows
                 oldWindow.Close();
             }
         }
-
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -41,6 +41,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             Loaded += LoadSettings;
         }
 
+        // Page Display Functions
         private void LoadSettings(object sender, RoutedEventArgs e)
         {
             //Purpose: Loads savedsettings in so it displays the same as the user last saved it
@@ -51,7 +52,6 @@ namespace Ultimate_Game_Winner.Main_Pages
             LoadRankingSystem(savedSettings);
 
         }
-        
         private void LoadRankingSystem(string[] savedSettings)
         {
             //Purpose: Loads Ranking System with previous user saved information
@@ -66,7 +66,6 @@ namespace Ultimate_Game_Winner.Main_Pages
             else
                 RankingSysBox.Text = savedSettings[3];
         }
-
         private void LoadFilter(string[] savedSettings)
         {
             //Purpose: Loads Filter with previous user saved information
@@ -87,14 +86,8 @@ namespace Ultimate_Game_Winner.Main_Pages
             GroupBox.Text = filterOptions[4];
         }
 
-        private void DeleteLog_Click(object sender, RoutedEventArgs e)
-        {
-            //Purpose: Displays a window which will ask for confirmation and delete the entire log
-            
-            AreYouSureWindow areYouSure = new AreYouSureWindow(true, [], null);
-            areYouSure.Show();
-        }
 
+        // Ranking System Options Event Listeners
         private void Custom_Selected(object sender, RoutedEventArgs e)
         {
             //Purpose: Displays custom ranking options when custom is selected
@@ -109,7 +102,6 @@ namespace Ultimate_Game_Winner.Main_Pages
             PlacementNum_LostFocus(sender, e);
             CustomRankItems.Visibility = Visibility.Visible;
         }
-
         private void Normal_Selected(object sender, RoutedEventArgs e)
         {
             //Purpose: Resets values back to normal and refreshes leaderboard with updated values when normal is selected
@@ -145,7 +137,6 @@ namespace Ultimate_Game_Winner.Main_Pages
             if (refreshLeaderboard)
                 LeaderboardPage.RefreshLeaderboard();
         }
-
         private void NumofWins_Selected(object sender, RoutedEventArgs e)
         {
             //Purpose: Edits SavedSettings.txt with "# of wins" so Leaderboard displays correctly
@@ -163,8 +154,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
 
 
-        
-
+        // Verification Event Listeners
         private void WeightNum_LostFocus(object sender, RoutedEventArgs e)
         {
             //Purpose: User verification for WeightNum
@@ -187,7 +177,6 @@ namespace Ultimate_Game_Winner.Main_Pages
                 weightIsAGo = false;
             }
         }
-
         private void PlaytimeNum_LostFocus(object sender, RoutedEventArgs e)
         {
             //Purpose: User verification for PlaytimeNum
@@ -210,7 +199,6 @@ namespace Ultimate_Game_Winner.Main_Pages
                 playtimeIsAGo = false;
             }
         }
-
         private void PlacementNum_LostFocus(object sender, RoutedEventArgs e)
         {
             //Purpose: User verification for PlacementNum
@@ -234,10 +222,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             }
         }
 
-        
-
-        
-
+        // Button Event Listeners
         private async void FilterSetBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Sets selected Filter options in SavedSettings and refreshes Leaderboard
@@ -275,7 +260,6 @@ namespace Ultimate_Game_Winner.Main_Pages
                 FilterSetBtn.Content = "Set";
             }
         }
-
         private async void FilterResetBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Resets everything to non-filtered state
@@ -319,7 +303,6 @@ namespace Ultimate_Game_Winner.Main_Pages
                 FilterResetBtn.Content = "Reset";
             }
         }
-
         private async void CustomSetBtn_Click(object sender, RoutedEventArgs e)
         {
             //Purpose: Edits SavedSettings.txt with user inputted data, which is used when calculating points
@@ -375,6 +358,16 @@ namespace Ultimate_Game_Winner.Main_Pages
                 CustomSetBtn.Content = "Set";
             }
 
+        }
+
+
+        // Delete Log Event Listener
+        private void DeleteLog_Click(object sender, RoutedEventArgs e)
+        {
+            //Purpose: Displays a window which will ask for confirmation and delete the entire log
+            
+            AreYouSureWindow areYouSure = new AreYouSureWindow(true, [], null);
+            areYouSure.Show();
         }
     }
     

@@ -37,7 +37,7 @@ namespace Ultimate_Game_Winner.Windows
             InitializeComponent();
             this.DataContext = this;
             playerName = PlayerName;
-            Filtered = UtilityFunctions.FilterVisibility();
+            Filtered = UtilityFunctions.FilterLabelVisibility();
             Loaded += LoadGames;
         }
 

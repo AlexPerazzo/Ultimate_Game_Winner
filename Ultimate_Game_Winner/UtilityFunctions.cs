@@ -13,111 +13,8 @@ namespace Ultimate_Game_Winner
 {
     internal class UtilityFunctions
     {
-        public static string ReturnOfficialGameName(string nameOfGame)
-        {
-            //Purpose: User sometimes adds a game without proper capitalization;
-            //this fixes that so other parts of the code (and the GUI) are better
 
-            //reads through all the game names
-            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\GamesAndIDs.txt"))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] lineList = line.Split(",");
-                    //stops when inputed name matches up with real game name
-                    if (lineList[1].ToLower() == nameOfGame.ToLower())
-                    {
-                        //returns real game name
-                        return lineList[1];
-                    }
-                }
-                //if no real game name matched the inputted game name, the string "error" is returned
-                MessageBox.Show("No game with that name has been found; this is a very rare error. The game 'Dominion' has been inputted instead. Try deleting the gameplay and trying again. (Note for Developer: ReturnOfficialGameName)");
-                return "Dominion";
-            }
-        }
-
-
-        public static bool DoesGameExist(string nameOfGame)
-        {
-            //Purpose: Easy way to check if game is in our text file for purposes of verification
-
-            //Reads list of all games and their ids
-            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\GamesAndIDs.txt"))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] lineList = line.Split(",");
-                    //stops when the names match up
-                    if (lineList[1].ToLower() == nameOfGame.ToLower())
-                    {
-                        //if game exists return true
-                        return true;
-                    }
-                }
-            }
-            //otherwise return false
-            return false;
-        }
-
-
-        public static string CapitalizeEachWord(string input)
-        {
-            //Purpose: Helper function to help catch user input error in regards to names
-            //Capitalizes the first letter of every word in a string
-            if (string.IsNullOrEmpty(input))
-                return input;
-
-            string[] words = input.Split(' ');
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (words[i].Length > 0)
-                {
-                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
-                }
-            }
-
-            return string.Join(' ', words);
-        }
-
-        public static void RefreshFramework(FrameworkElement element)
-        {
-            //Purpose: Certain GUI sections get their info after the page has been loaded
-            //This allows a reload to occur so those parts get loaded in
-
-            //turns the data context off and on again
-            var oldDataContext = element.DataContext;
-            element.DataContext = null;
-            element.DataContext = oldDataContext;
-        }
-        public static string AddOrdinal(int num)
-        {
-            //Purpose: Add proper ending for purposes of displaying placements
-            if (num <= 0) return num.ToString();
-
-            switch (num % 100)
-            {
-                case 11:
-                case 12:
-                case 13:
-                    return num + "th";
-            }
-
-            switch (num % 10)
-            {
-                case 1:
-                    return num + "st";
-                case 2:
-                    return num + "nd";
-                case 3:
-                    return num + "rd";
-                default:
-                    return num + "th";
-            }
-        }
-
+        // API Related Functions:
         public static (float playtime, float weight) GetAPIData(int gameID)
         {
             //Purpose: Uses API and grabs the needed information: weight and playtime
@@ -153,7 +50,6 @@ namespace Ultimate_Game_Winner
 
             return (averagePlaytime, averageWeight);
         }
-
         public static string GetAPIImage(int gameID)
         {
             //Purpose: Uses API to grab an image, which we can display
@@ -233,7 +129,6 @@ namespace Ultimate_Game_Winner
             
             return fixedGenre;
         }
-        
         public static int GetID(string nameOfGame)
         {
             //Purpose: Grab's ID of a game. The ID is critical for access bgg's API
@@ -258,17 +153,102 @@ namespace Ultimate_Game_Winner
             MessageBox.Show("No game with that name has been found; this is a very rare error. The game 'Dominion' has been inputted instead. Try deleting the gameplay and trying again. (Note for developer: GetID function)");
             return 64777;
         }
-
-        public static string FilterVisibility()
+        public static bool DoesGameExist(string nameOfGame)
         {
-            var settingsText = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
-            //If No selected Filters, Filter text remains hidden
-            if (settingsText[4] == "All Genres,All Player Counts,All Weights,All Playtimes,All Groups")
-                return "Hidden";
-            else
-                return "Visible";
+            //Purpose: Easy way to check if game is in our text file for purposes of verification
+
+            //Reads list of all games and their ids
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\GamesAndIDs.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] lineList = line.Split(",");
+                    //stops when the names match up
+                    if (lineList[1].ToLower() == nameOfGame.ToLower())
+                    {
+                        //if game exists return true
+                        return true;
+                    }
+                }
+            }
+            //otherwise return false
+            return false;
         }
 
+        
+        // Random String Tasks
+        public static string CapitalizeEachWord(string input)
+        {
+            //Purpose: Helper function to help catch user input error in regards to names
+            //Capitalizes the first letter of every word in a string
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            string[] words = input.Split(' ');
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].Length > 0)
+                {
+                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                }
+            }
+
+            return string.Join(' ', words);
+        }
+        public static string AddOrdinal(int num)
+        {
+            //Purpose: Add proper ending for purposes of displaying placements
+            if (num <= 0) return num.ToString();
+
+            switch (num % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return num + "th";
+            }
+
+            switch (num % 10)
+            {
+                case 1:
+                    return num + "st";
+                case 2:
+                    return num + "nd";
+                case 3:
+                    return num + "rd";
+                default:
+                    return num + "th";
+            }
+        }
+        public static string ReturnOfficialGameName(string nameOfGame)
+        {
+            //Purpose: User sometimes adds a game without proper capitalization;
+            //this fixes that so other parts of the code (and the GUI) are better
+
+            //reads through all the game names
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\GamesAndIDs.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] lineList = line.Split(",");
+                    //stops when inputed name matches up with real game name
+                    if (lineList[1].ToLower() == nameOfGame.ToLower())
+                    {
+                        //returns real game name
+                        return lineList[1];
+                    }
+                }
+                //if no real game name matched the inputted game name, the string "error" is returned
+                MessageBox.Show("No game with that name has been found; this is a very rare error. The game 'Dominion' has been inputted instead. Try deleting the gameplay and trying again. (Note for Developer: ReturnOfficialGameName)");
+                return "Dominion";
+            }
+        }
+
+
+        
+        // Filter Related
         public static bool CheckGenre(string chosenGenre, string genre)
         {
             //Purpose: Checks Genre compared to Filter
@@ -277,7 +257,6 @@ namespace Ultimate_Game_Winner
             else
                 return (chosenGenre == genre);
         }
-
         public static bool CheckPlayerCount(string chosenPlayerCount, string playercount)
         {
             //Purpose: Checks Player Count compared to Filter
@@ -307,7 +286,6 @@ namespace Ultimate_Game_Winner
                     return true;
             }
         }
-
         public static bool CheckWeight(string chosenWeight, float weight)
         {
             //Purpose: Checks Weight compared to Filter
@@ -334,7 +312,6 @@ namespace Ultimate_Game_Winner
                     return true;
             }
         }
-
         public static bool CheckPlaytime(string chosenPlaytime, float playtime)
         {
             //Purpose: Checks Playtime compared to Filter
@@ -364,7 +341,6 @@ namespace Ultimate_Game_Winner
                     return true;
             }
         }
-
         public static bool CheckGroup(string chosenGroup, string group)
         {
             //Purpose: Checks Group compared to Filter
@@ -410,58 +386,15 @@ namespace Ultimate_Game_Winner
             }
             return filterBool;
         }
-
-        public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
+        public static string FilterLabelVisibility()
         {
-            //Purpose: Returns a point total to award
-            //Depends on the weight/playtime of the game, and the number of players who participated, and the individual's placement
-            
-            
-            //Gathers the multipliers (in case custom ranking system is on)
-            string[] values;
-            values = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
-
-            //Creates three factors that go into point total
-            var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
-            if (playtime <= 10)
-            {
-                playtime = 10;
-            }
-            var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10) * 2;
-            var placementFactor = float.Parse(values[2]) * CalculatePlacementPercentage(placement, numOfPlayers);
-
-            //Creates a point value using the three factors
-            var points = (weightFactor + playtimeFactor) * placementFactor;
-
-            string stringPoints = points.ToString("0.00");
-            var finalPoints = double.Parse(stringPoints);
-
-
-            return finalPoints;
-
-            double CalculatePlacementPercentage(int placement, int numOfPlayers)
-            {
-                //Purpose: Helper function to gather the percentage of points to award based off placement
-
-                //reads from PlacementPercentages.txt and grabs the associated information needed for the math calculations.
-                using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\PlacementPercentages.txt"))
-                {
-                    reader.ReadLine();
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        string[] lineList = line.Split(",");
-                        if (int.Parse(lineList[0]) == numOfPlayers)
-                        {
-                            return double.Parse(lineList[placement]);
-                        }
-                    }
-                }
-                MessageBox.Show("Something went wrong with CalculatePlacementPercentage. The number 1 was simply used instead.");
-                return 1;
-            }
+            var settingsText = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
+            //If No selected Filters, Filter text remains hidden
+            if (settingsText[4] == "All Genres,All Player Counts,All Weights,All Playtimes,All Groups")
+                return "Hidden";
+            else
+                return "Visible";
         }
-
         public static void UpdateFilterInLog()
         {
             //Purpose: Updates every game in the logofplayedgames with whether it should be displayed or not based off the filters
@@ -493,5 +426,60 @@ namespace Ultimate_Game_Winner
             File.WriteAllText("..\\..\\..\\Text_Files\\LogofPlayedGames.txt", resultString);
 
         }
+
+        
+
+        // Points
+        public static double CalculatePoints(float weight, float playtime, int numOfPlayers, int placement)
+        {
+            //Purpose: Returns a point total to award
+            //Depends on the weight/playtime of the game, and the number of players who participated, and the individual's placement
+            
+            
+            //Gathers the multipliers (in case custom ranking system is on)
+            string[] values;
+            values = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
+
+            //Creates three factors that go into point total
+            var weightFactor = float.Parse(values[0]) * Math.Log10(weight) * 3;
+            if (playtime <= 10)
+            {
+                playtime = 10;
+            }
+            var playtimeFactor = float.Parse(values[1]) * Math.Log10(playtime / 10) * 2;
+            var placementFactor = float.Parse(values[2]) * CalculatePlacementPercentage(placement, numOfPlayers);
+
+            //Creates a point value using the three factors
+            var points = (weightFactor + playtimeFactor) * placementFactor;
+
+            string stringPoints = points.ToString("0.00");
+            var finalPoints = double.Parse(stringPoints);
+
+
+            return finalPoints;
+
+        }
+        private static double CalculatePlacementPercentage(int placement, int numOfPlayers)
+        {
+            //Purpose: Helper function to gather the percentage of points to award based off placem
+
+            //reads from PlacementPercentages.txt and grabs the associated information needed for the math calculations.
+            using (StreamReader reader = new StreamReader("..\\..\\..\\Text_Files\\PlacementPercentages.txt"))
+            {
+                reader.ReadLine();
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] lineList = line.Split(",");
+                    if (int.Parse(lineList[0]) == numOfPlayers)
+                    {
+                        return double.Parse(lineList[placement]);
+                    }
+                }
+            }
+           MessageBox.Show("Something went wrong with CalculatePlacementPercentage. The number 1 was simply used instead.");
+            return 1;
+        }
+
     }
 }
