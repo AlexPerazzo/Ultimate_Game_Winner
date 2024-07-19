@@ -42,7 +42,7 @@ namespace Ultimate_Game_Winner.Main_Pages
         }
         private void LoadLeaderboard(object sender, RoutedEventArgs e)
         {
-            string[] savedSettings = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\SavedSettings.txt");
+            string[] savedSettings = File.ReadAllLines("..\\..\\..\\Text_Files\\SavedSettings.txt");
             if (savedSettings[3] == "# of Wins")
                 LoadWinsLeaderboard(sender, e);
             else
@@ -121,11 +121,10 @@ namespace Ultimate_Game_Winner.Main_Pages
 
                 
                 //sort Dictionary for Leaderboard
-                var sortedDictionary = playerWins
-                .OrderByDescending(kv => kv.Value[0])    // Sort by the first int (descending)
-                .ThenByDescending(kv => kv.Value[1])     // Sort by the second int (descending)
-                .ThenBy(kv => kv.Value[2])               // Sort by the third int (ascending)
-                .ToDictionary(kv => kv.Key, kv => kv.Value);
+                // Sort by the first int (descending)
+                // Sort by the second int (descending)
+                // Sort by the third int (ascending)
+                var sortedDictionary = playerWins.OrderByDescending(kv => kv.Value[0]).ThenByDescending(kv => kv.Value[1]).ThenBy(kv => kv.Value[2]).ToDictionary(kv => kv.Key, kv => kv.Value);
 
 
                 foreach (var item in sortedDictionary)

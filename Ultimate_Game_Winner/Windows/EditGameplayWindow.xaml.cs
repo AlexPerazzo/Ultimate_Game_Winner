@@ -48,7 +48,7 @@ namespace Ultimate_Game_Winner.Windows
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
             NameLabelVerificationControl.ItemsSource = VerificationLabelCollection;
 
-            items = File.ReadAllLines("C:\\Users\\alexa\\OneDrive\\Desktop\\Senior Project\\New\\Ultimate_Game_Winner\\Text_Files\\GamesAndIDs.txt").ToList();
+            items = File.ReadAllLines("..\\..\\..\\Text_Files\\GamesAndIDs.txt").ToList();
             gameNames = items.Select(line => line.Split(',')[1]).ToList();
             allInfo = _allInfo;
             oldWindow = _oldWindow;
