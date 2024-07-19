@@ -37,15 +37,8 @@
             <Label Name="GameNameVerification" HorizontalAlignment="Center" Margin="338,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden" Grid.ColumnSpan="2"/>
             <!--Suggestionsion Box-->
             <!--Trying to figure out how to get the vertical bar smaller-->
-            <ListBox Name="SuggestionsListBox" Width="143" Height="75" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,59,0,0" Grid.ColumnSpan="2" Grid.Row="1" KeyDown="GameName_PreviewKeyDown" MouseDoubleClick="SuggestionsListBox_MouseDoubleClick" SelectionChanged="SuggestionsListBox_SelectionChanged" Visibility="Collapsed">
-                <ListBox.Resources>
-                    <Style TargetType="ScrollBar">
-                        <Setter Property="Width" Value="2"/>
-                    </Style>
-                </ListBox.Resources>
+            <ListBox Name="SuggestionsListBox" Width="143" Height="75" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,59,0,0" Grid.ColumnSpan="2" Grid.Row="1" KeyDown="GameName_PreviewKeyDown" MouseDoubleClick="SuggestionsListBox_MouseDoubleClick" SelectionChanged="SuggestionsListBox_SelectionChanged" Visibility="Collapsed"/>
 
-
-            </ListBox>
 
             <!--Num Players-->
             <!--Due to TextChanged event listener weirdness, needed to make PlaceholderTextBox by hand here-->
@@ -56,24 +49,12 @@
 
             <!--StackPanel where inputs for 1st place 2nd place etc. go-->
             <StackPanel Margin="0,30,0,0" Grid.Row="2" Grid.ColumnSpan="2">
-                <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <ItemsControl x:Name="NameTextBoxesControl" Margin="10"/>
             </StackPanel>
 
             <!--StackPanel for verification for 1st place 2nd place etc. go-->
             <StackPanel Margin="243,33,0,0" Grid.Row="2" Grid.ColumnSpan="2">
-                <ItemsControl x:Name="NameLabelVerificationControl" Margin="10">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <ItemsControl x:Name="NameLabelVerificationControl" Margin="10"/>
             </StackPanel>
 
             <!--Two buttons + Group centered on the bottom row with some margin-->
@@ -88,7 +69,6 @@
 
 
                 <!--Group Combo Box-->
-
                 <ComboBox x:Name="GroupComboBox" Grid.Row="1" Height="24" Width="110" Grid.ColumnSpan="5" Margin="0,0,0,45" HorizontalAlignment="Center">
                     <ComboBoxItem Content="No Group" IsSelected="True"/>
                     <ComboBoxItem Content="Family" />
@@ -100,6 +80,8 @@
                     <ComboBoxItem Content="Other" />
                 </ComboBox>
 
+
+                <!--All 3 Buttons-->
                 <Button x:Name="SaveBtn" Content="Save" Grid.Row="3" Margin="0,45,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Click="SaveBtn_Click"/>
                 <Button x:Name="ResetBtn" Content="Reset" Grid.Row="3" Margin="0,45,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Click="ResetBtn_Click"/>
                 <Button x:Name="CancelBtn" Content="Cancel" Grid.Row="3" Margin="5,45,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Click="CancelBtn_Click"/>
@@ -109,12 +91,6 @@
 
 
             </Grid>
-
-
-
-
-
         </Grid>
     </ScrollViewer>
-
 </Window>

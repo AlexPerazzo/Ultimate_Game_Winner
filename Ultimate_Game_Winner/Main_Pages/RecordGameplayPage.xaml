@@ -35,19 +35,12 @@
             <!--TextBoxes for all the needed information-->
             <userControls:PlaceholderTextBoxUC x:Name="GameName" HorizontalAlignment="Left" Margin="320,41,0,0" BindedWrap="NoWrap" placeholderText="Name of Game" VerticalAlignment="Top" BindedWidth="142" BindedHeight="18" Grid.Row="1" LostFocus="GameName_LostFocus"/>
             <Label Name="GameNameVerification" HorizontalAlignment="Left" Margin="478,36,0,0" Content="*Please input valid game name" VerticalAlignment="Top" Grid.Row="1" Foreground="Red" Visibility="Hidden" Grid.ColumnSpan="2"/>
-            <!--Suggestionsion Box-->
-            <!--Trying to figure out how to get the vertical bar smaller-->
-            <ListBox Name="SuggestionsListBox" Width="143" Height="75" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="322,59,0,0" Grid.Row="1" KeyDown="GameName_PreviewKeyDown" MouseDoubleClick="SuggestionsListBox_MouseDoubleClick" SelectionChanged="SuggestionsListBox_SelectionChanged" Visibility="Collapsed">
-                <ListBox.Resources>
-                    <Style TargetType="ScrollBar">
-                        <Setter Property="Width" Value="2"/>
-                    </Style>
-                </ListBox.Resources>
-                
-               
-            </ListBox>
+            
+            <!--Suggestions Box-->
+            <ListBox Name="SuggestionsListBox" Width="143" Height="75" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="322,59,0,0" Grid.Row="1" KeyDown="GameName_PreviewKeyDown" MouseDoubleClick="SuggestionsListBox_MouseDoubleClick" SelectionChanged="SuggestionsListBox_SelectionChanged" Visibility="Collapsed"/>
 
-                <!--Num Players-->
+
+            <!--Num Players-->
             <!--Due to TextChanged event listener weirdness, needed to make PlaceholderTextBox by hand here-->
             <TextBlock x:Name="tbPlaceholder" TextAlignment="Center" Text="# of Players" Foreground="Gray" Margin="334,21,0,0" Width="120" Height="18" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox x:Name="NumPlayers" Height="18" TextAlignment="Center" Width="120" Background="{x:Null}" TextWrapping="NoWrap" Margin="332,21,0,0" TextChanged="NumPlayers_TextChanged" LostFocus="NumPlayers_LostFocus" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -56,24 +49,12 @@
 
             <!--StackPanel where inputs for 1st place 2nd place etc. go-->
             <StackPanel Margin="0,30,0,0" Grid.Row="2" Grid.ColumnSpan="2">
-                <ItemsControl x:Name="NameTextBoxesControl" Margin="10">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <ItemsControl x:Name="NameTextBoxesControl" Margin="10"/>
             </StackPanel>
 
             <!--StackPanel for verification for 1st place 2nd place etc. go-->
             <StackPanel Margin="240,33,0,0" Grid.Row="2" Grid.ColumnSpan="2">
-                <ItemsControl x:Name="NameLabelVerificationControl" Margin="10">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <ItemsControl x:Name="NameLabelVerificationControl" Margin="10"/>
             </StackPanel>
 
             <!--Two buttons + Group centered on the bottom row with some margin-->

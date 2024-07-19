@@ -34,7 +34,7 @@
             <!--Info-->
             <Label Content="(Winner, Game Name, # of Players, Date Recorded)" Grid.Column="1" Grid.Row="1" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Gray"></Label>
 
-            <!--Tip-->
+            <!--Tip for user-->
             <Label Content="(Click on panel for additional gameplay info)" Grid.Column="1" Grid.Row="2" FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Gray"></Label>
 
             <!--All logged Games Stack Panel-->
