@@ -3,4 +3,4 @@
 1.0
 Normal
 All Genres,All Player Counts,All Weights,All Playtimes,All Groups
-All Genres
+All Genres,Strategy,Abstracts

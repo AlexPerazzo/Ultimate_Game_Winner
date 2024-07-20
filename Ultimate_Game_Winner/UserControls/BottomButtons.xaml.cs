@@ -29,6 +29,7 @@ namespace Ultimate_Game_Winner.UserControls
         private void Recordbtn_Click(object sender, RoutedEventArgs e)
         {        
             mainFrame.Navigate(new Uri("Main_Pages\\RecordGameplayPage.xaml", UriKind.Relative));
+            
         }
 
         private void Leaderboardbtn_Click(object sender, RoutedEventArgs e)

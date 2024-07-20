@@ -45,8 +45,9 @@ namespace Ultimate_Game_Winner.Main_Pages
 
         public RecordGameplayPage()
         {
-            InitializeComponent();
             this.DataContext = this;
+
+            InitializeComponent();
             TextBoxCollection = new ObservableCollection<PlaceholderTextBoxUC>();
             VerificationLabelCollection = new ObservableCollection<Label>();
             NameTextBoxesControl.ItemsSource = TextBoxCollection;
@@ -55,8 +56,7 @@ namespace Ultimate_Game_Winner.Main_Pages
             items = File.ReadAllLines("..\\..\\..\\Text_Files\\GamesAndIDs.txt").ToList();
             gameNames = items.Select(line => line.Split(',')[1]).ToList();
             GameName.Input.TextChanged += InputTextBox_TextChanged;
-            this.Width = 800;
-            
+
             GameName.Input.PreviewKeyDown += GameName_PreviewKeyDown;
 
             
